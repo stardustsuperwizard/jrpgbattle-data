@@ -9,6 +9,7 @@ The champion roster for Mega Fighters: a content pack for the [jrpg-battle](http
 | Path | What it is |
 |---|---|
 | `pack.json` | The pack manifest: id, version, the core content it was built against, each folder's licence. A draft until jrpg-battle settles the format (#248). |
+| `data/elements.json` | Elements the pack adds, in the shape of jrpg-battle's `src/content/elements.json` (decision 0019). Empty for now: the first wave uses the four core elements. A core element id is refused. |
 | `data/heroes.json` | Champions, in the same shape as jrpg-battle's `src/content/heroes.json`. |
 | `data/abilities.json` | Their abilities, in the shape of `src/content/abilities.json`. Each champion has exactly one basic, one skill and one ultimate. |
 | `data/checks.json` | Settings for the check script only: which core hero each champion is compared with, and sample teams. Not pack content. |

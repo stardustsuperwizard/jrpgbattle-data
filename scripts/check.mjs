@@ -19,15 +19,17 @@ const engine = (file) => import(pathToFileURL(join(ENGINE, 'src', 'engine', file
 const { buildConfig, mergeConfig, validateConfig, createBattle, createPvpMatch } = await engine('content.js');
 const { simulate, simulatePvp } = await engine('simulate.js');
 
-const CORE_FILES = ['manifest', 'rules', 'heroes', 'abilities', 'enemies', 'items', 'party', 'waves', 'modes'];
+const CORE_FILES = ['manifest', 'rules', 'elements', 'heroes', 'abilities', 'enemies', 'items', 'party', 'waves', 'modes'];
 const core = buildConfig(Object.fromEntries(CORE_FILES.map((name) => [name, read(join(ENGINE, 'src', 'content', `${name}.json`))])));
 
 const pack = read(join(ROOT, 'pack.json'));
+const elements = read(join(ROOT, 'data', 'elements.json'));
 const heroes = read(join(ROOT, 'data', 'heroes.json'));
 const abilities = read(join(ROOT, 'data', 'abilities.json'));
 
 // A pack only adds: reusing a core id would silently replace a balance hero.
 const clashes = [
+  ...Object.keys(elements).filter((id) => Object.hasOwn(core.elements, id)).map((id) => `element "${id}"`),
   ...Object.keys(heroes).filter((id) => Object.hasOwn(core.heroes, id)).map((id) => `hero "${id}"`),
   ...Object.keys(abilities).filter((id) => Object.hasOwn(core.abilities, id)).map((id) => `ability "${id}"`),
 ];
@@ -36,7 +38,7 @@ if (clashes.length) {
   process.exit(1);
 }
 
-const tuning = { heroes, abilities };
+const tuning = { elements, heroes, abilities };
 const config = validateConfig(mergeConfig(core, tuning));
 mkdirSync(join(ROOT, 'dist'), { recursive: true });
 writeFileSync(join(ROOT, 'dist', 'tuning-import.json'), `${JSON.stringify(tuning, null, 2)}\n`);

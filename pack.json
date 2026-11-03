@@ -12,6 +12,7 @@
     "lore": "UNLICENSED"
   },
   "files": {
+    "elements": "data/elements.json",
     "heroes": "data/heroes.json",
     "abilities": "data/abilities.json"
   }
