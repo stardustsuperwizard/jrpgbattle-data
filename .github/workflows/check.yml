@@ -1,0 +1,55 @@
+# Checks the pack against the jrpg-battle release pinned in engine.json, on
+# every push and pull request. jrpg-battle is private, so the checkout uses
+# ENGINE_READ_TOKEN, a fine-grained token with read-only Contents access.
+name: check
+
+# Pull requests, plus main after a merge. Every push to a PR branch is
+# already covered by its pull_request run, so a push trigger on all
+# branches only doubled each run.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      # A secret that doesn't exist under this exact name reaches the job as an
+      # empty string; say so plainly instead of the checkout's "token not supplied".
+      - name: Require ENGINE_READ_TOKEN
+        env:
+          TOKEN: ${{ secrets.ENGINE_READ_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::The repository secret ENGINE_READ_TOKEN is missing or empty. Add it under Settings > Secrets and variables > Actions > Repository secrets (not Variables, and not an environment or Dependabot secret): a fine-grained token with read-only Contents access to stardustsuperwizard/jrpg-battle."
+            exit 1
+          fi
+
+      - name: Read the pinned engine release
+        id: engine
+        run: echo "tag=$(node -p "require('./engine.json').tag")" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v5
+        with:
+          repository: stardustsuperwizard/jrpg-battle
+          ref: ${{ steps.engine.outputs.tag }}
+          token: ${{ secrets.ENGINE_READ_TOKEN }}
+          path: jrpg-battle
+          # Don't leave the token in jrpg-battle/.git/config for later steps.
+          persist-credentials: false
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+
+      - name: Check the pack
+        run: npm run check -- 300
+        env:
+          JRPG_BATTLE: ${{ github.workspace }}/jrpg-battle

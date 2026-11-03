@@ -34,11 +34,28 @@ The server, the page and `build:site` then load it, and content versions read `1
 
 ## Checking
 
-Needs Node 22 or later and a jrpg-battle checkout beside this one (or `JRPG_BATTLE=/path/to/jrpg-battle`).
+Needs Node 22 or later and a jrpg-battle checkout beside this one (or `JRPG_BATTLE=/path/to/jrpg-battle`), **at the release in `engine.json`**:
 
 ```sh
+git -C ../jrpg-battle checkout v0.1.0   # the tag engine.json pins
 npm run check              # 300 battles per line
 npm run check -- 1000      # more battles, steadier numbers
 ```
 
 It loads the pack the way a deployment does, through jrpg-battle's own pack reader, boundary check and validation, reports any speed shared with another hero, writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions), and prints each champion's PvE and PvP win rates against the core party. ROSTER.md explains how to read them.
+
+**The engine pin.** `engine.json` names the jrpg-battle release the pack is checked against (`{ "tag": "v0.1.0" }`), and the manifest's `core` names the release it was built for (`"0.1.0"`). The check fails unless both name the same release *and* the checkout is that release, so a pack never passes on engine rules the site won't deploy. Moving the pack to a new engine release means changing both, rerunning the check, and updating ROSTER.md's numbers.
+
+## CI
+
+`.github/workflows/check.yml` runs `npm run check -- 300` on every pull request and on every push to `main`. It checks out jrpg-battle at `engine.json`'s tag into `jrpg-battle/` using the repository secret **`ENGINE_READ_TOKEN`** (a fine-grained token with read-only Contents access, since jrpg-battle is private), without leaving the token in that checkout's git config. A pack that the engine refuses (an id core already defines, a missing file, an unknown field) or a pin mismatch fails the run.
+
+## Releasing
+
+The site (`stardustsuperwizard/mega_fighters`) pins a release tag of this repository, never a branch.
+
+1. Bump `version` in `packs/mega_fighters-champions/manifest.json` (semver; the `package.json` version follows it) in the PR that changes the pack.
+2. Merge it, with CI green.
+3. On GitHub, **Releases → Draft a new release**: create the tag `vX.Y.Z` (the manifest's version, with a `v`) on `main`, and name the champions added or changed in the notes. Publishing creates the tag.
+4. Move the site's pin in `mega_fighters`'s `versions.json` to the new tag. **That deploy interrupts live online matches**, as any content change does.
+
