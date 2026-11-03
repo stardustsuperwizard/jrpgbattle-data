@@ -17,6 +17,17 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      # A secret that doesn't exist under this exact name reaches the job as an
+      # empty string; say so plainly instead of the checkout's "token not supplied".
+      - name: Require ENGINE_READ_TOKEN
+        env:
+          TOKEN: ${{ secrets.ENGINE_READ_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::The repository secret ENGINE_READ_TOKEN is missing or empty. Add it under Settings > Secrets and variables > Actions > Repository secrets (not Variables, and not an environment or Dependabot secret): a fine-grained token with read-only Contents access to stardustsuperwizard/jrpg-battle."
+            exit 1
+          fi
+
       - name: Read the pinned engine release
         id: engine
         run: echo "tag=$(node -p "require('./engine.json').tag")" >> "$GITHUB_OUTPUT"
