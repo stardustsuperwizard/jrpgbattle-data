@@ -25,6 +25,7 @@ A pack only adds: ids must not reuse core ids (`aria`, `slash`, `fire`, …). jr
 Copy the pack folder into a jrpg-battle checkout and list it in the index:
 
 ```sh
+mkdir -p ../jrpg-battle/src/content/packs   # jrpg-battle ships no packs/ folder; without it, cp would put the six files one level too high
 cp -r packs/mega_fighters-champions ../jrpg-battle/src/content/packs/
 echo '["mega_fighters-champions"]' > ../jrpg-battle/src/content/packs.json
 ```
