@@ -1,12 +1,17 @@
 // Checks the pack against a jrpg-battle checkout and measures each champion.
 //   node scripts/check.mjs [runs]                 (default 300 battles per line)
 //   JRPG_BATTLE=/path/to/jrpg-battle node scripts/check.mjs
-// It also writes dist/tuning-import.json, the pack as tuning-panel settings,
-// so the champions can be tried in the game before content packs (#248) exist.
 //
-// Until jrpg-battle loads packs itself, this merges the pack the way the
-// tuning panel's Import does: onto the core content, adding ids only.
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+// The pack folder, packs/<id>/, is a jrpg-battle content pack as decision
+// 0016 defines it: a deployment copies it to src/content/packs/<id>/ and
+// lists the id in src/content/packs.json. The check loads it exactly that
+// way, through jrpg-battle's own pack reader, boundary check and merge, so
+// a pack that passes here is one the server and the page accept.
+//
+// It also writes dist/tuning-import.json, the pack as tuning-panel settings,
+// so the champions can be tried on a deployment that doesn't load the pack.
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -15,31 +20,44 @@ const ENGINE = resolve(process.env.JRPG_BATTLE ?? join(ROOT, '..', 'jrpg-battle'
 const runs = Number(process.argv[2] ?? 300);
 
 const read = (path) => JSON.parse(readFileSync(path, 'utf8'));
-const engine = (file) => import(pathToFileURL(join(ENGINE, 'src', 'engine', file)).href);
-const { buildConfig, mergeConfig, validateConfig, createBattle, createPvpMatch } = await engine('content.js');
-const { simulate, simulatePvp } = await engine('simulate.js');
+const load = (path) => import(pathToFileURL(join(ENGINE, path)).href);
+const { buildConfig, validateConfig, createBattle, createPvpMatch } = await load('src/engine/content.js');
+const { simulate, simulatePvp } = await load('src/engine/simulate.js');
+const { readPacks, shippedContent } = await load('scripts/content.js');
+const { checkBoundaries } = await load('scripts/check-boundaries.js');
 
-const CORE_FILES = ['manifest', 'rules', 'elements', 'heroes', 'abilities', 'enemies', 'items', 'party', 'waves', 'modes'];
-const core = buildConfig(Object.fromEntries(CORE_FILES.map((name) => [name, read(join(ENGINE, 'src', 'content', `${name}.json`))])));
+// The one pack folder this repository holds; its name is the pack's id.
+const [PACK_ID, ...others] = readdirSync(join(ROOT, 'packs'));
+if (!PACK_ID || others.length) throw new Error('packs/ must hold exactly one pack folder.');
+const PACK_DIR = join(ROOT, 'packs', PACK_ID);
 
-const pack = read(join(ROOT, 'pack.json'));
-const elements = read(join(ROOT, 'data', 'elements.json'));
-const heroes = read(join(ROOT, 'data', 'heroes.json'));
-const abilities = read(join(ROOT, 'data', 'abilities.json'));
-
-// A pack only adds: reusing a core id would silently replace a balance hero.
-const clashes = [
-  ...Object.keys(elements).filter((id) => Object.hasOwn(core.elements, id)).map((id) => `element "${id}"`),
-  ...Object.keys(heroes).filter((id) => Object.hasOwn(core.heroes, id)).map((id) => `hero "${id}"`),
-  ...Object.keys(abilities).filter((id) => Object.hasOwn(core.abilities, id)).map((id) => `ability "${id}"`),
+// Where a deployment puts the folder: its files must pass jrpg-battle's check:boundaries.
+const asDeployed = [
+  { path: 'src/content/packs.json', source: JSON.stringify([PACK_ID]) },
+  ...readdirSync(PACK_DIR).map((name) => ({ path: `src/content/packs/${PACK_ID}/${name}`, source: readFileSync(join(PACK_DIR, name), 'utf8') })),
 ];
-if (clashes.length) {
-  console.error(`The pack reuses core ids: ${clashes.join(', ')}`);
-  process.exit(1);
+const violations = checkBoundaries(asDeployed);
+if (violations.length) throw new Error(violations.map((v) => `${v.file}: ${v.reason}`).join('\n'));
+
+// A content folder with only the index and this pack, read by the deployment's reader.
+const contentDir = mkdtempSync(join(tmpdir(), 'pack-check-'));
+let packs;
+try {
+  writeFileSync(join(contentDir, 'packs.json'), JSON.stringify([PACK_ID]));
+  mkdirSync(join(contentDir, 'packs'));
+  symlinkSync(PACK_DIR, join(contentDir, 'packs', PACK_ID), 'dir');
+  packs = readPacks(contentDir);
+} finally {
+  rmSync(contentDir, { recursive: true, force: true });
 }
+const [pack] = packs;
+const { manifest, elements, heroes, abilities } = pack;
+
+// composeContent refuses any id core already defines, so a pack never replaces a balance hero.
+const core = buildConfig(shippedContent([]));
+const config = validateConfig(buildConfig(shippedContent(packs)));
 
 const tuning = { elements, heroes, abilities };
-const config = validateConfig(mergeConfig(core, tuning));
 mkdirSync(join(ROOT, 'dist'), { recursive: true });
 writeFileSync(join(ROOT, 'dist', 'tuning-import.json'), `${JSON.stringify(tuning, null, 2)}\n`);
 
@@ -66,7 +84,7 @@ const pvp = (blue, red) => {
 // fairer read of raw strength.
 const { standsInFor: STANDS_IN_FOR, teams: ROSTER_TEAMS } = read(join(ROOT, 'data', 'checks.json'));
 
-console.log(`${pack.name} ${pack.version}: ${Object.keys(heroes).length} champions, ${Object.keys(abilities).length} abilities, valid against ${core.contentVersion ? `core content ${core.contentVersion}` : 'core'}`);
+console.log(`${manifest.name} ${manifest.version}: ${Object.keys(heroes).length} champions, ${Object.keys(abilities).length} abilities, ${Object.keys(elements).length} new elements; loads as ${config.contentVersion}`);
 console.log(`Engine: ${ENGINE}`);
 console.log(tiedSpeeds.length ? `Shared speeds: ${tiedSpeeds.map(([spd, names]) => `${spd} (${names.join(', ')})`).join('; ')}` : 'Every hero, core and pack, has its own speed.');
 console.log(`Wrote dist/tuning-import.json\n`);

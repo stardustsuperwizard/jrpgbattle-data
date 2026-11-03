@@ -8,15 +8,28 @@ The champion roster for Mega Fighters: a content pack for the [jrpg-battle](http
 
 | Path | What it is |
 |---|---|
-| `pack.json` | The pack manifest: id, version, the core content it was built against, each folder's licence. A draft until jrpg-battle settles the format (#248). |
-| `data/elements.json` | Elements the pack adds, in the shape of jrpg-battle's `src/content/elements.json` (decision 0019). Empty for now: the first wave uses the four core elements. A core element id is refused. |
-| `data/heroes.json` | Champions, in the same shape as jrpg-battle's `src/content/heroes.json`. |
-| `data/abilities.json` | Their abilities, in the shape of `src/content/abilities.json`. Each champion has exactly one basic, one skill and one ultimate. |
+| `packs/mega_fighters-champions/` | The pack: a jrpg-battle content pack folder (its decisions 0016 and 0019), exactly as a deployment loads it. It holds these six files and nothing else. |
+| `…/manifest.json` | `id` (the folder's name), `name`, `version`, `core` (the jrpg-battle `package.json` version the pack was built against) and `licences: { data, lore }`. |
+| `…/elements.json` | Elements the pack adds, in the shape of jrpg-battle's `src/content/elements.json`. Empty for now: the first wave uses the four core elements. |
+| `…/heroes.json` | Champions, in the shape of `src/content/heroes.json`. |
+| `…/abilities.json` | Their abilities, in the shape of `src/content/abilities.json`. Each champion has exactly one basic, one skill and one ultimate. |
+| `…/enemies.json`, `…/items.json` | Enemies and gear the pack adds: none yet, `{}`. jrpg-battle needs every file because the page can't list a folder. |
 | `data/checks.json` | Settings for the check script only: which core hero each champion is compared with, and sample teams. Not pack content. |
-| `lore/` | One file per champion: sources and story. Kept apart from the data so it can carry its own licence. |
+| `lore/` | One file per champion: sources and story. Kept apart from the pack so it can carry its own licence; jrpg-battle never loads it. |
 | `scripts/check.mjs` | Validates the pack with the engine and measures each champion. |
 
-Ids must not reuse core ids (`aria`, `slash`, …); the check refuses them, so a pack never silently replaces a balance hero.
+A pack only adds: ids must not reuse core ids (`aria`, `slash`, `fire`, …). jrpg-battle refuses them, so a pack never silently replaces a balance hero.
+
+## Deploying
+
+Copy the pack folder into a jrpg-battle checkout and list it in the index:
+
+```sh
+cp -r packs/mega_fighters-champions ../jrpg-battle/src/content/packs/
+echo '["mega_fighters-champions"]' > ../jrpg-battle/src/content/packs.json
+```
+
+The server, the page and `build:site` then load it, and content versions read `1.0.0+mega_fighters-champions@0.1.0`. Adding or upgrading the pack interrupts online matches running on that deploy. Bump `version` in the manifest on every change to the pack.
 
 ## Checking
 
@@ -27,4 +40,4 @@ npm run check              # 300 battles per line
 npm run check -- 1000      # more battles, steadier numbers
 ```
 
-It validates the pack against the engine, reports any speed shared with another hero, writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions), and prints each champion's PvE and PvP win rates against the core party. ROSTER.md explains how to read them.
+It loads the pack the way a deployment does, through jrpg-battle's own pack reader, boundary check and validation, reports any speed shared with another hero, writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions), and prints each champion's PvE and PvP win rates against the core party. ROSTER.md explains how to read them.
