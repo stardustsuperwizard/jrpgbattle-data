@@ -1,0 +1,40 @@
+# Checks the pack against the jrpg-battle release pinned in engine.json, on
+# every push and pull request. jrpg-battle is private, so the checkout uses
+# ENGINE_READ_TOKEN, a fine-grained token with read-only Contents access.
+name: check
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Read the pinned engine release
+        id: engine
+        run: echo "tag=$(node -p "require('./engine.json').tag")" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v5
+        with:
+          repository: stardustsuperwizard/jrpg-battle
+          ref: ${{ steps.engine.outputs.tag }}
+          token: ${{ secrets.ENGINE_READ_TOKEN }}
+          path: jrpg-battle
+          # Don't leave the token in jrpg-battle/.git/config for later steps.
+          persist-credentials: false
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+
+      - name: Check the pack
+        run: npm run check -- 300
+        env:
+          JRPG_BATTLE: ${{ github.workspace }}/jrpg-battle
