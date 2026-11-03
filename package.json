@@ -1,0 +1,11 @@
+{
+  "name": "mega_fighters-champions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The Mega Fighters champion roster, a content pack for the jrpg-battle engine.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "check": "node scripts/check.mjs"
+  }
+}
