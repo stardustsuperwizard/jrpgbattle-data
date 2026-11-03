@@ -1,0 +1,35 @@
+{
+  "//": "Settings for scripts/check.mjs only; not part of the pack content.",
+  "standsInFor": {
+    "hermes": "vex",
+    "artemis": "vex",
+    "apollo": "seren",
+    "ares": "aria",
+    "aphrodite": "seren",
+    "zeus": "pyra",
+    "athena": "aria",
+    "poseidon": "pyra",
+    "hades": "pyra",
+    "hephaestus": "aria"
+  },
+  "teams": [
+    [
+      "athena",
+      "zeus",
+      "apollo",
+      "artemis"
+    ],
+    [
+      "hephaestus",
+      "poseidon",
+      "aphrodite",
+      "hermes"
+    ],
+    [
+      "ares",
+      "hades",
+      "apollo",
+      "zeus"
+    ]
+  ]
+}
