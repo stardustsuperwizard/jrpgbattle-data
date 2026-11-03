@@ -48,7 +48,7 @@ It loads the pack the way a deployment does, through jrpg-battle's own pack read
 
 ## CI
 
-`.github/workflows/check.yml` runs `npm run check -- 300` on every push and pull request. It checks out jrpg-battle at `engine.json`'s tag into `jrpg-battle/` using the repository secret **`ENGINE_READ_TOKEN`** (a fine-grained token with read-only Contents access, since jrpg-battle is private), without leaving the token in that checkout's git config. A pack that the engine refuses (an id core already defines, a missing file, an unknown field) or a pin mismatch fails the run.
+`.github/workflows/check.yml` runs `npm run check -- 300` on every pull request and on every push to `main`. It checks out jrpg-battle at `engine.json`'s tag into `jrpg-battle/` using the repository secret **`ENGINE_READ_TOKEN`** (a fine-grained token with read-only Contents access, since jrpg-battle is private), without leaving the token in that checkout's git config. A pack that the engine refuses (an id core already defines, a missing file, an unknown field) or a pin mismatch fails the run.
 
 ## Releasing
 
