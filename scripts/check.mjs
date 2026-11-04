@@ -31,22 +31,15 @@ const [PACK_ID, ...others] = readdirSync(join(ROOT, 'packs'));
 if (!PACK_ID || others.length) throw new Error('packs/ must hold exactly one pack folder.');
 const PACK_DIR = join(ROOT, 'packs', PACK_ID);
 
-// The engine release the pack is checked against (engine.json), the release
-// its manifest says it was built for (`core`), and the checkout actually in
-// use must all agree: CI checks out the pinned tag, but a local run against a
-// newer engine would otherwise pass on rules the site won't deploy.
+// engine.json names the jrpg-battle release CI checks the pack against. The
+// pack works with any engine whose content format matches its manifest's
+// formatVersion (jrpg-battle decision 0023); the engine's own reader below
+// refuses another format by name, so no release numbers have to agree.
 const { tag: ENGINE_TAG } = read(join(ROOT, 'engine.json'));
 if (typeof ENGINE_TAG !== 'string' || !/^v\d+\.\d+\.\d+$/.test(ENGINE_TAG)) {
   throw new Error(`engine.json's tag must be a release tag like "v0.1.0", not ${JSON.stringify(ENGINE_TAG)}.`);
 }
-const { core: BUILT_FOR } = read(join(PACK_DIR, 'manifest.json'));
-if (BUILT_FOR !== ENGINE_TAG.slice(1)) {
-  throw new Error(`engine.json pins ${ENGINE_TAG}, but packs/${PACK_ID}/manifest.json says core "${BUILT_FOR}". They must name the same release.`);
-}
 const { version: ENGINE_VERSION } = read(join(ENGINE, 'package.json'));
-if (ENGINE_VERSION !== BUILT_FOR) {
-  throw new Error(`The jrpg-battle checkout at ${ENGINE} is version ${ENGINE_VERSION}, but the pack is pinned to ${ENGINE_TAG}. Check it out first: git -C ${ENGINE} checkout ${ENGINE_TAG}`);
-}
 
 // Where a deployment puts the folder: its files must pass jrpg-battle's check:boundaries.
 const asDeployed = [
@@ -103,7 +96,7 @@ const pvp = (blue, red) => {
 const { standsInFor: STANDS_IN_FOR, teams: ROSTER_TEAMS } = read(join(ROOT, 'data', 'checks.json'));
 
 console.log(`${manifest.name} ${manifest.version}: ${Object.keys(heroes).length} champions, ${Object.keys(abilities).length} abilities, ${Object.keys(elements).length} new elements; loads as ${config.contentVersion}`);
-console.log(`Engine: ${ENGINE} (${ENGINE_TAG})`);
+console.log(`Engine: ${ENGINE} (${ENGINE_VERSION}; CI checks against ${ENGINE_TAG})`);
 console.log(tiedSpeeds.length ? `Shared speeds: ${tiedSpeeds.map(([spd, names]) => `${spd} (${names.join(', ')})`).join('; ')}` : 'Every hero, core and pack, has its own speed.');
 console.log(`Wrote dist/tuning-import.json\n`);
 
