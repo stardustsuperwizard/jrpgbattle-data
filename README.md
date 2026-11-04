@@ -9,7 +9,7 @@ The champion roster for Mega Fighters: a content pack for the [jrpg-battle](http
 | Path | What it is |
 |---|---|
 | `packs/mega_fighters-champions/` | The pack: a jrpg-battle content pack folder (its decisions 0016 and 0019), exactly as a deployment loads it. It holds these six files and nothing else. |
-| `…/manifest.json` | `id` (the folder's name), `name`, `version`, `core` (the jrpg-battle `package.json` version the pack was built against) and `licences: { data, lore }`. |
+| `…/manifest.json` | `formatVersion` (the jrpg-battle content format the files are written in), `id` (the folder's name), `name`, `version` (the pack's own content) and `licences: { data, lore }`. |
 | `…/elements.json` | Elements the pack adds, in the shape of jrpg-battle's `src/content/elements.json`. Empty for now: the first wave uses the four core elements. |
 | `…/heroes.json` | Champions, in the shape of `src/content/heroes.json`. |
 | `…/abilities.json` | Their abilities, in the shape of `src/content/abilities.json`. Each champion has exactly one basic, one skill and one ultimate. |
@@ -30,25 +30,25 @@ cp -r packs/mega_fighters-champions ../jrpg-battle/src/content/packs/
 echo '["mega_fighters-champions"]' > ../jrpg-battle/src/content/packs.json
 ```
 
-The server, the page and `build:site` then load it, and content versions read `1.0.0+mega_fighters-champions@0.2.0`. Adding or upgrading the pack interrupts online matches running on that deploy. Bump `version` in the manifest on every change to the pack.
+The server, the page and `build:site` then load it, and content versions read `1.0.0+mega_fighters-champions@0.3.0`. Adding or upgrading the pack interrupts online matches running on that deploy. Bump `version` in the manifest on every change to the pack.
 
 ## Checking
 
-Needs Node 22 or later and a jrpg-battle checkout beside this one (or `JRPG_BATTLE=/path/to/jrpg-battle`), **at the release in `engine.json`**:
+Needs Node 22 or later and a jrpg-battle checkout beside this one (or `JRPG_BATTLE=/path/to/jrpg-battle`), in the pack's content format; the release in `engine.json` is what CI uses:
 
 ```sh
-git -C ../jrpg-battle checkout v0.2.0   # the tag engine.json pins
+git -C ../jrpg-battle checkout v0.3.0   # the tag CI checks against
 npm run check              # 300 battles per line
 npm run check -- 1000      # more battles, steadier numbers
 ```
 
 It loads the pack the way a deployment does, through jrpg-battle's own pack reader, boundary check and validation, reports any speed shared with another hero, writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions), and prints each champion's PvE and PvP win rates against the core party. ROSTER.md explains how to read them.
 
-**The engine pin.** `engine.json` names the jrpg-battle release the pack is checked against (`{ "tag": "v0.2.0" }`), and the manifest's `core` names the release it was built for (`"0.2.0"`). The check fails unless both name the same release *and* the checkout is that release, so a pack never passes on engine rules the site won't deploy. Moving the pack to a new engine release means changing both, rerunning the check, and updating ROSTER.md's numbers.
+**Compatibility is the format, not a release number** (jrpg-battle decision 0023). The manifest's `formatVersion` names the content format the pack is written in, and the pack works with every jrpg-battle release that reads that format. The engine refuses any other format by name. An engine release that keeps the format needs nothing here: no pack release, and the site moves its engine pin alone. When jrpg-battle moves the content format, the pack's files move with it in one PR and the pack releases. `engine.json` (`{ "tag": "v0.3.0" }`) only names the release CI checks against; bump it to measure on a newer engine, and update ROSTER.md if the numbers move.
 
 ## CI
 
-`.github/workflows/check.yml` runs `npm run check -- 300` on every pull request and on every push to `main`. It checks out jrpg-battle at `engine.json`'s tag into `jrpg-battle/` using the repository secret **`ENGINE_READ_TOKEN`** (a fine-grained token with read-only Contents access, since jrpg-battle is private), without leaving the token in that checkout's git config. A pack that the engine refuses (an id core already defines, a missing file, an unknown field) or a pin mismatch fails the run.
+`.github/workflows/check.yml` runs `npm run check -- 300` on every pull request and on every push to `main`. It checks out jrpg-battle at `engine.json`'s tag into `jrpg-battle/` using the repository secret **`ENGINE_READ_TOKEN`** (a fine-grained token with read-only Contents access, since jrpg-battle is private), without leaving the token in that checkout's git config. A pack that the engine refuses (an id core already defines, a missing file, an unknown field, another content format) fails the run.
 
 ## Releasing
 
