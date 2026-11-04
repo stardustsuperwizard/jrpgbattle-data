@@ -30,21 +30,21 @@ cp -r packs/mega_fighters-champions ../jrpg-battle/src/content/packs/
 echo '["mega_fighters-champions"]' > ../jrpg-battle/src/content/packs.json
 ```
 
-The server, the page and `build:site` then load it, and content versions read `1.0.0+mega_fighters-champions@0.1.2`. Adding or upgrading the pack interrupts online matches running on that deploy. Bump `version` in the manifest on every change to the pack.
+The server, the page and `build:site` then load it, and content versions read `1.0.0+mega_fighters-champions@0.2.0`. Adding or upgrading the pack interrupts online matches running on that deploy. Bump `version` in the manifest on every change to the pack.
 
 ## Checking
 
 Needs Node 22 or later and a jrpg-battle checkout beside this one (or `JRPG_BATTLE=/path/to/jrpg-battle`), **at the release in `engine.json`**:
 
 ```sh
-git -C ../jrpg-battle checkout v0.1.2   # the tag engine.json pins
+git -C ../jrpg-battle checkout v0.2.0   # the tag engine.json pins
 npm run check              # 300 battles per line
 npm run check -- 1000      # more battles, steadier numbers
 ```
 
 It loads the pack the way a deployment does, through jrpg-battle's own pack reader, boundary check and validation, reports any speed shared with another hero, writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions), and prints each champion's PvE and PvP win rates against the core party. ROSTER.md explains how to read them.
 
-**The engine pin.** `engine.json` names the jrpg-battle release the pack is checked against (`{ "tag": "v0.1.2" }`), and the manifest's `core` names the release it was built for (`"0.1.2"`). The check fails unless both name the same release *and* the checkout is that release, so a pack never passes on engine rules the site won't deploy. Moving the pack to a new engine release means changing both, rerunning the check, and updating ROSTER.md's numbers.
+**The engine pin.** `engine.json` names the jrpg-battle release the pack is checked against (`{ "tag": "v0.2.0" }`), and the manifest's `core` names the release it was built for (`"0.2.0"`). The check fails unless both name the same release *and* the checkout is that release, so a pack never passes on engine rules the site won't deploy. Moving the pack to a new engine release means changing both, rerunning the check, and updating ROSTER.md's numbers.
 
 ## CI
 

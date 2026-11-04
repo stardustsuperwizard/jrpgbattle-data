@@ -21,7 +21,7 @@ const runs = Number(process.argv[2] ?? 300);
 
 const read = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const load = (path) => import(pathToFileURL(join(ENGINE, path)).href);
-const { buildConfig, validateConfig, createBattle, createPvpMatch } = await load('src/engine/content.js');
+const { buildConfig, validateConfig, createMatch } = await load('src/engine/content.js');
 const { simulate, simulatePvp } = await load('src/engine/simulate.js');
 const { readPacks, shippedContent } = await load('scripts/content.js');
 const { checkBoundaries } = await load('scripts/check-boundaries.js');
@@ -84,13 +84,14 @@ const tiedSpeeds = [...speeds].filter(([, names]) => names.length > 1);
 
 const pct = (n) => `${(n * 100).toFixed(1)}%`.padStart(6);
 const pad = (text, width) => String(text).padEnd(width);
-const pve = (party) => simulate((seed) => createBattle({ ...config, party }, { seed }), runs);
+// Every hero team on the bot, as the engine's simulators play them: a person can't sit at a simulator.
+const pve = (party) => simulate((seed) => createMatch({ ...config, party }, { mode: 'pve', seed, controllers: { party: 'bot:default' } }), runs);
 const controllers = { blue: 'bot:default', red: 'bot:default' };
 const pvp = (blue, red) => {
   const modes = structuredClone(config.modes);
   modes.pvp.teams[0].champions = blue;
   modes.pvp.teams[1].champions = red;
-  return simulatePvp((seed) => createPvpMatch({ ...config, modes }, { seed, controllers }), runs);
+  return simulatePvp((seed) => createMatch({ ...config, modes }, { mode: 'pvp', seed, controllers }), runs);
 };
 
 // Each champion stands in for the core hero whose job is closest, so the

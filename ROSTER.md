@@ -19,9 +19,9 @@ Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for the
 
 **Elements are provisional.** With only physical, fire, ice and lightning, several gods are approximations: Poseidon and Aphrodite are "ice" for water, Hades "fire" for the Phlegethon. When jrpg-battle lets content define elements ([jrpg-battle#254](https://github.com/stardustsuperwizard/jrpg-battle/issues/254)), the intended ones are: Poseidon and Aphrodite water, Hades dark, Apollo light, Hermes wind, Zeus lightning, Hephaestus fire.
 
-## Numbers (pack 0.1.2 on jrpg-battle v0.1.2, 300 seeded battles per line)
+## Numbers (pack 0.2.0 on jrpg-battle v0.2.0, 300 seeded battles per line)
 
-`npm run check` in this repository, against jrpg-battle `v0.1.2`; the core party wins PvE 80.0% and splits the PvP mirror 51.7%. The numbers are identical to the ones measured on `v0.1.0`: the pack and the engine rules are unchanged, and only the version moved. The pack is unchanged since its first numbers; they moved because `v0.1.0`'s bot holds shared SP for a teammate's due heal (jrpg-battle#256). Each champion stands in for the core hero with the closest job (`data/checks.json`).
+`npm run check` in this repository, against jrpg-battle `v0.2.0`; the core party wins PvE 80.0% and splits the PvP mirror 51.7%. The numbers are identical to the ones measured on `v0.1.0` and `v0.1.2`: the pack and the engine rules are unchanged (`v0.2.0` reshaped how matches are built, decision 0022, but not the rules). The pack is unchanged since its first numbers; they moved because `v0.1.0`'s bot holds shared SP for a teammate's due heal (jrpg-battle#256). Each champion stands in for the core hero with the closest job (`data/checks.json`).
 
 | Champion | In for | PvE win | vs core | PvP win vs core team |
 |---|---|---|---|---|
