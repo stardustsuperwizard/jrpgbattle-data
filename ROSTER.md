@@ -1,6 +1,6 @@
 # Roster: first wave, the Olympians
 
-Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; the default pack's statuses burn, shock, bleed, freeze, ATK Up, DEF Down and Taunt; and its four elements. The pack adds no statuses or elements of its own yet, though since jrpg-battle 0.6.0 a pack may (decisions 0019 and 0029). Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
+Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; jrpg-battle's statuses burn, shock, bleed, freeze, ATK Up, DEF Down and Taunt; and its four elements. No statuses or elements of its own yet: since jrpg-battle 0.6.0 both are content files (decisions 0019 and 0029), so a deployment could replace `statuses.json` or `elements.json` with versions that add the roster's. Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
 
 | Champion | Role | Element (for now) | Spd | HP | ATK | DEF | Skill | Ultimate |
 |---|---|---|---|---|---|---|---|---|
@@ -17,11 +17,11 @@ Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shie
 
 Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for their teammates' skills.
 
-**Elements are provisional.** With only physical, fire, ice and lightning, several gods are approximations: Poseidon and Aphrodite are "ice" for water, Hades "fire" for the Phlegethon. jrpg-battle lets a pack define elements now (its decision 0019); the intended ones are: Poseidon and Aphrodite water, Hades dark, Apollo light, Hermes wind, Zeus lightning, Hephaestus fire.
+**Elements are provisional.** With only physical, fire, ice and lightning, several gods are approximations: Poseidon and Aphrodite are "ice" for water, Hades "fire" for the Phlegethon. Elements are content files in jrpg-battle now (its decision 0019), so the roster could bring its own `elements.json`; the intended ones are: Poseidon and Aphrodite water, Hades dark, Apollo light, Hermes wind, Zeus lightning, Hephaestus fire.
 
-## Numbers (pack 0.4.0 on jrpg-battle 0.6.0, 300 seeded battles per line)
+## Numbers (roster 0.4.0 on jrpg-battle 0.6.0, 300 seeded battles per line)
 
-`npm run check` in this repository, against jrpg-battle 0.6.0; the core party wins PvE 83.3% and splits the PvP mirror 50.0%. The pack's champions are unchanged since 0.3.0; the numbers moved with the engine. In 0.6.0 taunt pulls every attacker's single-target attacks, players' and the bot's as well as monsters' (jrpg-battle decision 0028); before, it only drew monsters, so in PvP Ares's and Athena's taunts did nothing. A frozen golem also keeps its wind-up now instead of losing it (decision 0027). Each champion stands in for the core hero with the closest job (`data/checks.json`).
+`npm run check` in this repository, against jrpg-battle 0.6.0; the core party wins PvE 83.3% and splits the PvP mirror 50.0%. The champions are unchanged since 0.3.0; the numbers moved with the engine. In 0.6.0 taunt pulls every attacker's single-target attacks, players' and the bot's as well as monsters' (jrpg-battle decision 0028); before, it only drew monsters, so in PvP Ares's and Athena's taunts did nothing. A frozen golem also keeps its wind-up now instead of losing it (decision 0027). Each champion stands in for the core hero with the closest job (`data/checks.json`).
 
 | Champion | In for | PvE win | vs core | PvP win vs core team |
 |---|---|---|---|---|
@@ -58,7 +58,7 @@ Gods whose myth wants something the engine can't do yet. Each is a small jrpg-ba
 | Champion idea | Mechanic | Why |
 |---|---|---|
 | Hermes (fuller kit) | Speed up / turn advance (Haste, FFX) | The messenger acts again or hurries an ally |
-| Kronos | Delay an enemy's turn (Slow) | Lord of time. A Slow that lowers speed is now a pack status (`"mods": { "spdPct": -0.3 }`, decision 0029); pushing a turn back is not yet |
+| Kronos | Delay an enemy's turn (Slow) | Lord of time. A Slow that lowers speed is now a content status (`"mods": { "spdPct": -0.3 }`, decision 0029); pushing a turn back is not yet |
 | Hera | Revive a fallen ally | Queen of the gods, protector |
 | Dionysus | Confuse / random target | Madness and revelry |
 | Persephone | A form that changes over the battle | Spring and the underworld |
@@ -70,6 +70,6 @@ Gods whose myth wants something the engine can't do yet. Each is a small jrpg-ba
 
 ## Trying them in the game
 
-**On a deployment that loads the pack** (the Mega Fighters site, or a jrpg-battle checkout with the pack copied in as README's "Deploying" says), the gods are ordinary heroes: pick them in the PvP team pick, or put them in the PvE party from the tuning panel (**T**).
+**On a deployment that loads the roster** (the Mega Fighters site, or a jrpg-battle checkout with `content/` copied over as README's "Deploying" says), the gods are ordinary heroes: pick them in the PvP team pick, or put them in the PvE party from the tuning panel (**T**).
 
 **On a deployment that doesn't load it,** run `npm run check`, open the tuning panel, paste `dist/tuning-import.json` into its settings box and press **Import**. The gods then appear in the party slot menus, in PvE and in an online match's settings.

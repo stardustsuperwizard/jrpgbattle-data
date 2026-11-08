@@ -2,7 +2,7 @@
 
 One file per champion, `<hero id>.md`: the public-domain sources it draws from, and the story. jrpg-battle never loads it; the Mega Fighters site reads it as one layer of its lore (mega_fighters#27).
 
-**The site's own lore wins.** The site layers presentation data as **site > this pack > jrpg-battle core**: a god's file in the site's `lore/` replaces the one here, whole. These files are the base the site falls back on, so a god added here shows its lore before the site writes its own telling. Lore stays unlicensed and is the owner's, like the art.
+**The site's own lore wins.** The site layers presentation data as **site > this repository > jrpg-battle**: a god's file in the site's `lore/` replaces the one here, whole. These files are the base the site falls back on, so a god added here shows its lore before the site writes its own telling. Lore stays unlicensed and is the owner's, like the art.
 
 **The format** (`manifest.json`'s `formatVersion`, `2026-11-04`), which the site's build reads:
 - `# Name` on the first line;

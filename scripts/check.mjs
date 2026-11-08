@@ -1,19 +1,19 @@
-// Checks the pack against a jrpg-battle checkout and measures each champion.
+// Checks the roster against a jrpg-battle checkout and measures each champion.
 //   node scripts/check.mjs [runs]                 (default 300 battles per line)
 //   JRPG_BATTLE=/path/to/jrpg-battle node scripts/check.mjs
 //
-// The pack folder, packs/<id>/, is a jrpg-battle content pack as decisions
-// 0016 and 0025 define it: a deployment copies it to src/content/packs/<id>/
-// and lists the id in src/content/packs.json after the engine's default
-// pack. The check loads it that way, through jrpg-battle's own pack reader,
-// boundary check and merge, so a pack that passes here is one the server and
-// the page accept. It keeps the default pack's heroes, which a deployment
-// may leave out, because each champion is measured against them.
+// content/ holds the content files a deployment overwrites in jrpg-battle's
+// src/content/ (its decision 0030): the roster's manifest, heroes and
+// abilities, each replacing the engine's file of that name. The check reads
+// the engine's content with its own reader, puts these files where a
+// deployment would and runs jrpg-battle's boundary check and validation, so
+// files that pass here are files the server and the page accept. To measure
+// each champion beside the engine's heroes, it keeps those heroes and their
+// abilities next to the roster's, which a deployment's overwrite would drop.
 //
-// It also writes dist/tuning-import.json, the pack as tuning-panel settings,
-// so the champions can be tried on a deployment that doesn't load the pack.
-import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+// It also writes dist/tuning-import.json, the roster as tuning-panel settings,
+// so the champions can be tried on a deployment that doesn't load them.
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -23,54 +23,50 @@ const runs = Number(process.argv[2] ?? 300);
 
 const read = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const load = (path) => import(pathToFileURL(join(ENGINE, path)).href);
-const { buildConfig, validateConfig, createMatch } = await load('src/engine/content.js');
+const { buildConfig, validateConfig, createMatch, CONTENT_FILES } = await load('src/engine/content.js');
 const { simulate, simulatePvp } = await load('src/engine/simulate.js');
-const { readPacks, shippedContent } = await load('scripts/content.js');
-const { completePicks } = await load('src/engine/picks.js');
+const { readContent } = await load('scripts/content.js');
 const { checkBoundaries } = await load('scripts/check-boundaries.js');
+const { completePicks } = await load('src/engine/picks.js');
 
-// The one pack folder this repository holds; its name is the pack's id.
-const [PACK_ID, ...others] = readdirSync(join(ROOT, 'packs'));
-if (!PACK_ID || others.length) throw new Error('packs/ must hold exactly one pack folder.');
-const PACK_DIR = join(ROOT, 'packs', PACK_ID);
-
-// engine.json names the jrpg-battle release CI checks the pack against. The
-// pack works with any engine whose content format matches its manifest's
-// formatVersion (jrpg-battle decision 0023); the engine's own reader below
-// refuses another format by name, so no release numbers have to agree.
+// engine.json names the jrpg-battle release CI checks against. The roster
+// works with any engine whose content format matches its manifest's
+// formatVersion (jrpg-battle decision 0023); buildConfig below refuses
+// another format by name, so no release numbers have to agree.
 const { tag: ENGINE_TAG } = read(join(ROOT, 'engine.json'));
 if (typeof ENGINE_TAG !== 'string' || !/^v\d+\.\d+\.\d+$/.test(ENGINE_TAG)) {
   throw new Error(`engine.json's tag must be a release tag like "v0.1.0", not ${JSON.stringify(ENGINE_TAG)}.`);
 }
 const { version: ENGINE_VERSION } = read(join(ENGINE, 'package.json'));
 
-// Where a deployment puts the folder: its files must pass jrpg-battle's check:boundaries.
-const asDeployed = [
-  { path: 'src/content/packs.json', source: JSON.stringify([PACK_ID]) },
-  ...readdirSync(PACK_DIR).map((name) => ({ path: `src/content/packs/${PACK_ID}/${name}`, source: readFileSync(join(PACK_DIR, name), 'utf8') })),
-];
-const violations = checkBoundaries(asDeployed);
+// The files this repository overwrites: each must be one of the engine's content files.
+const CONTENT_DIR = join(ROOT, 'content');
+const files = readdirSync(CONTENT_DIR).map((name) => name.replace(/\.json$/, ''));
+const unknown = files.filter((name) => !CONTENT_FILES.includes(name));
+if (unknown.length) throw new Error(`content/ may hold only jrpg-battle's content files (${CONTENT_FILES.join(', ')}); not ${unknown.join(', ')}.`);
+const roster = Object.fromEntries(files.map((name) => [name, read(join(CONTENT_DIR, `${name}.json`))]));
+
+// Where a deployment puts them: they must pass jrpg-battle's check:boundaries.
+const violations = checkBoundaries(files.map((name) => ({ path: `src/content/${name}.json`, source: readFileSync(join(CONTENT_DIR, `${name}.json`), 'utf8') })));
 if (violations.length) throw new Error(violations.map((v) => `${v.file}: ${v.reason}`).join('\n'));
 
-// A content folder with the index, the engine's default pack and this one, read by the deployment's reader.
-const contentDir = mkdtempSync(join(tmpdir(), 'pack-check-'));
-let packs;
-try {
-  writeFileSync(join(contentDir, 'packs.json'), JSON.stringify(['default', PACK_ID]));
-  mkdirSync(join(contentDir, 'packs'));
-  symlinkSync(join(ENGINE, 'src', 'content', 'packs', 'default'), join(contentDir, 'packs', 'default'), 'dir');
-  symlinkSync(PACK_DIR, join(contentDir, 'packs', PACK_ID), 'dir');
-  packs = readPacks(contentDir);
-} finally {
-  rmSync(contentDir, { recursive: true, force: true });
+// The engine's content with the roster's files in place, keeping the engine's heroes beside the champions.
+const engine = readContent(join(ENGINE, 'src', 'content'));
+for (const kind of ['heroes', 'abilities']) {
+  const clash = Object.keys(roster[kind] ?? {}).filter((id) => Object.hasOwn(engine[kind], id));
+  if (clash.length) throw new Error(`The roster's ${kind} reuse jrpg-battle's ids ${clash.join(', ')}, so a champion couldn't be measured beside the hero it stands in for.`);
 }
-const pack = packs.find((p) => p.id === PACK_ID);
-const { manifest, statuses, elements, heroes, abilities } = pack;
+const config = validateConfig(buildConfig({
+  ...engine,
+  ...roster,
+  heroes: { ...engine.heroes, ...roster.heroes },
+  abilities: { ...engine.abilities, ...roster.abilities },
+}));
+// And as a deployment loads them, the roster's files replacing the engine's whole.
+validateConfig(buildConfig({ ...engine, ...roster }));
+const { manifest, heroes, abilities } = roster;
 
-// composeContent refuses any id the default pack already defines, so a pack never replaces a balance hero.
-const config = validateConfig(buildConfig(shippedContent(packs)));
-
-const tuning = { statuses, elements, heroes, abilities };
+const tuning = { heroes, abilities };
 mkdirSync(join(ROOT, 'dist'), { recursive: true });
 writeFileSync(join(ROOT, 'dist', 'tuning-import.json'), `${JSON.stringify(tuning, null, 2)}\n`);
 
@@ -94,9 +90,9 @@ const pvp = (blue, red) => simulatePvp((seed) => createMatch(config, { mode: 'pv
 // fairer read of raw strength.
 const { coreParty: CORE_PARTY, standsInFor: STANDS_IN_FOR, teams: ROSTER_TEAMS } = read(join(ROOT, 'data', 'checks.json'));
 
-console.log(`${manifest.name} ${manifest.version}: ${Object.keys(heroes).length} champions, ${Object.keys(abilities).length} abilities, ${Object.keys(statuses).length} new statuses, ${Object.keys(elements).length} new elements; loads as ${config.contentVersion}`);
+console.log(`${manifest.name} ${manifest.version}: ${Object.keys(heroes).length} champions, ${Object.keys(abilities).length} abilities; loads as ${config.contentVersion}`);
 console.log(`Engine: ${ENGINE} (${ENGINE_VERSION}; CI checks against ${ENGINE_TAG})`);
-console.log(tiedSpeeds.length ? `Shared speeds: ${tiedSpeeds.map(([spd, names]) => `${spd} (${names.join(', ')})`).join('; ')}` : 'Every hero, core and pack, has its own speed.');
+console.log(tiedSpeeds.length ? `Shared speeds: ${tiedSpeeds.map(([spd, names]) => `${spd} (${names.join(', ')})`).join('; ')}` : "Every hero, the engine's and the roster's, has its own speed.");
 console.log(`Wrote dist/tuning-import.json\n`);
 
 const baseline = pve(CORE_PARTY);
