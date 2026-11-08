@@ -42,7 +42,13 @@ The build refuses sources that don't fit together, naming every problem: a liste
 
 ## Static API
 
-`.github/workflows/pages.yml` publishes `dist/api/` to GitHub Pages on every push to `main`, once Pages is turned on (**Settings → Pages → Source: GitHub Actions**). A Pages site is public even when the repository is private, and on a private repository Pages needs a paid GitHub plan.
+`.github/workflows/pages.yml` publishes `dist/api/` to GitHub Pages on every push to `main`, once publishing is switched on. Until then its job is skipped and nothing is published. To switch it on:
+
+1. Turn Pages on: **Settings → Pages → Source: GitHub Actions**.
+2. Add the repository variable **`PUBLISH_API`** with the value `true`: **Settings → Secrets and variables → Actions → Variables**.
+3. Run the `pages` workflow once from the Actions tab (or push to `main`).
+
+A Pages site is public even when the repository is private, and on a private repository Pages needs a paid GitHub plan. Setting `PUBLISH_API` back to anything else stops publishing; the last deploy stays up until Pages is turned off.
 
 | Path | What it is |
 |---|---|

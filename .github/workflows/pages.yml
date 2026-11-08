@@ -1,8 +1,11 @@
 # Publishes the roster's static API (dist/api/, built by scripts/build.mjs) to
-# GitHub Pages on every push to main. It deploys only once Pages is turned on
-# under Settings > Pages with "GitHub Actions" as the source. Pages sites are
-# public, even for a private repository: publishing this makes the roster's
-# data public (README "Static API").
+# GitHub Pages on every push to main, once publishing is switched on: the
+# repository variable PUBLISH_API set to "true" (Settings > Secrets and
+# variables > Actions > Variables), and Pages turned on with "GitHub Actions"
+# as its source. Until then the job is skipped rather than failed, so main
+# stays green and nothing is published. Pages sites are public, even for a
+# private repository: publishing this makes the roster's data public (README
+# "Static API").
 name: pages
 
 on:
@@ -22,6 +25,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: vars.PUBLISH_API == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
