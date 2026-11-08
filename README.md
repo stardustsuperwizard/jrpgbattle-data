@@ -84,7 +84,7 @@ It builds the sources, reads the engine's content with jrpg-battle's own reader,
 
 ## Releasing
 
-The jrpgbattle site (the repository `stardustsuperwizard/mega_fighters` until it is renamed) pins a release tag of this repository, never a branch.
+The jrpgbattle site (`stardustsuperwizard/jrpgbattle-client-premium`) pins a release tag of this repository, never a branch.
 
 1. Bump `version` in `content/manifest.json` (semver; the `package.json` version follows it) in the PR that changes the roster.
 2. Merge it, with CI green.
