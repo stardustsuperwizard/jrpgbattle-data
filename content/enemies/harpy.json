@@ -1,0 +1,52 @@
+{
+  "id": "harpy",
+  "name": "Harpy",
+  "sprite": "🦅",
+  "element": "lightning",
+  "maxHp": 860,
+  "atk": 155,
+  "def": 35,
+  "spd": 126,
+  "toughness": 20,
+  "weaknesses": [
+    "ice",
+    "physical"
+  ],
+  "xp": 150,
+  "gold": 210,
+  "skills": [
+    {
+      "id": "talon_rake",
+      "name": "Talon Rake",
+      "type": "basic",
+      "target": "enemy",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1
+        }
+      ],
+      "weight": 3
+    },
+    {
+      "id": "storm_shriek",
+      "name": "Storm Shriek",
+      "type": "skill",
+      "target": "all_enemies",
+      "weight": 1,
+      "message": "{user} shrieks up a storm wind!",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 0.5
+        },
+        {
+          "type": "status",
+          "status": "shock",
+          "chance": 0.3,
+          "duration": 2
+        }
+      ]
+    }
+  ]
+}

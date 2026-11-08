@@ -15,10 +15,33 @@
         "wolf",
         "shaman"
       ]
+    },
+    {
+      "from": 6,
+      "enemies": [
+        "goblin",
+        "wolf",
+        "shaman",
+        "harpy",
+        "boar",
+        "spartoi"
+      ]
+    },
+    {
+      "from": 8,
+      "enemies": [
+        "wolf",
+        "harpy",
+        "boar",
+        "spartoi",
+        "shade",
+        "phoenix"
+      ]
     }
   ],
   "bosses": [
-    "golem"
+    "golem",
+    "minotaur"
   ],
   "bossEvery": 5,
   "waveSize": {

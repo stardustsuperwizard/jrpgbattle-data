@@ -1,0 +1,52 @@
+{
+  "id": "boar",
+  "name": "Erymanthian Boar",
+  "sprite": "🐗",
+  "element": "physical",
+  "maxHp": 950,
+  "atk": 165,
+  "def": 50,
+  "spd": 96,
+  "toughness": 40,
+  "weaknesses": [
+    "fire",
+    "lightning"
+  ],
+  "xp": 165,
+  "gold": 230,
+  "skills": [
+    {
+      "id": "gore",
+      "name": "Gore",
+      "type": "basic",
+      "target": "enemy",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1
+        }
+      ],
+      "weight": 3
+    },
+    {
+      "id": "stampede",
+      "name": "Stampede",
+      "type": "skill",
+      "target": "enemy",
+      "weight": 1,
+      "message": "{user} lowers its tusks and charges!",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1.2
+        },
+        {
+          "type": "status",
+          "status": "bleed",
+          "chance": 0.5,
+          "duration": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "id": "spartoi",
+  "name": "Spartoi",
+  "sprite": "💀",
+  "element": "physical",
+  "maxHp": 1050,
+  "atk": 145,
+  "def": 90,
+  "spd": 100,
+  "toughness": 40,
+  "weaknesses": [
+    "physical",
+    "fire"
+  ],
+  "xp": 160,
+  "gold": 220,
+  "skills": [
+    {
+      "id": "spear_thrust",
+      "name": "Spear Thrust",
+      "type": "basic",
+      "target": "enemy",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1.0
+        }
+      ],
+      "weight": 3
+    },
+    {
+      "id": "phalanx",
+      "name": "Phalanx",
+      "type": "skill",
+      "target": "self",
+      "weight": 1,
+      "message": "{user} raises its shield and stands its ground!",
+      "effects": [
+        {
+          "type": "shield",
+          "defRatio": 1,
+          "flat": 60,
+          "duration": 2
+        },
+        {
+          "type": "status",
+          "status": "taunt",
+          "duration": 2
+        }
+      ]
+    }
+  ]
+}

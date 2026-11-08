@@ -51,6 +51,26 @@ All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 94.0% and PvP 65.0% ag
 - **Artemis** (11% PvP) and **Hermes** (34%): both replace Vex, the fastest core hero, and lose his place at the top of the order.
 - **A team without a real healer loses PvE outright** (Ares, Hades, Apollo, Zeus: 0%, since Apollo heals only one ally per skill). The second wave needs more healers.
 
+## Monsters
+
+The dungeon's monsters (`content/enemies/`). The first five are jrpg-battle's own; roster 0.5.0 adds five from Greek myth from floor 6 on, and the Minotaur, who shares the boss floors with the Golem (each boss floor draws one at random).
+
+| Monster | From floor | Element | Weak to | Role |
+|---|---|---|---|---|
+| 🦠 Slime | 1 | Physical | Fire, lightning | Corrode: lowers a hero's DEF |
+| 👺 Goblin | 1 | Physical | Ice, physical | Hits hard, sometimes harder |
+| 🐺 Dire Wolf | 3 | Physical | Fire, ice | Fast; Howl raises its ATK |
+| 🧌 Goblin Shaman | 3 | Lightning | Physical, lightning | Healer; shocks |
+| 🦅 Harpy | 6 | Lightning | Ice, physical | Fastest monster; Storm Shriek hits the whole party, may shock |
+| 🐗 Erymanthian Boar | 6 | Physical | Fire, lightning | Stampede: a heavy gore that may bleed |
+| 💀 Spartoi | 6 | Physical | Physical, fire | The sown men: Phalanx shields itself and taunts |
+| 👻 Shade | 8 | Ice | Fire, lightning | Grave Chill may freeze; its Lament lowers the party's DEF |
+| 🔥 Phoenix | 8 | Fire | Ice, physical | Healer; burns |
+| 🗿 Ancient Golem | boss | Physical | Lightning, ice | Charger, every 3rd action: Cataclysm on the party |
+| 🐂 Minotaur | boss | Physical | Fire, lightning | Charger, every 4th action: Labyrinth Rampage on the party; Horn Gore bleeds |
+
+From floor 8 the pool drops the Goblin and the Shaman, so the Phoenix is its one healer. Floors cleared by the bot in jrpg-battle 0.6.0's `simulate-run.js` (200 runs, three waves a floor), roster 0.4.0 → 0.5.0: Athena, Zeus, Apollo, Artemis median 10 → 9; Hephaestus, Poseidon, Aphrodite, Hermes 9 → 7; Ares, Hades, Apollo, Zeus 4 → 5. The step up from floor 6 is deliberate; the Boar was a wall until its Stampede became single-target.
+
 ## Needs a mechanic
 
 Gods whose myth wants something the engine can't do yet. Each is a small jrpg-battle engine idea; the roster tells it which to build first.

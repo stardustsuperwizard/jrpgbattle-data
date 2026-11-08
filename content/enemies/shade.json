@@ -1,0 +1,58 @@
+{
+  "id": "shade",
+  "name": "Shade",
+  "sprite": "👻",
+  "element": "ice",
+  "maxHp": 880,
+  "atk": 165,
+  "def": 30,
+  "spd": 112,
+  "toughness": 30,
+  "weaknesses": [
+    "fire",
+    "lightning"
+  ],
+  "xp": 155,
+  "gold": 215,
+  "skills": [
+    {
+      "id": "grave_chill",
+      "name": "Grave Chill",
+      "type": "basic",
+      "target": "enemy",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 0.9
+        },
+        {
+          "type": "status",
+          "status": "freeze",
+          "chance": 0.2,
+          "duration": 1
+        }
+      ],
+      "weight": 3
+    },
+    {
+      "id": "lament",
+      "name": "Lament of the Dead",
+      "type": "skill",
+      "target": "all_enemies",
+      "weight": 1,
+      "message": "{user} wails a lament from the underworld.",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 0.4
+        },
+        {
+          "type": "status",
+          "status": "def_down",
+          "chance": 0.5,
+          "duration": 2
+        }
+      ]
+    }
+  ]
+}
