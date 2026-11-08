@@ -1,6 +1,6 @@
 # Lore
 
-One file per champion, `<hero id>.md`: the public-domain sources it draws from, and the story. jrpg-battle never loads it; the jrpgbattle site reads it as one layer of its lore (mega_fighters#27).
+One file per champion, `<hero id>.md`: the public-domain sources it draws from, and the story. jrpg-battle never loads it; the jrpgbattle site reads it as one layer of its lore (jrpgbattle-client-premium#27).
 
 **The site's own lore wins.** The site layers presentation data as **site > this repository > jrpg-battle**: a god's file in the site's `lore/` replaces the one here, whole. These files are the base the site falls back on, so a god added here shows its lore before the site writes its own telling. Lore stays unlicensed and is the owner's, like the art.
 
