@@ -1,0 +1,8 @@
+{
+  "name": "ATK Up",
+  "kind": "buff",
+  "icon": "⚔️",
+  "mods": {
+    "atkPct": 0.3
+  }
+}

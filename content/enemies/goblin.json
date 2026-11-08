@@ -1,0 +1,45 @@
+{
+  "id": "goblin",
+  "name": "Goblin",
+  "sprite": "👺",
+  "element": "physical",
+  "maxHp": 980,
+  "atk": 170,
+  "def": 50,
+  "spd": 104,
+  "toughness": 30,
+  "weaknesses": [
+    "ice",
+    "physical"
+  ],
+  "xp": 120,
+  "gold": 170,
+  "skills": [
+    {
+      "id": "stab",
+      "name": "Stab",
+      "type": "basic",
+      "target": "enemy",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1
+        }
+      ],
+      "weight": 3
+    },
+    {
+      "id": "frenzy",
+      "name": "Frenzy",
+      "type": "basic",
+      "target": "enemy",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1.6
+        }
+      ],
+      "weight": 1
+    }
+  ]
+}

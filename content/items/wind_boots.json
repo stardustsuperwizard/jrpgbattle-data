@@ -1,0 +1,9 @@
+{
+  "id": "wind_boots",
+  "name": "Wind Boots",
+  "icon": "🪽",
+  "cost": 400,
+  "stats": {
+    "spd": 10
+  }
+}

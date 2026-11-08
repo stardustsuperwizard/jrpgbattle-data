@@ -1,0 +1,12 @@
+{
+  "id": "war_blade",
+  "name": "War Blade",
+  "icon": "⚔️",
+  "cost": 400,
+  "stats": {
+    "atk": 25
+  },
+  "components": [
+    "iron_dagger"
+  ]
+}

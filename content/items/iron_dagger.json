@@ -1,0 +1,9 @@
+{
+  "id": "iron_dagger",
+  "name": "Iron Dagger",
+  "icon": "🗡️",
+  "cost": 150,
+  "stats": {
+    "atk": 10
+  }
+}

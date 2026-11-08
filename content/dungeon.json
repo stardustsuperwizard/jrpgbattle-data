@@ -1,0 +1,67 @@
+{
+  "pools": [
+    {
+      "from": 1,
+      "enemies": [
+        "slime",
+        "goblin"
+      ]
+    },
+    {
+      "from": 3,
+      "enemies": [
+        "slime",
+        "goblin",
+        "wolf",
+        "shaman"
+      ]
+    }
+  ],
+  "bosses": [
+    "golem"
+  ],
+  "bossEvery": 5,
+  "waveSize": {
+    "base": 2,
+    "growEvery": 2,
+    "max": 4
+  },
+  "statGrowth": 0.5,
+  "rewardGrowth": 0.1,
+  "xpShare": 0.35,
+  "goldShare": 0.3,
+  "bossShare": 0.45,
+  "wavesPerFloor": {
+    "min": 1,
+    "max": 5,
+    "default": 3
+  },
+  "startGold": 0,
+  "gearSlots": 3,
+  "shop": {
+    "items": [
+      "vigor_charm",
+      "iron_dagger",
+      "leather_vest",
+      "light_boots",
+      "giant_belt",
+      "war_blade",
+      "plate_mail",
+      "wind_boots"
+    ],
+    "consumables": {
+      "potion": {
+        "name": "Potion",
+        "icon": "🧪",
+        "cost": 80,
+        "heal": 0.5
+      },
+      "revive": {
+        "name": "Revival Herb",
+        "icon": "🌿",
+        "cost": 200,
+        "revive": 0.4
+      }
+    }
+  }
+}

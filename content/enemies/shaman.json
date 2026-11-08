@@ -1,0 +1,52 @@
+{
+  "id": "shaman",
+  "name": "Goblin Shaman",
+  "sprite": "🧌",
+  "element": "lightning",
+  "ai": "healer",
+  "maxHp": 1080,
+  "atk": 150,
+  "def": 50,
+  "spd": 92,
+  "toughness": 40,
+  "weaknesses": [
+    "physical",
+    "lightning"
+  ],
+  "xp": 160,
+  "gold": 225,
+  "skills": [
+    {
+      "id": "hex",
+      "name": "Hex Bolt",
+      "type": "basic",
+      "target": "enemy",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 0.9
+        },
+        {
+          "type": "status",
+          "status": "shock",
+          "chance": 0.5,
+          "duration": 2
+        }
+      ]
+    },
+    {
+      "id": "dark_mend",
+      "name": "Dark Mend",
+      "type": "skill",
+      "target": "ally",
+      "special": "heal",
+      "message": "{user} chants a healing spell.",
+      "effects": [
+        {
+          "type": "heal",
+          "pctMaxHp": 0.3
+        }
+      ]
+    }
+  ]
+}

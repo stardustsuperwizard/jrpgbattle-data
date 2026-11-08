@@ -1,0 +1,12 @@
+{
+  "id": "giant_belt",
+  "name": "Giant Belt",
+  "icon": "❤️",
+  "cost": 400,
+  "stats": {
+    "maxHp": 400
+  },
+  "components": [
+    "vigor_charm"
+  ]
+}

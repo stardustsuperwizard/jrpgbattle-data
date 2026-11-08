@@ -1,0 +1,9 @@
+{
+  "id": "light_boots",
+  "name": "Light Boots",
+  "icon": "👟",
+  "cost": 150,
+  "stats": {
+    "spd": 4
+  }
+}
