@@ -3,6 +3,7 @@
   "name": "Wind Boots",
   "icon": "🪽",
   "cost": 400,
+  "slot": "boots",
   "stats": {
     "spd": 10
   }

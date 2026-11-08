@@ -53,28 +53,31 @@ All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 94.0% and PvP 65.0% ag
 
 ## Monsters
 
-The dungeon's monsters (`content/enemies/`). The first five are jrpg-battle's own; roster 0.5.0 adds ten from Greek myth from floor 6 on, two of them stronger recolours of others (the Drakon of the Dracaena, the Myrmidon of the Hoplite), and the Minotaur, who shares the boss floors with the Golem (each boss floor draws one at random).
+The dungeon's monsters (`content/enemies/`), by the stretch of the Descent they first appear in; [DUNGEON.md](DUNGEON.md) has the whole map. The first five are jrpg-battle's own; roster 0.5.0 added ten from Greek myth, two of them stronger recolours of others (the Drakon of the Dracaena, the Myrmidon of the Hoplite), and the Minotaur; roster 0.6.0 adds a boss for each of the last three stretches.
 
 | Monster | From floor | Element | Weak to | Role |
 |---|---|---|---|---|
 | 🦠 Slime | 1 | Physical | Fire, lightning | Corrode: lowers a hero's DEF |
 | 👺 Goblin | 1 | Physical | Ice, physical | Hits hard, sometimes harder |
-| 🐺 Dire Wolf | 3 | Physical | Fire, ice | Fast; Howl raises its ATK |
+| 🐺 Dire Wolf | 1 | Physical | Fire, ice | Fast; Howl raises its ATK |
 | 🧌 Goblin Shaman | 3 | Lightning | Physical, lightning | Healer; shocks |
+| 🐗 Erymanthian Boar | 3 | Physical | Fire, lightning | Stampede: a heavy gore that may bleed |
 | 🦅 Harpy | 6 | Lightning | Ice, physical | Fastest monster; Storm Shriek hits the whole party, may shock |
-| 🐗 Erymanthian Boar | 6 | Physical | Fire, lightning | Stampede: a heavy gore that may bleed |
 | 💀 Spartoi | 6 | Physical | Physical, fire | The sown men: Phalanx shields itself and taunts |
-| 👻 Shade | 8 | Ice | Fire, lightning | Grave Chill may freeze; its Lament lowers the party's DEF |
-| 🔥 Phoenix | 8 | Fire | Ice, physical | Healer; burns |
 | 🐍 Dracaena | 6 | Physical | Fire, ice | Venom Fang may cause bleeding; Constrict lowers DEF |
-| 🛡️ Hoplite | 8 | Physical | Lightning, ice | Shield Wall shields every monster on its side |
+| 🔥 Phoenix | 11 | Fire | Ice, physical | Healer; burns |
 | 🦎 Drakon | 11 | Fire | Ice, physical | The Dracaena's fire kin: burning fangs, Fire Breath on three heroes |
-| ⚔️ Myrmidon | 11 | Physical | Lightning, fire | The Hoplite's red-armoured elite: Battle Cry raises every monster's ATK for a turn |
-| 🧙 Necromancer | 11 | Ice | Fire, physical | Grave Bolt may freeze; Withering Curse hits the party and lowers DEF |
-| 🗿 Ancient Golem | boss | Physical | Lightning, ice | Charger, every 3rd action: Cataclysm on the party |
-| 🐂 Minotaur | boss | Physical | Fire, lightning | Charger, every 4th action: Labyrinth Rampage on the party; Horn Gore bleeds |
+| 🛡️ Hoplite | 11 | Physical | Lightning, ice | Shield Wall shields every monster on its side |
+| 👻 Shade | 16 | Ice | Fire, lightning | Grave Chill may freeze; its Lament lowers the party's DEF |
+| 🧙 Necromancer | 16 | Ice | Fire, physical | Grave Bolt may freeze; Withering Curse hits the party and lowers DEF |
+| ⚔️ Myrmidon | 16 | Physical | Lightning, fire | The Hoplite's red-armoured elite: Battle Cry raises every monster's ATK for a turn |
+| 🗿 Ancient Golem | boss, 1–5 | Physical | Lightning, ice | Charger, every 3rd action: Cataclysm on the party |
+| 🐂 Minotaur | boss, 6–10 | Physical | Fire, lightning | Charger, every 4th action: Labyrinth Rampage on the party; Horn Gore bleeds |
+| 🐉 Lernaean Hydra | boss, 11–15 | Physical | Fire, ice | Charger, every 4th action: Venom Torrent on the party, may bleed; Venom Bite bleeds |
+| 🐕 Cerberus | boss, 16–20 | Fire | Ice, lightning | Charger, every 4th action: Triple Inferno on the party, may burn; Hellfire Bite burns |
+| 🌪️ Typhon | boss, 21–25 (the final boss) | Lightning | Ice, physical | Charger, every 3rd action: Wrath of the Titans on the party, may shock; Storm Fist shocks |
 
-From floor 8 the pool drops the Goblin and the Shaman, so the Phoenix is its one healer. Floor 10 is a boss floor, so the last pool starts at 11; with it on 10 as well, the first team below cleared floor 10 in 22 runs of 200 instead of 80. Floors cleared by the bot in jrpg-battle 0.6.0's `simulate-run.js` (three waves a floor), roster 0.4.0 → 0.5.0: Athena, Zeus, Apollo, Artemis median 10 → 9; Hephaestus, Poseidon, Aphrodite, Hermes 9 → 7; Ares, Hades, Apollo, Zeus 4 → 5. The step up from floor 6 is deliberate; the Boar was a wall until its Stampede became single-target. The floor 11 pool keeps the Wolf and the Harpy as lighter company, and the Myrmidon's Battle Cry lasts one turn: at two, with four monsters to a wave, the bot cleared floor 11 about a third as often.
+The Hydra, Cerberus and Typhon have no art on the site yet: it shows their emoji until jrpgbattle-client-premium has their recipes.
 
 ## Needs a mechanic
 

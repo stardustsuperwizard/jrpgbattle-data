@@ -13,7 +13,7 @@ All of jrpgbattle's content for the [jrpg-battle](https://github.com/stardustsup
 | `content/heroes/<id>.json` | One champion, in the shape of an entry of jrpg-battle's `src/content/heroes.json`; its `id` is its file name. |
 | `content/abilities/<id>.json` | One ability, in the shape of an entry of `src/content/abilities.json`. Each champion has exactly one basic, one skill and one ultimate. Abilities have no index: they come in the order the champions use them. |
 | `content/statuses/`, `content/elements/`, `content/enemies/`, `content/items/` | One file per status, element, monster and item, in the shape of an entry of the engine's file of that name, each folder with an `index.json` listing its ids in order. Statuses and elements are keyed by their file name alone; monsters and items also carry it as `id`. |
-| `content/rules.json`, `content/waves.json`, `content/modes.json`, `content/dungeon.json` | The global rules, the waves, each mode's teams and the dungeon, single files as the engine has them. |
+| `content/rules.json`, `content/waves.json`, `content/modes.json`, `content/dungeon.json` | The global rules, the waves, each mode's teams and the dungeon, single files as the engine has them. The dungeon holds the Descent, the campaign's town, loot and enchanter: see [DUNGEON.md](DUNGEON.md). |
 | `scripts/build.mjs` | `npm run build`: the sources into `dist/src/content/` and `dist/api/`. Plain Node, no dependencies, no engine needed. |
 | `scripts/check.mjs` | `npm run check`: builds, validates the result with the engine and measures each champion. |
 | `tests/` | `npm test`: the build's own tests. |
@@ -34,7 +34,7 @@ Ids are lowercase letters, digits and `_`. Champion and ability ids must not reu
 ### Adding a monster
 
 1. Write `content/enemies/<id>.json` (its `skills` inline, with `weight`s for the default AI, or `"ai": "healer"` or `"charger"` with the tagged skills those need) and add the id to `content/enemies/index.json`.
-2. Put it in the dungeon: a pool in `content/dungeon.json` (`from` a floor), or `bosses`. Practice's fixed `waves.json` is what `npm run check` measures the champions on, so changing it moves every number in ROSTER.md.
+2. Put it in the dungeon: a pool in `content/dungeon.json` (`from` a floor), or a stretch's `bosses` (entries `{ from, bosses }` by floor), and its row in DUNGEON.md's map. Practice's fixed `waves.json` is what `npm run check` measures the champions on, so changing it moves every number in ROSTER.md.
 3. Bump the version as for a champion, `npm test && npm run check`, and add it to ROSTER.md's monsters.
 4. The site draws it with an enemy recipe of its own (jrpgbattle-client-premium's `art/enemies/`); until then it shows its `sprite` emoji.
 
@@ -86,14 +86,14 @@ From a local build, `cp -r dist/src ../jrpg-battle/` does the same. The server, 
 Needs Node 22 or later and a jrpg-battle checkout beside this one (or `JRPG_BATTLE=/path/to/jrpg-battle`), in the roster's content format; the release in `engine.json` is what CI uses:
 
 ```sh
-git -C ../jrpg-battle checkout v0.6.0   # the tag CI checks against
+git -C ../jrpg-battle checkout v0.7.0   # the tag CI checks against
 npm run check              # 300 battles per line
 npm run check -- 1000      # more battles, steadier numbers
 ```
 
 It builds the sources, reads the engine's content with jrpg-battle's own reader, puts the built files where a deployment would and runs its boundary check and validation, both as a deployment loads them and with the engine's heroes kept beside the champions so each can be measured against the hero it stands in for. It reports any speed shared with another hero, writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions), and prints each champion's PvE and PvP win rates against the core party. ROSTER.md explains how to read them.
 
-**Compatibility is the format, not a release number** (jrpg-battle decision 0023). The manifest's `formatVersion` names the content format the files are written in, and they work with every jrpg-battle release that reads that format. The engine refuses any other format by name. An engine release that keeps the format needs nothing here: no roster release, and the site moves its engine pin alone. When jrpg-battle moves the content format, the files move with it in one PR and the roster releases. `engine.json` (`{ "tag": "v0.6.0" }`) only names the release CI checks against; bump it to measure on a newer engine, and update ROSTER.md if the numbers move.
+**Compatibility is the format, not a release number** (jrpg-battle decision 0023). The manifest's `formatVersion` names the content format the files are written in, and they work with every jrpg-battle release that reads that format. The engine refuses any other format by name. An engine release that keeps the format needs nothing here: no roster release, and the site moves its engine pin alone. When jrpg-battle moves the content format, the files move with it in one PR and the roster releases. `engine.json` (`{ "tag": "v0.7.0" }`) only names the release CI checks against; bump it to measure on a newer engine, and update ROSTER.md if the numbers move.
 
 ## CI
 

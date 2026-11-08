@@ -3,6 +3,7 @@
   "name": "War Blade",
   "icon": "⚔️",
   "cost": 400,
+  "slot": "weapon",
   "stats": {
     "atk": 25
   },
