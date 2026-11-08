@@ -1,51 +1,66 @@
-# Publishes the roster's static API (dist/api/, built by scripts/build.mjs) to
-# GitHub Pages on every push to main, once publishing is switched on: the
-# repository variable PUBLISH_API set to "true" (Settings > Secrets and
-# variables > Actions > Variables), and Pages turned on with "GitHub Actions"
-# as its source. Until then the job is skipped rather than failed, so main
-# stays green and nothing is published. Pages sites are public, even for a
-# private repository: publishing this makes the roster's data public (README
-# "Static API").
+# Publishes the roster's static API to GitHub Pages from a release: it
+# downloads that release's jrpgbattle-api-<tag>.zip (attached by release.yml)
+# and deploys its files as they are, so the API always serves a released
+# roster, never whatever is on main.
+#
+# It runs when the release workflow succeeds, publishing the latest release.
+# Run it by hand from the Actions tab with a tag to serve another release, as
+# a rollback. Both run on main, which the github-pages environment allows to
+# deploy; a run on a release's tag would be refused.
+#
+# Publishing is off until the repository variable PUBLISH_API is "true"
+# (Settings > Secrets and variables > Actions > Variables) and Pages is on
+# with "GitHub Actions" as its source; until then the job is skipped. Pages
+# sites are public, even for a private repository: publishing this makes the
+# roster's data public (README "Static API").
 name: pages
 
 on:
-  push:
-    branches: [main]
+  workflow_run:
+    workflows: [release]
+    types: [completed]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: The release whose API to publish, such as v0.4.0 (empty for the latest)
+        required: false
+        type: string
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# One deploy at a time; a newer push replaces a queued one, never a running one.
+# One deploy at a time; a newer run waits for a running one rather than cancelling it.
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
   deploy:
-    if: vars.PUBLISH_API == 'true'
+    # After a release run, only one that attached its files.
+    if: vars.PUBLISH_API == 'true' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v5
-
-      - uses: actions/setup-node@v5
-        with:
-          node-version-file: .nvmrc
-
-      - name: Test and build
+      - name: Download the release's API files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          TAG: ${{ inputs.tag }}
         run: |
-          npm test
-          npm run build
+          if [ -z "$TAG" ]; then TAG="$(gh release view --repo "$REPO" --json tagName --jq .tagName)"; fi
+          echo "Publishing the API of $TAG"
+          gh release download "$TAG" --repo "$REPO" --pattern "jrpgbattle-api-$TAG.zip"
+          unzip -q "jrpgbattle-api-$TAG.zip" -d site
+          ls -la site
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/api
+          path: site
 
       - id: deployment
         uses: actions/deploy-pages@v4

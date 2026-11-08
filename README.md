@@ -42,13 +42,13 @@ The build refuses sources that don't fit together, naming every problem: a liste
 
 ## Static API
 
-`.github/workflows/pages.yml` publishes `dist/api/` to GitHub Pages on every push to `main`, once publishing is switched on. Until then its job is skipped and nothing is published. To switch it on:
+The API on GitHub Pages serves a release, never `main`. Each release carries `jrpgbattle-api-vX.Y.Z.zip`, the API's files as they are served. When the release workflow succeeds, `.github/workflows/pages.yml` downloads the latest release's API zip and deploys it, once publishing is switched on; until then its job is skipped and nothing is published. To switch it on:
 
 1. Turn Pages on: **Settings → Pages → Source: GitHub Actions**.
 2. Add the repository variable **`PUBLISH_API`** with the value `true`: **Settings → Secrets and variables → Actions → Variables**.
-3. Run the `pages` workflow once from the Actions tab (or push to `main`).
+3. Run the `pages` workflow once from the Actions tab to publish the latest release, or publish a new release.
 
-A Pages site is public even when the repository is private, and on a private repository Pages needs a paid GitHub plan. Setting `PUBLISH_API` back to anything else stops publishing; the last deploy stays up until Pages is turned off.
+To serve another release again, as a rollback, run `pages` from the Actions tab with its tag. A Pages site is public even when the repository is private, and on a private repository Pages needs a paid GitHub plan. Setting `PUBLISH_API` back to anything else stops publishing; the last deploy stays up until Pages is turned off.
 
 | Path | What it is |
 |---|---|
@@ -58,7 +58,7 @@ A Pages site is public even when the repository is private, and on a private rep
 | `heroes/<id>.json`, `abilities/<id>.json` | One entry, as in the sources. |
 | `content/manifest.json`, `content/heroes.json`, `content/abilities.json` | The combined files, the same as a release's. |
 
-The API always serves `main`. A deployment that needs a fixed version takes a release instead.
+The API's `index.json` names the release it serves (`version`). A deployment that needs a fixed version takes that release's zips rather than the API.
 
 ## Deploying
 
@@ -95,5 +95,5 @@ The jrpgbattle site (`stardustsuperwizard/jrpgbattle-client-premium`) pins a rel
 1. Bump `version` in `content/manifest.json` (semver; the `package.json` version follows it) in the PR that changes the roster.
 2. Merge it, with CI green.
 3. On GitHub, **Releases → Draft a new release**: create the tag `vX.Y.Z` (the manifest's version, with a `v`) on `main`, and name the champions added or changed in the notes. Publishing creates the tag.
-4. `.github/workflows/release.yml` then checks that the tag matches the manifest, runs the same tests and check as CI, and attaches `jrpgbattle-content-vX.Y.Z.zip`. If it fails, the release has no zip: fix the cause and re-run the workflow.
+4. `.github/workflows/release.yml` then checks that the tag matches the manifest, runs the same tests and check as CI, and attaches `jrpgbattle-content-vX.Y.Z.zip` and `jrpgbattle-api-vX.Y.Z.zip`. If it fails, the release has no zips: fix the cause and re-run the workflow. Once it succeeds, `pages` publishes the new release's API (when `PUBLISH_API` is `true`).
 5. Move the site's pin in its `versions.json` to the new tag. **That deploy interrupts live online matches**, as any content change does.
