@@ -4,4 +4,4 @@
 
 Messenger of the gods, guide of souls to the underworld, patron of travellers and thieves. Winged sandals carry him faster than anyone on Olympus.
 
-<!-- The Mega Fighters telling goes here. Draw from the ancient sources, not later adaptations (films, games, comics). -->
+<!-- The jrpgbattle telling goes here. Draw from the ancient sources, not later adaptations (films, games, comics). -->

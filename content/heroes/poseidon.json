@@ -1,0 +1,23 @@
+{
+  "id": "poseidon",
+  "name": "Poseidon",
+  "role": "Sea King",
+  "sprite": "🔱",
+  "element": "ice",
+  "maxHp": 1150,
+  "atk": 145,
+  "def": 80,
+  "spd": 97,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 92,
+    "atk": 13,
+    "def": 6,
+    "spd": 1
+  },
+  "abilities": [
+    "trident_jab",
+    "tidal_wave",
+    "earthshaker"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "bloodlust",
+  "name": "Bloodlust",
+  "type": "skill",
+  "target": "enemy",
+  "description": "Physical DMG to one enemy with high Toughness damage, then Taunt for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.8,
+      "toughness": 30
+    },
+    {
+      "type": "status",
+      "status": "taunt",
+      "duration": 2,
+      "on": "self"
+    }
+  ]
+}

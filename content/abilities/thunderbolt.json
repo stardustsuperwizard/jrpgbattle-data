@@ -1,0 +1,21 @@
+{
+  "id": "thunderbolt",
+  "name": "Thunderbolt",
+  "type": "skill",
+  "target": "blast",
+  "splash": 0.5,
+  "description": "Lightning DMG to an enemy and half to adjacent enemies, with a 60% chance to Shock.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 2,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "shock",
+      "duration": 2,
+      "chance": 0.6
+    }
+  ]
+}

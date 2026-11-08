@@ -4,4 +4,4 @@
 
 God of the forge, fire and craft. He made the armor of heroes and the thrones of the gods.
 
-<!-- The Mega Fighters telling goes here. Draw from the ancient sources, not later adaptations (films, games, comics). -->
+<!-- The jrpgbattle telling goes here. Draw from the ancient sources, not later adaptations (films, games, comics). -->

@@ -1,0 +1,19 @@
+{
+  "id": "molten_hammer",
+  "name": "Molten Hammer",
+  "type": "ultimate",
+  "target": "enemy",
+  "description": "Massive Fire DMG to one enemy with high Toughness damage, and Burn it.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 4,
+      "toughness": 40
+    },
+    {
+      "type": "status",
+      "status": "burn",
+      "duration": 2
+    }
+  ]
+}

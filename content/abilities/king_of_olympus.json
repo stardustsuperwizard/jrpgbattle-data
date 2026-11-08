@@ -1,0 +1,19 @@
+{
+  "id": "king_of_olympus",
+  "name": "King of Olympus",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "Heavy Lightning DMG to all enemies and Shock them.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 2.6,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "shock",
+      "duration": 2
+    }
+  ]
+}

@@ -4,4 +4,4 @@
 
 God of the sea, earthquakes and horses. His trident raises waves and splits the ground.
 
-<!-- The Mega Fighters telling goes here. Draw from the ancient sources, not later adaptations (films, games, comics). -->
+<!-- The jrpgbattle telling goes here. Draw from the ancient sources, not later adaptations (films, games, comics). -->

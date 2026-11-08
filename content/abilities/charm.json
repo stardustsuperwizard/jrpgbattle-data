@@ -1,0 +1,15 @@
+{
+  "id": "charm",
+  "name": "Charm",
+  "type": "basic",
+  "target": "enemy",
+  "spGain": 2,
+  "description": "Deal Ice DMG to one enemy. Gain 2 SP instead of 1.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1,
+      "toughness": 10
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "chariot_of_the_sun",
+  "name": "Chariot of the Sun",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "Fire DMG to all enemies and Burn them; heal all allies 20% Max HP and grant ATK Up for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.8,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "burn",
+      "duration": 2
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.2,
+      "on": "all_allies"
+    },
+    {
+      "type": "status",
+      "status": "atk_up",
+      "duration": 2,
+      "on": "all_allies"
+    }
+  ]
+}

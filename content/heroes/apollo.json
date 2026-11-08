@@ -1,0 +1,23 @@
+{
+  "id": "apollo",
+  "name": "Apollo",
+  "role": "Sun Healer",
+  "sprite": "☀️",
+  "element": "fire",
+  "maxHp": 1100,
+  "atk": 110,
+  "def": 80,
+  "spd": 110,
+  "maxEnergy": 100,
+  "growth": {
+    "maxHp": 88,
+    "atk": 10,
+    "def": 6,
+    "spd": 1
+  },
+  "abilities": [
+    "sunbeam",
+    "healing_light",
+    "chariot_of_the_sun"
+  ]
+}

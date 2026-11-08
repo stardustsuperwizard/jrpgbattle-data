@@ -1,0 +1,20 @@
+{
+  "id": "tidal_wave",
+  "name": "Tidal Wave",
+  "type": "skill",
+  "target": "all_enemies",
+  "description": "Ice DMG to all enemies with a 25% chance to Freeze.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1,
+      "toughness": 15
+    },
+    {
+      "type": "status",
+      "status": "freeze",
+      "duration": 1,
+      "chance": 0.25
+    }
+  ]
+}

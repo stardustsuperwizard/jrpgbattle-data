@@ -1,0 +1,23 @@
+{
+  "id": "athena",
+  "name": "Athena",
+  "role": "Strategist",
+  "sprite": "🦉",
+  "element": "physical",
+  "maxHp": 1450,
+  "atk": 115,
+  "def": 120,
+  "spd": 98,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 116,
+    "atk": 10,
+    "def": 10,
+    "spd": 1
+  },
+  "abilities": [
+    "spear_of_wisdom",
+    "aegis",
+    "owls_gambit"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "grasp_of_the_dead",
+  "name": "Grasp of the Dead",
+  "type": "skill",
+  "target": "enemy",
+  "description": "Fire DMG to one enemy, Burn it, and DEF Down for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.6,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "burn",
+      "duration": 2
+    },
+    {
+      "type": "status",
+      "status": "def_down",
+      "duration": 2
+    }
+  ]
+}

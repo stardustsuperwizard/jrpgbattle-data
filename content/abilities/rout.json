@@ -1,0 +1,20 @@
+{
+  "id": "rout",
+  "name": "Rout",
+  "type": "ultimate",
+  "target": "blast",
+  "splash": 0.5,
+  "description": "Heavy Physical DMG to an enemy and half to adjacent enemies, and Bleed them.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 3,
+      "toughness": 30
+    },
+    {
+      "type": "status",
+      "status": "bleed",
+      "duration": 2
+    }
+  ]
+}

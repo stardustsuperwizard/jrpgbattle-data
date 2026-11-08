@@ -1,0 +1,17 @@
+{
+  "id": "healing_light",
+  "name": "Healing Light",
+  "type": "skill",
+  "target": "ally",
+  "description": "Heal one ally for 30% Max HP + 120 and cleanse their debuffs.",
+  "effects": [
+    {
+      "type": "heal",
+      "pctMaxHp": 0.3,
+      "flat": 120
+    },
+    {
+      "type": "cleanse"
+    }
+  ]
+}

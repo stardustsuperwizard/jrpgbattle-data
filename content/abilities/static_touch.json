@@ -1,0 +1,14 @@
+{
+  "id": "static_touch",
+  "name": "Static Touch",
+  "type": "basic",
+  "target": "enemy",
+  "description": "Deal Lightning DMG to one enemy.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1,
+      "toughness": 10
+    }
+  ]
+}
