@@ -3,6 +3,7 @@
   "name": "Leather Vest",
   "icon": "🦺",
   "cost": 150,
+  "slot": "armour",
   "stats": {
     "def": 12
   }

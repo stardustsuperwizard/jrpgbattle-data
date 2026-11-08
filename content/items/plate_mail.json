@@ -3,6 +3,7 @@
   "name": "Plate Mail",
   "icon": "🛡️",
   "cost": 400,
+  "slot": "armour",
   "stats": {
     "def": 30
   }

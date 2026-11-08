@@ -4,7 +4,8 @@
       "from": 1,
       "enemies": [
         "slime",
-        "goblin"
+        "goblin",
+        "wolf"
       ]
     },
     {
@@ -13,53 +14,110 @@
         "slime",
         "goblin",
         "wolf",
-        "shaman"
+        "shaman",
+        "boar"
       ]
     },
     {
       "from": 6,
       "enemies": [
         "goblin",
-        "wolf",
         "shaman",
-        "harpy",
         "boar",
         "spartoi",
-        "dracaena"
-      ]
-    },
-    {
-      "from": 8,
-      "enemies": [
-        "wolf",
-        "harpy",
-        "boar",
-        "spartoi",
-        "shade",
-        "phoenix",
         "dracaena",
-        "hoplite"
+        "harpy"
       ]
     },
     {
       "from": 11,
       "enemies": [
+        "harpy",
+        "dracaena",
+        "phoenix",
+        "drakon",
+        "hoplite"
+      ]
+    },
+    {
+      "from": 16,
+      "enemies": [
+        "shade",
+        "necromancer",
+        "spartoi",
+        "myrmidon",
+        "hoplite"
+      ]
+    },
+    {
+      "from": 21,
+      "enemies": [
+        "shade",
+        "necromancer",
+        "myrmidon",
+        "drakon",
+        "phoenix",
+        "hoplite"
+      ]
+    },
+    {
+      "from": 26,
+      "enemies": [
         "wolf",
         "harpy",
         "boar",
         "spartoi",
-        "shade",
+        "dracaena",
         "phoenix",
-        "hoplite",
         "drakon",
+        "hoplite",
+        "shade",
         "myrmidon",
         "necromancer"
       ]
     }
   ],
   "bosses": [
-    "golem",
-    "minotaur"
+    {
+      "from": 1,
+      "bosses": [
+        "golem"
+      ]
+    },
+    {
+      "from": 6,
+      "bosses": [
+        "minotaur"
+      ]
+    },
+    {
+      "from": 11,
+      "bosses": [
+        "hydra"
+      ]
+    },
+    {
+      "from": 16,
+      "bosses": [
+        "cerberus"
+      ]
+    },
+    {
+      "from": 21,
+      "bosses": [
+        "typhon"
+      ]
+    },
+    {
+      "from": 26,
+      "bosses": [
+        "golem",
+        "minotaur",
+        "hydra",
+        "cerberus",
+        "typhon"
+      ]
+    }
   ],
   "bossEvery": 5,
   "waveSize": {
@@ -67,7 +125,7 @@
     "growEvery": 2,
     "max": 4
   },
-  "statGrowth": 0.5,
+  "statGrowth": 0.3,
   "rewardGrowth": 0.1,
   "xpShare": 0.35,
   "goldShare": 0.3,
@@ -78,7 +136,25 @@
     "default": 3
   },
   "startGold": 0,
-  "gearSlots": 3,
+  "gearSlots": 4,
+  "slots": [
+    {
+      "id": "weapon",
+      "name": "Weapon"
+    },
+    {
+      "id": "armour",
+      "name": "Armour"
+    },
+    {
+      "id": "boots",
+      "name": "Boots"
+    },
+    {
+      "id": "charm",
+      "name": "Charm"
+    }
+  ],
   "shop": {
     "items": [
       "vigor_charm",
@@ -104,5 +180,210 @@
         "revive": 0.4
       }
     }
+  },
+  "waveScaling": {
+    "reference": 3,
+    "exponent": 0.5
+  },
+  "themes": [
+    {
+      "id": "grove",
+      "name": "The Sacred Grove",
+      "from": 1
+    },
+    {
+      "id": "labyrinth",
+      "name": "The Labyrinth",
+      "from": 6
+    },
+    {
+      "id": "marsh",
+      "name": "The Stymphalian Marsh",
+      "from": 11
+    },
+    {
+      "id": "underworld",
+      "name": "The Underworld",
+      "from": 16
+    },
+    {
+      "id": "tartarus",
+      "name": "Tartarus",
+      "from": 21
+    },
+    {
+      "id": "abyss",
+      "name": "The Endless Abyss",
+      "from": 26
+    }
+  ],
+  "campaign": {
+    "floors": 25,
+    "stretch": 5,
+    "wipeGoldLoss": 0.2,
+    "wipeReviveHp": 0.5,
+    "endless": true,
+    "heirloomBoost": 0.5,
+    "enchanter": {
+      "maxAffixes": 4,
+      "enchant": {
+        "cost": 60,
+        "costPerAffix": 60,
+        "odds": [
+          {
+            "success": 0.9,
+            "wipe": 0
+          },
+          {
+            "success": 0.75,
+            "wipe": 0.05
+          },
+          {
+            "success": 0.6,
+            "wipe": 0.1
+          },
+          {
+            "success": 0.45,
+            "wipe": 0.2
+          }
+        ]
+      },
+      "reroll": {
+        "cost": 40,
+        "costPerAffix": 20,
+        "odds": [
+          {
+            "success": 1,
+            "wipe": 0
+          },
+          {
+            "success": 0.85,
+            "wipe": 0.03
+          },
+          {
+            "success": 0.75,
+            "wipe": 0.07
+          },
+          {
+            "success": 0.65,
+            "wipe": 0.12
+          }
+        ]
+      }
+    },
+    "loot": {
+      "drops": 1,
+      "bossDrops": 2,
+      "items": [
+        {
+          "from": 1,
+          "items": [
+            "vigor_charm",
+            "iron_dagger",
+            "leather_vest",
+            "light_boots"
+          ]
+        },
+        {
+          "from": 6,
+          "items": [
+            "vigor_charm",
+            "iron_dagger",
+            "leather_vest",
+            "light_boots",
+            "giant_belt",
+            "war_blade",
+            "plate_mail",
+            "wind_boots"
+          ]
+        }
+      ],
+      "rarities": [
+        {
+          "id": "common",
+          "name": "Common",
+          "weight": 60,
+          "affixes": 0,
+          "value": 1
+        },
+        {
+          "id": "magic",
+          "name": "Magic",
+          "weight": 30,
+          "affixes": 1,
+          "value": 1.5
+        },
+        {
+          "id": "rare",
+          "name": "Rare",
+          "weight": 10,
+          "affixes": 2,
+          "value": 2.5
+        }
+      ],
+      "affixes": [
+        {
+          "name": "of Might",
+          "stat": "atk",
+          "min": 3,
+          "max": 8,
+          "perFloor": 1
+        },
+        {
+          "name": "of the Bulwark",
+          "stat": "def",
+          "min": 3,
+          "max": 8,
+          "perFloor": 1
+        },
+        {
+          "name": "of Vigor",
+          "stat": "maxHp",
+          "min": 40,
+          "max": 100,
+          "perFloor": 10
+        },
+        {
+          "name": "of the Wind",
+          "stat": "spd",
+          "min": 1,
+          "max": 3,
+          "perFloor": 0.2
+        }
+      ],
+      "sellShare": 0.5,
+      "stashSize": 12
+    }
+  },
+  "town": {
+    "services": [
+      {
+        "id": "descent",
+        "name": "Exit",
+        "icon": "🚪"
+      },
+      {
+        "id": "stash",
+        "name": "Stash",
+        "icon": "🧰"
+      },
+      {
+        "id": "shop",
+        "name": "Shop",
+        "icon": "🛒"
+      },
+      {
+        "id": "enchanter",
+        "name": "Enchanter",
+        "icon": "🔮",
+        "after": 10
+      },
+      {
+        "id": "retire",
+        "name": "Retire",
+        "icon": "🏛️",
+        "after": 25
+      }
+    ]
   }
 }

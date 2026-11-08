@@ -3,6 +3,7 @@
   "name": "Light Boots",
   "icon": "👟",
   "cost": 150,
+  "slot": "boots",
   "stats": {
     "spd": 4
   }

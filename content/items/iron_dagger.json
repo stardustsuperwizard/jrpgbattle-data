@@ -3,6 +3,7 @@
   "name": "Iron Dagger",
   "icon": "🗡️",
   "cost": 150,
+  "slot": "weapon",
   "stats": {
     "atk": 10
   }

@@ -1,0 +1,92 @@
+{
+  "id": "cerberus",
+  "name": "Cerberus",
+  "sprite": "🐕",
+  "element": "fire",
+  "ai": "charger",
+  "chargeEvery": 4,
+  "maxHp": 12400,
+  "atk": 400,
+  "def": 90,
+  "spd": 112,
+  "toughness": 120,
+  "weaknesses": [
+    "ice",
+    "lightning"
+  ],
+  "xp": 600,
+  "gold": 840,
+  "skills": [
+    {
+      "id": "three_jaws",
+      "name": "Three Jaws",
+      "type": "basic",
+      "target": "enemy",
+      "weight": 3,
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1.25
+        }
+      ]
+    },
+    {
+      "id": "hellfire_bite",
+      "name": "Hellfire Bite",
+      "type": "skill",
+      "target": "enemy",
+      "weight": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1.0
+        },
+        {
+          "type": "status",
+          "status": "burn",
+          "duration": 2
+        }
+      ]
+    },
+    {
+      "id": "gates_howl",
+      "name": "Howl at the Gates",
+      "type": "skill",
+      "target": "self",
+      "special": "charge",
+      "message": "{user} howls, all three heads drawing breath! Break it to interrupt!",
+      "effects": [
+        {
+          "type": "status",
+          "status": "charging",
+          "duration": 1
+        }
+      ]
+    },
+    {
+      "id": "triple_inferno",
+      "name": "Triple Inferno",
+      "type": "ultimate",
+      "target": "all_enemies",
+      "special": "release",
+      "message": "{user} breathes fire from all three heads!",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 2.0
+        },
+        {
+          "type": "status",
+          "status": "burn",
+          "chance": 0.5,
+          "duration": 2
+        },
+        {
+          "type": "remove_status",
+          "status": "charging",
+          "on": "self"
+        }
+      ]
+    }
+  ]
+}

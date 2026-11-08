@@ -3,6 +3,7 @@
   "name": "Vigor Charm",
   "icon": "💗",
   "cost": 150,
+  "slot": "charm",
   "stats": {
     "maxHp": 150
   }
