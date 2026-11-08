@@ -1,0 +1,58 @@
+{
+  "id": "drakon",
+  "name": "Drakon",
+  "sprite": "🦎",
+  "element": "fire",
+  "maxHp": 1050,
+  "atk": 170,
+  "def": 60,
+  "spd": 110,
+  "toughness": 40,
+  "weaknesses": [
+    "ice",
+    "physical"
+  ],
+  "xp": 185,
+  "gold": 260,
+  "skills": [
+    {
+      "id": "searing_fang",
+      "name": "Searing Fang",
+      "type": "basic",
+      "target": "enemy",
+      "weight": 3,
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1
+        },
+        {
+          "type": "status",
+          "status": "burn",
+          "chance": 0.3,
+          "duration": 2
+        }
+      ]
+    },
+    {
+      "id": "fire_breath",
+      "name": "Fire Breath",
+      "type": "skill",
+      "target": "blast",
+      "weight": 1,
+      "message": "{user} breathes a gout of flame!",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 0.7
+        },
+        {
+          "type": "status",
+          "status": "burn",
+          "chance": 0.35,
+          "duration": 2
+        }
+      ]
+    }
+  ]
+}

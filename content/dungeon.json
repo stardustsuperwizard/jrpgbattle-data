@@ -24,7 +24,8 @@
         "shaman",
         "harpy",
         "boar",
-        "spartoi"
+        "spartoi",
+        "dracaena"
       ]
     },
     {
@@ -35,7 +36,24 @@
         "boar",
         "spartoi",
         "shade",
-        "phoenix"
+        "phoenix",
+        "dracaena",
+        "hoplite"
+      ]
+    },
+    {
+      "from": 11,
+      "enemies": [
+        "wolf",
+        "harpy",
+        "boar",
+        "spartoi",
+        "shade",
+        "phoenix",
+        "hoplite",
+        "drakon",
+        "myrmidon",
+        "necromancer"
       ]
     }
   ],

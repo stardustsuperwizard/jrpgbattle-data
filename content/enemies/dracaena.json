@@ -1,0 +1,58 @@
+{
+  "id": "dracaena",
+  "name": "Dracaena",
+  "sprite": "🐍",
+  "element": "physical",
+  "maxHp": 900,
+  "atk": 165,
+  "def": 50,
+  "spd": 108,
+  "toughness": 30,
+  "weaknesses": [
+    "fire",
+    "ice"
+  ],
+  "xp": 150,
+  "gold": 210,
+  "skills": [
+    {
+      "id": "venom_fang",
+      "name": "Venom Fang",
+      "type": "basic",
+      "target": "enemy",
+      "weight": 3,
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1
+        },
+        {
+          "type": "status",
+          "status": "bleed",
+          "chance": 0.3,
+          "duration": 2
+        }
+      ]
+    },
+    {
+      "id": "constrict",
+      "name": "Constrict",
+      "type": "skill",
+      "target": "enemy",
+      "weight": 1,
+      "message": "{user} coils around its prey!",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 0.8
+        },
+        {
+          "type": "status",
+          "status": "def_down",
+          "chance": 0.6,
+          "duration": 2
+        }
+      ]
+    }
+  ]
+}

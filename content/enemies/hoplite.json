@@ -1,0 +1,49 @@
+{
+  "id": "hoplite",
+  "name": "Hoplite",
+  "sprite": "🛡️",
+  "element": "physical",
+  "maxHp": 1150,
+  "atk": 150,
+  "def": 95,
+  "spd": 98,
+  "toughness": 40,
+  "weaknesses": [
+    "lightning",
+    "ice"
+  ],
+  "xp": 170,
+  "gold": 240,
+  "skills": [
+    {
+      "id": "hoplite_spear",
+      "name": "Spear Thrust",
+      "type": "basic",
+      "target": "enemy",
+      "weight": 3,
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1
+        }
+      ]
+    },
+    {
+      "id": "shield_wall",
+      "name": "Shield Wall",
+      "type": "skill",
+      "target": "self",
+      "weight": 1,
+      "message": "{user} locks shields with its allies!",
+      "effects": [
+        {
+          "type": "shield",
+          "defRatio": 0.6,
+          "flat": 40,
+          "duration": 2,
+          "on": "all_allies"
+        }
+      ]
+    }
+  ]
+}

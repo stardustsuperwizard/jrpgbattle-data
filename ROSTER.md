@@ -53,7 +53,7 @@ All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 94.0% and PvP 65.0% ag
 
 ## Monsters
 
-The dungeon's monsters (`content/enemies/`). The first five are jrpg-battle's own; roster 0.5.0 adds five from Greek myth from floor 6 on, and the Minotaur, who shares the boss floors with the Golem (each boss floor draws one at random).
+The dungeon's monsters (`content/enemies/`). The first five are jrpg-battle's own; roster 0.5.0 adds ten from Greek myth from floor 6 on, two of them stronger recolours of others (the Drakon of the Dracaena, the Myrmidon of the Hoplite), and the Minotaur, who shares the boss floors with the Golem (each boss floor draws one at random).
 
 | Monster | From floor | Element | Weak to | Role |
 |---|---|---|---|---|
@@ -66,10 +66,15 @@ The dungeon's monsters (`content/enemies/`). The first five are jrpg-battle's ow
 | 💀 Spartoi | 6 | Physical | Physical, fire | The sown men: Phalanx shields itself and taunts |
 | 👻 Shade | 8 | Ice | Fire, lightning | Grave Chill may freeze; its Lament lowers the party's DEF |
 | 🔥 Phoenix | 8 | Fire | Ice, physical | Healer; burns |
+| 🐍 Dracaena | 6 | Physical | Fire, ice | Venom Fang may cause bleeding; Constrict lowers DEF |
+| 🛡️ Hoplite | 8 | Physical | Lightning, ice | Shield Wall shields every monster on its side |
+| 🦎 Drakon | 11 | Fire | Ice, physical | The Dracaena's fire kin: burning fangs, Fire Breath on three heroes |
+| ⚔️ Myrmidon | 11 | Physical | Lightning, fire | The Hoplite's red-armoured elite: Battle Cry raises every monster's ATK for a turn |
+| 🧙 Necromancer | 11 | Ice | Fire, physical | Grave Bolt may freeze; Withering Curse hits the party and lowers DEF |
 | 🗿 Ancient Golem | boss | Physical | Lightning, ice | Charger, every 3rd action: Cataclysm on the party |
 | 🐂 Minotaur | boss | Physical | Fire, lightning | Charger, every 4th action: Labyrinth Rampage on the party; Horn Gore bleeds |
 
-From floor 8 the pool drops the Goblin and the Shaman, so the Phoenix is its one healer. Floors cleared by the bot in jrpg-battle 0.6.0's `simulate-run.js` (200 runs, three waves a floor), roster 0.4.0 → 0.5.0: Athena, Zeus, Apollo, Artemis median 10 → 9; Hephaestus, Poseidon, Aphrodite, Hermes 9 → 7; Ares, Hades, Apollo, Zeus 4 → 5. The step up from floor 6 is deliberate; the Boar was a wall until its Stampede became single-target.
+From floor 8 the pool drops the Goblin and the Shaman, so the Phoenix is its one healer. Floor 10 is a boss floor, so the last pool starts at 11; with it on 10 as well, the first team below cleared floor 10 in 22 runs of 200 instead of 80. Floors cleared by the bot in jrpg-battle 0.6.0's `simulate-run.js` (three waves a floor), roster 0.4.0 → 0.5.0: Athena, Zeus, Apollo, Artemis median 10 → 9; Hephaestus, Poseidon, Aphrodite, Hermes 9 → 7; Ares, Hades, Apollo, Zeus 4 → 5. The step up from floor 6 is deliberate; the Boar was a wall until its Stampede became single-target. The floor 11 pool keeps the Wolf and the Harpy as lighter company, and the Myrmidon's Battle Cry lasts one turn: at two, with four monsters to a wave, the bot cleared floor 11 about a third as often.
 
 ## Needs a mechanic
 
