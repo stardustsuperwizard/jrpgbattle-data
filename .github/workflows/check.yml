@@ -49,6 +49,12 @@ jobs:
         with:
           node-version-file: .nvmrc
 
+      - name: Test the build
+        run: npm test
+
+      - name: Build the content files and the API
+        run: npm run build
+
       - name: Check the roster
         run: npm run check -- 300
         env:

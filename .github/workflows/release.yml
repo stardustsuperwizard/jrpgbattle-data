@@ -1,0 +1,79 @@
+# Attaches the roster's built content files to a release, for a deployment's
+# build to drop over a jrpg-battle checkout: mega_fighters-content-<tag>.zip
+# holds src/content/manifest.json, heroes.json and abilities.json, at the
+# paths they take in jrpg-battle. Runs when a release is published, after the
+# same check as CI, so a release never carries files the engine refuses.
+name: release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  attach:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      # The tag names the content it carries (README "Releasing"), so a release
+      # whose tag and manifest disagree would put the wrong version in matches.
+      - name: Require the tag to match the manifest's version
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          VERSION="v$(node -p "require('./content/manifest.json').version")"
+          if [ "$TAG" != "$VERSION" ]; then
+            echo "::error::The release tag is $TAG, but content/manifest.json says $VERSION. Bump the manifest in a PR, or tag the commit that has it."
+            exit 1
+          fi
+
+      - name: Require ENGINE_READ_TOKEN
+        env:
+          TOKEN: ${{ secrets.ENGINE_READ_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::The repository secret ENGINE_READ_TOKEN is missing or empty; the release is checked against jrpg-battle like every PR."
+            exit 1
+          fi
+
+      - name: Read the pinned engine release
+        id: engine
+        run: echo "tag=$(node -p "require('./engine.json').tag")" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v5
+        with:
+          repository: stardustsuperwizard/jrpg-battle
+          ref: ${{ steps.engine.outputs.tag }}
+          token: ${{ secrets.ENGINE_READ_TOKEN }}
+          path: jrpg-battle
+          persist-credentials: false
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+
+      - name: Test and build
+        run: |
+          npm test
+          npm run build
+
+      - name: Check the roster
+        run: npm run check -- 300
+        env:
+          JRPG_BATTLE: ${{ github.workspace }}/jrpg-battle
+
+      - name: Attach the content files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          ZIP="mega_fighters-content-$TAG.zip"
+          (cd dist && zip -r "../$ZIP" src)
+          unzip -l "$ZIP"
+          gh release upload "$TAG" "$ZIP" --clobber

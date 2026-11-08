@@ -1,0 +1,21 @@
+{
+  "id": "aegis",
+  "name": "Aegis",
+  "type": "skill",
+  "target": "all_allies",
+  "description": "Shield all allies (scales with DEF) for 2 turns and Taunt.",
+  "effects": [
+    {
+      "type": "shield",
+      "defRatio": 1,
+      "flat": 80,
+      "duration": 2
+    },
+    {
+      "type": "status",
+      "status": "taunt",
+      "duration": 2,
+      "on": "self"
+    }
+  ]
+}

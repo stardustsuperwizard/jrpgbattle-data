@@ -1,0 +1,23 @@
+{
+  "id": "ares",
+  "name": "Ares",
+  "role": "War God",
+  "sprite": "🗡️",
+  "element": "physical",
+  "maxHp": 1400,
+  "atk": 140,
+  "def": 95,
+  "spd": 108,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 112,
+    "atk": 13,
+    "def": 8,
+    "spd": 1
+  },
+  "abilities": [
+    "spear_thrust",
+    "bloodlust",
+    "rout"
+  ]
+}

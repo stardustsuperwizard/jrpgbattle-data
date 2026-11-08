@@ -1,0 +1,14 @@
+{
+  "id": "the_hunt",
+  "name": "The Hunt",
+  "type": "ultimate",
+  "target": "enemy",
+  "description": "Massive Ice DMG to one enemy.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 4.4,
+      "toughness": 30
+    }
+  ]
+}

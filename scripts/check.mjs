@@ -2,20 +2,23 @@
 //   node scripts/check.mjs [runs]                 (default 300 battles per line)
 //   JRPG_BATTLE=/path/to/jrpg-battle node scripts/check.mjs
 //
-// content/ holds the content files a deployment overwrites in jrpg-battle's
-// src/content/ (its decision 0030): the roster's manifest, heroes and
-// abilities, each replacing the engine's file of that name. The check reads
-// the engine's content with its own reader, puts these files where a
-// deployment would and runs jrpg-battle's boundary check and validation, so
-// files that pass here are files the server and the page accept. To measure
+// The roster's sources in content/ build (scripts/build.mjs) into the
+// content files a deployment drops over jrpg-battle's src/content/ (its
+// decision 0030): the manifest, heroes and abilities, each replacing the
+// engine's file of that name. The check builds them, reads the engine's
+// content with its own reader, puts the built files where a deployment would
+// and runs jrpg-battle's boundary check and validation, so files that pass
+// here are files the server and the page accept. To measure
 // each champion beside the engine's heroes, it keeps those heroes and their
 // abilities next to the roster's, which a deployment's overwrite would drop.
 //
 // It also writes dist/tuning-import.json, the roster as tuning-panel settings,
 // so the champions can be tried on a deployment that doesn't load them.
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+
+import { buildContent, render } from './build.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ENGINE = resolve(process.env.JRPG_BATTLE ?? join(ROOT, '..', 'jrpg-battle'));
@@ -39,15 +42,14 @@ if (typeof ENGINE_TAG !== 'string' || !/^v\d+\.\d+\.\d+$/.test(ENGINE_TAG)) {
 }
 const { version: ENGINE_VERSION } = read(join(ENGINE, 'package.json'));
 
-// The files this repository overwrites: each must be one of the engine's content files.
-const CONTENT_DIR = join(ROOT, 'content');
-const files = readdirSync(CONTENT_DIR).map((name) => name.replace(/\.json$/, ''));
+// The files a release drops over the engine's: each must be one of the engine's content files.
+const { unused, ...roster } = buildContent(ROOT);
+const files = Object.keys(roster);
 const unknown = files.filter((name) => !CONTENT_FILES.includes(name));
-if (unknown.length) throw new Error(`content/ may hold only jrpg-battle's content files (${CONTENT_FILES.join(', ')}); not ${unknown.join(', ')}.`);
-const roster = Object.fromEntries(files.map((name) => [name, read(join(CONTENT_DIR, `${name}.json`))]));
+if (unknown.length) throw new Error(`The build makes ${unknown.join(', ')}, which jrpg-battle's content files (${CONTENT_FILES.join(', ')}) don't include.`);
 
 // Where a deployment puts them: they must pass jrpg-battle's check:boundaries.
-const violations = checkBoundaries(files.map((name) => ({ path: `src/content/${name}.json`, source: readFileSync(join(CONTENT_DIR, `${name}.json`), 'utf8') })));
+const violations = checkBoundaries(files.map((name) => ({ path: `src/content/${name}.json`, source: render(roster[name]) })));
 if (violations.length) throw new Error(violations.map((v) => `${v.file}: ${v.reason}`).join('\n'));
 
 // The engine's content with the roster's files in place, keeping the engine's heroes beside the champions.

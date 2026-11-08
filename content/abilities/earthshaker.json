@@ -1,0 +1,19 @@
+{
+  "id": "earthshaker",
+  "name": "Earthshaker",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "Heavy Ice DMG to all enemies and DEF Down for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 2.4,
+      "toughness": 30
+    },
+    {
+      "type": "status",
+      "status": "def_down",
+      "duration": 2
+    }
+  ]
+}

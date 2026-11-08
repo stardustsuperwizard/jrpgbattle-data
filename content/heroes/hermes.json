@@ -1,0 +1,24 @@
+{
+  "id": "hermes",
+  "name": "Hermes",
+  "role": "Messenger",
+  "sprite": "🪽",
+  "element": "lightning",
+  "maxHp": 980,
+  "atk": 135,
+  "def": 65,
+  "spd": 124,
+  "critRate": 0.15,
+  "maxEnergy": 110,
+  "growth": {
+    "maxHp": 78,
+    "atk": 12,
+    "def": 5,
+    "spd": 1
+  },
+  "abilities": [
+    "caduceus_tap",
+    "winged_sandals",
+    "psychopomp"
+  ]
+}

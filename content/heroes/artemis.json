@@ -1,0 +1,25 @@
+{
+  "id": "artemis",
+  "name": "Artemis",
+  "role": "Huntress",
+  "sprite": "🏹",
+  "element": "ice",
+  "maxHp": 1000,
+  "atk": 155,
+  "def": 65,
+  "spd": 116,
+  "critRate": 0.3,
+  "critDmg": 0.8,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 80,
+    "atk": 14,
+    "def": 5,
+    "spd": 1
+  },
+  "abilities": [
+    "moonlit_shot",
+    "silver_arrow",
+    "the_hunt"
+  ]
+}

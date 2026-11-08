@@ -1,0 +1,14 @@
+{
+  "id": "hammer_blow",
+  "name": "Hammer Blow",
+  "type": "basic",
+  "target": "enemy",
+  "description": "Deal Fire DMG to one enemy.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1,
+      "toughness": 10
+    }
+  ]
+}

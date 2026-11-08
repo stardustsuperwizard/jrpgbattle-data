@@ -1,0 +1,23 @@
+{
+  "id": "aphrodite",
+  "name": "Aphrodite",
+  "role": "Enchantress",
+  "sprite": "🌹",
+  "element": "ice",
+  "maxHp": 1050,
+  "atk": 110,
+  "def": 75,
+  "spd": 106,
+  "maxEnergy": 100,
+  "growth": {
+    "maxHp": 84,
+    "atk": 10,
+    "def": 6,
+    "spd": 1
+  },
+  "abilities": [
+    "charm",
+    "embrace",
+    "born_of_the_foam"
+  ]
+}

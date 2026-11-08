@@ -1,0 +1,19 @@
+{
+  "id": "winged_sandals",
+  "name": "Winged Sandals",
+  "type": "skill",
+  "target": "enemy",
+  "description": "Lightning DMG to one enemy and Shock it for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 2,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "shock",
+      "duration": 2
+    }
+  ]
+}

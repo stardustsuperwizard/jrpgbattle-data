@@ -1,0 +1,25 @@
+{
+  "id": "born_of_the_foam",
+  "name": "Born of the Foam",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "Ice DMG to all enemies with a 40% chance to Freeze; heal all allies 20% Max HP.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.2,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "freeze",
+      "duration": 1,
+      "chance": 0.4
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.2,
+      "on": "all_allies"
+    }
+  ]
+}

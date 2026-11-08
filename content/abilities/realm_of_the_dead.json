@@ -1,0 +1,19 @@
+{
+  "id": "realm_of_the_dead",
+  "name": "Realm of the Dead",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "Fire DMG to all enemies and Burn them for 3 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 2,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "burn",
+      "duration": 3
+    }
+  ]
+}

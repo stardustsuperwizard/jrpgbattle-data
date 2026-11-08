@@ -1,0 +1,23 @@
+{
+  "id": "hephaestus",
+  "name": "Hephaestus",
+  "role": "Smith",
+  "sprite": "🔨",
+  "element": "fire",
+  "maxHp": 1550,
+  "atk": 130,
+  "def": 110,
+  "spd": 88,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 124,
+    "atk": 12,
+    "def": 9,
+    "spd": 1
+  },
+  "abilities": [
+    "hammer_blow",
+    "forge_armor",
+    "molten_hammer"
+  ]
+}

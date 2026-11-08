@@ -1,0 +1,20 @@
+{
+  "id": "owls_gambit",
+  "name": "Owl’s Gambit",
+  "type": "ultimate",
+  "target": "enemy",
+  "description": "Heavy Physical DMG to one enemy with high Toughness damage; all allies gain ATK Up for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 3.6,
+      "toughness": 40
+    },
+    {
+      "type": "status",
+      "status": "atk_up",
+      "duration": 2,
+      "on": "all_allies"
+    }
+  ]
+}
