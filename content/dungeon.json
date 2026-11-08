@@ -15,10 +15,51 @@
         "wolf",
         "shaman"
       ]
+    },
+    {
+      "from": 6,
+      "enemies": [
+        "goblin",
+        "wolf",
+        "shaman",
+        "harpy",
+        "boar",
+        "spartoi",
+        "dracaena"
+      ]
+    },
+    {
+      "from": 8,
+      "enemies": [
+        "wolf",
+        "harpy",
+        "boar",
+        "spartoi",
+        "shade",
+        "phoenix",
+        "dracaena",
+        "hoplite"
+      ]
+    },
+    {
+      "from": 11,
+      "enemies": [
+        "wolf",
+        "harpy",
+        "boar",
+        "spartoi",
+        "shade",
+        "phoenix",
+        "hoplite",
+        "drakon",
+        "myrmidon",
+        "necromancer"
+      ]
     }
   ],
   "bosses": [
-    "golem"
+    "golem",
+    "minotaur"
   ],
   "bossEvery": 5,
   "waveSize": {

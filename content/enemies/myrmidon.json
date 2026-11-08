@@ -1,0 +1,48 @@
+{
+  "id": "myrmidon",
+  "name": "Myrmidon",
+  "sprite": "⚔️",
+  "element": "physical",
+  "maxHp": 1000,
+  "atk": 160,
+  "def": 70,
+  "spd": 114,
+  "toughness": 40,
+  "weaknesses": [
+    "lightning",
+    "fire"
+  ],
+  "xp": 190,
+  "gold": 270,
+  "skills": [
+    {
+      "id": "myrmidon_spear",
+      "name": "Spear Lunge",
+      "type": "basic",
+      "target": "enemy",
+      "weight": 3,
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1.1
+        }
+      ]
+    },
+    {
+      "id": "battle_cry",
+      "name": "Battle Cry",
+      "type": "skill",
+      "target": "self",
+      "weight": 1,
+      "message": "{user} roars a battle cry!",
+      "effects": [
+        {
+          "type": "status",
+          "status": "atk_up",
+          "duration": 1,
+          "on": "all_allies"
+        }
+      ]
+    }
+  ]
+}

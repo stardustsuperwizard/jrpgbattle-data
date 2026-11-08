@@ -1,0 +1,52 @@
+{
+  "id": "phoenix",
+  "name": "Phoenix",
+  "sprite": "🔥",
+  "element": "fire",
+  "ai": "healer",
+  "maxHp": 960,
+  "atk": 160,
+  "def": 45,
+  "spd": 118,
+  "toughness": 30,
+  "weaknesses": [
+    "ice",
+    "physical"
+  ],
+  "xp": 175,
+  "gold": 245,
+  "skills": [
+    {
+      "id": "ember_wing",
+      "name": "Ember Wing",
+      "type": "basic",
+      "target": "enemy",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 0.9
+        },
+        {
+          "type": "status",
+          "status": "burn",
+          "chance": 0.4,
+          "duration": 2
+        }
+      ]
+    },
+    {
+      "id": "rekindle",
+      "name": "Rekindle",
+      "type": "skill",
+      "target": "ally",
+      "special": "heal",
+      "message": "{user} sheds healing flame.",
+      "effects": [
+        {
+          "type": "heal",
+          "pctMaxHp": 0.25
+        }
+      ]
+    }
+  ]
+}
