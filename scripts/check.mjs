@@ -2,15 +2,14 @@
 //   node scripts/check.mjs [runs]                 (default 300 battles per line)
 //   JRPG_BATTLE=/path/to/jrpg-battle node scripts/check.mjs
 //
-// The roster's sources in content/ build (scripts/build.mjs) into the
-// content files a deployment drops over jrpg-battle's src/content/ (its
-// decision 0030): the manifest, heroes and abilities, each replacing the
-// engine's file of that name. The check builds them, reads the engine's
-// content with its own reader, puts the built files where a deployment would
-// and runs jrpg-battle's boundary check and validation, so files that pass
-// here are files the server and the page accept. To measure
-// each champion beside the engine's heroes, it keeps those heroes and their
-// abilities next to the roster's, which a deployment's overwrite would drop.
+// The sources in content/ build (scripts/build.mjs) into every one of
+// jrpg-battle's content files (its decision 0030), which a deployment drops
+// over its src/content/ whole. The check builds them, puts them where a
+// deployment would and runs jrpg-battle's boundary check and validation, so
+// files that pass here are files the server and the page accept. To measure
+// each champion against the engine's own heroes, it adds those heroes and
+// their abilities beside the champions, on this repository's rules and
+// monsters; a deployment has the champions alone.
 //
 // It also writes dist/tuning-import.json, the roster as tuning-panel settings,
 // so the champions can be tried on a deployment that doesn't load them.
@@ -42,31 +41,34 @@ if (typeof ENGINE_TAG !== 'string' || !/^v\d+\.\d+\.\d+$/.test(ENGINE_TAG)) {
 }
 const { version: ENGINE_VERSION } = read(join(ENGINE, 'package.json'));
 
-// The files a release drops over the engine's: each must be one of the engine's content files.
-const { unused, ...roster } = buildContent(ROOT);
+// The files a release drops over the engine's: exactly the engine's content files.
+const { content: roster } = buildContent(ROOT);
 const files = Object.keys(roster);
-const unknown = files.filter((name) => !CONTENT_FILES.includes(name));
-if (unknown.length) throw new Error(`The build makes ${unknown.join(', ')}, which jrpg-battle's content files (${CONTENT_FILES.join(', ')}) don't include.`);
+if (JSON.stringify([...files].sort()) !== JSON.stringify([...CONTENT_FILES].sort())) {
+  throw new Error(`The build makes ${files.join(', ')}; jrpg-battle's content files are ${CONTENT_FILES.join(', ')}.`);
+}
 
 // Where a deployment puts them: they must pass jrpg-battle's check:boundaries.
 const violations = checkBoundaries(files.map((name) => ({ path: `src/content/${name}.json`, source: render(roster[name]) })));
 if (violations.length) throw new Error(violations.map((v) => `${v.file}: ${v.reason}`).join('\n'));
 
-// The engine's content with the roster's files in place, keeping the engine's heroes beside the champions.
+// As a deployment loads them: these files alone, replacing all of the engine's.
+validateConfig(buildConfig(roster));
+
+// The engine's heroes beside the champions, for measuring each against the hero it stands in for.
 const engine = readContent(join(ENGINE, 'src', 'content'));
 for (const kind of ['heroes', 'abilities']) {
-  const clash = Object.keys(roster[kind] ?? {}).filter((id) => Object.hasOwn(engine[kind], id));
+  const clash = Object.keys(roster[kind]).filter((id) => Object.hasOwn(engine[kind], id));
   if (clash.length) throw new Error(`The roster's ${kind} reuse jrpg-battle's ids ${clash.join(', ')}, so a champion couldn't be measured beside the hero it stands in for.`);
 }
 const config = validateConfig(buildConfig({
-  ...engine,
   ...roster,
   heroes: { ...engine.heroes, ...roster.heroes },
   abilities: { ...engine.abilities, ...roster.abilities },
 }));
-// And as a deployment loads them, the roster's files replacing the engine's whole.
-validateConfig(buildConfig({ ...engine, ...roster }));
 const { manifest, heroes, abilities } = roster;
+// This repository owns its copies of the engine's other files now; say which have moved apart.
+const drifted = files.filter((name) => !['manifest', 'heroes', 'abilities'].includes(name) && JSON.stringify(roster[name]) !== JSON.stringify(engine[name]));
 
 const tuning = { heroes, abilities };
 mkdirSync(join(ROOT, 'dist'), { recursive: true });
@@ -94,6 +96,7 @@ const { coreParty: CORE_PARTY, standsInFor: STANDS_IN_FOR, teams: ROSTER_TEAMS }
 
 console.log(`${manifest.name} ${manifest.version}: ${Object.keys(heroes).length} champions, ${Object.keys(abilities).length} abilities; loads as ${config.contentVersion}`);
 console.log(`Engine: ${ENGINE} (${ENGINE_VERSION}; CI checks against ${ENGINE_TAG})`);
+console.log(drifted.length ? `Differs from the engine's own content: ${drifted.join(', ')}` : "The rules, statuses, elements, monsters, items, waves, modes and dungeon match the engine's own.");
 console.log(tiedSpeeds.length ? `Shared speeds: ${tiedSpeeds.map(([spd, names]) => `${spd} (${names.join(', ')})`).join('; ')}` : "Every hero, the engine's and the roster's, has its own speed.");
 console.log(`Wrote dist/tuning-import.json\n`);
 

@@ -1,6 +1,6 @@
 # jrpgbattle-data
 
-The champion roster for jrpgbattle, content for the [jrpg-battle](https://github.com/stardustsuperwizard/jrpg-battle) engine. It is kept one file per champion and per ability, served as a static API, and built into the content files a deployment drops over the engine's own. The first wave is ten Greek gods; see [ROSTER.md](ROSTER.md).
+All of jrpgbattle's content for the [jrpg-battle](https://github.com/stardustsuperwizard/jrpg-battle) engine: its champions and their abilities, and the rules, statuses, elements, monsters, items, waves, modes and dungeon they play on. It is kept one file per entry, served as a static API, and built into the content files a deployment drops over the engine's own, replacing all of them. The first wave is ten Greek gods; see [ROSTER.md](ROSTER.md).
 
 **Private for now.** Both the data and the lore are unlicensed (all rights reserved) until the roster opens. The plan is a Creative Commons licence for the data with the lore held back ([jrpg-battle#248](https://github.com/stardustsuperwizard/jrpg-battle/issues/248)). The static API is public once Pages is on (see [Static API](#static-api)); the lore is never published.
 
@@ -11,14 +11,18 @@ The champion roster for jrpgbattle, content for the [jrpg-battle](https://github
 | `content/manifest.json` | `formatVersion` (the jrpg-battle content format the files are written in), `name`, `version` (the roster's own) and `licences: { data, lore }`. |
 | `content/heroes/index.json` | The champions' ids in roster order, the order jrpg-battle's pick screen lists them. A champion's file isn't built until it is listed here. |
 | `content/heroes/<id>.json` | One champion, in the shape of an entry of jrpg-battle's `src/content/heroes.json`; its `id` is its file name. |
-| `content/abilities/<id>.json` | One ability, in the shape of an entry of `src/content/abilities.json`. Each champion has exactly one basic, one skill and one ultimate. |
+| `content/abilities/<id>.json` | One ability, in the shape of an entry of `src/content/abilities.json`. Each champion has exactly one basic, one skill and one ultimate. Abilities have no index: they come in the order the champions use them. |
+| `content/statuses/`, `content/elements/`, `content/enemies/`, `content/items/` | One file per status, element, monster and item, in the shape of an entry of the engine's file of that name, each folder with an `index.json` listing its ids in order. Statuses and elements are keyed by their file name alone; monsters and items also carry it as `id`. |
+| `content/rules.json`, `content/waves.json`, `content/modes.json`, `content/dungeon.json` | The global rules, the waves, each mode's teams and the dungeon, single files as the engine has them. |
 | `scripts/build.mjs` | `npm run build`: the sources into `dist/src/content/` and `dist/api/`. Plain Node, no dependencies, no engine needed. |
 | `scripts/check.mjs` | `npm run check`: builds, validates the result with the engine and measures each champion. |
 | `tests/` | `npm test`: the build's own tests. |
 | `data/checks.json` | Settings for the check only: the core party it measures against, which core hero each champion stands in for, and sample teams. Not content. |
 | `lore/` | One file per champion: sources and story, with `manifest.json` naming the lore format. Neither built nor published; the jrpgbattle site reads it as the base layer under its own lore, which wins (see `lore/README.md`). |
 
-Champion and ability ids are lowercase letters, digits and `_`, and must not reuse jrpg-battle's (`aria`, `slash`, …): a deployment's overwrite wouldn't mind, but the check measures each champion beside the engine's heroes and refuses a clash.
+Ids are lowercase letters, digits and `_`. Champion and ability ids must not reuse jrpg-battle's (`aria`, `slash`, …): a deployment wouldn't mind, but the check measures each champion beside the engine's heroes and refuses a clash.
+
+**This repository owns all the content.** The rules, statuses, elements, monsters, items, waves, modes and dungeon started as copies of jrpg-battle 0.6.0's, and a release replaces the engine's with these, so a change to the engine's own content no longer reaches the site by itself. `npm run check` says which of these files differ from the engine checkout's, to make that a choice rather than drift.
 
 ### Adding a champion
 
@@ -35,10 +39,10 @@ npm run build          # into dist/
 
 | Output | What it is |
 |---|---|
-| `dist/src/content/manifest.json`, `heroes.json`, `abilities.json` | jrpg-battle's content files (its decision 0030): heroes in index order, abilities in the order the heroes use them. Dropped over a jrpg-battle checkout, they replace its manifest, heroes and abilities; its rules, statuses, elements, monsters, items, waves, modes and dungeon stay. |
+| `dist/src/content/<name>.json` | Every one of jrpg-battle's content files (its decision 0030): manifest, rules, statuses, elements, heroes, abilities, enemies, items, waves, modes and dungeon, each kind in its index order and abilities in the order the heroes use them. Dropped over a jrpg-battle checkout, they replace all of its content. |
 | `dist/api/` | The static API, below. |
 
-The build refuses sources that don't fit together, naming every problem: a listed champion with no file, a file the index doesn't list, an `id` that isn't its file name, an ability a champion uses that has no file. An ability no champion uses is built after the rest and reported. Whether the content follows the game's rules is the engine's to say, in `npm run check`.
+The build refuses sources that don't fit together, naming every problem: a missing file or folder, a listed entry with no file, a file its index doesn't list, an `id` that isn't its file name, an ability a champion uses that has no file. An ability no champion uses is built after the rest and reported. Whether the content follows the game's rules is the engine's to say, in `npm run check`.
 
 ## Static API
 
@@ -52,23 +56,23 @@ To serve another release again, as a rollback, run `pages` from the Actions tab 
 
 | Path | What it is |
 |---|---|
-| `index.json` | `name`, `version` and `formatVersion` from the manifest, the hero and ability ids in order, and the paths of the combined files. Start here. |
-| `manifest.json` | The manifest. |
-| `heroes/index.json`, `abilities/index.json` | Each kind's ids, in order. |
-| `heroes/<id>.json`, `abilities/<id>.json` | One entry, as in the sources. |
-| `content/manifest.json`, `content/heroes.json`, `content/abilities.json` | The combined files, the same as a release's. |
+| `index.json` | `name`, `version` and `formatVersion` from the manifest, each kind's ids in order, and the paths of the combined files. Start here. |
+| `manifest.json`, `rules.json`, `waves.json`, `modes.json`, `dungeon.json` | The single files. |
+| `<kind>/index.json` | Each kind's ids, in order: `statuses`, `elements`, `heroes`, `abilities`, `enemies`, `items`. |
+| `<kind>/<id>.json` | One entry, as in the sources. |
+| `content/<name>.json` | Every combined content file, the same as a release's. |
 
 The API's `index.json` names the release it serves (`version`). A deployment that needs a fixed version takes that release's zips rather than the API.
 
 ## Deploying
 
-Each release carries `jrpgbattle-content-vX.Y.Z.zip`, which holds `src/content/manifest.json`, `heroes.json` and `abilities.json` at the paths they take in jrpg-battle. Unzip it at the root of a jrpg-battle checkout, before building the site or starting the server:
+Each release carries `jrpgbattle-content-vX.Y.Z.zip`, which holds every content file, `src/content/<name>.json`, at the paths they take in jrpg-battle. Unzip it at the root of a jrpg-battle checkout, before building the site or starting the server:
 
 ```sh
 unzip -o jrpgbattle-content-v0.4.0.zip -d ../jrpg-battle
 ```
 
-From a local build, `cp -r dist/src ../jrpg-battle/` does the same. The server, the page and `build:site` then run on the champions with the engine's other content, and content versions read the roster's `version`. Changing the files interrupts online matches running on that deploy.
+From a local build, `cp -r dist/src ../jrpg-battle/` does the same. The server, the page and `build:site` then run on this repository's content alone, and content versions read its `version`. Changing the files interrupts online matches running on that deploy.
 
 ## Checking
 

@@ -1,0 +1,47 @@
+{
+  "id": "wolf",
+  "name": "Dire Wolf",
+  "sprite": "🐺",
+  "element": "physical",
+  "maxHp": 910,
+  "atk": 185,
+  "def": 40,
+  "spd": 124,
+  "toughness": 30,
+  "weaknesses": [
+    "fire",
+    "ice"
+  ],
+  "xp": 145,
+  "gold": 200,
+  "skills": [
+    {
+      "id": "bite",
+      "name": "Bite",
+      "type": "basic",
+      "target": "enemy",
+      "effects": [
+        {
+          "type": "damage",
+          "mult": 1
+        }
+      ],
+      "weight": 3
+    },
+    {
+      "id": "howl",
+      "name": "Howl",
+      "type": "skill",
+      "target": "self",
+      "weight": 1,
+      "message": "{user} howls, its fury rising!",
+      "effects": [
+        {
+          "type": "status",
+          "status": "atk_up",
+          "duration": 2
+        }
+      ]
+    }
+  ]
+}

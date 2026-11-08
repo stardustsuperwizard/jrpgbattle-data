@@ -1,0 +1,9 @@
+{
+  "id": "leather_vest",
+  "name": "Leather Vest",
+  "icon": "🦺",
+  "cost": 150,
+  "stats": {
+    "def": 12
+  }
+}

@@ -1,28 +1,48 @@
-// Builds the roster from its sources, one JSON file per entry, into what a
+// Builds the content from its sources, one JSON file per entry, into what a
 // deployment and a client use. Plain Node, no dependencies and no engine
-// checkout, so the Pages and release workflows can run it on their own.
+// checkout, so the release workflow can run it on its own.
 //   node scripts/build.mjs [outDir]           (default dist/)
 //
-// Sources, in content/:
-//   manifest.json            the roster's name, version and content format
-//   heroes/index.json        the champions' ids, in roster order (the order
-//                            jrpg-battle's pick screen lists them)
-//   heroes/<id>.json         one champion each
-//   abilities/<id>.json      one ability each
+// Sources, in content/: every jrpg-battle content file (its decision 0030),
+// the ones keyed by id broken out one file per entry.
+//   manifest.json, rules.json, waves.json, modes.json, dungeon.json
+//                            single files, built as they are
+//   <kind>/index.json        the ids in order, for heroes (the order the pick
+//                            screen lists them), statuses, elements, enemies
+//                            and items
+//   <kind>/<id>.json         one entry each; abilities have no index, and
+//                            come in the order the heroes use them
 //
 // Output, in outDir:
-//   src/content/<name>.json  manifest, heroes and abilities as jrpg-battle's
-//                            content files (its decision 0030): dropped over a
-//                            jrpg-battle checkout, they replace its own
-//   api/                     the static API GitHub Pages serves: the sources
-//                            entry by entry, an index per kind, and the
-//                            combined files under api/content/
+//   src/content/<name>.json  jrpg-battle's content files: dropped over a
+//                            jrpg-battle checkout, they replace all of its own
+//   api/                     the static API: the sources entry by entry, an
+//                            index per kind, and the combined files under
+//                            api/content/
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ID_RE = /^[a-z0-9][a-z0-9_]*$/;
+
+// The content files in the order jrpg-battle lists them (CONTENT_FILES), and
+// how each is kept here: `single` as one file; otherwise one file per entry,
+// `id` when an entry names its own id, `order` from the kind's index.json or,
+// for abilities, from the heroes that use them.
+export const KINDS = [
+  { name: 'manifest', single: true },
+  { name: 'rules', single: true },
+  { name: 'statuses', order: 'index' },
+  { name: 'elements', order: 'index' },
+  { name: 'heroes', order: 'index', id: true },
+  { name: 'abilities', order: 'use', id: true },
+  { name: 'enemies', order: 'index', id: true },
+  { name: 'items', order: 'index', id: true },
+  { name: 'waves', single: true },
+  { name: 'modes', single: true },
+  { name: 'dungeon', single: true },
+];
 
 // The repository's JSON layout: two-space indent and a final newline, so built files diff cleanly.
 export const render = (value) => `${JSON.stringify(value, null, 2)}\n`;
@@ -35,57 +55,80 @@ function readJson(path, label) {
   }
 }
 
-// Every <id>.json in a kind's folder but its index, checked against its file name.
+// Every <id>.json in a kind's folder but its index; an entry that names its id must name its file's.
 function readEntries(dir, kind, problems) {
   const entries = {};
   for (const name of readdirSync(dir).filter((n) => n !== 'index.json').sort()) {
-    const where = `content/${kind}/${name}`;
+    const where = `content/${kind.name}/${name}`;
     if (!name.endsWith('.json')) {
-      problems.push(`${where}: only <id>.json files belong in content/${kind}/.`);
+      problems.push(`${where}: only <id>.json files belong in content/${kind.name}/.`);
       continue;
     }
     const id = name.slice(0, -'.json'.length);
     if (!ID_RE.test(id)) problems.push(`${where}: an id is lowercase letters, digits and "_".`);
     const entry = readJson(join(dir, name), where);
-    if (entry?.id !== id) problems.push(`${where} says id ${JSON.stringify(entry?.id)}; its file name says "${id}".`);
+    if (kind.id && entry?.id !== id) problems.push(`${where} says id ${JSON.stringify(entry?.id)}; its file name says "${id}".`);
     entries[id] = entry;
   }
   return entries;
 }
 
-/**
- * The roster as jrpg-battle's three content files, built from the sources:
- * heroes in index order, abilities in the order the heroes use them (the
- * order the combined files have always had), then any no hero uses, by id.
- * Throws, listing every problem, when the sources don't fit together; the
- * game rules themselves are jrpg-battle's to check (npm run check).
- * @param {string} [root]  the repository root
- * @returns {{ manifest: object, heroes: Record<string, object>, abilities: Record<string, object>, unused: string[] }}
- */
-export function buildContent(root = ROOT) {
-  const content = join(root, 'content');
-  const problems = [];
-  const manifest = readJson(join(content, 'manifest.json'), 'content/manifest.json');
-  const heroFiles = readEntries(join(content, 'heroes'), 'heroes', problems);
-  const abilityFiles = readEntries(join(content, 'abilities'), 'abilities', problems);
-
-  const order = readJson(join(content, 'heroes', 'index.json'), 'content/heroes/index.json');
+// A kind's entries in its index's order, every file listed once and every listed id a file.
+function indexed(content, kind, files, problems) {
+  const where = `content/${kind.name}/index.json`;
+  if (!existsSync(join(content, kind.name, 'index.json'))) {
+    problems.push(`${where} is missing; it lists the ${kind.name} in order.`);
+    return {};
+  }
+  const order = readJson(join(content, kind.name, 'index.json'), where);
   if (!Array.isArray(order) || !order.every((id) => typeof id === 'string')) {
-    throw new Error('content/heroes/index.json must be a list of hero ids, in roster order.');
+    problems.push(`${where} must be a list of ids, in order.`);
+    return {};
   }
   const listed = new Set();
   for (const id of order) {
-    if (listed.has(id)) problems.push(`content/heroes/index.json lists "${id}" twice.`);
-    else if (!heroFiles[id]) problems.push(`content/heroes/index.json lists "${id}", but content/heroes/${id}.json is missing.`);
+    if (listed.has(id)) problems.push(`${where} lists "${id}" twice.`);
+    else if (!files[id]) problems.push(`${where} lists "${id}", but content/${kind.name}/${id}.json is missing.`);
     listed.add(id);
   }
-  for (const id of Object.keys(heroFiles)) {
-    if (!listed.has(id)) problems.push(`content/heroes/${id}.json isn't listed in content/heroes/index.json, so it has no place in the roster.`);
+  for (const id of Object.keys(files)) {
+    if (!listed.has(id)) problems.push(`content/${kind.name}/${id}.json isn't listed in ${where}, so it has no place in the order.`);
+  }
+  return Object.fromEntries(order.filter((id) => files[id]).map((id) => [id, files[id]]));
+}
+
+/**
+ * Every content file, built from the sources: single files as they are,
+ * indexed kinds in index order, abilities in the order the heroes use them
+ * (then any no hero uses, by id). Throws, listing every problem, when the
+ * sources don't fit together; the game rules themselves are jrpg-battle's to
+ * check (npm run check).
+ * @param {string} [root]  the repository root
+ * @returns {{ content: Record<string, unknown>, unused: string[] }}
+ */
+export function buildContent(root = ROOT) {
+  const dir = join(root, 'content');
+  const problems = [];
+  const content = {};
+  const abilityFiles = {};
+  for (const kind of KINDS) {
+    if (kind.single) {
+      const path = join(dir, `${kind.name}.json`);
+      if (!existsSync(path)) problems.push(`content/${kind.name}.json is missing.`);
+      else content[kind.name] = readJson(path, `content/${kind.name}.json`);
+      continue;
+    }
+    if (!existsSync(join(dir, kind.name))) {
+      problems.push(`content/${kind.name}/ is missing.`);
+      continue;
+    }
+    const files = readEntries(join(dir, kind.name), kind, problems);
+    if (kind.order === 'index') content[kind.name] = indexed(dir, kind, files, problems);
+    else Object.assign(abilityFiles, files);
   }
 
-  const heroes = Object.fromEntries(order.filter((id) => heroFiles[id]).map((id) => [id, heroFiles[id]]));
   const used = [];
-  for (const [id, hero] of Object.entries(heroes)) {
+  for (const [id, hero] of Object.entries(content.heroes ?? {})) {
     if (!Array.isArray(hero.abilities)) {
       problems.push(`content/heroes/${id}.json needs "abilities", a list of ability ids.`);
       continue;
@@ -97,8 +140,9 @@ export function buildContent(root = ROOT) {
   }
   if (problems.length) throw new Error(problems.join('\n'));
   const unused = Object.keys(abilityFiles).filter((id) => !used.includes(id)).sort();
-  const abilities = Object.fromEntries([...used, ...unused].map((id) => [id, abilityFiles[id]]));
-  return { manifest, heroes, abilities, unused };
+  content.abilities = Object.fromEntries([...used, ...unused].map((id) => [id, abilityFiles[id]]));
+  // In KINDS order, as the engine lists its files.
+  return { content: Object.fromEntries(KINDS.map(({ name }) => [name, content[name]])), unused };
 }
 
 /**
@@ -108,40 +152,44 @@ export function buildContent(root = ROOT) {
  * @param {string} [root]
  */
 export function build(out, root = ROOT) {
-  const { manifest, heroes, abilities, unused } = buildContent(root);
-  const files = { manifest, heroes, abilities };
+  const { content, unused } = buildContent(root);
+  const { manifest } = /** @type {any} */ (content);
   for (const dir of ['src', 'api']) rmSync(join(out, dir), { recursive: true, force: true });
   const write = (path, value) => {
     mkdirSync(dirname(join(out, path)), { recursive: true });
     writeFileSync(join(out, path), typeof value === 'string' ? value : render(value));
   };
 
-  for (const [name, value] of Object.entries(files)) write(`src/content/${name}.json`, value);
+  for (const [name, value] of Object.entries(content)) write(`src/content/${name}.json`, value);
 
   // The API: a root index to discover the rest, then each kind entry by entry.
+  const entryKinds = KINDS.filter((kind) => !kind.single).map((kind) => kind.name);
   write('api/index.json', {
     name: manifest.name,
     version: manifest.version,
     formatVersion: manifest.formatVersion,
-    heroes: Object.keys(heroes),
-    abilities: Object.keys(abilities),
-    content: Object.keys(files).map((name) => `content/${name}.json`),
+    ...Object.fromEntries(entryKinds.map((name) => [name, Object.keys(content[name])])),
+    content: Object.keys(content).map((name) => `content/${name}.json`),
   });
-  write('api/manifest.json', manifest);
-  for (const [kind, entries] of Object.entries({ heroes, abilities })) {
-    write(`api/${kind}/index.json`, Object.keys(entries));
-    for (const [id, entry] of Object.entries(entries)) write(`api/${kind}/${id}.json`, entry);
+  for (const kind of KINDS) {
+    if (kind.single) {
+      write(`api/${kind.name}.json`, content[kind.name]);
+      continue;
+    }
+    const entries = /** @type {Record<string, unknown>} */ (content[kind.name]);
+    write(`api/${kind.name}/index.json`, Object.keys(entries));
+    for (const [id, entry] of Object.entries(entries)) write(`api/${kind.name}/${id}.json`, entry);
   }
-  for (const [name, value] of Object.entries(files)) write(`api/content/${name}.json`, value);
+  for (const [name, value] of Object.entries(content)) write(`api/content/${name}.json`, value);
   // GitHub Pages runs Jekyll otherwise, which has no business with JSON.
   write('api/.nojekyll', '');
-  return { heroes: Object.keys(heroes).length, abilities: Object.keys(abilities).length, unused };
+  const counts = Object.fromEntries(entryKinds.map((name) => [name, Object.keys(content[name]).length]));
+  return { counts, unused };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const out = resolve(process.argv[2] ?? join(ROOT, 'dist'));
-  if (!existsSync(join(ROOT, 'content'))) throw new Error('No content/ folder to build from.');
-  const { heroes, abilities, unused } = build(out);
-  console.log(`Built ${heroes} heroes and ${abilities} abilities into ${out}/src/content/ and ${out}/api/.`);
+  const { counts, unused } = build(out);
+  console.log(`Built ${Object.entries(counts).map(([name, n]) => `${n} ${name}`).join(', ')} into ${out}/src/content/ and ${out}/api/.`);
   if (unused.length) console.log(`No hero uses ${unused.join(', ')}; built after the rest.`);
 }

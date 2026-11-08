@@ -1,0 +1,9 @@
+{
+  "id": "plate_mail",
+  "name": "Plate Mail",
+  "icon": "🛡️",
+  "cost": 400,
+  "stats": {
+    "def": 30
+  }
+}

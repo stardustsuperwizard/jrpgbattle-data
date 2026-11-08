@@ -1,0 +1,9 @@
+{
+  "id": "vigor_charm",
+  "name": "Vigor Charm",
+  "icon": "💗",
+  "cost": 150,
+  "stats": {
+    "maxHp": 150
+  }
+}

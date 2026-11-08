@@ -1,0 +1,113 @@
+{
+  "pve": {
+    "name": "PvE",
+    "pick": "blind",
+    "teams": [
+      {
+        "id": "party",
+        "name": "Your team",
+        "controllers": [
+          "local:p1",
+          "local:p1",
+          "local:p1",
+          "local:p1"
+        ],
+        "level": 1,
+        "gear": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "id": "enemy",
+        "name": "Monsters",
+        "kind": "monster",
+        "controllers": [
+          "bot:default"
+        ],
+        "waves": {
+          "kind": "fixed"
+        }
+      }
+    ]
+  },
+  "pvp": {
+    "name": "PvP",
+    "pick": "blind",
+    "timeLimit": "pvpTimeLimit",
+    "teams": [
+      {
+        "id": "blue",
+        "name": "Blue",
+        "controllers": [
+          "local:p1",
+          "local:p1",
+          "local:p1",
+          "local:p1"
+        ],
+        "level": 1,
+        "gear": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "id": "red",
+        "name": "Red",
+        "controllers": [
+          "bot:default",
+          "bot:default",
+          "bot:default",
+          "bot:default"
+        ],
+        "level": 1,
+        "gear": [
+          [],
+          [],
+          [],
+          []
+        ]
+      }
+    ]
+  },
+  "run": {
+    "name": "Dungeon",
+    "pick": "blind",
+    "levels": true,
+    "timeLimit": "runTimeLimit",
+    "teams": [
+      {
+        "id": "party",
+        "name": "Your team",
+        "controllers": [
+          "local:p1",
+          "local:p1",
+          "local:p1",
+          "local:p1"
+        ],
+        "level": 1,
+        "gear": [
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "id": "enemy",
+        "name": "Monsters",
+        "kind": "monster",
+        "controllers": [
+          "bot:default"
+        ],
+        "waves": {
+          "kind": "endless"
+        }
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # Roster: first wave, the Olympians
 
-Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; jrpg-battle's statuses burn, shock, bleed, freeze, ATK Up, DEF Down and Taunt; and its four elements. No statuses or elements of its own yet: since jrpg-battle 0.6.0 both are content files (decisions 0019 and 0029), so a deployment could replace `statuses.json` or `elements.json` with versions that add the roster's. Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
+Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; jrpg-battle's statuses burn, shock, bleed, freeze, ATK Up, DEF Down and Taunt; and its four elements. The statuses and elements are still the engine's own, copied into this repository's `content/` with the rest of its content, so new ones are a file each in `content/statuses/` or `content/elements/`. Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
 
 | Champion | Role | Element (for now) | Spd | HP | ATK | DEF | Skill | Ultimate |
 |---|---|---|---|---|---|---|---|---|
@@ -17,7 +17,7 @@ Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shie
 
 Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for their teammates' skills.
 
-**Elements are provisional.** With only physical, fire, ice and lightning, several gods are approximations: Poseidon and Aphrodite are "ice" for water, Hades "fire" for the Phlegethon. Elements are content files in jrpg-battle now (its decision 0019), so the roster could bring its own `elements.json`; the intended ones are: Poseidon and Aphrodite water, Hades dark, Apollo light, Hermes wind, Zeus lightning, Hephaestus fire.
+**Elements are provisional.** With only physical, fire, ice and lightning, several gods are approximations: Poseidon and Aphrodite are "ice" for water, Hades "fire" for the Phlegethon. Elements are content here now, one file each in `content/elements/`; the intended ones are: Poseidon and Aphrodite water, Hades dark, Apollo light, Hermes wind, Zeus lightning, Hephaestus fire.
 
 ## Numbers (roster 0.4.0 on jrpg-battle 0.6.0, 300 seeded battles per line)
 

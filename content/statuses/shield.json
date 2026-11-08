@@ -1,0 +1,6 @@
+{
+  "name": "Shield",
+  "kind": "buff",
+  "icon": "🔰",
+  "absorbsDamage": true
+}

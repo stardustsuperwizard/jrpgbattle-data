@@ -1,0 +1,9 @@
+{
+  "name": "Lightning",
+  "icon": "⚡",
+  "color": "#c58bff",
+  "break": {
+    "status": "shock",
+    "duration": 2
+  }
+}

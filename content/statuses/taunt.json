@@ -1,0 +1,6 @@
+{
+  "name": "Taunt",
+  "kind": "buff",
+  "icon": "🎯",
+  "drawsAttacks": true
+}
