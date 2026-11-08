@@ -1,8 +1,13 @@
-# Attaches the roster's built content files to a release, for a deployment's
-# build to drop over a jrpg-battle checkout: jrpgbattle-content-<tag>.zip
-# holds src/content/manifest.json, heroes.json and abilities.json, at the
-# paths they take in jrpg-battle. Runs when a release is published, after the
-# same check as CI, so a release never carries files the engine refuses.
+# Attaches the roster's built files to a release, after the same check as CI,
+# so a release never carries files the engine refuses:
+#   jrpgbattle-content-<tag>.zip  src/content/manifest.json, heroes.json and
+#                                 abilities.json, at the paths they take in
+#                                 jrpg-battle, for a deployment's build to drop
+#                                 over a checkout
+#   jrpgbattle-api-<tag>.zip      the static API's files, entry by entry, which
+#                                 pages.yml publishes to GitHub Pages once this
+#                                 run succeeds, when PUBLISH_API is "true"
+# Runs when a release is published.
 name: release
 
 on:
@@ -68,12 +73,18 @@ jobs:
         env:
           JRPG_BATTLE: ${{ github.workspace }}/jrpg-battle
 
-      - name: Attach the content files
+      # A release asset can't hold folders, and the API has two index.json
+      # files, so its files go up zipped, as they are served.
+      - name: Attach the content files and the API
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.event.release.tag_name }}
         run: |
-          ZIP="jrpgbattle-content-$TAG.zip"
-          (cd dist && zip -r "../$ZIP" src)
-          unzip -l "$ZIP"
-          gh release upload "$TAG" "$ZIP" --clobber
+          CONTENT="jrpgbattle-content-$TAG.zip"
+          API="jrpgbattle-api-$TAG.zip"
+          (cd dist && zip -r "../$CONTENT" src)
+          (cd dist/api && zip -r "../../$API" .)
+          unzip -l "$CONTENT"
+          unzip -l "$API"
+          gh release upload "$TAG" "$CONTENT" "$API" --clobber
+
