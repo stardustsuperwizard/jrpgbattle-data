@@ -1,8 +1,8 @@
 {
-  "formatVersion": "2026-11-04",
+  "formatVersion": "2026-11-08",
   "id": "mega_fighters-champions",
   "name": "Mega Fighters Champions",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "licences": {
     "data": "UNLICENSED",
     "lore": "UNLICENSED"

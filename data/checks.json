@@ -1,5 +1,6 @@
 {
   "//": "Settings for scripts/check.mjs only; not part of the pack content.",
+  "coreParty": ["aria", "pyra", "seren", "vex"],
   "standsInFor": {
     "hermes": "vex",
     "artemis": "vex",

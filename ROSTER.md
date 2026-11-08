@@ -1,6 +1,6 @@
 # Roster: first wave, the Olympians
 
-Ten Greek gods built only from jrpg-battle's current building blocks: damage, heal, shield, status, cleanse and remove_status effects; the statuses burn, shock, bleed, freeze, ATK Up, DEF Down and Taunt; and the four elements. Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
+Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; the default pack's statuses burn, shock, bleed, freeze, ATK Up, DEF Down and Taunt; and its four elements. The pack adds no statuses or elements of its own yet, though since jrpg-battle 0.6.0 a pack may (decisions 0019 and 0029). Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
 
 | Champion | Role | Element (for now) | Spd | HP | ATK | DEF | Skill | Ultimate |
 |---|---|---|---|---|---|---|---|---|
@@ -17,24 +17,26 @@ Ten Greek gods built only from jrpg-battle's current building blocks: damage, he
 
 Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for their teammates' skills.
 
-**Elements are provisional.** With only physical, fire, ice and lightning, several gods are approximations: Poseidon and Aphrodite are "ice" for water, Hades "fire" for the Phlegethon. When jrpg-battle lets content define elements ([jrpg-battle#254](https://github.com/stardustsuperwizard/jrpg-battle/issues/254)), the intended ones are: Poseidon and Aphrodite water, Hades dark, Apollo light, Hermes wind, Zeus lightning, Hephaestus fire.
+**Elements are provisional.** With only physical, fire, ice and lightning, several gods are approximations: Poseidon and Aphrodite are "ice" for water, Hades "fire" for the Phlegethon. jrpg-battle lets a pack define elements now (its decision 0019); the intended ones are: Poseidon and Aphrodite water, Hades dark, Apollo light, Hermes wind, Zeus lightning, Hephaestus fire.
 
-## Numbers (pack 0.3.0 on jrpg-battle v0.3.0, 300 seeded battles per line)
+## Numbers (pack 0.4.0 on jrpg-battle 0.6.0, 300 seeded battles per line)
 
-`npm run check` in this repository, against jrpg-battle `v0.3.0`; the core party wins PvE 80.0% and splits the PvP mirror 51.7%. The numbers are identical to the ones measured on `v0.1.0`, `v0.1.2` and `v0.2.0`: the pack and the engine rules are unchanged (`v0.2.0` reshaped how matches are built, decision 0022, and `v0.3.0` moved to dated formats, decision 0023, but neither changed the rules). The pack is unchanged since its first numbers; they moved because `v0.1.0`'s bot holds shared SP for a teammate's due heal (jrpg-battle#256). Each champion stands in for the core hero with the closest job (`data/checks.json`).
+`npm run check` in this repository, against jrpg-battle 0.6.0; the core party wins PvE 83.3% and splits the PvP mirror 50.0%. The pack's champions are unchanged since 0.3.0; the numbers moved with the engine. In 0.6.0 taunt pulls every attacker's single-target attacks, players' and the bot's as well as monsters' (jrpg-battle decision 0028); before, it only drew monsters, so in PvP Ares's and Athena's taunts did nothing. A frozen golem also keeps its wind-up now instead of losing it (decision 0027). Each champion stands in for the core hero with the closest job (`data/checks.json`).
 
 | Champion | In for | PvE win | vs core | PvP win vs core team |
 |---|---|---|---|---|
-| Hermes | Vex | 67.3% | −12.7 | 34.0% |
-| Artemis | Vex | 95.3% | +15.3 | 16.3% |
-| Apollo | Seren | 50.3% | −29.7 | 20.3% |
-| Ares | Aria | 31.7% | −48.3 | **98.0%** |
-| Aphrodite | Seren | 49.3% | −30.7 | 78.3% |
-| Zeus | Pyra | 100.0% | +20.0 | 54.7% |
-| Athena | Aria | 83.0% | +3.0 | 52.0% |
-| Poseidon | Pyra | 99.7% | +19.7 | 68.7% |
-| Hades | Pyra | 77.7% | −2.3 | 56.3% |
-| Hephaestus | Aria | 73.7% | −6.3 | 49.3% |
+| Hermes | Vex | 71.0% | −12.3 | 34.3% |
+| Artemis | Vex | 98.7% | +15.3 | 10.7% |
+| Apollo | Seren | 51.3% | −32.0 | 63.7% |
+| Ares | Aria | 23.3% | −60.0 | 59.0% |
+| Aphrodite | Seren | 53.7% | −29.7 | **88.3%** |
+| Zeus | Pyra | 99.7% | +16.3 | 53.3% |
+| Athena | Aria | 89.3% | +6.0 | 47.3% |
+| Poseidon | Pyra | 99.3% | +16.0 | 68.3% |
+| Hades | Pyra | 70.7% | −12.7 | 40.3% |
+| Hephaestus | Aria | 73.0% | −10.3 | 41.3% |
+
+All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 94.0% and PvP 65.0% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 93.3% and 4.3%; Ares, Hades, Apollo, Zeus 0.0% and 51.3%.
 
 ### How to read them
 
@@ -44,9 +46,9 @@ Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for the
 
 ### Known issues to fix next
 
-- **Ares** (98% PvP, 32% PvE): Taunt on a 1,400 HP bruiser at speed 108 dominates PvP, while his physical damage is resisted by the boss.
-- **Apollo** (20% PvP): a faster Seren with a similar kit loses badly; probably speed order again (110 lands between Pyra and Vex).
-- **Artemis** (16% PvP) and **Hermes** (34%): both replace Vex, the fastest core hero, and lose his place at the top of the order.
+- **Aphrodite** (88% PvP): the strongest PvP champion now. A party heal and ATK Up for everyone each turn, behind a taunting Aria who draws the core team's single-target hits, outlasts it.
+- **Ares** (59% PvP, 23% PvE): no longer dominant. His 98% PvP on 0.3.0 wasn't his taunt, which did nothing in PvP then; with taunt working on both sides, the core team's Aria draws his hits too. His physical damage is still resisted by the PvE boss.
+- **Artemis** (11% PvP) and **Hermes** (34%): both replace Vex, the fastest core hero, and lose his place at the top of the order.
 - **A team without a real healer loses PvE outright** (Ares, Hades, Apollo, Zeus: 0%, since Apollo heals only one ally per skill). The second wave needs more healers.
 
 ## Needs a mechanic
@@ -56,7 +58,7 @@ Gods whose myth wants something the engine can't do yet. Each is a small jrpg-ba
 | Champion idea | Mechanic | Why |
 |---|---|---|
 | Hermes (fuller kit) | Speed up / turn advance (Haste, FFX) | The messenger acts again or hurries an ally |
-| Kronos | Delay an enemy's turn (Slow) | Lord of time |
+| Kronos | Delay an enemy's turn (Slow) | Lord of time. A Slow that lowers speed is now a pack status (`"mods": { "spdPct": -0.3 }`, decision 0029); pushing a turn back is not yet |
 | Hera | Revive a fallen ally | Queen of the gods, protector |
 | Dionysus | Confuse / random target | Madness and revelry |
 | Persephone | A form that changes over the battle | Spring and the underworld |

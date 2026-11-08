@@ -2,11 +2,13 @@
 //   node scripts/check.mjs [runs]                 (default 300 battles per line)
 //   JRPG_BATTLE=/path/to/jrpg-battle node scripts/check.mjs
 //
-// The pack folder, packs/<id>/, is a jrpg-battle content pack as decision
-// 0016 defines it: a deployment copies it to src/content/packs/<id>/ and
-// lists the id in src/content/packs.json. The check loads it exactly that
-// way, through jrpg-battle's own pack reader, boundary check and merge, so
-// a pack that passes here is one the server and the page accept.
+// The pack folder, packs/<id>/, is a jrpg-battle content pack as decisions
+// 0016 and 0025 define it: a deployment copies it to src/content/packs/<id>/
+// and lists the id in src/content/packs.json after the engine's default
+// pack. The check loads it that way, through jrpg-battle's own pack reader,
+// boundary check and merge, so a pack that passes here is one the server and
+// the page accept. It keeps the default pack's heroes, which a deployment
+// may leave out, because each champion is measured against them.
 //
 // It also writes dist/tuning-import.json, the pack as tuning-panel settings,
 // so the champions can be tried on a deployment that doesn't load the pack.
@@ -24,6 +26,7 @@ const load = (path) => import(pathToFileURL(join(ENGINE, path)).href);
 const { buildConfig, validateConfig, createMatch } = await load('src/engine/content.js');
 const { simulate, simulatePvp } = await load('src/engine/simulate.js');
 const { readPacks, shippedContent } = await load('scripts/content.js');
+const { completePicks } = await load('src/engine/picks.js');
 const { checkBoundaries } = await load('scripts/check-boundaries.js');
 
 // The one pack folder this repository holds; its name is the pack's id.
@@ -49,25 +52,25 @@ const asDeployed = [
 const violations = checkBoundaries(asDeployed);
 if (violations.length) throw new Error(violations.map((v) => `${v.file}: ${v.reason}`).join('\n'));
 
-// A content folder with only the index and this pack, read by the deployment's reader.
+// A content folder with the index, the engine's default pack and this one, read by the deployment's reader.
 const contentDir = mkdtempSync(join(tmpdir(), 'pack-check-'));
 let packs;
 try {
-  writeFileSync(join(contentDir, 'packs.json'), JSON.stringify([PACK_ID]));
+  writeFileSync(join(contentDir, 'packs.json'), JSON.stringify(['default', PACK_ID]));
   mkdirSync(join(contentDir, 'packs'));
+  symlinkSync(join(ENGINE, 'src', 'content', 'packs', 'default'), join(contentDir, 'packs', 'default'), 'dir');
   symlinkSync(PACK_DIR, join(contentDir, 'packs', PACK_ID), 'dir');
   packs = readPacks(contentDir);
 } finally {
   rmSync(contentDir, { recursive: true, force: true });
 }
-const [pack] = packs;
-const { manifest, elements, heroes, abilities } = pack;
+const pack = packs.find((p) => p.id === PACK_ID);
+const { manifest, statuses, elements, heroes, abilities } = pack;
 
-// composeContent refuses any id core already defines, so a pack never replaces a balance hero.
-const core = buildConfig(shippedContent([]));
+// composeContent refuses any id the default pack already defines, so a pack never replaces a balance hero.
 const config = validateConfig(buildConfig(shippedContent(packs)));
 
-const tuning = { elements, heroes, abilities };
+const tuning = { statuses, elements, heroes, abilities };
 mkdirSync(join(ROOT, 'dist'), { recursive: true });
 writeFileSync(join(ROOT, 'dist', 'tuning-import.json'), `${JSON.stringify(tuning, null, 2)}\n`);
 
@@ -78,14 +81,10 @@ const tiedSpeeds = [...speeds].filter(([, names]) => names.length > 1);
 const pct = (n) => `${(n * 100).toFixed(1)}%`.padStart(6);
 const pad = (text, width) => String(text).padEnd(width);
 // Every hero team on the bot, as the engine's simulators play them: a person can't sit at a simulator.
-const pve = (party) => simulate((seed) => createMatch({ ...config, party }, { mode: 'pve', seed, controllers: { party: 'bot:default' } }), runs);
+// Content has no party (decision 0025), so each line-up is passed in: PvE's as the party, PvP's as both teams' picks.
+const pve = (party) => simulate((seed) => createMatch(config, { mode: 'pve', seed, party, controllers: { party: 'bot:default' } }), runs);
 const controllers = { blue: 'bot:default', red: 'bot:default' };
-const pvp = (blue, red) => {
-  const modes = structuredClone(config.modes);
-  modes.pvp.teams[0].champions = blue;
-  modes.pvp.teams[1].champions = red;
-  return simulatePvp((seed) => createMatch({ ...config, modes }, { mode: 'pvp', seed, controllers }), runs);
-};
+const pvp = (blue, red) => simulatePvp((seed) => createMatch(config, { mode: 'pvp', seed, controllers, picks: completePicks(config, { seed, mode: 'pvp', picks: { blue, red } }) }), runs);
 
 // Each champion stands in for the core hero whose job is closest, so the
 // numbers compare like with like: Aria the tank, Pyra area damage, Seren
@@ -93,22 +92,22 @@ const pvp = (blue, red) => {
 // PvE also rewards matching the waves' weaknesses (the wave-3 golem is weak
 // only to lightning and ice), so PvP, where heroes have no weaknesses, is the
 // fairer read of raw strength.
-const { standsInFor: STANDS_IN_FOR, teams: ROSTER_TEAMS } = read(join(ROOT, 'data', 'checks.json'));
+const { coreParty: CORE_PARTY, standsInFor: STANDS_IN_FOR, teams: ROSTER_TEAMS } = read(join(ROOT, 'data', 'checks.json'));
 
-console.log(`${manifest.name} ${manifest.version}: ${Object.keys(heroes).length} champions, ${Object.keys(abilities).length} abilities, ${Object.keys(elements).length} new elements; loads as ${config.contentVersion}`);
+console.log(`${manifest.name} ${manifest.version}: ${Object.keys(heroes).length} champions, ${Object.keys(abilities).length} abilities, ${Object.keys(statuses).length} new statuses, ${Object.keys(elements).length} new elements; loads as ${config.contentVersion}`);
 console.log(`Engine: ${ENGINE} (${ENGINE_VERSION}; CI checks against ${ENGINE_TAG})`);
 console.log(tiedSpeeds.length ? `Shared speeds: ${tiedSpeeds.map(([spd, names]) => `${spd} (${names.join(', ')})`).join('; ')}` : 'Every hero, core and pack, has its own speed.');
 console.log(`Wrote dist/tuning-import.json\n`);
 
-const baseline = pve(core.party);
-const mirror = pvp(core.party, core.party);
+const baseline = pve(CORE_PARTY);
+const mirror = pvp(CORE_PARTY, CORE_PARTY);
 console.log(`${runs} battles per line. Core party: PvE win ${pct(baseline.winRate)}; PvP mirror blue ${pct(mirror.wins.blue / mirror.runs)}\n`);
 console.log(`${pad('Champion', 18)}${pad('spd', 5)}${pad('in for', 8)}${pad('PvE win', 9)}${pad('vs core', 9)}PvP win vs core team`);
 for (const [id, hero] of Object.entries(heroes)) {
   const slot = STANDS_IN_FOR[id];
-  const party = core.party.map((h) => (h === slot ? id : h));
+  const party = CORE_PARTY.map((h) => (h === slot ? id : h));
   const p = pve(party);
-  const v = pvp(party, core.party);
+  const v = pvp(party, CORE_PARTY);
   const delta = ((p.winRate - baseline.winRate) * 100).toFixed(1);
   console.log(`${pad(hero.name, 18)}${pad(hero.spd, 5)}${pad(slot ?? '?', 8)}${pad(pct(p.winRate), 9)}${pad(`${delta >= 0 ? '+' : ''}${delta}`, 9)}${pct(v.wins.blue / v.runs)}`);
 }
@@ -116,6 +115,6 @@ for (const [id, hero] of Object.entries(heroes)) {
 console.log('\nAll-champion teams');
 for (const team of ROSTER_TEAMS) {
   const p = pve(team);
-  const v = pvp(team, core.party);
+  const v = pvp(team, CORE_PARTY);
   console.log(`  ${team.map((id) => heroes[id].name).join(', ')}: PvE win ${pct(p.winRate)}, PvP win vs core team ${pct(v.wins.blue / v.runs)}`);
 }
