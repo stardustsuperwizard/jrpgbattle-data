@@ -1,6 +1,6 @@
-# mega_fighters-champions
+# jrpgbattle-data
 
-The champion roster for Mega Fighters, content for the [jrpg-battle](https://github.com/stardustsuperwizard/jrpg-battle) engine. It is kept one file per champion and per ability, served as a static API, and built into the content files a deployment drops over the engine's own. The first wave is ten Greek gods; see [ROSTER.md](ROSTER.md).
+The champion roster for jrpgbattle, content for the [jrpg-battle](https://github.com/stardustsuperwizard/jrpg-battle) engine. It is kept one file per champion and per ability, served as a static API, and built into the content files a deployment drops over the engine's own. The first wave is ten Greek gods; see [ROSTER.md](ROSTER.md).
 
 **Private for now.** Both the data and the lore are unlicensed (all rights reserved) until the roster opens. The plan is a Creative Commons licence for the data with the lore held back ([jrpg-battle#248](https://github.com/stardustsuperwizard/jrpg-battle/issues/248)). The static API is public once Pages is on (see [Static API](#static-api)); the lore is never published.
 
@@ -16,7 +16,7 @@ The champion roster for Mega Fighters, content for the [jrpg-battle](https://git
 | `scripts/check.mjs` | `npm run check`: builds, validates the result with the engine and measures each champion. |
 | `tests/` | `npm test`: the build's own tests. |
 | `data/checks.json` | Settings for the check only: the core party it measures against, which core hero each champion stands in for, and sample teams. Not content. |
-| `lore/` | One file per champion: sources and story, with `manifest.json` naming the lore format. Neither built nor published; the Mega Fighters site reads it as the base layer under its own lore, which wins (see `lore/README.md`). |
+| `lore/` | One file per champion: sources and story, with `manifest.json` naming the lore format. Neither built nor published; the jrpgbattle site reads it as the base layer under its own lore, which wins (see `lore/README.md`). |
 
 Champion and ability ids are lowercase letters, digits and `_`, and must not reuse jrpg-battle's (`aria`, `slash`, …): a deployment's overwrite wouldn't mind, but the check measures each champion beside the engine's heroes and refuses a clash.
 
@@ -56,10 +56,10 @@ The API always serves `main`. A deployment that needs a fixed version takes a re
 
 ## Deploying
 
-Each release carries `mega_fighters-content-vX.Y.Z.zip`, which holds `src/content/manifest.json`, `heroes.json` and `abilities.json` at the paths they take in jrpg-battle. Unzip it at the root of a jrpg-battle checkout, before building the site or starting the server:
+Each release carries `jrpgbattle-content-vX.Y.Z.zip`, which holds `src/content/manifest.json`, `heroes.json` and `abilities.json` at the paths they take in jrpg-battle. Unzip it at the root of a jrpg-battle checkout, before building the site or starting the server:
 
 ```sh
-unzip -o mega_fighters-content-v0.4.0.zip -d ../jrpg-battle
+unzip -o jrpgbattle-content-v0.4.0.zip -d ../jrpg-battle
 ```
 
 From a local build, `cp -r dist/src ../jrpg-battle/` does the same. The server, the page and `build:site` then run on the champions with the engine's other content, and content versions read the roster's `version`. Changing the files interrupts online matches running on that deploy.
@@ -84,10 +84,10 @@ It builds the sources, reads the engine's content with jrpg-battle's own reader,
 
 ## Releasing
 
-The site (`stardustsuperwizard/mega_fighters`) pins a release tag of this repository, never a branch.
+The jrpgbattle site (the repository `stardustsuperwizard/mega_fighters` until it is renamed) pins a release tag of this repository, never a branch.
 
 1. Bump `version` in `content/manifest.json` (semver; the `package.json` version follows it) in the PR that changes the roster.
 2. Merge it, with CI green.
 3. On GitHub, **Releases → Draft a new release**: create the tag `vX.Y.Z` (the manifest's version, with a `v`) on `main`, and name the champions added or changed in the notes. Publishing creates the tag.
-4. `.github/workflows/release.yml` then checks that the tag matches the manifest, runs the same tests and check as CI, and attaches `mega_fighters-content-vX.Y.Z.zip`. If it fails, the release has no zip: fix the cause and re-run the workflow.
-5. Move the site's pin in `mega_fighters`'s `versions.json` to the new tag. **That deploy interrupts live online matches**, as any content change does.
+4. `.github/workflows/release.yml` then checks that the tag matches the manifest, runs the same tests and check as CI, and attaches `jrpgbattle-content-vX.Y.Z.zip`. If it fails, the release has no zip: fix the cause and re-run the workflow.
+5. Move the site's pin in its `versions.json` to the new tag. **That deploy interrupts live online matches**, as any content change does.

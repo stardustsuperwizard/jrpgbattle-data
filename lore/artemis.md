@@ -4,4 +4,4 @@
 
 Goddess of the hunt and the moon, twin of Apollo. Her silver arrows never miss.
 
-<!-- The Mega Fighters telling goes here. Draw from the ancient sources, not later adaptations (films, games, comics). -->
+<!-- The jrpgbattle telling goes here. Draw from the ancient sources, not later adaptations (films, games, comics). -->

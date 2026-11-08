@@ -1,9 +1,9 @@
 {
-  "name": "mega_fighters-champions",
+  "name": "jrpgbattle-data",
   "version": "0.4.0",
   "private": true,
   "type": "module",
-  "description": "The Mega Fighters champion roster: content for the jrpg-battle engine, built from one file per entry.",
+  "description": "The jrpgbattle champion roster: content for the jrpg-battle engine, built from one file per entry.",
   "license": "UNLICENSED",
   "scripts": {
     "build": "node scripts/build.mjs",

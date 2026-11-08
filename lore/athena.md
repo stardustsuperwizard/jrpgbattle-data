@@ -4,4 +4,4 @@
 
 Goddess of wisdom and strategic war, born armored from the head of Zeus. She carries the Aegis, and the owl is her sign.
 
-<!-- The Mega Fighters telling goes here. Draw from the ancient sources, not later adaptations (films, games, comics). -->
+<!-- The jrpgbattle telling goes here. Draw from the ancient sources, not later adaptations (films, games, comics). -->
