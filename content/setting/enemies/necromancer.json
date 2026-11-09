@@ -2,6 +2,7 @@
   "id": "necromancer",
   "name": "Necromancer",
   "sprite": "🧙",
+  "reach": "ranged",
   "element": "ice",
   "maxHp": 950,
   "atk": 175,

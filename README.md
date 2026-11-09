@@ -28,17 +28,17 @@ Ids are lowercase letters, digits and `_`. Champion and ability ids must not reu
 
 ### Adding a champion
 
-1. Write `content/setting/heroes/<id>.json` and its three `content/setting/abilities/<id>.json` files.
+1. Write `content/setting/heroes/<id>.json` and its three `content/setting/abilities/<id>.json` files. Every champion says its `reach`, `"melee"` or `"ranged"` (jrpg-battle decision 0052): how it fights, which a site uses to draw it before its art exists. No rule reads it.
 2. Add the id to `content/setting/heroes/index.json` where it belongs in the roster.
 3. Bump `version` in `content/setting/manifest.json`, and `package.json`'s with it.
 4. `npm test && npm run check`, and update ROSTER.md with its numbers.
 
 ### Adding a monster
 
-1. Write `content/setting/enemies/<id>.json` (its `skills` inline, with `weight`s for the default AI, or `"ai": "healer"` or `"charger"` with the tagged skills those need) and add the id to `content/setting/enemies/index.json`.
+1. Write `content/setting/enemies/<id>.json` (its `reach` as a champion's, its `skills` inline, with `weight`s for the default AI, or `"ai": "healer"` or `"charger"` with the tagged skills those need) and add the id to `content/setting/enemies/index.json`.
 2. Put it in the dungeon: a pool in `content/setting/dungeon.json` (`from` a floor), or a stretch's `bosses` (entries `{ from, bosses }` by floor), and its row in DUNGEON.md's map. Practice's fixed `waves.json` is what `npm run check` measures the champions on, so changing it moves every number in ROSTER.md.
 3. Bump the version as for a champion, `npm test && npm run check`, and add it to ROSTER.md's monsters.
-4. The site draws it with an enemy recipe of its own (jrpgbattle-client-premium's `art/enemies/`); until then it shows its `sprite` emoji.
+4. The site draws it with an enemy recipe of its own (jrpgbattle-client-premium's `art/enemies/`); until then it shows the site's default unit, chosen by its `reach`.
 
 ## Building
 

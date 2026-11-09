@@ -3,6 +3,7 @@
   "name": "Hades",
   "role": "Underworld King",
   "sprite": "💀",
+  "reach": "melee",
   "element": "fire",
   "maxHp": 1150,
   "atk": 145,

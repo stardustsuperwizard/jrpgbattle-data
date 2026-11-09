@@ -2,6 +2,7 @@
   "id": "drakon",
   "name": "Drakon",
   "sprite": "🦎",
+  "reach": "melee",
   "element": "fire",
   "maxHp": 1050,
   "atk": 170,

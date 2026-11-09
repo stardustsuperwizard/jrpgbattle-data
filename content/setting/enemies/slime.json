@@ -2,6 +2,7 @@
   "id": "slime",
   "name": "Slime",
   "sprite": "🦠",
+  "reach": "melee",
   "element": "physical",
   "maxHp": 780,
   "atk": 135,

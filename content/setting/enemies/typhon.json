@@ -2,6 +2,7 @@
   "id": "typhon",
   "name": "Typhon",
   "sprite": "🌪️",
+  "reach": "melee",
   "element": "lightning",
   "ai": "charger",
   "chargeEvery": 3,

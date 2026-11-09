@@ -77,7 +77,7 @@ The dungeon's monsters (`content/enemies/`), by the stretch of the Descent they 
 | 🐕 Cerberus | boss, 16–20 | Fire | Ice, lightning | Charger, every 4th action: Triple Inferno on the party, may burn; Hellfire Bite burns |
 | 🌪️ Typhon | boss, 21–25 (the final boss) | Lightning | Ice, physical | Charger, every 3rd action: Wrath of the Titans on the party, may shock; Storm Fist shocks |
 
-The Hydra, Cerberus and Typhon have no art on the site yet: it shows their emoji until jrpgbattle-client-premium has their recipes.
+Every monster here has art on the site. A monster added later shows the site's default unit, chosen by its `reach`, until jrpgbattle-client-premium has its recipe.
 
 ## Needs a mechanic
 

@@ -2,6 +2,7 @@
   "id": "hoplite",
   "name": "Hoplite",
   "sprite": "🛡️",
+  "reach": "melee",
   "element": "physical",
   "maxHp": 1150,
   "atk": 150,

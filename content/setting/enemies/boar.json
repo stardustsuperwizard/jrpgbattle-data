@@ -2,6 +2,7 @@
   "id": "boar",
   "name": "Erymanthian Boar",
   "sprite": "🐗",
+  "reach": "melee",
   "element": "physical",
   "maxHp": 950,
   "atk": 165,

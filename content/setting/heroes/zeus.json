@@ -3,6 +3,7 @@
   "name": "Zeus",
   "role": "Sky King",
   "sprite": "⚡",
+  "reach": "ranged",
   "element": "lightning",
   "maxHp": 1000,
   "atk": 160,

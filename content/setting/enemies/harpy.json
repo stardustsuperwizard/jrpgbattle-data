@@ -2,6 +2,7 @@
   "id": "harpy",
   "name": "Harpy",
   "sprite": "🦅",
+  "reach": "ranged",
   "element": "lightning",
   "maxHp": 860,
   "atk": 155,

@@ -2,6 +2,7 @@
   "id": "wolf",
   "name": "Dire Wolf",
   "sprite": "🐺",
+  "reach": "melee",
   "element": "physical",
   "maxHp": 910,
   "atk": 185,

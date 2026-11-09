@@ -3,6 +3,7 @@
   "name": "Artemis",
   "role": "Huntress",
   "sprite": "🏹",
+  "reach": "ranged",
   "element": "ice",
   "maxHp": 1000,
   "atk": 155,

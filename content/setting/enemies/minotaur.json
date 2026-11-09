@@ -2,6 +2,7 @@
   "id": "minotaur",
   "name": "Minotaur",
   "sprite": "🐂",
+  "reach": "melee",
   "element": "physical",
   "ai": "charger",
   "chargeEvery": 4,

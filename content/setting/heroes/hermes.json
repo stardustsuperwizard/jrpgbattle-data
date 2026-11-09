@@ -3,6 +3,7 @@
   "name": "Hermes",
   "role": "Messenger",
   "sprite": "🪽",
+  "reach": "melee",
   "element": "lightning",
   "maxHp": 980,
   "atk": 135,

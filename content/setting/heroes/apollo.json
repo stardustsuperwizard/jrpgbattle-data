@@ -3,6 +3,7 @@
   "name": "Apollo",
   "role": "Sun Healer",
   "sprite": "☀️",
+  "reach": "melee",
   "element": "fire",
   "maxHp": 1100,
   "atk": 110,

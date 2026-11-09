@@ -3,6 +3,7 @@
   "name": "Aphrodite",
   "role": "Enchantress",
   "sprite": "🌹",
+  "reach": "melee",
   "element": "ice",
   "maxHp": 1050,
   "atk": 110,
