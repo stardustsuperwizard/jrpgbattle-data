@@ -5,7 +5,7 @@
   "cost": 1000,
   "slot": "boots",
   "stats": {
-    "spd": 12
+    "spd": 11
   },
   "components": [
     "wind_boots"

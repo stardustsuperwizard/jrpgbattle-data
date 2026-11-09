@@ -5,7 +5,7 @@
   "cost": 1800,
   "slot": "boots",
   "stats": {
-    "spd": 15
+    "spd": 12
   },
   "components": [
     "courier_sandals"

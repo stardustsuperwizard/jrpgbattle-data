@@ -5,7 +5,7 @@
   "cost": 3000,
   "slot": "boots",
   "stats": {
-    "spd": 18
+    "spd": 13
   },
   "components": [
     "winged_sandals"

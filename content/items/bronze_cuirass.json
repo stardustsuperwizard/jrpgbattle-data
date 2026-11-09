@@ -5,7 +5,7 @@
   "cost": 1000,
   "slot": "armour",
   "stats": {
-    "def": 40
+    "def": 38
   },
   "components": [
     "plate_mail"

@@ -5,7 +5,7 @@
   "cost": 1800,
   "slot": "armour",
   "stats": {
-    "def": 55
+    "def": 46
   },
   "components": [
     "bronze_cuirass"
