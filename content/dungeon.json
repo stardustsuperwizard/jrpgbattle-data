@@ -387,7 +387,7 @@
           "perFloor": 0.2
         }
       ],
-      "sellShare": 0.5,
+      "sellShare": 0.25,
       "stashSize": 12
     }
   },
