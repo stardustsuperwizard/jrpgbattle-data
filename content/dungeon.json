@@ -127,11 +127,11 @@
   },
   "statGrowth": [
     { "from": 1, "base": 1.6, "perFloor": 0 },
-    { "from": 6, "base": 3.1, "perFloor": 0 },
-    { "from": 11, "base": 4.6, "perFloor": 0 },
-    { "from": 16, "base": 6.1, "perFloor": 0 },
-    { "from": 21, "base": 7.6, "perFloor": 0 },
-    { "from": 26, "base": 8.5, "perFloor": 0.3 }
+    { "from": 6, "base": 3.2, "perFloor": 0 },
+    { "from": 11, "base": 4.8, "perFloor": 0 },
+    { "from": 16, "base": 6.4, "perFloor": 0 },
+    { "from": 21, "base": 8.2, "perFloor": 0 },
+    { "from": 26, "base": 8.8, "perFloor": 0.3 }
   ],
   "rewardGrowth": [
     { "from": 1, "base": 1.2, "perFloor": 0 },
