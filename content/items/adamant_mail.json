@@ -5,7 +5,10 @@
   "cost": 3000,
   "slot": "armour",
   "stats": {
-    "def": 55
+    "def": 30
+  },
+  "statsPct": {
+    "def": 0.1
   },
   "components": [
     "hoplite_panoply"

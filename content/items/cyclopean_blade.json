@@ -5,7 +5,10 @@
   "cost": 3000,
   "slot": "weapon",
   "stats": {
-    "atk": 48
+    "atk": 25
+  },
+  "statsPct": {
+    "atk": 0.1
   },
   "components": [
     "adamant_harpe"

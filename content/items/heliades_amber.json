@@ -5,7 +5,10 @@
   "cost": 1800,
   "slot": "charm",
   "stats": {
-    "maxHp": 600
+    "maxHp": 400
+  },
+  "statsPct": {
+    "maxHp": 0.07
   },
   "components": [
     "asclepian_amulet"
