@@ -2,6 +2,7 @@
   "id": "golem",
   "name": "Ancient Golem",
   "sprite": "🗿",
+  "reach": "melee",
   "element": "physical",
   "ai": "charger",
   "chargeEvery": 3,

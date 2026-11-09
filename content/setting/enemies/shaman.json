@@ -2,6 +2,7 @@
   "id": "shaman",
   "name": "Goblin Shaman",
   "sprite": "🧌",
+  "reach": "ranged",
   "element": "lightning",
   "ai": "healer",
   "maxHp": 1080,

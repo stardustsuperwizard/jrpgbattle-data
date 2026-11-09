@@ -2,6 +2,7 @@
   "id": "dracaena",
   "name": "Dracaena",
   "sprite": "🐍",
+  "reach": "melee",
   "element": "physical",
   "maxHp": 900,
   "atk": 165,

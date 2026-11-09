@@ -2,6 +2,7 @@
   "id": "phoenix",
   "name": "Phoenix",
   "sprite": "🔥",
+  "reach": "ranged",
   "element": "fire",
   "ai": "healer",
   "maxHp": 960,

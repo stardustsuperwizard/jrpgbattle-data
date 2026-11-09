@@ -2,6 +2,7 @@
   "id": "cerberus",
   "name": "Cerberus",
   "sprite": "🐕",
+  "reach": "melee",
   "element": "fire",
   "ai": "charger",
   "chargeEvery": 4,

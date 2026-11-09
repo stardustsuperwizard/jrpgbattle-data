@@ -2,6 +2,7 @@
   "id": "goblin",
   "name": "Goblin",
   "sprite": "👺",
+  "reach": "melee",
   "element": "physical",
   "maxHp": 980,
   "atk": 170,

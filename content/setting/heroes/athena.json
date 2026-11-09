@@ -3,6 +3,7 @@
   "name": "Athena",
   "role": "Strategist",
   "sprite": "🦉",
+  "reach": "melee",
   "element": "physical",
   "maxHp": 1450,
   "atk": 115,

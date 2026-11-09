@@ -3,6 +3,7 @@
   "name": "Ares",
   "role": "War God",
   "sprite": "🗡️",
+  "reach": "melee",
   "element": "physical",
   "maxHp": 1400,
   "atk": 140,

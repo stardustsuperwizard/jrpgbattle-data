@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { KINDS, build, buildContent, render } from '../scripts/build.mjs';
 
-const manifest = { formatVersion: '2026-11-09', name: 'Test', version: '1.0.0', licences: { data: 'UNLICENSED', lore: 'UNLICENSED' } };
+const manifest = { formatVersion: '2026-11-10', name: 'Test', version: '1.0.0', licences: { data: 'UNLICENSED', lore: 'UNLICENSED' } };
 const hero = (id, abilities) => ({ id, name: id, abilities });
 const ability = (id) => ({ id, name: id, type: 'basic', target: 'enemy', effects: [] });
 const enemy = (id) => ({ id, name: id, skills: [] });
@@ -100,7 +100,7 @@ test('the build writes every drop-in setting file and the static API', (t) => {
   assert.deepEqual(read('src/content/setting/manifest.json'), manifest);
   assert.deepEqual(Object.keys(read('src/content/setting/heroes.json')), ['zed', 'amy']);
   assert.deepEqual(read('api/index.json'), {
-    name: 'Test', version: '1.0.0', formatVersion: '2026-11-09',
+    name: 'Test', version: '1.0.0', formatVersion: '2026-11-10',
     heroes: ['zed', 'amy'], abilities: ['jab', 'kick', 'aim'], enemies: ['rat'], items: [],
     content: KINDS.map(({ name }) => `content/${name}.json`),
   });

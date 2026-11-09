@@ -3,6 +3,7 @@
   "name": "Hephaestus",
   "role": "Smith",
   "sprite": "🔨",
+  "reach": "melee",
   "element": "fire",
   "maxHp": 1550,
   "atk": 130,

@@ -2,6 +2,7 @@
   "id": "spartoi",
   "name": "Spartoi",
   "sprite": "💀",
+  "reach": "melee",
   "element": "physical",
   "maxHp": 1050,
   "atk": 145,

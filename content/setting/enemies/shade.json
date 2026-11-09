@@ -2,6 +2,7 @@
   "id": "shade",
   "name": "Shade",
   "sprite": "👻",
+  "reach": "melee",
   "element": "ice",
   "maxHp": 880,
   "atk": 165,

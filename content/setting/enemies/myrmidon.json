@@ -2,6 +2,7 @@
   "id": "myrmidon",
   "name": "Myrmidon",
   "sprite": "⚔️",
+  "reach": "melee",
   "element": "physical",
   "maxHp": 1000,
   "atk": 160,

@@ -3,6 +3,7 @@
   "name": "Poseidon",
   "role": "Sea King",
   "sprite": "🔱",
+  "reach": "melee",
   "element": "ice",
   "maxHp": 1150,
   "atk": 145,
