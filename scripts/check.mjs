@@ -2,13 +2,14 @@
 //   node scripts/check.mjs [runs]                 (default 300 battles per line)
 //   JRPG_BATTLE=/path/to/jrpg-battle node scripts/check.mjs
 //
-// The sources in content/ build (scripts/build.mjs) into every one of
-// jrpg-battle's content files (its decision 0030), which a deployment drops
-// over its src/content/ whole. The check builds them, puts them where a
-// deployment would and runs jrpg-battle's boundary check and validation, so
-// files that pass here are files the server and the page accept. To measure
-// each champion against the engine's own heroes, it adds those heroes and
-// their abilities beside the champions, on this repository's rules and
+// The sources in content/setting/ build (scripts/build.mjs) into jrpg-battle's
+// setting files (its decision 0050), which a deployment drops over its
+// src/content/setting/ whole; the rules stay the engine's core, with this
+// setting's house rules over them. The check builds the files, puts them
+// where a deployment would and runs jrpg-battle's boundary check, assembly
+// and validation, so files that pass here are files the server and the page
+// accept. To measure each champion against the engine's own heroes, it adds
+// those heroes and their abilities beside the champions, on this setting's
 // monsters; a deployment has the champions alone.
 //
 // It also writes dist/tuning-import.json, the roster as tuning-panel settings,
@@ -25,7 +26,7 @@ const runs = Number(process.argv[2] ?? 300);
 
 const read = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const load = (path) => import(pathToFileURL(join(ENGINE, path)).href);
-const { buildConfig, validateConfig, createMatch, CONTENT_FILES } = await load('src/engine/content.js');
+const { assembleContent, buildConfig, validateConfig, createMatch, CONTENT_LAYOUT } = await load('src/engine/content.js');
 const { simulate, simulatePvp } = await load('src/engine/simulate.js');
 const { readContent } = await load('scripts/content.js');
 const { checkBoundaries } = await load('scripts/check-boundaries.js');
@@ -41,34 +42,39 @@ if (typeof ENGINE_TAG !== 'string' || !/^v\d+\.\d+\.\d+$/.test(ENGINE_TAG)) {
 }
 const { version: ENGINE_VERSION } = read(join(ENGINE, 'package.json'));
 
-// The files a release drops over the engine's: exactly the engine's content files.
-const { content: roster } = buildContent(ROOT);
-const files = Object.keys(roster);
-if (JSON.stringify([...files].sort()) !== JSON.stringify([...CONTENT_FILES].sort())) {
-  throw new Error(`The build makes ${files.join(', ')}; jrpg-battle's content files are ${CONTENT_FILES.join(', ')}.`);
+// The files a release drops over the engine's setting: exactly the engine's setting files.
+const { content: setting } = buildContent(ROOT);
+const files = Object.keys(setting);
+if (JSON.stringify([...files].sort()) !== JSON.stringify([...CONTENT_LAYOUT.setting].sort())) {
+  throw new Error(`The build makes ${files.join(', ')}; jrpg-battle's setting files are ${CONTENT_LAYOUT.setting.join(', ')}.`);
 }
 
 // Where a deployment puts them: they must pass jrpg-battle's check:boundaries.
-const violations = checkBoundaries(files.map((name) => ({ path: `src/content/${name}.json`, source: render(roster[name]) })));
+const violations = checkBoundaries(files.map((name) => ({ path: `src/content/setting/${name}.json`, source: render(setting[name]) })));
 if (violations.length) throw new Error(violations.map((v) => `${v.file}: ${v.reason}`).join('\n'));
 
-// As a deployment loads them: these files alone, replacing all of the engine's.
+// As a deployment loads them: the engine's core rules, this setting over them, replacing the engine's own world.
+const engine = readContent(join(ENGINE, 'src', 'content'));
+const roster = assembleContent({ core: engine.core, setting });
 validateConfig(buildConfig(roster));
 
 // The engine's heroes beside the champions, for measuring each against the hero it stands in for.
-const engine = readContent(join(ENGINE, 'src', 'content'));
+const defaults = assembleContent(engine);
 for (const kind of ['heroes', 'abilities']) {
-  const clash = Object.keys(roster[kind]).filter((id) => Object.hasOwn(engine[kind], id));
+  const clash = Object.keys(roster[kind]).filter((id) => Object.hasOwn(defaults[kind], id));
   if (clash.length) throw new Error(`The roster's ${kind} reuse jrpg-battle's ids ${clash.join(', ')}, so a champion couldn't be measured beside the hero it stands in for.`);
 }
 const config = validateConfig(buildConfig({
   ...roster,
-  heroes: { ...engine.heroes, ...roster.heroes },
-  abilities: { ...engine.abilities, ...roster.abilities },
+  heroes: { ...defaults.heroes, ...roster.heroes },
+  abilities: { ...defaults.abilities, ...roster.abilities },
 }));
-const { manifest, heroes, abilities } = roster;
-// This repository owns its copies of the engine's other files now; say which have moved apart.
-const drifted = files.filter((name) => !['manifest', 'heroes', 'abilities'].includes(name) && JSON.stringify(roster[name]) !== JSON.stringify(engine[name]));
+const { manifest, heroes, abilities } = setting;
+// What this setting changes in the core rules: each house rule beside the core's own value.
+const unruled = assembleContent({ core: engine.core, setting: { ...setting, 'house-rules': {} } });
+const leaves = (value, prefix = '') => (value && typeof value === 'object' && !Array.isArray(value) ? Object.entries(value).flatMap(([k, v]) => leaves(v, prefix ? `${prefix}.${k}` : k)) : [prefix]);
+const at = (obj, path) => path.split('.').reduce((o, k) => o?.[k], obj);
+const houseRules = leaves(setting['house-rules']).filter(Boolean).map((path) => `${path} ${JSON.stringify(at(roster, path))} (core ${JSON.stringify(at(unruled, path))})`);
 
 const tuning = { heroes, abilities };
 mkdirSync(join(ROOT, 'dist'), { recursive: true });
@@ -96,7 +102,7 @@ const { coreParty: CORE_PARTY, standsInFor: STANDS_IN_FOR, teams: ROSTER_TEAMS }
 
 console.log(`${manifest.name} ${manifest.version}: ${Object.keys(heroes).length} champions, ${Object.keys(abilities).length} abilities; loads as ${config.contentVersion}`);
 console.log(`Engine: ${ENGINE} (${ENGINE_VERSION}; CI checks against ${ENGINE_TAG})`);
-console.log(drifted.length ? `Differs from the engine's own content: ${drifted.join(', ')}` : "The rules, statuses, elements, monsters, items, waves, modes and dungeon match the engine's own.");
+console.log(houseRules.length ? `House rules over the engine's core: ${houseRules.join('; ')}` : 'No house rules: the engine\'s core rules as they are.');
 console.log(tiedSpeeds.length ? `Shared speeds: ${tiedSpeeds.map(([spd, names]) => `${spd} (${names.join(', ')})`).join('; ')}` : "Every hero, the engine's and the roster's, has its own speed.");
 console.log(`Wrote dist/tuning-import.json\n`);
 

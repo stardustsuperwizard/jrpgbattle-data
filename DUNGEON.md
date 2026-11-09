@@ -1,6 +1,6 @@
 # The Descent
 
-The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/dungeon.json`. It needs jrpg-battle 0.10.0 or later (tag `v0.10.1`; percentage bonuses on gear; strength by stretch came in 0.9.0 and the shop's stock by floor in 0.8.0). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
+The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/setting/dungeon.json`: what is in it. How a campaign works (floors, stretches, wipes, the town, the enchanter, how loot rolls) is the engine's `core/campaign.json`, and the two core numbers this world changes are in `content/setting/house-rules.json` (jrpg-battle decision 0050). It needs jrpg-battle 0.10.0 or later (tag `v0.10.1`; percentage bonuses on gear; strength by stretch came in 0.9.0 and the shop's stock by floor in 0.8.0). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
 
 ## The map
 
@@ -31,7 +31,7 @@ Each stretch keeps one healer among its monsters (the Shaman, then the Phoenix) 
   | 26 on | The Endless Abyss | 8.8, then 0.3 more a floor | 3.5, then 0.1 more a floor |
 
   Before (roster 0.8.0 and earlier) monsters grew 0.3 of their content a floor from floor 1, so floor 25 was 8.2 and every floor a little harder than the last; Tartarus keeps that 8.2 for its whole stretch.
-- **Level cap:** heroes now go up to level 25 (`maxLevel` in `rules.json`; it was 10).
+- **Level cap:** heroes now go up to level 25 (the house rule `rules.maxLevel` in `house-rules.json`; the engine's core says 10).
 - **Waves:** the waves the party chooses set each floor's strength and pay. Three is the content's own; one is harder and pays more, five easier and paying less (`waveScaling`, jrpg-battle decision 0033).
 - **Bosses:** a boss comes at 45% of its content stats (`bossShare`), times its stretch's strength.
 

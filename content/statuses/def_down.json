@@ -1,8 +1,0 @@
-{
-  "name": "DEF Down",
-  "kind": "debuff",
-  "icon": "🛡️",
-  "mods": {
-    "defPct": -0.35
-  }
-}

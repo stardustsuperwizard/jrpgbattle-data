@@ -1,7 +1,0 @@
-{
-  "name": "Charging",
-  "kind": "buff",
-  "icon": "⏳",
-  "removedOnBreak": true,
-  "untilRemoved": true
-}

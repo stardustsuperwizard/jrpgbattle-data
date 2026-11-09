@@ -1,9 +1,0 @@
-{
-  "name": "Physical",
-  "icon": "🗡️",
-  "color": "#c9c9d4",
-  "break": {
-    "status": "bleed",
-    "duration": 2
-  }
-}

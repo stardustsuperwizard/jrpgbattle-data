@@ -3,19 +3,20 @@
 // checkout, so the release workflow can run it on its own.
 //   node scripts/build.mjs [outDir]           (default dist/)
 //
-// Sources, in content/: every jrpg-battle content file (its decision 0030),
-// the ones keyed by id broken out one file per entry.
-//   manifest.json, rules.json, waves.json, modes.json, dungeon.json
+// Sources, in content/setting/: jrpg-battle's setting files (its decision
+// 0050: the world, played by the engine's own core rules), the ones keyed by
+// id broken out one file per entry.
+//   manifest.json, waves.json, dungeon.json, house-rules.json
 //                            single files, built as they are
 //   <kind>/index.json        the ids in order, for heroes (the order the pick
-//                            screen lists them), statuses, elements, enemies
-//                            and items
+//                            screen lists them), enemies and items
 //   <kind>/<id>.json         one entry each; abilities have no index, and
 //                            come in the order the heroes use them
 //
 // Output, in outDir:
-//   src/content/<name>.json  jrpg-battle's content files: dropped over a
-//                            jrpg-battle checkout, they replace all of its own
+//   src/content/setting/<name>.json  jrpg-battle's setting files: dropped over
+//                            a jrpg-battle checkout's src/content/setting/,
+//                            they replace its default world whole
 //   api/                     the static API: the sources entry by entry, an
 //                            index per kind, and the combined files under
 //                            api/content/
@@ -26,23 +27,23 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ID_RE = /^[a-z0-9][a-z0-9_]*$/;
 
-// The content files in the order jrpg-battle lists them (CONTENT_FILES), and
-// how each is kept here: `single` as one file; otherwise one file per entry,
-// `id` when an entry names its own id, `order` from the kind's index.json or,
-// for abilities, from the heroes that use them.
+// The setting files in the order jrpg-battle lists them (CONTENT_LAYOUT.setting),
+// and how each is kept here: `single` as one file; otherwise one file per
+// entry, `id` when an entry names its own id, `order` from the kind's
+// index.json or, for abilities, from the heroes that use them.
 export const KINDS = [
   { name: 'manifest', single: true },
-  { name: 'rules', single: true },
-  { name: 'statuses', order: 'index' },
-  { name: 'elements', order: 'index' },
   { name: 'heroes', order: 'index', id: true },
   { name: 'abilities', order: 'use', id: true },
   { name: 'enemies', order: 'index', id: true },
   { name: 'items', order: 'index', id: true },
   { name: 'waves', single: true },
-  { name: 'modes', single: true },
   { name: 'dungeon', single: true },
+  { name: 'house-rules', single: true },
 ];
+
+/** Where the sources live, under the repository root. */
+export const SOURCE_DIR = 'content/setting';
 
 // The repository's JSON layout: two-space indent and a final newline, so built files diff cleanly.
 export const render = (value) => `${JSON.stringify(value, null, 2)}\n`;
@@ -59,9 +60,9 @@ function readJson(path, label) {
 function readEntries(dir, kind, problems) {
   const entries = {};
   for (const name of readdirSync(dir).filter((n) => n !== 'index.json').sort()) {
-    const where = `content/${kind.name}/${name}`;
+    const where = `${SOURCE_DIR}/${kind.name}/${name}`;
     if (!name.endsWith('.json')) {
-      problems.push(`${where}: only <id>.json files belong in content/${kind.name}/.`);
+      problems.push(`${where}: only <id>.json files belong in ${SOURCE_DIR}/${kind.name}/.`);
       continue;
     }
     const id = name.slice(0, -'.json'.length);
@@ -75,7 +76,7 @@ function readEntries(dir, kind, problems) {
 
 // A kind's entries in its index's order, every file listed once and every listed id a file.
 function indexed(content, kind, files, problems) {
-  const where = `content/${kind.name}/index.json`;
+  const where = `${SOURCE_DIR}/${kind.name}/index.json`;
   if (!existsSync(join(content, kind.name, 'index.json'))) {
     problems.push(`${where} is missing; it lists the ${kind.name} in order.`);
     return {};
@@ -88,17 +89,17 @@ function indexed(content, kind, files, problems) {
   const listed = new Set();
   for (const id of order) {
     if (listed.has(id)) problems.push(`${where} lists "${id}" twice.`);
-    else if (!files[id]) problems.push(`${where} lists "${id}", but content/${kind.name}/${id}.json is missing.`);
+    else if (!files[id]) problems.push(`${where} lists "${id}", but ${SOURCE_DIR}/${kind.name}/${id}.json is missing.`);
     listed.add(id);
   }
   for (const id of Object.keys(files)) {
-    if (!listed.has(id)) problems.push(`content/${kind.name}/${id}.json isn't listed in ${where}, so it has no place in the order.`);
+    if (!listed.has(id)) problems.push(`${SOURCE_DIR}/${kind.name}/${id}.json isn't listed in ${where}, so it has no place in the order.`);
   }
   return Object.fromEntries(order.filter((id) => files[id]).map((id) => [id, files[id]]));
 }
 
 /**
- * Every content file, built from the sources: single files as they are,
+ * Every setting file, built from the sources: single files as they are,
  * indexed kinds in index order, abilities in the order the heroes use them
  * (then any no hero uses, by id). Throws, listing every problem, when the
  * sources don't fit together; the game rules themselves are jrpg-battle's to
@@ -107,19 +108,19 @@ function indexed(content, kind, files, problems) {
  * @returns {{ content: Record<string, unknown>, unused: string[] }}
  */
 export function buildContent(root = ROOT) {
-  const dir = join(root, 'content');
+  const dir = join(root, SOURCE_DIR);
   const problems = [];
   const content = {};
   const abilityFiles = {};
   for (const kind of KINDS) {
     if (kind.single) {
       const path = join(dir, `${kind.name}.json`);
-      if (!existsSync(path)) problems.push(`content/${kind.name}.json is missing.`);
-      else content[kind.name] = readJson(path, `content/${kind.name}.json`);
+      if (!existsSync(path)) problems.push(`${SOURCE_DIR}/${kind.name}.json is missing.`);
+      else content[kind.name] = readJson(path, `${SOURCE_DIR}/${kind.name}.json`);
       continue;
     }
     if (!existsSync(join(dir, kind.name))) {
-      problems.push(`content/${kind.name}/ is missing.`);
+      problems.push(`${SOURCE_DIR}/${kind.name}/ is missing.`);
       continue;
     }
     const files = readEntries(join(dir, kind.name), kind, problems);
@@ -130,23 +131,23 @@ export function buildContent(root = ROOT) {
   const used = [];
   for (const [id, hero] of Object.entries(content.heroes ?? {})) {
     if (!Array.isArray(hero.abilities)) {
-      problems.push(`content/heroes/${id}.json needs "abilities", a list of ability ids.`);
+      problems.push(`${SOURCE_DIR}/heroes/${id}.json needs "abilities", a list of ability ids.`);
       continue;
     }
     for (const abilityId of hero.abilities) {
-      if (!abilityFiles[abilityId]) problems.push(`content/heroes/${id}.json uses ability "${abilityId}", but content/abilities/${abilityId}.json is missing.`);
+      if (!abilityFiles[abilityId]) problems.push(`${SOURCE_DIR}/heroes/${id}.json uses ability "${abilityId}", but ${SOURCE_DIR}/abilities/${abilityId}.json is missing.`);
       else if (!used.includes(abilityId)) used.push(abilityId);
     }
   }
   if (problems.length) throw new Error(problems.join('\n'));
   const unused = Object.keys(abilityFiles).filter((id) => !used.includes(id)).sort();
   content.abilities = Object.fromEntries([...used, ...unused].map((id) => [id, abilityFiles[id]]));
-  // In KINDS order, as the engine lists its files.
+  // In KINDS order, as the engine lists its setting files.
   return { content: Object.fromEntries(KINDS.map(({ name }) => [name, content[name]])), unused };
 }
 
 /**
- * Writes the drop-in content files and the static API under `out`, replacing
+ * Writes the drop-in setting files and the static API under `out`, replacing
  * what a previous build left there.
  * @param {string} out
  * @param {string} [root]
@@ -160,7 +161,7 @@ export function build(out, root = ROOT) {
     writeFileSync(join(out, path), typeof value === 'string' ? value : render(value));
   };
 
-  for (const [name, value] of Object.entries(content)) write(`src/content/${name}.json`, value);
+  for (const [name, value] of Object.entries(content)) write(`src/content/setting/${name}.json`, value);
 
   // The API: a root index to discover the rest, then each kind entry by entry.
   const entryKinds = KINDS.filter((kind) => !kind.single).map((kind) => kind.name);
@@ -190,6 +191,6 @@ export function build(out, root = ROOT) {
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const out = resolve(process.argv[2] ?? join(ROOT, 'dist'));
   const { counts, unused } = build(out);
-  console.log(`Built ${Object.entries(counts).map(([name, n]) => `${n} ${name}`).join(', ')} into ${out}/src/content/ and ${out}/api/.`);
+  console.log(`Built ${Object.entries(counts).map(([name, n]) => `${n} ${name}`).join(', ')} into ${out}/src/content/setting/ and ${out}/api/.`);
   if (unused.length) console.log(`No hero uses ${unused.join(', ')}; built after the rest.`);
 }

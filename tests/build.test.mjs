@@ -8,14 +8,13 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { KINDS, build, buildContent, render } from '../scripts/build.mjs';
 
-const manifest = { formatVersion: '2026-11-08', name: 'Test', version: '1.0.0', licences: { data: 'UNLICENSED', lore: 'UNLICENSED' } };
+const manifest = { formatVersion: '2026-11-09', name: 'Test', version: '1.0.0', licences: { data: 'UNLICENSED', lore: 'UNLICENSED' } };
 const hero = (id, abilities) => ({ id, name: id, abilities });
 const ability = (id) => ({ id, name: id, type: 'basic', target: 'enemy', effects: [] });
-const status = (name) => ({ name, kind: 'buff', icon: '✨' });
 const enemy = (id) => ({ id, name: id, skills: [] });
 const ALL_FILES = KINDS.map(({ name }) => `${name}.json`).sort();
 
-// A repository root holding content/ as given; returns it, removed after the test.
+// A repository root holding content/setting/ as given; returns it, removed after the test.
 function sources(t, { order = ['zed', 'amy'], heroes = { zed: ['jab', 'kick'], amy: ['kick', 'aim'] }, abilities = ['aim', 'jab', 'kick'], extra = () => {} } = {}) {
   const root = mkdtempSync(join(tmpdir(), 'content-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -23,32 +22,26 @@ function sources(t, { order = ['zed', 'amy'], heroes = { zed: ['jab', 'kick'], a
     mkdirSync(join(root, path, '..'), { recursive: true });
     writeFileSync(join(root, path), typeof value === 'string' ? value : render(value));
   };
-  put('content/manifest.json', manifest);
-  put('content/rules.json', { maxSp: 5 });
-  put('content/waves.json', [['rat']]);
-  put('content/modes.json', { pve: { teams: [] } });
-  put('content/dungeon.json', null);
-  put('content/statuses/index.json', ['glow', 'calm']);
-  put('content/statuses/calm.json', status('Calm'));
-  put('content/statuses/glow.json', status('Glow'));
-  put('content/elements/index.json', ['wind']);
-  put('content/elements/wind.json', { name: 'Wind', icon: '🌬️', color: '#fff', break: { status: 'calm', duration: 1 } });
-  put('content/enemies/index.json', ['rat']);
-  put('content/enemies/rat.json', enemy('rat'));
-  put('content/items/index.json', []);
-  mkdirSync(join(root, 'content/items'), { recursive: true });
-  put('content/heroes/index.json', order);
-  for (const [id, list] of Object.entries(heroes)) put(`content/heroes/${id}.json`, hero(id, list));
-  for (const id of abilities) put(`content/abilities/${id}.json`, ability(id));
+  put('content/setting/manifest.json', manifest);
+  put('content/setting/waves.json', [['rat']]);
+  put('content/setting/dungeon.json', null);
+  put('content/setting/house-rules.json', { rules: { maxLevel: 25 } });
+  put('content/setting/enemies/index.json', ['rat']);
+  put('content/setting/enemies/rat.json', enemy('rat'));
+  put('content/setting/items/index.json', []);
+  mkdirSync(join(root, 'content/setting/items'), { recursive: true });
+  put('content/setting/heroes/index.json', order);
+  for (const [id, list] of Object.entries(heroes)) put(`content/setting/heroes/${id}.json`, hero(id, list));
+  for (const id of abilities) put(`content/setting/abilities/${id}.json`, ability(id));
   extra(put);
   return root;
 }
 
 test('every kind comes in its index order, and abilities in the order the heroes use them', (t) => {
   const { content, unused } = buildContent(sources(t));
-  assert.deepEqual(Object.keys(content), KINDS.map(({ name }) => name), 'every content file, in the engine\'s order');
+  assert.deepEqual(Object.keys(content), KINDS.map(({ name }) => name), 'every setting file, in the engine\'s order');
   assert.deepEqual(Object.keys(content.heroes), ['zed', 'amy']);
-  assert.deepEqual(Object.keys(content.statuses), ['glow', 'calm']);
+  assert.deepEqual(content['house-rules'], { rules: { maxLevel: 25 } });
   assert.deepEqual(Object.keys(content.abilities), ['jab', 'kick', 'aim']);
   assert.deepEqual(content.items, {});
   assert.equal(content.dungeon, null);
@@ -71,16 +64,16 @@ test('sources that do not fit together are refused, every problem named', (t) =>
       return err.message;
     }
   };
-  assert.match(problems({ order: ['zed', 'amy', 'bob'] }), /content\/heroes\/index\.json lists "bob", but content\/heroes\/bob\.json is missing\./);
-  assert.match(problems({ order: ['zed'] }), /content\/heroes\/amy\.json isn't listed in content\/heroes\/index\.json/);
+  assert.match(problems({ order: ['zed', 'amy', 'bob'] }), /content\/setting\/heroes\/index\.json lists "bob", but content\/setting\/heroes\/bob\.json is missing\./);
+  assert.match(problems({ order: ['zed'] }), /content\/setting\/heroes\/amy\.json isn't listed in content\/setting\/heroes\/index\.json/);
   assert.match(problems({ order: ['zed', 'amy', 'zed'] }), /lists "zed" twice/);
-  assert.match(problems({ abilities: ['jab', 'kick'] }), /content\/heroes\/amy\.json uses ability "aim", but content\/abilities\/aim\.json is missing\./);
-  assert.match(problems({ extra: (put) => put('content/abilities/jab.json', ability('jabs')) }), /content\/abilities\/jab\.json says id "jabs"; its file name says "jab"\./);
-  assert.match(problems({ extra: (put) => put('content/enemies/rat.json', enemy('mouse')) }), /content\/enemies\/rat\.json says id "mouse"/);
-  assert.match(problems({ extra: (put) => put('content/heroes/notes.md', '# notes') }), /content\/heroes\/notes\.md: only <id>\.json files belong/);
-  assert.match(problems({ extra: (put) => put('content/abilities/aim.json', '{ "id": ') }), /content\/abilities\/aim\.json: /);
-  assert.match(problems({ extra: (put) => put('content/statuses/index.json', ['glow']) }), /content\/statuses\/calm\.json isn't listed in content\/statuses\/index\.json/);
-  assert.match(problems({ extra: (put) => put('content/elements/index.json', ['wind', 'fire']) }), /content\/elements\/index\.json lists "fire", but content\/elements\/fire\.json is missing\./);
+  assert.match(problems({ abilities: ['jab', 'kick'] }), /content\/setting\/heroes\/amy\.json uses ability "aim", but content\/setting\/abilities\/aim\.json is missing\./);
+  assert.match(problems({ extra: (put) => put('content/setting/abilities/jab.json', ability('jabs')) }), /content\/setting\/abilities\/jab\.json says id "jabs"; its file name says "jab"\./);
+  assert.match(problems({ extra: (put) => put('content/setting/enemies/rat.json', enemy('mouse')) }), /content\/setting\/enemies\/rat\.json says id "mouse"/);
+  assert.match(problems({ extra: (put) => put('content/setting/heroes/notes.md', '# notes') }), /content\/setting\/heroes\/notes\.md: only <id>\.json files belong/);
+  assert.match(problems({ extra: (put) => put('content/setting/abilities/aim.json', '{ "id": ') }), /content\/setting\/abilities\/aim\.json: /);
+  assert.match(problems({ extra: (put) => put('content/setting/enemies/mouse.json', enemy('mouse')) }), /content\/setting\/enemies\/mouse\.json isn't listed in content\/setting\/enemies\/index\.json/);
+  assert.match(problems({ extra: (put) => put('content/setting/enemies/index.json', ['rat', 'bat']) }), /content\/setting\/enemies\/index\.json lists "bat", but content\/setting\/enemies\/bat\.json is missing\./);
   const several = problems({ order: ['zed', 'amy', 'bob'], abilities: ['jab', 'kick'] });
   assert.match(several, /lists "bob"/);
   assert.match(several, /uses ability "aim"/);
@@ -88,43 +81,43 @@ test('sources that do not fit together are refused, every problem named', (t) =>
 
 test('a missing single file or kind folder is named', (t) => {
   const root = sources(t);
-  rmSync(join(root, 'content/rules.json'));
-  rmSync(join(root, 'content/items'), { recursive: true });
+  rmSync(join(root, 'content/setting/house-rules.json'));
+  rmSync(join(root, 'content/setting/items'), { recursive: true });
   assert.throws(() => buildContent(root), (err) => {
-    assert.match(err.message, /content\/rules\.json is missing\./);
-    assert.match(err.message, /content\/items\/ is missing\./);
+    assert.match(err.message, /content\/setting\/house-rules\.json is missing\./);
+    assert.match(err.message, /content\/setting\/items\/ is missing\./);
     return true;
   });
 });
 
-test('the build writes every drop-in content file and the static API', (t) => {
+test('the build writes every drop-in setting file and the static API', (t) => {
   const root = sources(t);
   const out = join(root, 'dist');
   build(out, root);
   const read = (path) => JSON.parse(readFileSync(join(out, path), 'utf8'));
-  assert.deepEqual(readdirSync(join(out, 'src', 'content')).sort(), ALL_FILES);
-  assert.deepEqual(read('src/content/manifest.json'), manifest);
-  assert.deepEqual(Object.keys(read('src/content/heroes.json')), ['zed', 'amy']);
+  assert.deepEqual(readdirSync(join(out, 'src', 'content')), ['setting'], 'only the setting: the core rules are the engine\'s');
+  assert.deepEqual(readdirSync(join(out, 'src', 'content', 'setting')).sort(), ALL_FILES);
+  assert.deepEqual(read('src/content/setting/manifest.json'), manifest);
+  assert.deepEqual(Object.keys(read('src/content/setting/heroes.json')), ['zed', 'amy']);
   assert.deepEqual(read('api/index.json'), {
-    name: 'Test', version: '1.0.0', formatVersion: '2026-11-08',
-    statuses: ['glow', 'calm'], elements: ['wind'], heroes: ['zed', 'amy'], abilities: ['jab', 'kick', 'aim'], enemies: ['rat'], items: [],
+    name: 'Test', version: '1.0.0', formatVersion: '2026-11-09',
+    heroes: ['zed', 'amy'], abilities: ['jab', 'kick', 'aim'], enemies: ['rat'], items: [],
     content: KINDS.map(({ name }) => `content/${name}.json`),
   });
   assert.deepEqual(read('api/heroes/index.json'), ['zed', 'amy']);
   assert.deepEqual(read('api/heroes/amy.json'), hero('amy', ['kick', 'aim']));
   assert.deepEqual(read('api/abilities/index.json'), ['jab', 'kick', 'aim']);
-  assert.deepEqual(read('api/statuses/calm.json'), status('Calm'));
-  assert.deepEqual(read('api/rules.json'), { maxSp: 5 });
+  assert.deepEqual(read('api/house-rules.json'), { rules: { maxLevel: 25 } });
   assert.deepEqual(readdirSync(join(out, 'api', 'content')).sort(), ALL_FILES);
-  assert.equal(readFileSync(join(out, 'api/content/heroes.json'), 'utf8'), readFileSync(join(out, 'src/content/heroes.json'), 'utf8'));
+  assert.equal(readFileSync(join(out, 'api/content/heroes.json'), 'utf8'), readFileSync(join(out, 'src/content/setting/heroes.json'), 'utf8'));
   // A second build replaces the first: a hero removed from the sources leaves no file behind.
-  rmSync(join(root, 'content/heroes/amy.json'));
-  writeFileSync(join(root, 'content/heroes/index.json'), render(['zed']));
+  rmSync(join(root, 'content/setting/heroes/amy.json'));
+  writeFileSync(join(root, 'content/setting/heroes/index.json'), render(['zed']));
   build(out, root);
   assert.deepEqual(readdirSync(join(out, 'api', 'heroes')).sort(), ['index.json', 'zed.json']);
 });
 
-test("the repository's own sources build into every content file", () => {
+test("the repository's own sources build into every setting file", () => {
   const { content, unused } = buildContent();
   assert.deepEqual(Object.keys(content), KINDS.map(({ name }) => name));
   assert.ok(Object.keys(content.heroes).length > 0);
