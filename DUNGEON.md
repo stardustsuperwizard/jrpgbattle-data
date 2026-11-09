@@ -1,6 +1,6 @@
 # The Descent
 
-The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/dungeon.json`. It needs jrpg-battle 0.10.0 or later (percentage bonuses on gear; strength by stretch came in 0.9.0 and the shop's stock by floor in 0.8.0). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
+The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/dungeon.json`. It needs jrpg-battle 0.10.0 or later (tag `v0.10.1`; percentage bonuses on gear; strength by stretch came in 0.9.0 and the shop's stock by floor in 0.8.0). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
 
 ## The map
 
