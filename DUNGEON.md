@@ -1,6 +1,6 @@
 # The Descent
 
-The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/dungeon.json`. It needs jrpg-battle 0.9.0 or later (strength by stretch; the shop's stock by floor came in 0.8.0). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
+The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/dungeon.json`. It needs jrpg-battle 0.10.0 or later (percentage bonuses on gear; strength by stretch came in 0.9.0 and the shop's stock by floor in 0.8.0). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
 
 ## The map
 
@@ -46,11 +46,11 @@ The endless floors past 25 grow on their own, from a step above Tartarus.
   |---|---|---|---|---|---|---|
   | Floor 1 | Grove | 🗡️ Iron Dagger (+10) | 🦺 Leather Vest (+12) | 👟 Light Boots (+4) | 💗 Vigor Charm (+150) | 150 |
   | Floor 6 | Labyrinth | ⚔️ War Blade (+25) | 🛡️ Plate Mail (+30) | 🪽 Wind Boots (+10) | ❤️ Giant Belt (+400) | 400 |
-  | Floor 11 | Marsh | 🔱 Bronze Spear (+32) | 🥉 Bronze Cuirass (+38) | 🩴 Courier's Sandals (+11) | 🐍 Asclepian Amulet (+500) | 1,000 |
-  | Floor 16 | Underworld | 🌙 Adamant Harpe (+40) | 🏛️ Hoplite Panoply (+46) | 🕊️ Winged Sandals (+12) | 🟠 Amber of the Heliades (+600) | 1,800 |
-  | Floor 21 | Tartarus | ⚡ Cyclopean Blade (+48) | 💎 Adamant Mail (+55) | 🌬️ Sandals of Zephyrus (+13) | 🍯 Phial of Ambrosia (+720) | 3,000 |
+  | Floor 11 | Marsh | 🔱 Bronze Spear (+25, +4%) | 🥉 Bronze Cuirass (+30, +4%) | 🩴 Courier's Sandals (+11) | 🐍 Asclepian Amulet (+400, +4%) | 1,000 |
+  | Floor 16 | Underworld | 🌙 Adamant Harpe (+25, +7%) | 🏛️ Hoplite Panoply (+30, +7%) | 🕊️ Winged Sandals (+12) | 🟠 Amber of the Heliades (+400, +7%) | 1,800 |
+  | Floor 21 | Tartarus | ⚡ Cyclopean Blade (+25, +10%) | 💎 Adamant Mail (+30, +10%) | 🌬️ Sandals of Zephyrus (+13) | 🍯 Phial of Ambrosia (+400, +10%) | 3,000 |
 
-  The upper tiers add little power for a lot of gold, on purpose: they are where a deep party's gold goes, and too much power there made the Descent trivial (below).
+  The upper tiers add little power for a lot of gold, on purpose: they are where a deep party's gold goes, and too much power there made the Descent trivial (below). Their weapons, armour and charms keep the Labyrinth tier's flat bonus and add a percentage of the hero's own stat (jrpg-battle decision 0045), so they keep pace as heroes level instead of fading; the boots stay flat, because a share of speed moves turn order more than any other stat.
 - **Loot:** cleared floors drop one item, and boss floors two more. The base item comes from the shop's tiers: the Grove tier from floor 1, then each stretch's tier and the one below it (the Grove and Labyrinth tiers from floor 6, the Labyrinth and Marsh tiers from floor 11, and so on to the Underworld and Tartarus tiers from floor 21). It drops as Common (no bonus), Magic (one) or Rare (two). The bonuses are ATK, DEF, max HP or SPD, and grow with depth. The stash holds 12 and sells at a quarter of an item's worth, so selling deep loot doesn't undo the gold sink.
 - **The town:** the Exit, the Stash and the Shop from the start; the Enchanter after floor 10; Retire after floor 25.
 - **The enchanter:** an item may have up to four bonuses.
@@ -63,15 +63,15 @@ The town, the enchanter, wipes and retiring started as jrpg-battle 0.7.0's own, 
 
 ## The numbers
 
-The bot plays every turn and shops between floors, three waves a floor, at most 80 floors started per campaign. Measured with jrpg-battle 0.9.0's `simulate-campaign.js` and `simulate-run.js` on this repository's built content (below).
+The bot plays every turn and shops between floors, three waves a floor, at most 80 floors started per campaign. Measured with jrpg-battle 0.10.0's `simulate-campaign.js` and `simulate-run.js` on this repository's built content (below).
 
 | Team | Campaigns that cleared the Descent | Wipes per campaign | Where they wipe | Run: floors cleared, median (p10–p90) | Gold at the end of a campaign |
 |---|---|---|---|---|---|
-| Athena, Zeus, Apollo, Artemis | 50 of 50 | 0.4 | A few entering the Labyrinth and Tartarus; most at Typhon | 30 (24–35) | 5,225 |
-| Hephaestus, Poseidon, Aphrodite, Hermes | 50 of 50 | 1.8 | One or two at each stretch's first floors; most at Typhon | 24 (20–30) | 4,575 |
-| Ares, Hades, Apollo, Zeus | 50 of 50 | 8.1 | Entering the Labyrinth, the Marsh and Tartarus; most at Typhon | 12 (5–24) | 3,238 |
+| Athena, Zeus, Apollo, Artemis | 50 of 50 | 0.3 | A few entering the Labyrinth and Tartarus; most at Typhon | 32 (24–36) | 5,224 |
+| Hephaestus, Poseidon, Aphrodite, Hermes | 50 of 50 | 1.2 | A few entering the Labyrinth, the Marsh and Tartarus; most at Typhon | 24 (15–31) | 4,817 |
+| Ares, Hades, Apollo, Zeus | 50 of 50 | 5.2 | Entering the Labyrinth, the Marsh and Tartarus; most at Typhon | 16.5 (5–24) | 3,835 |
 
-Measured on jrpg-battle 0.9.0. Runs have no town to come back to, so a weak team's run now usually ends at the Marsh's first floors (median 12, from 24). With roster 0.8.0's growth of 0.3 a floor, the same teams wiped 0.3, 1.1 and 8.5 times, almost all at Typhon. Roster 0.7.0, whose loot stopped at the Labyrinth tier and sold at half worth, ended with 3,510, 3,366 and 2,931 gold and wiped 0.2, 1.4 and 8.4 times; the bot sells its loot, so deeper loot at half worth brought the gold back up to 6,900–13,900 before the sell share fell to a quarter. Before the gear by stretch (roster 0.6.0, the shop's eight items on sale from floor 1), the same teams wiped 0.9, 3.5 and 16.8 times a campaign, their runs cleared a median of 26, 24 and 24 floors, and they ended with 37,212, 25,394 and 8,761 gold. Before that (statGrowth 0.5, level cap 10), Athena, Zeus, Apollo and Artemis cleared floor 11–12 at best in 60 tries, and runs ended around floor 9.
+Measured on jrpg-battle 0.10.0. With roster 0.9.0's flat-only deep tiers, the same teams wiped 0.4, 1.8 and 8.1 times and the weakest team's runs cleared a median of 12 floors; the percentages help most where heroes are strongest by level and weakest by gear. Runs have no town to come back to, so a weak team's run still often ends at the Marsh's first floors. With strength by stretch (roster 0.9.0) the weakest team's runs fell from a median of 24 to 12. With roster 0.8.0's growth of 0.3 a floor, the same teams wiped 0.3, 1.1 and 8.5 times, almost all at Typhon. Roster 0.7.0, whose loot stopped at the Labyrinth tier and sold at half worth, ended with 3,510, 3,366 and 2,931 gold and wiped 0.2, 1.4 and 8.4 times; the bot sells its loot, so deeper loot at half worth brought the gold back up to 6,900–13,900 before the sell share fell to a quarter. Before the gear by stretch (roster 0.6.0, the shop's eight items on sale from floor 1), the same teams wiped 0.9, 3.5 and 16.8 times a campaign, their runs cleared a median of 26, 24 and 24 floors, and they ended with 37,212, 25,394 and 8,761 gold. Before that (statGrowth 0.5, level cap 10), Athena, Zeus, Apollo and Artemis cleared floor 11–12 at best in 60 tries, and runs ended around floor 9.
 
 **Where the gold goes.** A cleared campaign used to end with 9,000 to 37,000 gold, because the shop's eight items were bought out early. Now each stretch brings dearer gear, and the bot spends nearly everything: 3,700 to 5,400 gold is left at the end. It never enchants, so a player has the enchanter as well. The first try at the upper tiers gave them their price in power (up to +115 ATK); the Descent then had no wipes at all and runs went to floor 44, so the tiers were cut to small steps.
 
