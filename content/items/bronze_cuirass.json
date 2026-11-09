@@ -1,0 +1,13 @@
+{
+  "id": "bronze_cuirass",
+  "name": "Bronze Cuirass",
+  "icon": "🥉",
+  "cost": 800,
+  "slot": "armour",
+  "stats": {
+    "def": 50
+  },
+  "components": [
+    "plate_mail"
+  ]
+}

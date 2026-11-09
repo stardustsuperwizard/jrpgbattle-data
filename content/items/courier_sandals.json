@@ -1,0 +1,13 @@
+{
+  "id": "courier_sandals",
+  "name": "Courier's Sandals",
+  "icon": "🩴",
+  "cost": 800,
+  "slot": "boots",
+  "stats": {
+    "spd": 14
+  },
+  "components": [
+    "wind_boots"
+  ]
+}

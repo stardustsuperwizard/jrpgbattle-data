@@ -6,5 +6,8 @@
   "slot": "boots",
   "stats": {
     "spd": 10
-  }
+  },
+  "components": [
+    "light_boots"
+  ]
 }

@@ -1,0 +1,13 @@
+{
+  "id": "winged_sandals",
+  "name": "Winged Sandals",
+  "icon": "🕊️",
+  "cost": 1400,
+  "slot": "boots",
+  "stats": {
+    "spd": 19
+  },
+  "components": [
+    "courier_sandals"
+  ]
+}

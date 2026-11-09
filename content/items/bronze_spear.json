@@ -1,0 +1,13 @@
+{
+  "id": "bronze_spear",
+  "name": "Bronze Spear",
+  "icon": "🔱",
+  "cost": 800,
+  "slot": "weapon",
+  "stats": {
+    "atk": 45
+  },
+  "components": [
+    "war_blade"
+  ]
+}

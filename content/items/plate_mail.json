@@ -6,5 +6,8 @@
   "slot": "armour",
   "stats": {
     "def": 30
-  }
+  },
+  "components": [
+    "leather_vest"
+  ]
 }

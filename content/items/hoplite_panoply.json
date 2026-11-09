@@ -1,0 +1,13 @@
+{
+  "id": "hoplite_panoply",
+  "name": "Hoplite Panoply",
+  "icon": "🏛️",
+  "cost": 1400,
+  "slot": "armour",
+  "stats": {
+    "def": 80
+  },
+  "components": [
+    "bronze_cuirass"
+  ]
+}
