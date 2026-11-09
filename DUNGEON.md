@@ -1,6 +1,6 @@
 # The Descent
 
-The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/dungeon.json`. It needs jrpg-battle 0.7.0 or later. The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
+The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/dungeon.json`. It needs jrpg-battle 0.8.0 or later (the shop's stock by floor). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
 
 ## The map
 
@@ -28,7 +28,18 @@ The engine has one growth for the whole dungeon, so the endless floors grow on a
 
 ## Loot, the town and the enchanter
 
-- **Slots:** each hero wears one weapon, one armour, one pair of boots and one charm (`slots`, `gearSlots` 4); every item names its `slot`. The shop's dearer items upgrade their cheaper parts: the War Blade over the Iron Dagger, the Giant Belt over the Vigor Charm.
+- **Slots:** each hero wears one weapon, one armour, one pair of boots and one charm (`slots`, `gearSlots` 4); every item names its `slot`.
+- **The shop's gear comes by stretch** (`shop.items` as stock entries, jrpg-battle decision 0043). Each stretch brings a new tier on sale before its first floor, and what came in stays. Each item upgrades the one below it of its slot: buying it over that one costs the difference.
+
+  | On sale from | Tier | Weapon (ATK) | Armour (DEF) | Boots (SPD) | Charm (max HP) | Each |
+  |---|---|---|---|---|---|---|
+  | Floor 1 | Grove | 🗡️ Iron Dagger (+10) | 🦺 Leather Vest (+12) | 👟 Light Boots (+4) | 💗 Vigor Charm (+150) | 150 |
+  | Floor 6 | Labyrinth | ⚔️ War Blade (+25) | 🛡️ Plate Mail (+30) | 🪽 Wind Boots (+10) | ❤️ Giant Belt (+400) | 400 |
+  | Floor 11 | Marsh | 🔱 Bronze Spear (+32) | 🥉 Bronze Cuirass (+38) | 🩴 Courier's Sandals (+11) | 🐍 Asclepian Amulet (+500) | 1,000 |
+  | Floor 16 | Underworld | 🌙 Adamant Harpe (+40) | 🏛️ Hoplite Panoply (+46) | 🕊️ Winged Sandals (+12) | 🟠 Amber of the Heliades (+600) | 1,800 |
+  | Floor 21 | Tartarus | ⚡ Cyclopean Blade (+48) | 💎 Adamant Mail (+55) | 🌬️ Sandals of Zephyrus (+13) | 🍯 Phial of Ambrosia (+720) | 3,000 |
+
+  The upper tiers add little power for a lot of gold, on purpose: they are where a deep party's gold goes, and too much power there made the Descent trivial (below).
 - **Loot:** cleared floors drop one item, and boss floors two more. The four cheaper items drop from floor 1 and all eight from floor 6, as Common (no bonus), Magic (one) or Rare (two). The bonuses are ATK, DEF, max HP or SPD, and grow with depth. The stash holds 12 and sells at half worth.
 - **The town:** the Exit, the Stash and the Shop from the start; the Enchanter after floor 10; Retire after floor 25.
 - **The enchanter:** an item may have up to four bonuses.
@@ -37,21 +48,21 @@ The engine has one growth for the whole dungeon, so the endless floors grow on a
 - **Wipes:** a wipe costs a fifth of the party's gold and stands it back up at half HP.
 - **Retiring:** each hero passes on one item as an Heirloom, half again as strong.
 
-These started as jrpg-battle 0.7.0's own, the same as its content.
+The town, the enchanter, wipes and retiring started as jrpg-battle 0.7.0's own, the same as its content.
 
 ## The numbers
 
-The bot plays every turn and shops between floors, three waves a floor, at most 80 floors started per campaign. Measured with jrpg-battle 0.7.0's `simulate-campaign.js` and `simulate-run.js` on this repository's built content (below).
+The bot plays every turn and shops between floors, three waves a floor, at most 80 floors started per campaign. Measured with jrpg-battle 0.8.0's `simulate-campaign.js` and `simulate-run.js` on this repository's built content (below).
 
-| Team | Campaigns that cleared the Descent | Wipes per campaign | Where they wipe | Run: floors cleared, median (p10–p90) |
-|---|---|---|---|---|
-| Athena, Zeus, Apollo, Artemis | 50 of 50 | 0.9 | Almost all at Typhon (floor 25) | 26 (24–32) |
-| Hephaestus, Poseidon, Aphrodite, Hermes | 50 of 50 | 3.5 | A few in the Marsh and Underworld; most at Typhon | 24 (21–27) |
-| Ares, Hades, Apollo, Zeus | 49 of 50 | 16.8 | The Marsh and Hydra, then Typhon many times | 24 (11–24) |
+| Team | Campaigns that cleared the Descent | Wipes per campaign | Where they wipe | Run: floors cleared, median (p10–p90) | Gold at the end of a campaign |
+|---|---|---|---|---|---|
+| Athena, Zeus, Apollo, Artemis | 50 of 50 | 0.2 | Only at Typhon (floor 25) | 31.5 (24–36) | 3,510 |
+| Hephaestus, Poseidon, Aphrodite, Hermes | 50 of 50 | 1.4 | One each in the Underworld and Tartarus; the rest at Typhon | 24 (24–33) | 3,366 |
+| Ares, Hades, Apollo, Zeus | 50 of 50 | 8.4 | A few on the way down; almost all at Typhon | 24 (14–24) | 2,931 |
 
-Before (statGrowth 0.5, level cap 10), Athena, Zeus, Apollo and Artemis cleared floor 11–12 at best in 60 tries, and runs ended around floor 9.
+Measured on jrpg-battle 0.8.0. Before the gear by stretch (roster 0.6.0, the shop's eight items on sale from floor 1), the same teams wiped 0.9, 3.5 and 16.8 times a campaign, their runs cleared a median of 26, 24 and 24 floors, and they ended with 37,212, 25,394 and 8,761 gold. Before that (statGrowth 0.5, level cap 10), Athena, Zeus, Apollo and Artemis cleared floor 11–12 at best in 60 tries, and runs ended around floor 9.
 
-**Gold piles up.** A party that clears the Descent ends with 9,000 to 37,000 gold, because the shop's eight items are bought out early and the bot never enchants. The enchanter is the sink for now. Shop stock that grows with depth is jrpg-battle#295.
+**Where the gold goes.** A cleared campaign used to end with 9,000 to 37,000 gold, because the shop's eight items were bought out early. Now each stretch brings dearer gear, and the bot spends nearly everything: about 3,000 gold is left at the end. It never enchants, so a player has the enchanter as well. The first try at the upper tiers gave them their price in power (up to +115 ATK); the Descent then had no wipes at all and runs went to floor 44, so the tiers were cut to small steps.
 
 ### Measuring
 
@@ -69,5 +80,4 @@ node scripts/simulate-run.js 200 --party athena,zeus,apollo,artemis
 
 - **Monsters fixed by stretch**, and the endless floors' own growth: both need the engine (above).
 - **Uniques with names from myth:** loot is a base item with rolled bonuses; the engine has no named uniques.
-- **Shop stock by stretch:** jrpg-battle#295.
-- **Art:** the site draws the Hydra, Cerberus and Typhon as emoji until jrpgbattle-client-premium has their enemy recipes. It also has scenes for none of the themes yet, only its garden.
+- **Loot from the upper tiers:** floors still drop only the Grove and Labyrinth tiers as base items. Adding the deeper tiers to the loot table would add power the shop's numbers don't account for, so it waits for its own measuring.
