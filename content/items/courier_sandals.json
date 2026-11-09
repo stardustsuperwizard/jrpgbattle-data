@@ -2,10 +2,10 @@
   "id": "courier_sandals",
   "name": "Courier's Sandals",
   "icon": "🩴",
-  "cost": 800,
+  "cost": 1000,
   "slot": "boots",
   "stats": {
-    "spd": 14
+    "spd": 12
   },
   "components": [
     "wind_boots"

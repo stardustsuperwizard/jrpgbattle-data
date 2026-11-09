@@ -2,10 +2,10 @@
   "id": "cyclopean_blade",
   "name": "Cyclopean Blade",
   "icon": "⚡",
-  "cost": 2200,
+  "cost": 3000,
   "slot": "weapon",
   "stats": {
-    "atk": 115
+    "atk": 70
   },
   "components": [
     "adamant_harpe"

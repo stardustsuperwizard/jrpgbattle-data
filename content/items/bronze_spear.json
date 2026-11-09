@@ -2,10 +2,10 @@
   "id": "bronze_spear",
   "name": "Bronze Spear",
   "icon": "🔱",
-  "cost": 800,
+  "cost": 1000,
   "slot": "weapon",
   "stats": {
-    "atk": 45
+    "atk": 35
   },
   "components": [
     "war_blade"

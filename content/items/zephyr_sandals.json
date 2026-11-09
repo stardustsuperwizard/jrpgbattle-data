@@ -2,10 +2,10 @@
   "id": "zephyr_sandals",
   "name": "Sandals of Zephyrus",
   "icon": "🌬️",
-  "cost": 2200,
+  "cost": 3000,
   "slot": "boots",
   "stats": {
-    "spd": 25
+    "spd": 18
   },
   "components": [
     "winged_sandals"

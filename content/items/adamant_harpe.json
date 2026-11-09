@@ -2,10 +2,10 @@
   "id": "adamant_harpe",
   "name": "Adamant Harpe",
   "icon": "🌙",
-  "cost": 1400,
+  "cost": 1800,
   "slot": "weapon",
   "stats": {
-    "atk": 75
+    "atk": 50
   },
   "components": [
     "bronze_spear"

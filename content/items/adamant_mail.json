@@ -2,10 +2,10 @@
   "id": "adamant_mail",
   "name": "Adamant Mail",
   "icon": "💎",
-  "cost": 2200,
+  "cost": 3000,
   "slot": "armour",
   "stats": {
-    "def": 115
+    "def": 75
   },
   "components": [
     "hoplite_panoply"

@@ -2,10 +2,10 @@
   "id": "heliades_amber",
   "name": "Amber of the Heliades",
   "icon": "🟠",
-  "cost": 1400,
+  "cost": 1800,
   "slot": "charm",
   "stats": {
-    "maxHp": 1300
+    "maxHp": 850
   },
   "components": [
     "asclepian_amulet"
