@@ -125,8 +125,22 @@
     "growEvery": 2,
     "max": 4
   },
-  "statGrowth": 0.3,
-  "rewardGrowth": 0.1,
+  "statGrowth": [
+    { "from": 1, "base": 1.6, "perFloor": 0 },
+    { "from": 6, "base": 3.2, "perFloor": 0 },
+    { "from": 11, "base": 4.8, "perFloor": 0 },
+    { "from": 16, "base": 6.4, "perFloor": 0 },
+    { "from": 21, "base": 8.2, "perFloor": 0 },
+    { "from": 26, "base": 8.8, "perFloor": 0.3 }
+  ],
+  "rewardGrowth": [
+    { "from": 1, "base": 1.2, "perFloor": 0 },
+    { "from": 6, "base": 1.7, "perFloor": 0 },
+    { "from": 11, "base": 2.2, "perFloor": 0 },
+    { "from": 16, "base": 2.7, "perFloor": 0 },
+    { "from": 21, "base": 3.2, "perFloor": 0 },
+    { "from": 26, "base": 3.5, "perFloor": 0.1 }
+  ],
   "xpShare": 0.35,
   "goldShare": 0.3,
   "bossShare": 0.45,

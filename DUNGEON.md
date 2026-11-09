@@ -1,6 +1,6 @@
 # The Descent
 
-The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/dungeon.json`. It needs jrpg-battle 0.8.0 or later (the shop's stock by floor). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
+The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/dungeon.json`. It needs jrpg-battle 0.9.0 or later (strength by stretch; the shop's stock by floor came in 0.8.0). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
 
 ## The map
 
@@ -19,12 +19,23 @@ Each stretch keeps one healer among its monsters (the Shaman, then the Phoenix) 
 
 ## How hard it gets
 
-- **Growth:** monsters grow 30% of their content stats a floor (`statGrowth` 0.3; it was 0.5). At 0.5, floor 13's monsters had seven times their stats, and every team walled at floors 11–13 with its heroes at the level cap.
+- **Strength by stretch** (`statGrowth` as entries by floor, jrpg-battle decision 0044): each stretch holds its monsters at one strength and the next steps up, so a stretch is learned and then left behind, and its first floor is the hard one.
+
+  | Floors | Stretch | Monsters' stats, times their content | Their XP and gold, times their content |
+  |---|---|---|---|
+  | 1–5 | The Sacred Grove | 1.6 | 1.2 |
+  | 6–10 | The Labyrinth | 3.2 | 1.7 |
+  | 11–15 | The Stymphalian Marsh | 4.8 | 2.2 |
+  | 16–20 | The Underworld | 6.4 | 2.7 |
+  | 21–25 | Tartarus | 8.2 | 3.2 |
+  | 26 on | The Endless Abyss | 8.8, then 0.3 more a floor | 3.5, then 0.1 more a floor |
+
+  Before (roster 0.8.0 and earlier) monsters grew 0.3 of their content a floor from floor 1, so floor 25 was 8.2 and every floor a little harder than the last; Tartarus keeps that 8.2 for its whole stretch.
 - **Level cap:** heroes now go up to level 25 (`maxLevel` in `rules.json`; it was 10).
 - **Waves:** the waves the party chooses set each floor's strength and pay. Three is the content's own; one is harder and pays more, five easier and paying less (`waveScaling`, jrpg-battle decision 0033).
-- **Bosses:** a boss comes at 45% of its content stats (`bossShare`), times the floor's growth.
+- **Bosses:** a boss comes at 45% of its content stats (`bossShare`), times its stretch's strength.
 
-The engine has one growth for the whole dungeon, so the endless floors grow on as the Descent does. #18 asked for monsters fixed by stretch (`statGrowth` 0) with their own growth after floor 25. That needs a per-stretch strength in the engine, which it doesn't have yet.
+The endless floors past 25 grow on their own, from a step above Tartarus.
 
 ## Loot, the town and the enchanter
 
@@ -52,15 +63,15 @@ The town, the enchanter, wipes and retiring started as jrpg-battle 0.7.0's own, 
 
 ## The numbers
 
-The bot plays every turn and shops between floors, three waves a floor, at most 80 floors started per campaign. Measured with jrpg-battle 0.8.0's `simulate-campaign.js` and `simulate-run.js` on this repository's built content (below).
+The bot plays every turn and shops between floors, three waves a floor, at most 80 floors started per campaign. Measured with jrpg-battle 0.9.0's `simulate-campaign.js` and `simulate-run.js` on this repository's built content (below).
 
 | Team | Campaigns that cleared the Descent | Wipes per campaign | Where they wipe | Run: floors cleared, median (p10–p90) | Gold at the end of a campaign |
 |---|---|---|---|---|---|
-| Athena, Zeus, Apollo, Artemis | 50 of 50 | 0.3 | Almost all at Typhon (floor 25) | 31.5 (24–36) | 5,376 |
-| Hephaestus, Poseidon, Aphrodite, Hermes | 50 of 50 | 1.1 | A few in Tartarus; the rest at Typhon | 24 (24–33) | 4,999 |
-| Ares, Hades, Apollo, Zeus | 50 of 50 | 8.5 | A few in the Marsh; almost all at Typhon | 24 (14–24) | 3,676 |
+| Athena, Zeus, Apollo, Artemis | 50 of 50 | 0.4 | A few entering the Labyrinth and Tartarus; most at Typhon | 30 (24–35) | 5,225 |
+| Hephaestus, Poseidon, Aphrodite, Hermes | 50 of 50 | 1.8 | One or two at each stretch's first floors; most at Typhon | 24 (20–30) | 4,575 |
+| Ares, Hades, Apollo, Zeus | 50 of 50 | 8.1 | Entering the Labyrinth, the Marsh and Tartarus; most at Typhon | 12 (5–24) | 3,238 |
 
-Measured on jrpg-battle 0.8.0, with roster 0.8.0's loot from the deeper tiers. Roster 0.7.0, whose loot stopped at the Labyrinth tier and sold at half worth, ended with 3,510, 3,366 and 2,931 gold and wiped 0.2, 1.4 and 8.4 times; the bot sells its loot, so deeper loot at half worth brought the gold back up to 6,900–13,900 before the sell share fell to a quarter. Before the gear by stretch (roster 0.6.0, the shop's eight items on sale from floor 1), the same teams wiped 0.9, 3.5 and 16.8 times a campaign, their runs cleared a median of 26, 24 and 24 floors, and they ended with 37,212, 25,394 and 8,761 gold. Before that (statGrowth 0.5, level cap 10), Athena, Zeus, Apollo and Artemis cleared floor 11–12 at best in 60 tries, and runs ended around floor 9.
+Measured on jrpg-battle 0.9.0. Runs have no town to come back to, so a weak team's run now usually ends at the Marsh's first floors (median 12, from 24). With roster 0.8.0's growth of 0.3 a floor, the same teams wiped 0.3, 1.1 and 8.5 times, almost all at Typhon. Roster 0.7.0, whose loot stopped at the Labyrinth tier and sold at half worth, ended with 3,510, 3,366 and 2,931 gold and wiped 0.2, 1.4 and 8.4 times; the bot sells its loot, so deeper loot at half worth brought the gold back up to 6,900–13,900 before the sell share fell to a quarter. Before the gear by stretch (roster 0.6.0, the shop's eight items on sale from floor 1), the same teams wiped 0.9, 3.5 and 16.8 times a campaign, their runs cleared a median of 26, 24 and 24 floors, and they ended with 37,212, 25,394 and 8,761 gold. Before that (statGrowth 0.5, level cap 10), Athena, Zeus, Apollo and Artemis cleared floor 11–12 at best in 60 tries, and runs ended around floor 9.
 
 **Where the gold goes.** A cleared campaign used to end with 9,000 to 37,000 gold, because the shop's eight items were bought out early. Now each stretch brings dearer gear, and the bot spends nearly everything: 3,700 to 5,400 gold is left at the end. It never enchants, so a player has the enchanter as well. The first try at the upper tiers gave them their price in power (up to +115 ATK); the Descent then had no wipes at all and runs went to floor 44, so the tiers were cut to small steps.
 
@@ -78,6 +89,5 @@ node scripts/simulate-run.js 200 --party athena,zeus,apollo,artemis
 
 ## Not yet (#18)
 
-- **Monsters fixed by stretch**, and the endless floors' own growth: both need the engine (above).
 - **Uniques with names from myth:** loot is a base item with rolled bonuses; the engine has no named uniques.
 - **Loot worn by the bot:** the bot sells every item it finds, so the numbers above measure deep loot's gold, not its power. A player who wears a Rare Cyclopean Blade is stronger than the bot ever is.
