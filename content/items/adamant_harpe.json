@@ -5,7 +5,10 @@
   "cost": 1800,
   "slot": "weapon",
   "stats": {
-    "atk": 40
+    "atk": 25
+  },
+  "statsPct": {
+    "atk": 0.07
   },
   "components": [
     "bronze_spear"

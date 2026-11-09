@@ -5,7 +5,10 @@
   "cost": 1000,
   "slot": "charm",
   "stats": {
-    "maxHp": 500
+    "maxHp": 400
+  },
+  "statsPct": {
+    "maxHp": 0.04
   },
   "components": [
     "giant_belt"

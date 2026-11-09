@@ -5,7 +5,10 @@
   "cost": 1000,
   "slot": "weapon",
   "stats": {
-    "atk": 32
+    "atk": 25
+  },
+  "statsPct": {
+    "atk": 0.04
   },
   "components": [
     "war_blade"

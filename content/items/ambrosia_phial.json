@@ -5,7 +5,10 @@
   "cost": 3000,
   "slot": "charm",
   "stats": {
-    "maxHp": 720
+    "maxHp": 400
+  },
+  "statsPct": {
+    "maxHp": 0.1
   },
   "components": [
     "heliades_amber"
