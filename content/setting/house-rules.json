@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "maxLevel": 25
+  },
+  "dungeon": {
+    "campaign": {
+      "loot": {
+        "sellShare": 0.25
+      }
+    }
+  }
+}

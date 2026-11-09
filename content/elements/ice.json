@@ -1,9 +1,0 @@
-{
-  "name": "Ice",
-  "icon": "❄️",
-  "color": "#7fd8ff",
-  "break": {
-    "status": "freeze",
-    "duration": 1
-  }
-}

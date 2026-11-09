@@ -1,0 +1,354 @@
+{
+  "pools": [
+    {
+      "from": 1,
+      "enemies": [
+        "slime",
+        "goblin",
+        "wolf"
+      ]
+    },
+    {
+      "from": 3,
+      "enemies": [
+        "slime",
+        "goblin",
+        "wolf",
+        "shaman",
+        "boar"
+      ]
+    },
+    {
+      "from": 6,
+      "enemies": [
+        "goblin",
+        "shaman",
+        "boar",
+        "spartoi",
+        "dracaena",
+        "harpy"
+      ]
+    },
+    {
+      "from": 11,
+      "enemies": [
+        "harpy",
+        "dracaena",
+        "phoenix",
+        "drakon",
+        "hoplite"
+      ]
+    },
+    {
+      "from": 16,
+      "enemies": [
+        "shade",
+        "necromancer",
+        "spartoi",
+        "myrmidon",
+        "hoplite"
+      ]
+    },
+    {
+      "from": 21,
+      "enemies": [
+        "shade",
+        "necromancer",
+        "myrmidon",
+        "drakon",
+        "phoenix",
+        "hoplite"
+      ]
+    },
+    {
+      "from": 26,
+      "enemies": [
+        "wolf",
+        "harpy",
+        "boar",
+        "spartoi",
+        "dracaena",
+        "phoenix",
+        "drakon",
+        "hoplite",
+        "shade",
+        "myrmidon",
+        "necromancer"
+      ]
+    }
+  ],
+  "bosses": [
+    {
+      "from": 1,
+      "bosses": [
+        "golem"
+      ]
+    },
+    {
+      "from": 6,
+      "bosses": [
+        "minotaur"
+      ]
+    },
+    {
+      "from": 11,
+      "bosses": [
+        "hydra"
+      ]
+    },
+    {
+      "from": 16,
+      "bosses": [
+        "cerberus"
+      ]
+    },
+    {
+      "from": 21,
+      "bosses": [
+        "typhon"
+      ]
+    },
+    {
+      "from": 26,
+      "bosses": [
+        "golem",
+        "minotaur",
+        "hydra",
+        "cerberus",
+        "typhon"
+      ]
+    }
+  ],
+  "bossEvery": 5,
+  "waveSize": {
+    "base": 2,
+    "growEvery": 2,
+    "max": 4
+  },
+  "statGrowth": [
+    {
+      "from": 1,
+      "base": 1.6,
+      "perFloor": 0
+    },
+    {
+      "from": 6,
+      "base": 3.2,
+      "perFloor": 0
+    },
+    {
+      "from": 11,
+      "base": 4.8,
+      "perFloor": 0
+    },
+    {
+      "from": 16,
+      "base": 6.4,
+      "perFloor": 0
+    },
+    {
+      "from": 21,
+      "base": 8.2,
+      "perFloor": 0
+    },
+    {
+      "from": 26,
+      "base": 8.8,
+      "perFloor": 0.3
+    }
+  ],
+  "rewardGrowth": [
+    {
+      "from": 1,
+      "base": 1.2,
+      "perFloor": 0
+    },
+    {
+      "from": 6,
+      "base": 1.7,
+      "perFloor": 0
+    },
+    {
+      "from": 11,
+      "base": 2.2,
+      "perFloor": 0
+    },
+    {
+      "from": 16,
+      "base": 2.7,
+      "perFloor": 0
+    },
+    {
+      "from": 21,
+      "base": 3.2,
+      "perFloor": 0
+    },
+    {
+      "from": 26,
+      "base": 3.5,
+      "perFloor": 0.1
+    }
+  ],
+  "themes": [
+    {
+      "id": "grove",
+      "name": "The Sacred Grove",
+      "from": 1
+    },
+    {
+      "id": "labyrinth",
+      "name": "The Labyrinth",
+      "from": 6
+    },
+    {
+      "id": "marsh",
+      "name": "The Stymphalian Marsh",
+      "from": 11
+    },
+    {
+      "id": "underworld",
+      "name": "The Underworld",
+      "from": 16
+    },
+    {
+      "id": "tartarus",
+      "name": "Tartarus",
+      "from": 21
+    },
+    {
+      "id": "abyss",
+      "name": "The Endless Abyss",
+      "from": 26
+    }
+  ],
+  "shop": {
+    "items": [
+      {
+        "from": 1,
+        "items": [
+          "vigor_charm",
+          "iron_dagger",
+          "leather_vest",
+          "light_boots"
+        ]
+      },
+      {
+        "from": 6,
+        "items": [
+          "giant_belt",
+          "war_blade",
+          "plate_mail",
+          "wind_boots"
+        ]
+      },
+      {
+        "from": 11,
+        "items": [
+          "asclepian_amulet",
+          "bronze_spear",
+          "bronze_cuirass",
+          "courier_sandals"
+        ]
+      },
+      {
+        "from": 16,
+        "items": [
+          "heliades_amber",
+          "adamant_harpe",
+          "hoplite_panoply",
+          "winged_sandals"
+        ]
+      },
+      {
+        "from": 21,
+        "items": [
+          "ambrosia_phial",
+          "cyclopean_blade",
+          "adamant_mail",
+          "zephyr_sandals"
+        ]
+      }
+    ],
+    "consumables": {
+      "potion": {
+        "name": "Potion",
+        "icon": "🧪",
+        "cost": 80,
+        "heal": 0.5
+      },
+      "revive": {
+        "name": "Revival Herb",
+        "icon": "🌿",
+        "cost": 200,
+        "revive": 0.4
+      }
+    }
+  },
+  "campaign": {
+    "loot": {
+      "items": [
+        {
+          "from": 1,
+          "items": [
+            "vigor_charm",
+            "iron_dagger",
+            "leather_vest",
+            "light_boots"
+          ]
+        },
+        {
+          "from": 6,
+          "items": [
+            "vigor_charm",
+            "iron_dagger",
+            "leather_vest",
+            "light_boots",
+            "giant_belt",
+            "war_blade",
+            "plate_mail",
+            "wind_boots"
+          ]
+        },
+        {
+          "from": 11,
+          "items": [
+            "giant_belt",
+            "war_blade",
+            "plate_mail",
+            "wind_boots",
+            "asclepian_amulet",
+            "bronze_spear",
+            "bronze_cuirass",
+            "courier_sandals"
+          ]
+        },
+        {
+          "from": 16,
+          "items": [
+            "asclepian_amulet",
+            "bronze_spear",
+            "bronze_cuirass",
+            "courier_sandals",
+            "heliades_amber",
+            "adamant_harpe",
+            "hoplite_panoply",
+            "winged_sandals"
+          ]
+        },
+        {
+          "from": 21,
+          "items": [
+            "heliades_amber",
+            "adamant_harpe",
+            "hoplite_panoply",
+            "winged_sandals",
+            "ambrosia_phial",
+            "cyclopean_blade",
+            "adamant_mail",
+            "zephyr_sandals"
+          ]
+        }
+      ]
+    }
+  }
+}

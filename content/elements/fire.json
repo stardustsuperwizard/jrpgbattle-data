@@ -1,9 +1,0 @@
-{
-  "name": "Fire",
-  "icon": "🔥",
-  "color": "#ff7a45",
-  "break": {
-    "status": "burn",
-    "duration": 2
-  }
-}
