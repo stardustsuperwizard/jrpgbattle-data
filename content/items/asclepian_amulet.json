@@ -1,0 +1,13 @@
+{
+  "id": "asclepian_amulet",
+  "name": "Asclepian Amulet",
+  "icon": "🐍",
+  "cost": 1000,
+  "slot": "charm",
+  "stats": {
+    "maxHp": 500
+  },
+  "components": [
+    "giant_belt"
+  ]
+}

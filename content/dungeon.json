@@ -157,14 +157,11 @@
   ],
   "shop": {
     "items": [
-      "vigor_charm",
-      "iron_dagger",
-      "leather_vest",
-      "light_boots",
-      "giant_belt",
-      "war_blade",
-      "plate_mail",
-      "wind_boots"
+      { "from": 1, "items": ["vigor_charm", "iron_dagger", "leather_vest", "light_boots"] },
+      { "from": 6, "items": ["giant_belt", "war_blade", "plate_mail", "wind_boots"] },
+      { "from": 11, "items": ["asclepian_amulet", "bronze_spear", "bronze_cuirass", "courier_sandals"] },
+      { "from": 16, "items": ["heliades_amber", "adamant_harpe", "hoplite_panoply", "winged_sandals"] },
+      { "from": 21, "items": ["ambrosia_phial", "cyclopean_blade", "adamant_mail", "zephyr_sandals"] }
     ],
     "consumables": {
       "potion": {

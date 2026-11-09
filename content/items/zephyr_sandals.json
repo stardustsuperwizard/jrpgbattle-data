@@ -1,0 +1,13 @@
+{
+  "id": "zephyr_sandals",
+  "name": "Sandals of Zephyrus",
+  "icon": "🌬️",
+  "cost": 3000,
+  "slot": "boots",
+  "stats": {
+    "spd": 13
+  },
+  "components": [
+    "winged_sandals"
+  ]
+}

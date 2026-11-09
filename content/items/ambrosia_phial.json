@@ -1,0 +1,13 @@
+{
+  "id": "ambrosia_phial",
+  "name": "Phial of Ambrosia",
+  "icon": "🍯",
+  "cost": 3000,
+  "slot": "charm",
+  "stats": {
+    "maxHp": 720
+  },
+  "components": [
+    "heliades_amber"
+  ]
+}
