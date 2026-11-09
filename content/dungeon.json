@@ -293,6 +293,45 @@
             "plate_mail",
             "wind_boots"
           ]
+        },
+        {
+          "from": 11,
+          "items": [
+            "giant_belt",
+            "war_blade",
+            "plate_mail",
+            "wind_boots",
+            "asclepian_amulet",
+            "bronze_spear",
+            "bronze_cuirass",
+            "courier_sandals"
+          ]
+        },
+        {
+          "from": 16,
+          "items": [
+            "asclepian_amulet",
+            "bronze_spear",
+            "bronze_cuirass",
+            "courier_sandals",
+            "heliades_amber",
+            "adamant_harpe",
+            "hoplite_panoply",
+            "winged_sandals"
+          ]
+        },
+        {
+          "from": 21,
+          "items": [
+            "heliades_amber",
+            "adamant_harpe",
+            "hoplite_panoply",
+            "winged_sandals",
+            "ambrosia_phial",
+            "cyclopean_blade",
+            "adamant_mail",
+            "zephyr_sandals"
+          ]
         }
       ],
       "rarities": [
