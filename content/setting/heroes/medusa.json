@@ -1,0 +1,24 @@
+{
+  "id": "medusa",
+  "name": "Medusa",
+  "role": "Blind Gorgon: venom and blood",
+  "sprite": "🐍",
+  "reach": "melee",
+  "element": "physical",
+  "maxHp": 1100,
+  "atk": 140,
+  "def": 75,
+  "spd": 114,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 88,
+    "atk": 12,
+    "def": 6,
+    "spd": 1
+  },
+  "abilities": [
+    "serpent_lash",
+    "writhing_crown",
+    "gorgons_blood"
+  ]
+}

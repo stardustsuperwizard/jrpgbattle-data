@@ -1,6 +1,6 @@
 # The setting
 
-The gods of Olympus and their world, as a **setting** for the jrpg-battle engine (its decision 0050): the champions and their abilities, the monsters, the items, the practice waves, and what is in the dungeon. The rulebook is the engine's own `src/content/core/`; this folder replaces its `src/content/setting/` whole when a site builds.
+The legends of Olympus and their world, as a **setting** for the jrpg-battle engine (its decision 0050): the champions and their abilities, the monsters, the items, the practice waves, and what is in the dungeon. The rulebook is the engine's own `src/content/core/`; this folder replaces its `src/content/setting/` whole when a site builds.
 
 The layout mirrors the engine's setting folder, with the kinds keyed by id broken out one file per entry (see the repository README): `manifest.json`, `heroes/`, `abilities/`, `enemies/`, `items/`, `waves.json`, `dungeon.json` and `house-rules.json`.
 

@@ -1,0 +1,20 @@
+{
+  "id": "wrath_of_achilles",
+  "name": "Wrath of Achilles",
+  "type": "ultimate",
+  "target": "enemy",
+  "description": "Massive Physical DMG to one enemy, then ATK Up for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 3.8,
+      "toughness": 30
+    },
+    {
+      "type": "status",
+      "status": "atk_up",
+      "duration": 2,
+      "on": "self"
+    }
+  ]
+}

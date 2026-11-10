@@ -1,0 +1,19 @@
+{
+  "id": "twelve_labors",
+  "name": "Twelve Labors",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "Heavy Physical DMG to all enemies and DEF Down for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.8,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "def_down",
+      "duration": 2
+    }
+  ]
+}

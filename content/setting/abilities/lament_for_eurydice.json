@@ -1,0 +1,20 @@
+{
+  "id": "lament_for_eurydice",
+  "name": "Lament for Eurydice",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "Ice DMG to all enemies with a 35% chance to Freeze.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.4,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "freeze",
+      "duration": 1,
+      "chance": 0.35
+    }
+  ]
+}

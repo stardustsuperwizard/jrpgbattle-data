@@ -1,0 +1,24 @@
+{
+  "id": "heracles",
+  "name": "Heracles",
+  "role": "Demigod: bruiser",
+  "sprite": "🦁",
+  "reach": "melee",
+  "element": "physical",
+  "maxHp": 1500,
+  "atk": 135,
+  "def": 105,
+  "spd": 92,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 120,
+    "atk": 12,
+    "def": 8,
+    "spd": 1
+  },
+  "abilities": [
+    "olive_club",
+    "nemean_hide",
+    "twelve_labors"
+  ]
+}

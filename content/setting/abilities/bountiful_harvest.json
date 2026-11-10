@@ -1,0 +1,22 @@
+{
+  "id": "bountiful_harvest",
+  "name": "Bountiful Harvest",
+  "type": "skill",
+  "target": "ally",
+  "description": "Heal one ally for 28% Max HP + 140 and cleanse their debuffs; heal all allies 8% Max HP.",
+  "effects": [
+    {
+      "type": "heal",
+      "pctMaxHp": 0.28,
+      "flat": 140
+    },
+    {
+      "type": "cleanse"
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.08,
+      "on": "all_allies"
+    }
+  ]
+}

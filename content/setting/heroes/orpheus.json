@@ -1,0 +1,24 @@
+{
+  "id": "orpheus",
+  "name": "Orpheus",
+  "role": "Bard of the Argo: support",
+  "sprite": "🎶",
+  "reach": "ranged",
+  "element": "ice",
+  "maxHp": 1000,
+  "atk": 115,
+  "def": 70,
+  "spd": 112,
+  "maxEnergy": 110,
+  "growth": {
+    "maxHp": 80,
+    "atk": 10,
+    "def": 5,
+    "spd": 1
+  },
+  "abilities": [
+    "lyre_chord",
+    "rowing_song",
+    "lament_for_eurydice"
+  ]
+}

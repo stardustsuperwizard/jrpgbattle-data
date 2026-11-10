@@ -1,0 +1,26 @@
+{
+  "id": "eleusinian_mysteries",
+  "name": "Eleusinian Mysteries",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "Physical DMG to all enemies; heal all allies 25% Max HP and Shield them (scales with DEF) for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.2,
+      "toughness": 20
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.25,
+      "on": "all_allies"
+    },
+    {
+      "type": "shield",
+      "defRatio": 0.6,
+      "flat": 40,
+      "duration": 2,
+      "on": "all_allies"
+    }
+  ]
+}

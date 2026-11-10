@@ -1,0 +1,19 @@
+{
+  "id": "swift_footed",
+  "name": "Swift-Footed",
+  "type": "skill",
+  "target": "enemy",
+  "description": "Heavy Physical DMG to one enemy and Bleed for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 2,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "bleed",
+      "duration": 2
+    }
+  ]
+}

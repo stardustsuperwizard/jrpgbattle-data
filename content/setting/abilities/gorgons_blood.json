@@ -1,0 +1,24 @@
+{
+  "id": "gorgons_blood",
+  "name": "Gorgon's Blood",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "The left vein kills: Physical DMG to all enemies and Bleed for 3 turns. The right vein heals: all allies 20% Max HP.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.6,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "bleed",
+      "duration": 3
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.2,
+      "on": "all_allies"
+    }
+  ]
+}

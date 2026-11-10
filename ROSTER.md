@@ -1,4 +1,4 @@
-# Roster: first wave, the Olympians
+# Roster: the legends of Olympus
 
 Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; jrpg-battle's statuses burn, shock, bleed, freeze, ATK Up, DEF Down and Taunt; and its four elements. The statuses and elements are still the engine's own, copied into this repository's `content/` with the rest of its content, so new ones are a file each in `content/statuses/` or `content/elements/`. Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
 
@@ -17,9 +17,26 @@ Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shie
 
 Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for their teammates' skills.
 
+## Second wave: the legends (roster 0.14.0)
+
+Six more, from the same building blocks: four heroes of myth beside two more gods, and Medusa. Their elements are as provisional as the first wave's (Demeter's intended one is earth, Orpheus's none in particular).
+
+| Champion | Role | Element (for now) | Spd | HP | ATK | DEF | Skill | Ultimate |
+|---|---|---|---|---|---|---|---|---|
+| 🪖 Achilles | Swift-Footed: single target | Physical | 118 | 1050 | 150 | 75 | Swift-Footed: heavy single + Bleed | Wrath of Achilles: massive single, ATK Up self |
+| 🐍 Medusa | Blind Gorgon: venom and blood | Physical | 114 | 1100 | 140 | 75 | Writhing Crown: all, 50% Bleed | Gorgon's Blood: all + 3-turn Bleed, heal all |
+| 🎶 Orpheus | Bard of the Argo: support, SP battery | Ice | 112 | 1000 | 115 | 70 | Rowing Song: ATK Up all + cleanse all | Lament for Eurydice: all, 35% Freeze |
+| 🕯️ Hecate | Witch of the Crossroads: debuffer | Fire | 101 | 1000 | 145 | 70 | Where Three Ways Meet: blast + DEF Down | Night of Torches: all + DEF Down, 60% Burn |
+| 🌾 Demeter | Harvest Mother: healer | Physical | 100 | 1150 | 105 | 85 | Bountiful Harvest: heal one + cleanse, small heal all | Eleusinian Mysteries: all, heal all, shield all |
+| 🦁 Heracles | Demigod: bruiser | Physical | 92 | 1500 | 135 | 105 | Nemean Hide: heavy shield self + Taunt | Twelve Labors: heavy all + DEF Down |
+
+Orpheus's basic attack gains 2 SP, like Hermes's and Aphrodite's. Demeter is the healer the first wave's "known issues" asked for: her skill is a single-target heal, like Seren's, because the bot holds SP for a teammate's due single heal and casts an all-ally skill only when nobody is shielded.
+
+**Medusa is blind, so she has no petrifying gaze** and needs no Stone mechanic (the site's lore says why). Her serpents strike at whatever they hear, and her blood, as in Apollodorus and Euripides' *Ion*, kills from one vein and heals from the other.
+
 **Elements are provisional.** With only physical, fire, ice and lightning, several gods are approximations: Poseidon and Aphrodite are "ice" for water, Hades "fire" for the Phlegethon. Elements are content here now, one file each in `content/elements/`; the intended ones are: Poseidon and Aphrodite water, Hades dark, Apollo light, Hermes wind, Zeus lightning, Hephaestus fire.
 
-## Numbers (roster 0.4.0 on jrpg-battle 0.6.0, 300 seeded battles per line)
+## Numbers (300 seeded battles per line)
 
 `npm run check` in this repository, against jrpg-battle 0.6.0; the core party wins PvE 83.3% and splits the PvP mirror 50.0%. The champions are unchanged since 0.3.0; the numbers moved with the engine. In 0.6.0 taunt pulls every attacker's single-target attacks, players' and the bot's as well as monsters' (jrpg-battle decision 0028); before, it only drew monsters, so in PvP Ares's and Athena's taunts did nothing. A frozen golem also keeps its wind-up now instead of losing it (decision 0027). Each champion stands in for the core hero with the closest job (`data/checks.json`).
 
@@ -35,8 +52,16 @@ Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for the
 | Poseidon | Pyra | 99.3% | +16.0 | 68.3% |
 | Hades | Pyra | 70.7% | −12.7 | 40.3% |
 | Hephaestus | Aria | 73.0% | −10.3 | 41.3% |
+| Heracles | Aria | 40.0% | −43.3 | 55.0% |
+| Achilles | Vex | 34.7% | −48.7 | 8.0% |
+| Orpheus | Vex | 66.0% | −17.3 | 45.7% |
+| Demeter | Seren | 92.0% | +8.7 | 9.3% |
+| Hecate | Pyra | 74.3% | −9.0 | 21.0% |
+| Medusa | Pyra | 94.0% | +10.7 | 67.0% |
 
-All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 94.0% and PvP 65.0% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 93.3% and 4.3%; Ares, Hades, Apollo, Zeus 0.0% and 51.3%.
+All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 94.0% and PvP 65.0% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 93.3% and 4.3%; Ares, Hades, Apollo, Zeus 0.0% and 51.3%; Heracles, Hecate, Demeter, Achilles 44.7% and 0.0%; Athena, Medusa, Orpheus, Zeus 1.0% and 42.0%.
+
+The first wave's numbers are from roster 0.4.0 on jrpg-battle 0.6.0 and have not moved since; the second wave's are roster 0.14.0 on jrpg-battle 0.17.0, the same core party numbers (83.3% and 50.0%).
 
 ### How to read them
 
@@ -49,6 +74,7 @@ All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 94.0% and PvP 65.0% ag
 - **Aphrodite** (88% PvP): the strongest PvP champion now. A party heal and ATK Up for everyone each turn, behind a taunting Aria who draws the core team's single-target hits, outlasts it.
 - **Ares** (59% PvP, 23% PvE): no longer dominant. His 98% PvP on 0.3.0 wasn't his taunt, which did nothing in PvP then; with taunt working on both sides, the core team's Aria draws his hits too. His physical damage is still resisted by the PvE boss.
 - **Artemis** (11% PvP) and **Hermes** (34%): both replace Vex, the fastest core hero, and lose his place at the top of the order.
+- **Second wave, first pass, not yet tuned.** Achilles (8% PvP, 35% PvE) has Artemis's problem: in for Vex, he loses the top of the turn order, and his physical damage is resisted by the PvE boss. Demeter (9% PvP) heals well in PvE but deals little in PvP. Hecate (21% PvP) hits wide but soft. Medusa (67% PvP, 94% PvE) is the strongest of the six: bleed isn't resisted the way her physical hits are.
 - **A team without a real healer loses PvE outright** (Ares, Hades, Apollo, Zeus: 0%, since Apollo heals only one ally per skill). The second wave needs more healers.
 
 ## Monsters
@@ -90,8 +116,8 @@ Gods whose myth wants something the engine can't do yet. Each is a small jrpg-ba
 | Hera | Revive a fallen ally | Queen of the gods, protector |
 | Dionysus | Confuse / random target | Madness and revelry |
 | Persephone | A form that changes over the battle | Spring and the underworld |
-| Medusa | Stone (a long freeze that ends on a hit) | Petrifying gaze |
-| Hydra / Heracles | Multi-hit, and a unit that grows heads when hit | The labors |
+| Perseus or a seeing Gorgon (Stheno, Euryale) | Stone (a long freeze that ends on a hit) | Petrifying gaze. Medusa herself is playable without it: she is blind (second wave) |
+| Hydra / Heracles (fuller kit) | Multi-hit, and a unit that grows heads when hit | The labors |
 | Eros | Charm: an enemy attacks its own side for a turn | The arrows |
 | Nyx | Stealth: can't be targeted for a turn | Night |
 | Hades (fuller kit) | Lifesteal | Taking souls |

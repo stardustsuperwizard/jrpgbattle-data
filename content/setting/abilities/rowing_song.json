@@ -1,0 +1,17 @@
+{
+  "id": "rowing_song",
+  "name": "Rowing Song",
+  "type": "skill",
+  "target": "all_allies",
+  "description": "Grant all allies ATK Up for 2 turns and cleanse their debuffs.",
+  "effects": [
+    {
+      "type": "status",
+      "status": "atk_up",
+      "duration": 2
+    },
+    {
+      "type": "cleanse"
+    }
+  ]
+}

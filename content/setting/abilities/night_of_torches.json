@@ -1,0 +1,25 @@
+{
+  "id": "night_of_torches",
+  "name": "Night of Torches",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "Fire DMG to all enemies, with a 60% chance to Burn and DEF Down for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.6,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "burn",
+      "duration": 2,
+      "chance": 0.6
+    },
+    {
+      "type": "status",
+      "status": "def_down",
+      "duration": 2
+    }
+  ]
+}

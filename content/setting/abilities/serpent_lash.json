@@ -1,0 +1,20 @@
+{
+  "id": "serpent_lash",
+  "name": "Serpent Lash",
+  "type": "basic",
+  "target": "enemy",
+  "description": "Deal Physical DMG to one enemy, with a 30% chance to Bleed.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1,
+      "toughness": 10
+    },
+    {
+      "type": "status",
+      "status": "bleed",
+      "duration": 2,
+      "chance": 0.3
+    }
+  ]
+}

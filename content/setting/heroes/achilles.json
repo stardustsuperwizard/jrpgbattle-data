@@ -1,0 +1,26 @@
+{
+  "id": "achilles",
+  "name": "Achilles",
+  "role": "Swift-Footed",
+  "sprite": "🪖",
+  "reach": "melee",
+  "element": "physical",
+  "maxHp": 1050,
+  "atk": 150,
+  "def": 75,
+  "spd": 118,
+  "critRate": 0.25,
+  "critDmg": 0.7,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 84,
+    "atk": 13,
+    "def": 6,
+    "spd": 1
+  },
+  "abilities": [
+    "pelian_spear",
+    "swift_footed",
+    "wrath_of_achilles"
+  ]
+}

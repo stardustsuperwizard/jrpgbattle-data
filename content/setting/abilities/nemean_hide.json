@@ -1,0 +1,20 @@
+{
+  "id": "nemean_hide",
+  "name": "Nemean Hide",
+  "type": "skill",
+  "target": "self",
+  "description": "Shield himself with the lion's hide (scales with DEF) and Taunt for 2 turns.",
+  "effects": [
+    {
+      "type": "shield",
+      "defRatio": 1.8,
+      "flat": 150,
+      "duration": 2
+    },
+    {
+      "type": "status",
+      "status": "taunt",
+      "duration": 2
+    }
+  ]
+}

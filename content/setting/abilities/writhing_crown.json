@@ -1,0 +1,20 @@
+{
+  "id": "writhing_crown",
+  "name": "Writhing Crown",
+  "type": "skill",
+  "target": "all_enemies",
+  "description": "Her serpents strike every enemy they hear: Physical DMG to all, with a 50% chance to Bleed.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 0.9,
+      "toughness": 15
+    },
+    {
+      "type": "status",
+      "status": "bleed",
+      "duration": 2,
+      "chance": 0.5
+    }
+  ]
+}

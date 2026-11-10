@@ -1,0 +1,24 @@
+{
+  "id": "hecate",
+  "name": "Hecate",
+  "role": "Witch of the Crossroads: debuffer",
+  "sprite": "🕯️",
+  "reach": "ranged",
+  "element": "fire",
+  "maxHp": 1000,
+  "atk": 145,
+  "def": 70,
+  "spd": 101,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 80,
+    "atk": 13,
+    "def": 5,
+    "spd": 1
+  },
+  "abilities": [
+    "torchfire",
+    "three_ways",
+    "night_of_torches"
+  ]
+}

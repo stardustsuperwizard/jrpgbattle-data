@@ -1,0 +1,20 @@
+{
+  "id": "three_ways",
+  "name": "Where Three Ways Meet",
+  "type": "skill",
+  "target": "blast",
+  "splash": 0.5,
+  "description": "Fire DMG to an enemy and half to adjacent enemies, and DEF Down for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.5,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "def_down",
+      "duration": 2
+    }
+  ]
+}
