@@ -19,6 +19,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { buildContent, render } from './build.mjs';
+import { SCHEMA_DIR, engineSchemas, keptSchemas } from './schemas.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ENGINE = resolve(process.env.JRPG_BATTLE ?? join(ROOT, '..', 'jrpg-battle'));
@@ -31,6 +32,7 @@ const { simulate, simulatePvp } = await load('src/engine/simulate.js');
 const { readContent } = await load('scripts/content.js');
 const { checkBoundaries } = await load('scripts/check-boundaries.js');
 const { completePicks } = await load('src/engine/picks.js');
+const { loadSchemas, validate } = await load('tests/helpers/schema.js');
 
 // engine.json names the jrpg-battle release CI checks against. The roster
 // works with any engine whose content format matches its manifest's
@@ -57,6 +59,15 @@ if (violations.length) throw new Error(violations.map((v) => `${v.file}: ${v.rea
 const engine = readContent(join(ENGINE, 'src', 'content'));
 const roster = assembleContent({ core: engine.core, setting });
 validateConfig(buildConfig(roster));
+
+// The schemas the API publishes are the engine's, as it wrote them (its decision 0053), and the setting fits them.
+const kept = keptSchemas(ROOT);
+const theirs = engineSchemas(ENGINE);
+const differ = [...new Set([...Object.keys(kept), ...Object.keys(theirs)])].filter((name) => kept[name] !== theirs[name]);
+if (differ.length) throw new Error(`${SCHEMA_DIR}/ differs from jrpg-battle ${ENGINE_VERSION}'s docs/content-format/ in ${differ.join(', ')}: run npm run schemas.`);
+const schemas = loadSchemas(join(ENGINE, 'docs', 'content-format') + '/');
+const misfits = files.flatMap((name) => validate(schemas, `${name}.schema.json`, setting[name]).map((p) => `${name}.json ${p}`));
+if (misfits.length) throw new Error(`The setting doesn't fit the content format's schemas:\n${misfits.join('\n')}`);
 
 // The engine's heroes beside the champions, for measuring each against the hero it stands in for.
 const defaults = assembleContent(engine);

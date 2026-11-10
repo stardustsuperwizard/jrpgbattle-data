@@ -1,0 +1,293 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common.schema.json",
+  "title": "Shared content shapes, content format 2026-11-10",
+  "description": "Shapes more than one content file uses: ids, stats, skills and their effects. The other schemas refer to these.",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "description": "An id: lowercase letters, digits and _, starting with a letter or digit."
+    },
+    "elementId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "An element id, one of core/elements.json's. The schema can't list them: the engine checks it when the content loads."
+    },
+    "statusId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "A status id, one of core/statuses.json's, checked when the content loads."
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "maxHp": {
+          "type": "number"
+        },
+        "atk": {
+          "type": "number"
+        },
+        "def": {
+          "type": "number"
+        },
+        "spd": {
+          "type": "number"
+        }
+      },
+      "description": "Flat stat changes, by stat."
+    },
+    "effectOn": {
+      "enum": [
+        "target",
+        "self",
+        "all_allies"
+      ],
+      "description": "Who an effect lands on: the skill's targets (the default), the user, or every living ally of the user."
+    },
+    "effect": {
+      "description": "One building block of a skill, by `type`. A field the type doesn't have is refused.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "mult"
+          ],
+          "properties": {
+            "type": {
+              "const": "damage"
+            },
+            "mult": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Of the user's ATK."
+            },
+            "toughness": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Toughness removed from a target weak to the element."
+            },
+            "on": {
+              "$ref": "#/$defs/effectOn"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "heal"
+            },
+            "pctMaxHp": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Of the recipient's max HP."
+            },
+            "flat": {
+              "type": "number",
+              "minimum": 0
+            },
+            "on": {
+              "$ref": "#/$defs/effectOn"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "duration"
+          ],
+          "properties": {
+            "type": {
+              "const": "shield"
+            },
+            "duration": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Turns."
+            },
+            "defRatio": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Of the user's DEF."
+            },
+            "flat": {
+              "type": "number",
+              "minimum": 0
+            },
+            "on": {
+              "$ref": "#/$defs/effectOn"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "status",
+            "duration"
+          ],
+          "properties": {
+            "type": {
+              "const": "status"
+            },
+            "status": {
+              "$ref": "#/$defs/statusId"
+            },
+            "duration": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Turns."
+            },
+            "chance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "To apply, 0 to 1; always applies when unset."
+            },
+            "dotRatio": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Overrides the status's own, for a DoT."
+            },
+            "on": {
+              "$ref": "#/$defs/effectOn"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "cleanse"
+            },
+            "on": {
+              "$ref": "#/$defs/effectOn"
+            }
+          },
+          "description": "Removes every cleansable status."
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "status"
+          ],
+          "properties": {
+            "type": {
+              "const": "remove_status"
+            },
+            "status": {
+              "$ref": "#/$defs/statusId"
+            },
+            "on": {
+              "$ref": "#/$defs/effectOn"
+            }
+          }
+        }
+      ]
+    },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "type",
+        "target",
+        "effects"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "basic",
+            "skill",
+            "ultimate"
+          ]
+        },
+        "target": {
+          "enum": [
+            "enemy",
+            "ally",
+            "blast",
+            "all_enemies",
+            "all_allies",
+            "self"
+          ]
+        },
+        "effects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/effect"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Shown in the UI."
+        },
+        "element": {
+          "$ref": "#/$defs/elementId",
+          "description": "Defaults to the user's element."
+        },
+        "splash": {
+          "type": "number",
+          "minimum": 0,
+          "description": "A blast's multiplier on the primary target's neighbours."
+        },
+        "spGain": {
+          "type": "number",
+          "minimum": 0
+        },
+        "spCost": {
+          "type": "number",
+          "minimum": 0
+        },
+        "energyGain": {
+          "type": "number",
+          "minimum": 0
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "description": "How often the enemy AI picks it, against its other skills."
+        },
+        "message": {
+          "type": "string",
+          "description": "Shown when used; {user} becomes the user's name."
+        },
+        "special": {
+          "enum": [
+            "heal",
+            "charge",
+            "release"
+          ],
+          "description": "Kept for an AI rule (a healer's heal, a charger's charge and release), out of the random picks."
+        }
+      },
+      "description": "A skill: a champion's ability (abilities.json) or a monster's own (enemies.json). spGain, spCost and energyGain come from the rules for its type when left out."
+    }
+  }
+}

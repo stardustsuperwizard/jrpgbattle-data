@@ -1,0 +1,381 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dungeon.schema.json",
+  "title": "setting/dungeon.json, content format 2026-11-10",
+  "description": "What is in the dungeon: monsters, bosses, themes, the shop and what drops. How a campaign works is core/campaign.json; the engine merges the two. null for a world with no dungeon. Every enemy and item named must be in the content, which the engine checks when it loads.",
+  "anyOf": [
+    {
+      "type": "null"
+    },
+    {
+      "$ref": "#/$defs/dungeon"
+    }
+  ],
+  "$defs": {
+    "dungeon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pools",
+        "bosses",
+        "bossEvery",
+        "waveSize",
+        "statGrowth",
+        "rewardGrowth",
+        "shop"
+      ],
+      "properties": {
+        "pools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "from",
+              "enemies"
+            ],
+            "properties": {
+              "from": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The floor it starts on."
+              },
+              "enemies": {
+                "type": "array",
+                "items": {
+                  "$ref": "common.schema.json#/$defs/id"
+                },
+                "minItems": 1
+              }
+            }
+          },
+          "minItems": 1,
+          "description": "The monsters drawn from, by the floor each pool starts on. One must start on floor 1."
+        },
+        "bosses": {
+          "description": "Drawn for a boss floor's last wave: one list of enemy ids, or entries by floor (decision 0034).",
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "common.schema.json#/$defs/id"
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "from",
+                  "bosses"
+                ],
+                "properties": {
+                  "from": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "The floor it starts on."
+                  },
+                  "bosses": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    },
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "bossEvery": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Every Nth floor ends on a boss; 0 for none."
+        },
+        "waveSize": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "base",
+            "growEvery",
+            "max"
+          ],
+          "properties": {
+            "base": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "growEvery": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "description": "Monsters a wave brings on floor 1, one more every growEvery floors, up to max."
+        },
+        "statGrowth": {
+          "description": "How a monster's HP, ATK and DEF grow by floor. A share a floor (0.1 is +10% a floor down), or entries by floor: from floor `from`, `base` times the content, plus `perFloor` a floor further down (decision 0044). Entries need one from floor 1.",
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "from",
+                  "base",
+                  "perFloor"
+                ],
+                "properties": {
+                  "from": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "The floor it starts on."
+                  },
+                  "base": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "perFloor": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              },
+              "minItems": 1
+            }
+          ]
+        },
+        "rewardGrowth": {
+          "description": "How its XP and gold grow by floor. A share a floor (0.1 is +10% a floor down), or entries by floor: from floor `from`, `base` times the content, plus `perFloor` a floor further down (decision 0044). Entries need one from floor 1.",
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "from",
+                  "base",
+                  "perFloor"
+                ],
+                "properties": {
+                  "from": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "The floor it starts on."
+                  },
+                  "base": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "perFloor": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              },
+              "minItems": 1
+            }
+          ]
+        },
+        "themes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "from"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9_-]+$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "from": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The floor it starts on."
+              }
+            }
+          },
+          "minItems": 1,
+          "description": "The stretches of the dungeon by the floor each starts on, for a client to choose scenes and music by (decision 0034). One must start on floor 1."
+        },
+        "shop": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "items",
+            "consumables"
+          ],
+          "properties": {
+            "items": {
+              "description": "The items it sells: ids all in stock from floor 1, or stock entries by the floor each comes in on (decision 0043). Not both in one list.",
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "common.schema.json#/$defs/id"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "from",
+                      "items"
+                    ],
+                    "properties": {
+                      "from": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "The floor it starts on."
+                      },
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "common.schema.json#/$defs/id"
+                        },
+                        "minItems": 1
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "consumables": {
+              "type": "object",
+              "description": "Things it sells to use at once, by id: heal gives a standing hero that share of its max HP, revive stands a fallen one up with it.",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9_]*$"
+              },
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "icon",
+                      "cost",
+                      "heal"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "icon": {
+                        "type": "string"
+                      },
+                      "cost": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "heal": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "maximum": 1
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "icon",
+                      "cost",
+                      "revive"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "icon": {
+                        "type": "string"
+                      },
+                      "cost": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "revive": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "maximum": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "campaign": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [],
+          "properties": {
+            "loot": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [],
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "from",
+                      "items"
+                    ],
+                    "properties": {
+                      "from": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "The floor it starts on."
+                      },
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "common.schema.json#/$defs/id"
+                        },
+                        "minItems": 1
+                      }
+                    }
+                  },
+                  "description": "Base items by the floor they start dropping on (decision 0035)."
+                }
+              }
+            }
+          },
+          "description": "The setting's part of the campaign: only which items drop. The rest is core/campaign.json's."
+        }
+      }
+    }
+  }
+}

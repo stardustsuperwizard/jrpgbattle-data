@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "heroes.schema.json",
+  "title": "setting/heroes.json, content format 2026-11-10",
+  "type": "object",
+  "propertyNames": {
+    "type": "string",
+    "pattern": "^[a-z0-9][a-z0-9_]*$"
+  },
+  "additionalProperties": {
+    "$ref": "#/$defs/hero"
+  },
+  "$defs": {
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "sprite",
+        "reach",
+        "element",
+        "maxHp",
+        "atk",
+        "def",
+        "spd",
+        "abilities"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sprite": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Its emoji or placeholder; a skin draws it by id."
+        },
+        "reach": {
+          "enum": [
+            "melee",
+            "ranged"
+          ],
+          "description": "How it fights, for a client drawing a unit it has no art for (decision 0052). No rule reads it."
+        },
+        "element": {
+          "$ref": "common.schema.json#/$defs/elementId"
+        },
+        "maxHp": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "atk": {
+          "type": "number",
+          "minimum": 0
+        },
+        "def": {
+          "type": "number",
+          "minimum": 0
+        },
+        "spd": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "role": {
+          "type": "string",
+          "description": "Shown in the UI."
+        },
+        "weaknesses": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/elementId"
+          }
+        },
+        "ai": {
+          "enum": [
+            "default",
+            "healer",
+            "charger"
+          ],
+          "description": "The enemy AI; default when unset. A healer needs a skill with special heal, a charger chargeEvery and one charge and one release skill."
+        },
+        "chargeEvery": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "A charger winds up every this many actions; only a charger has it."
+        },
+        "critRate": {
+          "type": "number",
+          "minimum": 0
+        },
+        "critDmg": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maxEnergy": {
+          "type": "number",
+          "minimum": 0
+        },
+        "toughness": {
+          "type": "number",
+          "minimum": 0
+        },
+        "growth": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [],
+          "properties": {
+            "maxHp": {
+              "type": "number",
+              "minimum": 0
+            },
+            "atk": {
+              "type": "number",
+              "minimum": 0
+            },
+            "def": {
+              "type": "number",
+              "minimum": 0
+            },
+            "spd": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "description": "Stats gained per level."
+        },
+        "xp": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Paid to whoever defeats it."
+        },
+        "gold": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Paid to whoever defeats it."
+        },
+        "abilities": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "description": "Its default set, by ability id (abilities.json): exactly one basic, one skill and one ultimate."
+        }
+      }
+    }
+  }
+}
