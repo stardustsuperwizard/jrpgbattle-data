@@ -2,6 +2,7 @@
   "id": "athena",
   "name": "Athena",
   "role": "Strategist",
+  "class": "Guardian",
   "sprite": "🦉",
   "reach": "melee",
   "element": "physical",

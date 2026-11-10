@@ -2,6 +2,7 @@
   "id": "hermes",
   "name": "Hermes",
   "role": "Messenger",
+  "class": "Support",
   "sprite": "🪽",
   "reach": "melee",
   "element": "lightning",

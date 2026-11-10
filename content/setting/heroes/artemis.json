@@ -2,6 +2,7 @@
   "id": "artemis",
   "name": "Artemis",
   "role": "Huntress",
+  "class": "Striker",
   "sprite": "🏹",
   "reach": "ranged",
   "element": "ice",

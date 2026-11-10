@@ -2,6 +2,7 @@
   "id": "ares",
   "name": "Ares",
   "role": "War God",
+  "class": "Striker",
   "sprite": "🗡️",
   "reach": "melee",
   "element": "physical",

@@ -69,6 +69,11 @@
           "type": "string",
           "description": "Shown in the UI."
         },
+        "class": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What job it does in a line-up, such as Guardian or Support (decision 0054). A label for a client and what the bot's pick spreads on; no rule reads it."
+        },
         "weaknesses": {
           "type": "array",
           "items": {

@@ -2,6 +2,7 @@
   "id": "poseidon",
   "name": "Poseidon",
   "role": "Sea King",
+  "class": "Caster",
   "sprite": "🔱",
   "reach": "melee",
   "element": "ice",

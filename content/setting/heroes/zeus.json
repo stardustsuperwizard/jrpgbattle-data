@@ -2,6 +2,7 @@
   "id": "zeus",
   "name": "Zeus",
   "role": "Sky King",
+  "class": "Caster",
   "sprite": "⚡",
   "reach": "ranged",
   "element": "lightning",

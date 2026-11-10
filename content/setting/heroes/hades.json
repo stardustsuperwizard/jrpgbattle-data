@@ -2,6 +2,7 @@
   "id": "hades",
   "name": "Hades",
   "role": "Underworld King",
+  "class": "Caster",
   "sprite": "💀",
   "reach": "melee",
   "element": "fire",

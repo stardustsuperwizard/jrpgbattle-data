@@ -2,18 +2,20 @@
 
 Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; jrpg-battle's statuses burn, shock, bleed, freeze, ATK Up, DEF Down and Taunt; and its four elements. The statuses and elements are still the engine's own, copied into this repository's `content/` with the rest of its content, so new ones are a file each in `content/statuses/` or `content/elements/`. Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
 
-| Champion | Role | Element (for now) | Spd | HP | ATK | DEF | Skill | Ultimate |
-|---|---|---|---|---|---|---|---|---|
-| 🪽 Hermes | Messenger: SP battery | Lightning | 124 | 980 | 135 | 65 | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
-| 🏹 Artemis | Huntress: single target | Ice | 116 | 1000 | 155 | 65 | Silver Arrow: heavy single + Bleed | The Hunt: massive single |
-| ☀️ Apollo | Sun Healer | Fire | 110 | 1100 | 110 | 80 | Healing Light: heal one + cleanse | Chariot of the Sun: all + Burn, heal all, ATK Up all |
-| 🗡️ Ares | War God: bruiser | Physical | 108 | 1400 | 140 | 95 | Bloodlust: single + Taunt | Rout: heavy blast + Bleed |
-| 🌹 Aphrodite | Enchantress: SP battery, party heal | Ice | 106 | 1050 | 110 | 75 | Embrace: heal all 12% + ATK Up all | Born of the Foam: all, 40% Freeze, heal all |
-| ⚡ Zeus | Sky King: area damage | Lightning | 104 | 1000 | 160 | 65 | Thunderbolt: blast, 60% Shock | King of Olympus: heavy all + Shock |
-| 🦉 Athena | Strategist: tank | Physical | 98 | 1450 | 115 | 120 | Aegis: shield all + Taunt | Owl's Gambit: heavy single, ATK Up all |
-| 🔱 Poseidon | Sea King: area control | Ice | 97 | 1150 | 145 | 80 | Tidal Wave: all, 25% Freeze | Earthshaker: heavy all + DEF Down |
-| 💀 Hades | Underworld King: damage over time | Fire | 94 | 1150 | 145 | 75 | Grasp of the Dead: single + Burn + DEF Down | Realm of the Dead: all + 3-turn Burn |
-| 🔨 Hephaestus | Smith: armor tank | Fire | 88 | 1550 | 130 | 110 | Forge Armor: heavy shield all | Molten Hammer: massive single + Burn |
+| Champion | Class | Role | Element (for now) | Spd | HP | ATK | DEF | Skill | Ultimate |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 🪽 Hermes | Support | Messenger: SP battery | Lightning | 124 | 980 | 135 | 65 | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
+| 🏹 Artemis | Striker | Huntress: single target | Ice | 116 | 1000 | 155 | 65 | Silver Arrow: heavy single + Bleed | The Hunt: massive single |
+| ☀️ Apollo | Support | Sun Healer | Fire | 110 | 1100 | 110 | 80 | Healing Light: heal one + cleanse | Chariot of the Sun: all + Burn, heal all, ATK Up all |
+| 🗡️ Ares | Striker | War God: bruiser | Physical | 108 | 1400 | 140 | 95 | Bloodlust: single + Taunt | Rout: heavy blast + Bleed |
+| 🌹 Aphrodite | Support | Enchantress: SP battery, party heal | Ice | 106 | 1050 | 110 | 75 | Embrace: heal all 12% + ATK Up all | Born of the Foam: all, 40% Freeze, heal all |
+| ⚡ Zeus | Caster | Sky King: area damage | Lightning | 104 | 1000 | 160 | 65 | Thunderbolt: blast, 60% Shock | King of Olympus: heavy all + Shock |
+| 🦉 Athena | Guardian | Strategist: tank | Physical | 98 | 1450 | 115 | 120 | Aegis: shield all + Taunt | Owl's Gambit: heavy single, ATK Up all |
+| 🔱 Poseidon | Caster | Sea King: area control | Ice | 97 | 1150 | 145 | 80 | Tidal Wave: all, 25% Freeze | Earthshaker: heavy all + DEF Down |
+| 💀 Hades | Caster | Underworld King: damage over time | Fire | 94 | 1150 | 145 | 75 | Grasp of the Dead: single + Burn + DEF Down | Realm of the Dead: all + 3-turn Burn |
+| 🔨 Hephaestus | Guardian | Smith: armor tank | Fire | 88 | 1550 | 130 | 110 | Forge Armor: heavy shield all | Molten Hammer: massive single + Burn |
+
+Each god has a class, a label for now (jrpg-battle decision 0054; what a class might do is jrpg-battle#363): Guardian, Striker, Caster or Support. The bot's pick spreads a team across classes.
 
 Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for their teammates' skills.
 
