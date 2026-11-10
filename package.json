@@ -1,6 +1,6 @@
 {
   "name": "jrpgbattle-data",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "private": true,
   "type": "module",
   "description": "The jrpgbattle champion roster: content for the jrpg-battle engine, built from one file per entry.",

@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { KINDS, build, buildContent, render } from '../scripts/build.mjs';
+import { API_VERSION, KINDS, build, buildContent, render } from '../scripts/build.mjs';
 
 const manifest = { formatVersion: '2026-11-10', name: 'Test', version: '1.0.0', licences: { data: 'UNLICENSED', lore: 'UNLICENSED' } };
 const hero = (id, abilities) => ({ id, name: id, abilities });
@@ -99,22 +99,25 @@ test('the build writes every drop-in setting file and the static API', (t) => {
   assert.deepEqual(readdirSync(join(out, 'src', 'content', 'setting')).sort(), ALL_FILES);
   assert.deepEqual(read('src/content/setting/manifest.json'), manifest);
   assert.deepEqual(Object.keys(read('src/content/setting/heroes.json')), ['zed', 'amy']);
-  assert.deepEqual(read('api/index.json'), {
-    name: 'Test', version: '1.0.0', formatVersion: '2026-11-10',
+  assert.equal(API_VERSION, 'v1');
+  assert.deepEqual(read('api/index.json'), { name: 'Test', versions: { v1: 'v1/index.json' } });
+  assert.deepEqual(readdirSync(join(out, 'api')).sort(), ['.nojekyll', 'index.json', 'v1'], 'every other path is under its version');
+  assert.deepEqual(read('api/v1/index.json'), {
+    api: 'v1', name: 'Test', version: '1.0.0', formatVersion: '2026-11-10',
     heroes: ['zed', 'amy'], abilities: ['jab', 'kick', 'aim'], enemies: ['rat'], items: [],
     content: KINDS.map(({ name }) => `content/${name}.json`),
   });
-  assert.deepEqual(read('api/heroes/index.json'), ['zed', 'amy']);
-  assert.deepEqual(read('api/heroes/amy.json'), hero('amy', ['kick', 'aim']));
-  assert.deepEqual(read('api/abilities/index.json'), ['jab', 'kick', 'aim']);
-  assert.deepEqual(read('api/house-rules.json'), { rules: { maxLevel: 25 } });
-  assert.deepEqual(readdirSync(join(out, 'api', 'content')).sort(), ALL_FILES);
-  assert.equal(readFileSync(join(out, 'api/content/heroes.json'), 'utf8'), readFileSync(join(out, 'src/content/setting/heroes.json'), 'utf8'));
+  assert.deepEqual(read('api/v1/heroes/index.json'), ['zed', 'amy']);
+  assert.deepEqual(read('api/v1/heroes/amy.json'), hero('amy', ['kick', 'aim']));
+  assert.deepEqual(read('api/v1/abilities/index.json'), ['jab', 'kick', 'aim']);
+  assert.deepEqual(read('api/v1/house-rules.json'), { rules: { maxLevel: 25 } });
+  assert.deepEqual(readdirSync(join(out, 'api', 'v1', 'content')).sort(), ALL_FILES);
+  assert.equal(readFileSync(join(out, 'api/v1/content/heroes.json'), 'utf8'), readFileSync(join(out, 'src/content/setting/heroes.json'), 'utf8'));
   // A second build replaces the first: a hero removed from the sources leaves no file behind.
   rmSync(join(root, 'content/setting/heroes/amy.json'));
   writeFileSync(join(root, 'content/setting/heroes/index.json'), render(['zed']));
   build(out, root);
-  assert.deepEqual(readdirSync(join(out, 'api', 'heroes')).sort(), ['index.json', 'zed.json']);
+  assert.deepEqual(readdirSync(join(out, 'api', 'v1', 'heroes')).sort(), ['index.json', 'zed.json']);
 });
 
 test("the repository's own sources build into every setting file", () => {

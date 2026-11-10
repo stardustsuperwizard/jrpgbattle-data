@@ -2,7 +2,7 @@
 
 jrpgbattle's **setting** for the [jrpg-battle](https://github.com/stardustsuperwizard/jrpg-battle) engine (its decision 0050): its champions and their abilities, and the monsters, items, waves and dungeon they play in, by the engine's own core rules, with a short list of **house rules** where this world changes a core number. It is kept one file per entry, served as a static API, and built into the setting files a deployment drops over the engine's `src/content/setting/`, replacing its default world whole. The first wave is ten Greek gods; see [ROSTER.md](ROSTER.md).
 
-**Public, not yet licensed.** The repository is public, but both the data and the lore are unlicensed (all rights reserved) until the roster opens. The plan is a Creative Commons licence for the data with the lore held back ([jrpg-battle#248](https://github.com/stardustsuperwizard/jrpg-battle/issues/248)). The static API serves the data only, at <https://stardustsuperwizard.github.io/jrpgbattle-data/> once Pages is on (see [Static API](#static-api)); the lore is never part of it.
+**Public, not yet licensed.** The repository is public, but the data is unlicensed (all rights reserved) until the roster opens; the plan is a Creative Commons licence ([jrpg-battle#248](https://github.com/stardustsuperwizard/jrpg-battle/issues/248)). The static API is at <https://stardustsuperwizard.github.io/jrpgbattle-data/v1/> once Pages is on (see [Static API](#static-api)). **No lore here:** the champions' stories are the owner's and stay private, so they moved to the jrpgbattle site's own `lore/` when this repository went public (2026-11-10); never add them back.
 
 ## Layout
 
@@ -20,7 +20,6 @@ jrpgbattle's **setting** for the [jrpg-battle](https://github.com/stardustsuperw
 | `scripts/check.mjs` | `npm run check`: builds, validates the result with the engine and measures each champion. |
 | `tests/` | `npm test`: the build's own tests. |
 | `data/checks.json` | Settings for the check only: the core party it measures against, which core hero each champion stands in for, and sample teams. Not content. |
-| `lore/` | One file per champion: sources and story, with `manifest.json` naming the lore format. Neither built nor published; the jrpgbattle site reads it as the base layer under its own lore, which wins (see `lore/README.md`). |
 
 Ids are lowercase letters, digits and `_`. Champion and ability ids must not reuse jrpg-battle's (`aria`, `slash`, …): a deployment wouldn't mind, but the check measures each champion beside the engine's heroes and refuses a clash.
 
@@ -64,17 +63,25 @@ The API on GitHub Pages serves a release, never `main`. Each release carries `jr
 
 To serve another release again, as a rollback, run `pages` from the Actions tab with its tag. Setting `PUBLISH_API` back to anything else stops publishing; the last deploy stays up until Pages is turned off.
 
-The API is then at `https://stardustsuperwizard.github.io/jrpgbattle-data/`, starting with `index.json`. Pages answers any origin (`Access-Control-Allow-Origin: *`), so a page on another site can fetch it.
+The API is then at `https://stardustsuperwizard.github.io/jrpgbattle-data/v1/`, starting with `v1/index.json`. Pages answers any origin (`Access-Control-Allow-Origin: *`), so a page on another site can fetch it.
 
-| Path | What it is |
+### Versions
+
+The API is versioned by path: everything is under `/v1/`, and the root `index.json` lists the versions (`{ "name", "versions": { "v1": "v1/index.json" } }`). `API_VERSION` in `scripts/build.mjs` names it. Three numbers, three meanings:
+
+- **`v1`, the API version:** the paths and the shape of the indexes. Moving, renaming or removing a path, or changing an index's shape, is a new version, `/v2/`; adding a path or a field to an index is not.
+- **`formatVersion`:** the jrpg-battle content format the entries are written in (its decision 0023). Entries are the sources as they are, so a new content format changes them inside `v1`; read `formatVersion` before reading entries.
+- **`version`:** the roster release being served. Pages serves one release, the latest, so this moves with every release.
+
+Pages serves one build, so when a `/v2/` comes the build writes both until `/v1/` is retired, and the root index lists both. A client that needs a fixed roster takes that release's API or content zip rather than the live API.
+
+| Path, under `/v1/` | What it is |
 |---|---|
-| `index.json` | `name`, `version` and `formatVersion` from the manifest, each kind's ids in order, and the paths of the combined files. Start here. |
+| `index.json` | `api` (`v1`), `name`, `version` and `formatVersion` from the manifest, each kind's ids in order, and the paths of the combined files. Start here. |
 | `manifest.json`, `waves.json`, `dungeon.json`, `house-rules.json` | The single files. |
 | `<kind>/index.json` | Each kind's ids, in order: `heroes`, `abilities`, `enemies`, `items`. |
 | `<kind>/<id>.json` | One entry, as in the sources. |
 | `content/<name>.json` | Every combined content file, the same as a release's. |
-
-The API's `index.json` names the release it serves (`version`). A deployment that needs a fixed version takes that release's zips rather than the API.
 
 ## Deploying
 

@@ -17,9 +17,10 @@
 //   src/content/setting/<name>.json  jrpg-battle's setting files: dropped over
 //                            a jrpg-battle checkout's src/content/setting/,
 //                            they replace its default world whole
-//   api/                     the static API: the sources entry by entry, an
+//   api/                     the static API: an index naming its versions,
+//                            and under api/v1/ the sources entry by entry, an
 //                            index per kind, and the combined files under
-//                            api/content/
+//                            api/v1/content/
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -41,6 +42,14 @@ export const KINDS = [
   { name: 'dungeon', single: true },
   { name: 'house-rules', single: true },
 ];
+
+/**
+ * The static API's version: its paths and the shape of its indexes. Entries
+ * are the sources as they are, in the content format the index names
+ * (`formatVersion`), so a new roster or content format is not a new version;
+ * moving, renaming or removing a path, or changing an index's shape, is.
+ */
+export const API_VERSION = 'v1';
 
 /** Where the sources live, under the repository root. */
 export const SOURCE_DIR = 'content/setting';
@@ -163,9 +172,13 @@ export function build(out, root = ROOT) {
 
   for (const [name, value] of Object.entries(content)) write(`src/content/setting/${name}.json`, value);
 
-  // The API: a root index to discover the rest, then each kind entry by entry.
+  // The API: a root index naming the versions, then the version's index to
+  // discover the rest, and each kind entry by entry.
+  const v = `api/${API_VERSION}`;
+  write('api/index.json', { name: manifest.name, versions: { [API_VERSION]: `${API_VERSION}/index.json` } });
   const entryKinds = KINDS.filter((kind) => !kind.single).map((kind) => kind.name);
-  write('api/index.json', {
+  write(`${v}/index.json`, {
+    api: API_VERSION,
     name: manifest.name,
     version: manifest.version,
     formatVersion: manifest.formatVersion,
@@ -174,14 +187,14 @@ export function build(out, root = ROOT) {
   });
   for (const kind of KINDS) {
     if (kind.single) {
-      write(`api/${kind.name}.json`, content[kind.name]);
+      write(`${v}/${kind.name}.json`, content[kind.name]);
       continue;
     }
     const entries = /** @type {Record<string, unknown>} */ (content[kind.name]);
-    write(`api/${kind.name}/index.json`, Object.keys(entries));
-    for (const [id, entry] of Object.entries(entries)) write(`api/${kind.name}/${id}.json`, entry);
+    write(`${v}/${kind.name}/index.json`, Object.keys(entries));
+    for (const [id, entry] of Object.entries(entries)) write(`${v}/${kind.name}/${id}.json`, entry);
   }
-  for (const [name, value] of Object.entries(content)) write(`api/content/${name}.json`, value);
+  for (const [name, value] of Object.entries(content)) write(`${v}/content/${name}.json`, value);
   // GitHub Pages runs Jekyll otherwise, which has no business with JSON.
   write('api/.nojekyll', '');
   const counts = Object.fromEntries(entryKinds.map((name) => [name, Object.keys(content[name]).length]));
