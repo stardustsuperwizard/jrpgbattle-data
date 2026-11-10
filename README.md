@@ -2,7 +2,7 @@
 
 jrpgbattle's **setting** for the [jrpg-battle](https://github.com/stardustsuperwizard/jrpg-battle) engine (its decision 0050): its champions and their abilities, and the monsters, items, waves and dungeon they play in, by the engine's own core rules, with a short list of **house rules** where this world changes a core number. It is kept one file per entry, served as a static API, and built into the setting files a deployment drops over the engine's `src/content/setting/`, replacing its default world whole. The first wave is ten Greek gods; see [ROSTER.md](ROSTER.md).
 
-**Private for now.** Both the data and the lore are unlicensed (all rights reserved) until the roster opens. The plan is a Creative Commons licence for the data with the lore held back ([jrpg-battle#248](https://github.com/stardustsuperwizard/jrpg-battle/issues/248)). The static API is public once Pages is on (see [Static API](#static-api)); the lore is never published.
+**Public, not yet licensed.** The repository is public, but both the data and the lore are unlicensed (all rights reserved) until the roster opens. The plan is a Creative Commons licence for the data with the lore held back ([jrpg-battle#248](https://github.com/stardustsuperwizard/jrpg-battle/issues/248)). The static API serves the data only, at <https://stardustsuperwizard.github.io/jrpgbattle-data/> once Pages is on (see [Static API](#static-api)); the lore is never part of it.
 
 ## Layout
 
@@ -59,9 +59,12 @@ The API on GitHub Pages serves a release, never `main`. Each release carries `jr
 
 1. Turn Pages on: **Settings → Pages → Source: GitHub Actions**.
 2. Add the repository variable **`PUBLISH_API`** with the value `true`: **Settings → Secrets and variables → Actions → Variables**.
-3. Run the `pages` workflow once from the Actions tab to publish the latest release, or publish a new release.
+3. Make sure the latest release has its zips. If its `release` run failed, run `release` from the Actions tab with its tag: that attaches them with the workflow as it is on `main`, and `pages` follows it.
+4. Otherwise run the `pages` workflow once from the Actions tab to publish the latest release, or publish a new release.
 
-To serve another release again, as a rollback, run `pages` from the Actions tab with its tag. A Pages site is public even when the repository is private, and on a private repository Pages needs a paid GitHub plan. Setting `PUBLISH_API` back to anything else stops publishing; the last deploy stays up until Pages is turned off.
+To serve another release again, as a rollback, run `pages` from the Actions tab with its tag. Setting `PUBLISH_API` back to anything else stops publishing; the last deploy stays up until Pages is turned off.
+
+The API is then at `https://stardustsuperwizard.github.io/jrpgbattle-data/`, starting with `index.json`. Pages answers any origin (`Access-Control-Allow-Origin: *`), so a page on another site can fetch it.
 
 | Path | What it is |
 |---|---|
@@ -108,5 +111,5 @@ The jrpgbattle site (`stardustsuperwizard/jrpgbattle-client-premium`) pins a rel
 1. Bump `version` in `content/setting/manifest.json` (semver; the `package.json` version follows it) in the PR that changes the roster.
 2. Merge it, with CI green.
 3. On GitHub, **Releases → Draft a new release**: create the tag `vX.Y.Z` (the manifest's version, with a `v`) on `main`, and name the champions added or changed in the notes. Publishing creates the tag.
-4. `.github/workflows/release.yml` then checks that the tag matches the manifest, runs the same tests and check as CI, and attaches `jrpgbattle-content-vX.Y.Z.zip` and `jrpgbattle-api-vX.Y.Z.zip`. If it fails, the release has no zips: fix the cause and re-run the workflow. Once it succeeds, `pages` publishes the new release's API (when `PUBLISH_API` is `true`).
+4. `.github/workflows/release.yml` then checks that the tag matches the manifest, runs the same tests and check as CI, and attaches `jrpgbattle-content-vX.Y.Z.zip` and `jrpgbattle-api-vX.Y.Z.zip`. If it fails, the release has no zips: fix the cause on `main`, then run `release` from the Actions tab with the tag (re-running the failed run would use the workflow as it was at the tag). Once it succeeds, `pages` publishes the new release's API (when `PUBLISH_API` is `true`).
 5. Move the site's pin in its `versions.json` to the new tag. **That deploy interrupts live online matches**, as any content change does.

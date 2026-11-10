@@ -7,12 +7,21 @@
 #   jrpgbattle-api-<tag>.zip      the static API's files, entry by entry, which
 #                                 pages.yml publishes to GitHub Pages once this
 #                                 run succeeds, when PUBLISH_API is "true"
-# Runs when a release is published.
+# Runs when a release is published. Run it by hand from the Actions tab with a
+# tag to attach the files to a release whose run failed: a re-run of a release
+# event uses the workflow as it was at that tag, so a fix to this file only
+# reaches an existing release this way.
 name: release
 
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: The published release to attach the files to, such as v0.12.0
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -24,17 +33,17 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.release.tag_name }}
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
 
       # The tag names the content it carries (README "Releasing"), so a release
       # whose tag and manifest disagree would put the wrong version in matches.
       - name: Require the tag to match the manifest's version
         env:
-          TAG: ${{ github.event.release.tag_name }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
         run: |
-          VERSION="v$(node -p "require('./content/manifest.json').version")"
+          VERSION="v$(node -p "require('./content/setting/manifest.json').version")"
           if [ "$TAG" != "$VERSION" ]; then
-            echo "::error::The release tag is $TAG, but content/manifest.json says $VERSION. Bump the manifest in a PR, or tag the commit that has it."
+            echo "::error::The release tag is $TAG, but content/setting/manifest.json says $VERSION. Bump the manifest in a PR, or tag the commit that has it."
             exit 1
           fi
 
@@ -78,7 +87,7 @@ jobs:
       - name: Attach the content files and the API
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.event.release.tag_name }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
         run: |
           CONTENT="jrpgbattle-content-$TAG.zip"
           API="jrpgbattle-api-$TAG.zip"
