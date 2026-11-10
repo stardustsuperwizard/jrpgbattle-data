@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "manifest.schema.json",
+  "title": "setting/manifest.json, content format 2026-11-10",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "formatVersion",
+    "name",
+    "version",
+    "licences"
+  ],
+  "properties": {
+    "formatVersion": {
+      "const": "2026-11-10",
+      "description": "The content format the files are written in (FORMATS.content, decision 0023). The engine reads only its own and refuses any other by name."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$",
+      "description": "The content's own version, semver: the config's contentVersion, which every match records."
+    },
+    "licences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "data",
+        "lore"
+      ],
+      "properties": {
+        "data": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lore": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "description": "The licence of the data and of its lore; UNLICENSED for all rights reserved."
+    }
+  }
+}

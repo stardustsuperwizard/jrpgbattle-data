@@ -3,7 +3,7 @@
 // folders, so these don't move when the real content does.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { API_VERSION, KINDS, build, buildContent, render } from '../scripts/build.mjs';
@@ -33,6 +33,8 @@ function sources(t, { order = ['zed', 'amy'], heroes = { zed: ['jab', 'kick'], a
   put('content/setting/heroes/index.json', order);
   for (const [id, list] of Object.entries(heroes)) put(`content/setting/heroes/${id}.json`, hero(id, list));
   for (const id of abilities) put(`content/setting/abilities/${id}.json`, ability(id));
+  // The engine's schemas, kept here as the repository keeps them.
+  cpSync(new URL('../schemas', import.meta.url), join(root, 'schemas'), { recursive: true });
   extra(put);
   return root;
 }
@@ -100,12 +102,14 @@ test('the build writes every drop-in setting file and the static API', (t) => {
   assert.deepEqual(read('src/content/setting/manifest.json'), manifest);
   assert.deepEqual(Object.keys(read('src/content/setting/heroes.json')), ['zed', 'amy']);
   assert.equal(API_VERSION, 'v1');
-  assert.deepEqual(read('api/index.json'), { name: 'Test', versions: { v1: 'v1/index.json' } });
-  assert.deepEqual(readdirSync(join(out, 'api')).sort(), ['.nojekyll', 'index.json', 'v1'], 'every other path is under its version');
+  assert.deepEqual(read('api/index.json'), { name: 'Test', docs: 'index.html', versions: { v1: { index: 'v1/index.json', openapi: 'v1/openapi.json' } } });
+  assert.deepEqual(readdirSync(join(out, 'api')).sort(), ['.nojekyll', 'index.html', 'index.json', 'v1'], 'every other path is under its version');
+  assert.match(readFileSync(join(out, 'api/index.html'), 'utf8'), /url: 'v1\/openapi\.json'/);
   assert.deepEqual(read('api/v1/index.json'), {
     api: 'v1', name: 'Test', version: '1.0.0', formatVersion: '2026-11-10',
     heroes: ['zed', 'amy'], abilities: ['jab', 'kick', 'aim'], enemies: ['rat'], items: [],
     content: KINDS.map(({ name }) => `content/${name}.json`),
+    openapi: 'openapi.json', schemas: 'schemas/',
   });
   assert.deepEqual(read('api/v1/heroes/index.json'), ['zed', 'amy']);
   assert.deepEqual(read('api/v1/heroes/amy.json'), hero('amy', ['kick', 'aim']));
@@ -113,11 +117,35 @@ test('the build writes every drop-in setting file and the static API', (t) => {
   assert.deepEqual(read('api/v1/house-rules.json'), { rules: { maxLevel: 25 } });
   assert.deepEqual(readdirSync(join(out, 'api', 'v1', 'content')).sort(), ALL_FILES);
   assert.equal(readFileSync(join(out, 'api/v1/content/heroes.json'), 'utf8'), readFileSync(join(out, 'src/content/setting/heroes.json'), 'utf8'));
+  // The schemas go out as the engine wrote them, and the description lists exactly the files written, each pointing at a schema that is there.
+  const schemaFiles = readdirSync(join(root, 'schemas')).sort();
+  assert.deepEqual(readdirSync(join(out, 'api/v1/schemas')).sort(), schemaFiles);
+  for (const name of schemaFiles) assert.equal(readFileSync(join(out, 'api/v1/schemas', name), 'utf8'), readFileSync(join(root, 'schemas', name), 'utf8'));
+  const spec = read('api/v1/openapi.json');
+  assert.equal(spec.openapi, '3.1.0');
+  assert.equal(spec.info.version, '1.0.0');
+  const written = (dir, prefix = '') => readdirSync(join(out, 'api/v1', dir), { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? written(join(dir, e.name), `${prefix}${e.name}/`) : [`/${prefix}${e.name}`]));
+  const files = written('').filter((p) => !p.startsWith('/schemas/') && p !== '/openapi.json').sort();
+  const listed = Object.entries(spec.paths).flatMap(([path, op]) => {
+    const id = op.get.parameters?.find((p) => p.name === 'id');
+    return id ? (id.schema.enum ?? []).map((v) => path.replace('{id}', v)) : [path];
+  }).sort();
+  assert.deepEqual(listed, files);
+  const refs = JSON.stringify(spec).match(/"\$ref":"schemas\/[^"#]+/g).map((r) => r.slice('"$ref":"schemas/'.length));
+  for (const file of refs) assert.ok(schemaFiles.includes(file), file);
+  assert.equal(spec.paths['/heroes/{id}.json'].get.responses[200].content['application/json'].schema.$ref, 'schemas/heroes.schema.json#/$defs/hero');
   // A second build replaces the first: a hero removed from the sources leaves no file behind.
   rmSync(join(root, 'content/setting/heroes/amy.json'));
   writeFileSync(join(root, 'content/setting/heroes/index.json'), render(['zed']));
   build(out, root);
   assert.deepEqual(readdirSync(join(out, 'api', 'v1', 'heroes')).sort(), ['index.json', 'zed.json']);
+});
+
+test('the build stops without the schemas, naming the command that brings them', (t) => {
+  const root = sources(t);
+  rmSync(join(root, 'schemas'), { recursive: true });
+  mkdirSync(join(root, 'schemas'));
+  assert.throws(() => build(join(root, 'dist'), root), /schemas\/ has no manifest\.schema\.json: run npm run schemas/);
 });
 
 test("the repository's own sources build into every setting file", () => {

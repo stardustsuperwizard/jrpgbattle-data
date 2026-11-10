@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "waves.schema.json",
+  "title": "setting/waves.json, content format 2026-11-10",
+  "description": "The practice waves (PvE), in order: each a list of enemy ids.",
+  "type": "array",
+  "items": {
+    "type": "array",
+    "items": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "minItems": 1
+  },
+  "minItems": 1
+}

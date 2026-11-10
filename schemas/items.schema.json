@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "items.schema.json",
+  "title": "setting/items.json, content format 2026-11-10",
+  "type": "object",
+  "propertyNames": {
+    "type": "string",
+    "pattern": "^[a-z0-9][a-z0-9_]*$"
+  },
+  "additionalProperties": {
+    "$ref": "#/$defs/item"
+  },
+  "$defs": {
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "cost",
+        "stats"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "icon": {
+          "type": "string"
+        },
+        "cost": {
+          "type": "number",
+          "minimum": 0
+        },
+        "stats": {
+          "$ref": "common.schema.json#/$defs/stats"
+        },
+        "statsPct": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [],
+          "properties": {
+            "maxHp": {
+              "type": "number",
+              "exclusiveMinimum": -1
+            },
+            "atk": {
+              "type": "number",
+              "exclusiveMinimum": -1
+            },
+            "def": {
+              "type": "number",
+              "exclusiveMinimum": -1
+            },
+            "spd": {
+              "type": "number",
+              "exclusiveMinimum": -1
+            }
+          },
+          "description": "Percentage bonuses as shares (0.1 is +10%), applied after the flat ones (decision 0045)."
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "description": "Item ids it is built from: buying it consumes those the hero wears (decision 0037)."
+        },
+        "slot": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The slot type it is worn in, one of the dungeon's slots (decision 0036)."
+        }
+      }
+    }
+  }
+}

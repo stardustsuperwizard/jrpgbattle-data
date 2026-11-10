@@ -17,7 +17,9 @@ jrpgbattle's **setting** for the [jrpg-battle](https://github.com/stardustsuperw
 | `content/setting/waves.json`, `content/setting/dungeon.json` | The practice waves, and what is in the dungeon (the pools, bosses, themes, the shop, the drops): see [DUNGEON.md](DUNGEON.md). How a campaign works is the engine's `core/campaign.json`. |
 | `content/setting/house-rules.json` | The core numbers this world changes, by the engine config's paths: the level cap and the loot sell share. The engine refuses anything its core lacks. |
 | `scripts/build.mjs` | `npm run build`: the sources into `dist/src/content/setting/` and `dist/api/`. Plain Node, no dependencies, no engine needed. |
-| `scripts/check.mjs` | `npm run check`: builds, validates the result with the engine and measures each champion. |
+| `scripts/check.mjs` | `npm run check`: builds, validates the result with the engine and its schemas, checks `schemas/` is the engine's, and measures each champion. |
+| `scripts/openapi.mjs` | The API's OpenAPI description, which the build writes from the same content as the files. |
+| `schemas/` | The content format's JSON Schemas, copied from the jrpg-battle release in `engine.json` (its `docs/content-format/`, decision 0053) by `npm run schemas` (`scripts/schemas.mjs`). The API publishes them. Never edit them here: `npm run check` fails when they differ from the engine's. |
 | `tests/` | `npm test`: the build's own tests. |
 | `data/checks.json` | Settings for the check only: the core party it measures against, which core hero each champion stands in for, and sample teams. Not content. |
 
@@ -63,11 +65,11 @@ The API on GitHub Pages serves a release, never `main`. Each release carries `jr
 
 To serve another release again, as a rollback, run `pages` from the Actions tab with its tag. Setting `PUBLISH_API` back to anything else stops publishing; the last deploy stays up until Pages is turned off.
 
-The API is then at `https://stardustsuperwizard.github.io/jrpgbattle-data/v1/`, starting with `v1/index.json`. Pages answers any origin (`Access-Control-Allow-Origin: *`), so a page on another site can fetch it.
+The API is then at `https://stardustsuperwizard.github.io/jrpgbattle-data/v1/`, starting with `v1/index.json`. The site's front page, `https://stardustsuperwizard.github.io/jrpgbattle-data/`, is its documentation: the OpenAPI description, browsable with Swagger UI, where each path can be tried. Pages answers any origin (`Access-Control-Allow-Origin: *`), so a page on another site can fetch it.
 
 ### Versions
 
-The API is versioned by path: everything is under `/v1/`, and the root `index.json` lists the versions (`{ "name", "versions": { "v1": "v1/index.json" } }`). `API_VERSION` in `scripts/build.mjs` names it. Three numbers, three meanings:
+The API is versioned by path: everything is under `/v1/`. The root holds only what outlives a version: `index.html`, the docs page, and `index.json`, which lists the versions (`{ "name", "docs": "index.html", "versions": { "v1": { "index": "v1/index.json", "openapi": "v1/openapi.json" } } }`). `API_VERSION` in `scripts/build.mjs` names it. Three numbers, three meanings:
 
 - **`v1`, the API version:** the paths and the shape of the indexes. Moving, renaming or removing a path, or changing an index's shape, is a new version, `/v2/`; adding a path or a field to an index is not.
 - **`formatVersion`:** the jrpg-battle content format the entries are written in (its decision 0023). Entries are the sources as they are, so a new content format changes them inside `v1`; read `formatVersion` before reading entries.
@@ -77,7 +79,9 @@ Pages serves one build, so when a `/v2/` comes the build writes both until `/v1/
 
 | Path, under `/v1/` | What it is |
 |---|---|
-| `index.json` | `api` (`v1`), `name`, `version` and `formatVersion` from the manifest, each kind's ids in order, and the paths of the combined files. Start here. |
+| `index.json` | `api` (`v1`), `name`, `version` and `formatVersion` from the manifest, each kind's ids in order, the paths of the combined files, and of `openapi.json` and `schemas/`. Start here. |
+| `openapi.json` | The OpenAPI 3.1 description of every path below, each response described by a schema in `schemas/`. |
+| `schemas/<name>.schema.json` | The content format's JSON Schemas, as the engine release in `engine.json` wrote them: one per setting file, an entry's shape a `$defs` of its file's (`heroes.schema.json#/$defs/hero`), and `common.schema.json`. A schema checks a file's shape; the engine checks the rest (an id naming something that exists) when it loads. |
 | `manifest.json`, `waves.json`, `dungeon.json`, `house-rules.json` | The single files. |
 | `<kind>/index.json` | Each kind's ids, in order: `heroes`, `abilities`, `enemies`, `items`. |
 | `<kind>/<id>.json` | One entry, as in the sources. |
@@ -98,14 +102,14 @@ From a local build, `cp -r dist/src ../jrpg-battle/` does the same. The server, 
 Needs Node 22 or later and a jrpg-battle checkout beside this one (or `JRPG_BATTLE=/path/to/jrpg-battle`), in the roster's content format; the release in `engine.json` is what CI uses:
 
 ```sh
-git -C ../jrpg-battle checkout v0.10.1  # the tag CI checks against
+git -C ../jrpg-battle checkout v0.17.0  # the tag CI checks against
 npm run check              # 300 battles per line
 npm run check -- 1000      # more battles, steadier numbers
 ```
 
 It builds the sources, reads the engine's content with jrpg-battle's own reader, puts the built files where a deployment would and runs its boundary check and validation, both as a deployment loads them and with the engine's heroes kept beside the champions so each can be measured against the hero it stands in for. It reports any speed shared with another hero, writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions), and prints each champion's PvE and PvP win rates against the core party. ROSTER.md explains how to read them.
 
-**Compatibility is the format, not a release number** (jrpg-battle decision 0023). The manifest's `formatVersion` names the content format the files are written in, and they work with every jrpg-battle release that reads that format. The engine refuses any other format by name. An engine release that keeps the format needs nothing here: no roster release, and the site moves its engine pin alone. When jrpg-battle moves the content format, the files move with it in one PR and the roster releases. `engine.json` (`{ "tag": "v0.10.1" }`) only names the release CI checks against; bump it to measure on a newer engine, and update ROSTER.md if the numbers move.
+**Compatibility is the format, not a release number** (jrpg-battle decision 0023). The manifest's `formatVersion` names the content format the files are written in, and they work with every jrpg-battle release that reads that format. The engine refuses any other format by name. An engine release that keeps the format needs nothing here: no roster release, and the site moves its engine pin alone. When jrpg-battle moves the content format, the files move with it in one PR and the roster releases. `engine.json` (`{ "tag": "v0.17.0" }`) names the release CI checks against and the schemas come from; bump it to measure on a newer engine, run `npm run schemas` with that release checked out, and update ROSTER.md if the numbers move.
 
 ## CI
 

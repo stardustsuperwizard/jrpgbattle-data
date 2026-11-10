@@ -17,13 +17,17 @@
 //   src/content/setting/<name>.json  jrpg-battle's setting files: dropped over
 //                            a jrpg-battle checkout's src/content/setting/,
 //                            they replace its default world whole
-//   api/                     the static API: an index naming its versions,
-//                            and under api/v1/ the sources entry by entry, an
-//                            index per kind, and the combined files under
-//                            api/v1/content/
+//   api/                     the static API: an index naming its versions
+//                            and a docs page, and under api/v1/ the sources
+//                            entry by entry, an index per kind, the combined
+//                            files under api/v1/content/, the content format's
+//                            schemas (schemas/, the engine's) and the
+//                            OpenAPI description, api/v1/openapi.json
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { openapi } from './openapi.mjs';
+import { SCHEMA_DIR, keptSchemas } from './schemas.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ID_RE = /^[a-z0-9][a-z0-9_]*$/;
@@ -175,7 +179,12 @@ export function build(out, root = ROOT) {
   // The API: a root index naming the versions, then the version's index to
   // discover the rest, and each kind entry by entry.
   const v = `api/${API_VERSION}`;
-  write('api/index.json', { name: manifest.name, versions: { [API_VERSION]: `${API_VERSION}/index.json` } });
+  write('api/index.json', {
+    name: manifest.name,
+    docs: 'index.html',
+    versions: { [API_VERSION]: { index: `${API_VERSION}/index.json`, openapi: `${API_VERSION}/openapi.json` } },
+  });
+  write('api/index.html', docsPage(manifest.name, `${API_VERSION}/openapi.json`));
   const entryKinds = KINDS.filter((kind) => !kind.single).map((kind) => kind.name);
   write(`${v}/index.json`, {
     api: API_VERSION,
@@ -184,6 +193,8 @@ export function build(out, root = ROOT) {
     formatVersion: manifest.formatVersion,
     ...Object.fromEntries(entryKinds.map((name) => [name, Object.keys(content[name])])),
     content: Object.keys(content).map((name) => `content/${name}.json`),
+    openapi: 'openapi.json',
+    schemas: 'schemas/',
   });
   for (const kind of KINDS) {
     if (kind.single) {
@@ -195,10 +206,39 @@ export function build(out, root = ROOT) {
     for (const [id, entry] of Object.entries(entries)) write(`${v}/${kind.name}/${id}.json`, entry);
   }
   for (const [name, value] of Object.entries(content)) write(`${v}/content/${name}.json`, value);
+  // The content format's schemas, as the engine wrote them, and the description that refers to them.
+  const schemas = keptSchemas(root);
+  for (const kind of KINDS) if (!schemas[`${kind.name}.schema.json`]) throw new Error(`${SCHEMA_DIR}/ has no ${kind.name}.schema.json: run npm run schemas with the pinned jrpg-battle.`);
+  for (const [name, text] of Object.entries(schemas)) write(`${v}/schemas/${name}`, text);
+  write(`${v}/openapi.json`, openapi(content, KINDS, API_VERSION));
   // GitHub Pages runs Jekyll otherwise, which has no business with JSON.
   write('api/.nojekyll', '');
   const counts = Object.fromEntries(entryKinds.map((name) => [name, Object.keys(content[name]).length]));
   return { counts, unused };
+}
+
+// The API's front page: the OpenAPI description, browsable, with Swagger UI
+// from a CDN at a fixed version. It reads only this API's own files.
+const SWAGGER_UI = 'https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14';
+const escape = (text) => text.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+export function docsPage(name, spec) {
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${escape(name)} API</title>
+<link rel="stylesheet" href="${SWAGGER_UI}/swagger-ui.css">
+<style>body { margin: 0; background: #fafafa; }</style>
+</head>
+<body>
+<noscript><p>The API's description is <a href="${spec}">${spec}</a>; its index is <a href="index.json">index.json</a>.</p></noscript>
+<div id="docs"></div>
+<script src="${SWAGGER_UI}/swagger-ui-bundle.js" crossorigin="anonymous"></script>
+<script>SwaggerUIBundle({ url: '${spec}', dom_id: '#docs', deepLinking: true });</script>
+</body>
+</html>
+`;
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
