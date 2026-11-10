@@ -2,7 +2,7 @@
 
 jrpgbattle's **setting** for the [jrpg-battle](https://github.com/stardustsuperwizard/jrpg-battle) engine (its decision 0050): its champions and their abilities, and the monsters, items, waves and dungeon they play in, by the engine's own core rules, with a short list of **house rules** where this world changes a core number. It is kept one file per entry, served as a static API, and built into the setting files a deployment drops over the engine's `src/content/setting/`, replacing its default world whole. The first wave is ten Greek gods; see [ROSTER.md](ROSTER.md).
 
-**Public, not yet licensed.** The repository is public, but the data is unlicensed (all rights reserved) until the roster opens; the plan is a Creative Commons licence ([jrpg-battle#248](https://github.com/stardustsuperwizard/jrpg-battle/issues/248)). The static API is at <https://stardustsuperwizard.github.io/jrpgbattle-data/v1/> once Pages is on (see [Static API](#static-api)). **No lore here:** the champions' stories are the owner's and stay private, so they moved to the jrpgbattle site's own `lore/` when this repository went public (2026-11-10); never add them back.
+**Public, not yet licensed.** The repository is public, but the data is unlicensed (all rights reserved) until the roster opens; the plan is a Creative Commons licence ([jrpg-battle#248](https://github.com/stardustsuperwizard/jrpg-battle/issues/248)). The static API is at <https://api.jrpgbattle.com/>, with its documentation on the front page (see [Static API](#static-api)). **No lore here:** the champions' stories are the owner's and stay private, so they moved to the jrpgbattle site's own `lore/` when this repository went public (2026-11-10); never add them back.
 
 ## Layout
 
@@ -65,7 +65,9 @@ The API on GitHub Pages serves a release, never `main`. Each release carries `jr
 
 To serve another release again, as a rollback, run `pages` from the Actions tab with its tag. Setting `PUBLISH_API` back to anything else stops publishing; the last deploy stays up until Pages is turned off.
 
-The API is then at `https://stardustsuperwizard.github.io/jrpgbattle-data/v1/`, starting with `v1/index.json`. The site's front page, `https://stardustsuperwizard.github.io/jrpgbattle-data/`, is its documentation: the OpenAPI description, browsable with Swagger UI, where each path can be tried. Pages answers any origin (`Access-Control-Allow-Origin: *`), so a page on another site can fetch it.
+The API is then at `https://api.jrpgbattle.com/v1/`, starting with `v1/index.json`. The site's front page, `https://api.jrpgbattle.com/`, is its documentation: the OpenAPI description, browsable with Swagger UI, where each path can be tried. Pages answers any origin (`Access-Control-Allow-Origin: *`), so a page on another site can fetch it.
+
+**The domain** is set in **Settings → Pages → Custom domain** (`api.jrpgbattle.com`, with Enforce HTTPS), not in a `CNAME` file: a deploy from Actions keeps it. Its DNS is a `CNAME` record `api` → `stardustsuperwizard.github.io` in the `jrpgbattle.com` zone at DigitalOcean, beside the TXT record that verifies the domain for the owner's GitHub account (`_github-pages-challenge-stardustsuperwizard`). The old address, `stardustsuperwizard.github.io/jrpgbattle-data/`, redirects to it.
 
 ### Versions
 
