@@ -3,7 +3,7 @@
   "name": "Cerberus",
   "sprite": "🐕",
   "reach": "melee",
-  "element": "magic",
+  "damageType": "magic",
   "ai": "charger",
   "chargeEvery": 4,
   "maxHp": 12400,
@@ -34,6 +34,7 @@
       "name": "Hellfire Bite",
       "type": "skill",
       "target": "enemy",
+      "element": "fire",
       "weight": 2,
       "effects": [
         {
@@ -67,6 +68,7 @@
       "name": "Triple Inferno",
       "type": "ultimate",
       "target": "all_enemies",
+      "element": "fire",
       "special": "release",
       "message": "{user} breathes fire from all three heads!",
       "effects": [

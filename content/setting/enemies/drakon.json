@@ -3,7 +3,7 @@
   "name": "Drakon",
   "sprite": "🦎",
   "reach": "melee",
-  "element": "magic",
+  "damageType": "magic",
   "maxHp": 1050,
   "physAtk": 170,
   "magAtk": 170,
@@ -19,6 +19,7 @@
       "name": "Searing Fang",
       "type": "basic",
       "target": "enemy",
+      "element": "fire",
       "weight": 3,
       "effects": [
         {
@@ -38,6 +39,7 @@
       "name": "Fire Breath",
       "type": "skill",
       "target": "blast",
+      "element": "fire",
       "weight": 1,
       "message": "{user} breathes a gout of flame!",
       "effects": [

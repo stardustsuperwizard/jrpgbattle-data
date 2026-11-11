@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "manifest.schema.json",
-  "title": "setting/manifest.json, content format 2026-11-13",
+  "title": "setting/manifest.json, content format 2026-11-14",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -12,7 +12,7 @@
   ],
   "properties": {
     "formatVersion": {
-      "const": "2026-11-13",
+      "const": "2026-11-14",
       "description": "The content format the files are written in (FORMATS.content, decision 0023). The engine reads only its own and refuses any other by name."
     },
     "name": {

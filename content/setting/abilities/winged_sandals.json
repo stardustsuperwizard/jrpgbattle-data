@@ -3,7 +3,8 @@
   "name": "Winged Sandals",
   "type": "skill",
   "target": "enemy",
-  "description": "Magic DMG to one enemy and Shock it for 2 turns.",
+  "element": "wind",
+  "description": "Physical DMG to one enemy and Shock it for 2 turns.",
   "effects": [
     {
       "type": "damage",

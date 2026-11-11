@@ -3,7 +3,7 @@
   "name": "Dire Wolf",
   "sprite": "🐺",
   "reach": "melee",
-  "element": "physical",
+  "damageType": "physical",
   "maxHp": 910,
   "physAtk": 185,
   "magAtk": 185,

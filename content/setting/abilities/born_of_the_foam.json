@@ -3,6 +3,7 @@
   "name": "Born of the Foam",
   "type": "ultimate",
   "target": "all_enemies",
+  "element": "water",
   "description": "Magic DMG to all enemies with a 40% chance to Freeze; heal all allies 20% Max HP.",
   "effects": [
     {

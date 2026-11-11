@@ -3,7 +3,7 @@
   "name": "Typhon",
   "sprite": "🌪️",
   "reach": "melee",
-  "element": "magic",
+  "damageType": "magic",
   "ai": "charger",
   "chargeEvery": 3,
   "maxHp": 14000,
@@ -34,6 +34,7 @@
       "name": "Storm Fist",
       "type": "skill",
       "target": "enemy",
+      "element": "lightning",
       "weight": 2,
       "effects": [
         {
@@ -52,6 +53,7 @@
       "name": "Gathering Tempest",
       "type": "skill",
       "target": "self",
+      "element": "wind",
       "special": "charge",
       "message": "{user} gathers the storms of Tartarus! Break it to interrupt!",
       "effects": [
@@ -67,6 +69,7 @@
       "name": "Wrath of the Titans",
       "type": "ultimate",
       "target": "all_enemies",
+      "element": "lightning",
       "special": "release",
       "message": "{user} unleashes the wrath of the Titans!",
       "effects": [

@@ -3,6 +3,7 @@
   "name": "Static Touch",
   "type": "basic",
   "target": "enemy",
+  "element": "lightning",
   "description": "Deal Magic DMG to one enemy.",
   "effects": [
     {

@@ -3,6 +3,7 @@
   "name": "Sunbeam",
   "type": "basic",
   "target": "enemy",
+  "element": "fire",
   "description": "Deal Magic DMG to one enemy.",
   "effects": [
     {

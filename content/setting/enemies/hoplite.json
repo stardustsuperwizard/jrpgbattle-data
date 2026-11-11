@@ -3,7 +3,7 @@
   "name": "Hoplite",
   "sprite": "🛡️",
   "reach": "melee",
-  "element": "physical",
+  "damageType": "physical",
   "maxHp": 1150,
   "physAtk": 150,
   "magAtk": 150,

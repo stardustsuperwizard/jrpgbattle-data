@@ -3,7 +3,8 @@
   "name": "Molten Hammer",
   "type": "ultimate",
   "target": "enemy",
-  "description": "Massive Magic DMG to one enemy with high Toughness damage, and Burn it.",
+  "element": "fire",
+  "description": "Massive Physical DMG to one enemy with high Toughness damage, and Burn it.",
   "effects": [
     {
       "type": "damage",

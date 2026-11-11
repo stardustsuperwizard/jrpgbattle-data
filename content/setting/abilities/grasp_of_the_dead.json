@@ -3,6 +3,7 @@
   "name": "Grasp of the Dead",
   "type": "skill",
   "target": "enemy",
+  "element": "dark",
   "description": "Magic DMG to one enemy, Burn it, and RES Down for 2 turns.",
   "effects": [
     {

@@ -3,6 +3,7 @@
   "name": "Soul Lash",
   "type": "basic",
   "target": "enemy",
+  "element": "dark",
   "description": "Deal Magic DMG to one enemy.",
   "effects": [
     {

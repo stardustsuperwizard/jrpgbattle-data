@@ -3,7 +3,7 @@
   "name": "Spartoi",
   "sprite": "💀",
   "reach": "melee",
-  "element": "physical",
+  "damageType": "physical",
   "maxHp": 1050,
   "physAtk": 145,
   "magAtk": 145,

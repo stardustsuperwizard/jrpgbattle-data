@@ -3,7 +3,7 @@
   "name": "Erymanthian Boar",
   "sprite": "🐗",
   "reach": "melee",
-  "element": "physical",
+  "damageType": "physical",
   "maxHp": 950,
   "physAtk": 165,
   "magAtk": 165,

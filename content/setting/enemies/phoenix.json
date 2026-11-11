@@ -3,7 +3,7 @@
   "name": "Phoenix",
   "sprite": "🔥",
   "reach": "ranged",
-  "element": "magic",
+  "damageType": "magic",
   "ai": "healer",
   "maxHp": 960,
   "physAtk": 160,
@@ -20,6 +20,7 @@
       "name": "Ember Wing",
       "type": "basic",
       "target": "enemy",
+      "element": "fire",
       "effects": [
         {
           "type": "damage",

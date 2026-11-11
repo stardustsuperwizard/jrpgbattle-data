@@ -3,6 +3,7 @@
   "name": "Earthshaker",
   "type": "ultimate",
   "target": "all_enemies",
+  "element": "earth",
   "description": "Heavy Magic DMG to all enemies and RES Down for 2 turns.",
   "effects": [
     {

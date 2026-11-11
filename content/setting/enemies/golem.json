@@ -3,7 +3,7 @@
   "name": "Ancient Golem",
   "sprite": "🗿",
   "reach": "melee",
-  "element": "physical",
+  "damageType": "physical",
   "ai": "charger",
   "chargeEvery": 3,
   "maxHp": 11400,
@@ -34,6 +34,7 @@
       "name": "Quake",
       "type": "skill",
       "target": "all_enemies",
+      "element": "earth",
       "weight": 2,
       "effects": [
         {
@@ -62,6 +63,7 @@
       "name": "Cataclysm",
       "type": "ultimate",
       "target": "all_enemies",
+      "element": "earth",
       "special": "release",
       "message": "{user} unleashes CATACLYSM!",
       "effects": [

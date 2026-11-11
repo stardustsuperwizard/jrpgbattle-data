@@ -3,7 +3,7 @@
   "name": "Goblin Shaman",
   "sprite": "🧌",
   "reach": "ranged",
-  "element": "magic",
+  "damageType": "magic",
   "ai": "healer",
   "maxHp": 1080,
   "physAtk": 150,
@@ -20,6 +20,7 @@
       "name": "Hex Bolt",
       "type": "basic",
       "target": "enemy",
+      "element": "lightning",
       "effects": [
         {
           "type": "damage",

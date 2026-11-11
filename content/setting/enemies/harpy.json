@@ -3,7 +3,7 @@
   "name": "Harpy",
   "sprite": "🦅",
   "reach": "ranged",
-  "element": "magic",
+  "damageType": "magic",
   "maxHp": 860,
   "physAtk": 155,
   "magAtk": 155,
@@ -32,6 +32,7 @@
       "name": "Storm Shriek",
       "type": "skill",
       "target": "all_enemies",
+      "element": "wind",
       "weight": 1,
       "message": "{user} shrieks up a storm wind!",
       "effects": [

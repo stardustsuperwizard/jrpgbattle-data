@@ -3,7 +3,7 @@
   "name": "Necromancer",
   "sprite": "🧙",
   "reach": "ranged",
-  "element": "magic",
+  "damageType": "magic",
   "maxHp": 950,
   "physAtk": 175,
   "magAtk": 175,
@@ -19,6 +19,7 @@
       "name": "Grave Bolt",
       "type": "basic",
       "target": "enemy",
+      "element": "dark",
       "weight": 3,
       "effects": [
         {
@@ -38,6 +39,7 @@
       "name": "Withering Curse",
       "type": "skill",
       "target": "all_enemies",
+      "element": "dark",
       "weight": 1,
       "message": "{user} lays a withering curse!",
       "effects": [

@@ -3,7 +3,8 @@
   "name": "Hammer Blow",
   "type": "basic",
   "target": "enemy",
-  "description": "Deal Magic DMG to one enemy.",
+  "element": "metal",
+  "description": "Deal Physical DMG to one enemy.",
   "effects": [
     {
       "type": "damage",

@@ -6,7 +6,7 @@
   "characterGroup": "Gods of Olympus",
   "sprite": "💀",
   "reach": "melee",
-  "element": "magic",
+  "damageType": "magic",
   "maxHp": 1150,
   "physAtk": 145,
   "magAtk": 145,

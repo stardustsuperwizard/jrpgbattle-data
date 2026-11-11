@@ -3,6 +3,7 @@
   "name": "Trident Jab",
   "type": "basic",
   "target": "enemy",
+  "element": "water",
   "description": "Deal Magic DMG to one enemy.",
   "effects": [
     {

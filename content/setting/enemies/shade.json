@@ -3,7 +3,7 @@
   "name": "Shade",
   "sprite": "👻",
   "reach": "melee",
-  "element": "magic",
+  "damageType": "magic",
   "maxHp": 880,
   "physAtk": 165,
   "magAtk": 165,
@@ -19,6 +19,7 @@
       "name": "Grave Chill",
       "type": "basic",
       "target": "enemy",
+      "element": "dark",
       "effects": [
         {
           "type": "damage",
@@ -38,6 +39,7 @@
       "name": "Lament of the Dead",
       "type": "skill",
       "target": "all_enemies",
+      "element": "dark",
       "weight": 1,
       "message": "{user} wails a lament from the underworld.",
       "effects": [

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "heroes.schema.json",
-  "title": "setting/heroes.json, content format 2026-11-13",
+  "title": "setting/heroes.json, content format 2026-11-14",
   "type": "object",
   "propertyNames": {
     "type": "string",
@@ -21,7 +21,7 @@
         "reach",
         "class",
         "characterGroup",
-        "element",
+        "damageType",
         "maxHp",
         "physAtk",
         "magAtk",
@@ -50,8 +50,8 @@
           ],
           "description": "How it fights, for a client drawing a unit it has no art for (decision 0052). No rule reads it."
         },
-        "element": {
-          "$ref": "common.schema.json#/$defs/elementId"
+        "damageType": {
+          "$ref": "common.schema.json#/$defs/damageTypeId"
         },
         "maxHp": {
           "type": "number",

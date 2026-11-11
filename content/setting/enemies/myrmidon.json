@@ -3,7 +3,7 @@
   "name": "Myrmidon",
   "sprite": "⚔️",
   "reach": "melee",
-  "element": "physical",
+  "damageType": "physical",
   "maxHp": 1000,
   "physAtk": 160,
   "magAtk": 160,
