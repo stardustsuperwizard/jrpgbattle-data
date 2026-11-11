@@ -3,7 +3,7 @@
   "name": "Silver Arrow",
   "type": "skill",
   "target": "enemy",
-  "description": "Heavy Ice DMG to one enemy and Bleed for 2 turns.",
+  "description": "Heavy Magic DMG to one enemy and Bleed for 2 turns.",
   "effects": [
     {
       "type": "damage",

@@ -3,7 +3,7 @@
   "name": "The Hunt",
   "type": "ultimate",
   "target": "enemy",
-  "description": "Massive Ice DMG to one enemy.",
+  "description": "Massive Magic DMG to one enemy.",
   "effects": [
     {
       "type": "damage",

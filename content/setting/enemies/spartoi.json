@@ -6,13 +6,10 @@
   "element": "physical",
   "maxHp": 1050,
   "atk": 145,
-  "def": 90,
+  "physRes": 72,
+  "magRes": 72,
   "spd": 100,
   "toughness": 40,
-  "weaknesses": [
-    "physical",
-    "fire"
-  ],
   "xp": 160,
   "gold": 220,
   "skills": [
@@ -39,9 +36,9 @@
       "effects": [
         {
           "type": "shield",
-          "defRatio": 1,
           "flat": 60,
-          "duration": 2
+          "duration": 2,
+          "resRatio": 1
         },
         {
           "type": "status",

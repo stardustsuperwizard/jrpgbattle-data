@@ -3,16 +3,13 @@
   "name": "Necromancer",
   "sprite": "🧙",
   "reach": "ranged",
-  "element": "ice",
+  "element": "magic",
   "maxHp": 950,
   "atk": 175,
-  "def": 45,
+  "physRes": 36,
+  "magRes": 36,
   "spd": 104,
   "toughness": 40,
-  "weaknesses": [
-    "fire",
-    "physical"
-  ],
   "xp": 200,
   "gold": 280,
   "skills": [
@@ -49,7 +46,7 @@
         },
         {
           "type": "status",
-          "status": "def_down",
+          "status": "res_down",
           "chance": 0.5,
           "duration": 2
         }

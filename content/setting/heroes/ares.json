@@ -9,13 +9,15 @@
   "element": "physical",
   "maxHp": 1400,
   "atk": 140,
-  "def": 95,
+  "physRes": 109,
+  "magRes": 81,
   "spd": 108,
   "maxEnergy": 120,
   "growth": {
     "maxHp": 112,
     "atk": 13,
-    "def": 8,
+    "physRes": 9,
+    "magRes": 7,
     "spd": 1
   },
   "abilities": [

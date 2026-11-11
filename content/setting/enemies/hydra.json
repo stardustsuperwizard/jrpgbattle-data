@@ -8,13 +8,10 @@
   "chargeEvery": 4,
   "maxHp": 11800,
   "atk": 380,
-  "def": 85,
+  "physRes": 98,
+  "magRes": 68,
   "spd": 104,
-  "toughness": 120,
-  "weaknesses": [
-    "fire",
-    "ice"
-  ],
+  "toughness": 200,
   "xp": 600,
   "gold": 840,
   "skills": [

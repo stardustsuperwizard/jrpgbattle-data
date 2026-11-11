@@ -3,16 +3,13 @@
   "name": "Harpy",
   "sprite": "🦅",
   "reach": "ranged",
-  "element": "lightning",
+  "element": "magic",
   "maxHp": 860,
   "atk": 155,
-  "def": 35,
+  "physRes": 28,
+  "magRes": 28,
   "spd": 126,
   "toughness": 20,
-  "weaknesses": [
-    "ice",
-    "physical"
-  ],
   "xp": 150,
   "gold": 210,
   "skills": [

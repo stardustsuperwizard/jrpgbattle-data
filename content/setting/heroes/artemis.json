@@ -6,10 +6,11 @@
   "characterGroup": "Gods of Olympus",
   "sprite": "🏹",
   "reach": "ranged",
-  "element": "ice",
+  "element": "physical",
   "maxHp": 1000,
   "atk": 155,
-  "def": 65,
+  "physRes": 75,
+  "magRes": 55,
   "spd": 116,
   "critRate": 0.3,
   "critDmg": 0.8,
@@ -17,7 +18,8 @@
   "growth": {
     "maxHp": 80,
     "atk": 14,
-    "def": 5,
+    "physRes": 6,
+    "magRes": 4,
     "spd": 1
   },
   "abilities": [

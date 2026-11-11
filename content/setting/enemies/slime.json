@@ -6,13 +6,10 @@
   "element": "physical",
   "maxHp": 780,
   "atk": 135,
-  "def": 30,
+  "physRes": 34,
+  "magRes": 24,
   "spd": 82,
   "toughness": 20,
-  "weaknesses": [
-    "fire",
-    "lightning"
-  ],
   "xp": 90,
   "gold": 125,
   "skills": [
@@ -42,7 +39,7 @@
         },
         {
           "type": "status",
-          "status": "def_down",
+          "status": "res_down",
           "chance": 0.7,
           "duration": 2
         }

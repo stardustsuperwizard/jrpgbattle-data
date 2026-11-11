@@ -3,18 +3,15 @@
   "name": "Typhon",
   "sprite": "🌪️",
   "reach": "melee",
-  "element": "lightning",
+  "element": "magic",
   "ai": "charger",
   "chargeEvery": 3,
   "maxHp": 14000,
   "atk": 430,
-  "def": 100,
+  "physRes": 80,
+  "magRes": 80,
   "spd": 116,
-  "toughness": 140,
-  "weaknesses": [
-    "ice",
-    "physical"
-  ],
+  "toughness": 230,
   "xp": 600,
   "gold": 840,
   "skills": [

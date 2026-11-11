@@ -3,18 +3,15 @@
   "name": "Cerberus",
   "sprite": "🐕",
   "reach": "melee",
-  "element": "fire",
+  "element": "magic",
   "ai": "charger",
   "chargeEvery": 4,
   "maxHp": 12400,
   "atk": 400,
-  "def": 90,
+  "physRes": 103,
+  "magRes": 72,
   "spd": 112,
-  "toughness": 120,
-  "weaknesses": [
-    "ice",
-    "lightning"
-  ],
+  "toughness": 200,
   "xp": 600,
   "gold": 840,
   "skills": [

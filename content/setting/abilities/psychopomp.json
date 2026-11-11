@@ -3,7 +3,7 @@
   "name": "Psychopomp",
   "type": "ultimate",
   "target": "all_enemies",
-  "description": "Lightning DMG to all enemies with a 60% chance to Shock.",
+  "description": "Magic DMG to all enemies with a 60% chance to Shock.",
   "effects": [
     {
       "type": "damage",

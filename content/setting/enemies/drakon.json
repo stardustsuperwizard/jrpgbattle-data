@@ -3,16 +3,13 @@
   "name": "Drakon",
   "sprite": "🦎",
   "reach": "melee",
-  "element": "fire",
+  "element": "magic",
   "maxHp": 1050,
   "atk": 170,
-  "def": 60,
+  "physRes": 48,
+  "magRes": 48,
   "spd": 110,
   "toughness": 40,
-  "weaknesses": [
-    "ice",
-    "physical"
-  ],
   "xp": 185,
   "gold": 260,
   "skills": [

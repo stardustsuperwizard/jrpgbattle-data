@@ -3,7 +3,7 @@
   "name": "Realm of the Dead",
   "type": "ultimate",
   "target": "all_enemies",
-  "description": "Fire DMG to all enemies and Burn them for 3 turns.",
+  "description": "Magic DMG to all enemies and Burn them for 3 turns.",
   "effects": [
     {
       "type": "damage",

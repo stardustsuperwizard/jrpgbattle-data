@@ -3,7 +3,7 @@
   "name": "Trident Jab",
   "type": "basic",
   "target": "enemy",
-  "description": "Deal Ice DMG to one enemy.",
+  "description": "Deal Magic DMG to one enemy.",
   "effects": [
     {
       "type": "damage",

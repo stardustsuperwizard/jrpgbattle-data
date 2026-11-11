@@ -42,13 +42,15 @@ The endless floors past 25 grow on their own, from a step above Tartarus.
 - **Slots:** each hero wears one weapon, one armour, one pair of boots and one charm (`slots`, `gearSlots` 4); every item names its `slot`.
 - **The shop's gear comes by stretch** (`shop.items` as stock entries, jrpg-battle decision 0043). Each stretch brings a new tier on sale before its first floor, and what came in stays. Each item upgrades the one below it of its slot: buying it over that one costs the difference.
 
-  | On sale from | Tier | Weapon (ATK) | Armour (DEF) | Boots (SPD) | Charm (max HP) | Each |
+  | On sale from | Tier | Weapon (ATK) | Armour (PHYS / MAG RES) | Boots (SPD) | Charm (max HP) | Each |
   |---|---|---|---|---|---|---|
   | Floor 1 | Grove | 🗡️ Iron Dagger (+10) | 🦺 Leather Vest (+12) | 👟 Light Boots (+4) | 💗 Vigor Charm (+150) | 150 |
   | Floor 6 | Labyrinth | ⚔️ War Blade (+25) | 🛡️ Plate Mail (+30) | 🪽 Wind Boots (+10) | ❤️ Giant Belt (+400) | 400 |
   | Floor 11 | Marsh | 🔱 Bronze Spear (+25, +4%) | 🥉 Bronze Cuirass (+30, +4%) | 🩴 Courier's Sandals (+11) | 🐍 Asclepian Amulet (+400, +4%) | 1,000 |
   | Floor 16 | Underworld | 🌙 Adamant Harpe (+25, +7%) | 🏛️ Hoplite Panoply (+30, +7%) | 🕊️ Winged Sandals (+12) | 🟠 Amber of the Heliades (+400, +7%) | 1,800 |
   | Floor 21 | Tartarus | ⚡ Cyclopean Blade (+25, +10%) | 💎 Adamant Mail (+30, +10%) | 🌬️ Sandals of Zephyrus (+13) | 🍯 Phial of Ambrosia (+400, +10%) | 3,000 |
+
+  Armour's number is its physical resistance; it gives half as much magic resistance (and its percentage to both).
 
   The upper tiers add little power for a lot of gold, on purpose: they are where a deep party's gold goes, and too much power there made the Descent trivial (below). Their weapons, armour and charms keep the Labyrinth tier's flat bonus and add a percentage of the hero's own stat (jrpg-battle decision 0045), so they keep pace as heroes level instead of fading; the boots stay flat, because a share of speed moves turn order more than any other stat.
 - **Loot:** cleared floors drop one item, and boss floors two more. The base item comes from the shop's tiers: the Grove tier from floor 1, then each stretch's tier and the one below it (the Grove and Labyrinth tiers from floor 6, the Labyrinth and Marsh tiers from floor 11, and so on to the Underworld and Tartarus tiers from floor 21). It drops as Common (no bonus), Magic (one) or Rare (two). The bonuses are ATK, DEF, max HP or SPD, and grow with depth. The stash holds 12 and sells at a quarter of an item's worth, so selling deep loot doesn't undo the gold sink.

@@ -6,16 +6,18 @@
   "characterGroup": "Gods of Olympus",
   "sprite": "🔨",
   "reach": "melee",
-  "element": "fire",
+  "element": "physical",
   "maxHp": 1550,
   "atk": 130,
-  "def": 110,
+  "physRes": 126,
+  "magRes": 94,
   "spd": 88,
   "maxEnergy": 120,
   "growth": {
     "maxHp": 124,
     "atk": 12,
-    "def": 9,
+    "physRes": 10,
+    "magRes": 8,
     "spd": 1
   },
   "abilities": [

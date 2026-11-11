@@ -6,13 +6,10 @@
   "element": "physical",
   "maxHp": 1150,
   "atk": 150,
-  "def": 95,
+  "physRes": 109,
+  "magRes": 76,
   "spd": 98,
   "toughness": 40,
-  "weaknesses": [
-    "lightning",
-    "ice"
-  ],
   "xp": 170,
   "gold": 240,
   "skills": [
@@ -39,10 +36,10 @@
       "effects": [
         {
           "type": "shield",
-          "defRatio": 0.6,
           "flat": 40,
           "duration": 2,
-          "on": "all_allies"
+          "on": "all_allies",
+          "resRatio": 0.6
         }
       ]
     }

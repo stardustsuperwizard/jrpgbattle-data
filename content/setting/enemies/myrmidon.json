@@ -6,13 +6,10 @@
   "element": "physical",
   "maxHp": 1000,
   "atk": 160,
-  "def": 70,
+  "physRes": 80,
+  "magRes": 56,
   "spd": 114,
   "toughness": 40,
-  "weaknesses": [
-    "lightning",
-    "fire"
-  ],
   "xp": 190,
   "gold": 270,
   "skills": [

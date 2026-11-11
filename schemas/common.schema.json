@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "common.schema.json",
-  "title": "Shared content shapes, content format 2026-11-11",
+  "title": "Shared content shapes, content format 2026-11-12",
   "description": "Shapes more than one content file uses: ids, stats, skills and their effects. The other schemas refer to these.",
   "$defs": {
     "id": {
@@ -30,7 +30,10 @@
         "atk": {
           "type": "number"
         },
-        "def": {
+        "physRes": {
+          "type": "number"
+        },
+        "magRes": {
           "type": "number"
         },
         "spd": {
@@ -69,7 +72,7 @@
             "toughness": {
               "type": "number",
               "minimum": 0,
-              "description": "Toughness removed from a target weak to the element."
+              "description": "Toughness removed from the target by the hit."
             },
             "on": {
               "$ref": "#/$defs/effectOn"
@@ -116,10 +119,10 @@
               "minimum": 1,
               "description": "Turns."
             },
-            "defRatio": {
+            "resRatio": {
               "type": "number",
               "minimum": 0,
-              "description": "Of the user's DEF."
+              "description": "Of the user's average of physical and magic resistance."
             },
             "flat": {
               "type": "number",

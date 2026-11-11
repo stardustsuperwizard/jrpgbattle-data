@@ -3,17 +3,14 @@
   "name": "Goblin Shaman",
   "sprite": "🧌",
   "reach": "ranged",
-  "element": "lightning",
+  "element": "magic",
   "ai": "healer",
   "maxHp": 1080,
   "atk": 150,
-  "def": 50,
+  "physRes": 40,
+  "magRes": 40,
   "spd": 92,
   "toughness": 40,
-  "weaknesses": [
-    "physical",
-    "lightning"
-  ],
   "xp": 160,
   "gold": 225,
   "skills": [

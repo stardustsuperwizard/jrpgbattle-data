@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "heroes.schema.json",
-  "title": "setting/heroes.json, content format 2026-11-11",
+  "title": "setting/heroes.json, content format 2026-11-12",
   "type": "object",
   "propertyNames": {
     "type": "string",
@@ -24,7 +24,8 @@
         "element",
         "maxHp",
         "atk",
-        "def",
+        "physRes",
+        "magRes",
         "spd",
         "abilities"
       ],
@@ -59,7 +60,11 @@
           "type": "number",
           "minimum": 0
         },
-        "def": {
+        "physRes": {
+          "type": "number",
+          "minimum": 0
+        },
+        "magRes": {
           "type": "number",
           "minimum": 0
         },
@@ -80,12 +85,6 @@
           "type": "string",
           "minLength": 1,
           "description": "What job it does in a line-up, such as Guardian or Support (decision 0054). A label for a client and what the bot's pick spreads on; no rule reads it."
-        },
-        "weaknesses": {
-          "type": "array",
-          "items": {
-            "$ref": "common.schema.json#/$defs/elementId"
-          }
         },
         "ai": {
           "enum": [
@@ -129,7 +128,11 @@
               "type": "number",
               "minimum": 0
             },
-            "def": {
+            "physRes": {
+              "type": "number",
+              "minimum": 0
+            },
+            "magRes": {
               "type": "number",
               "minimum": 0
             },

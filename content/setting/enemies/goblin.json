@@ -6,13 +6,10 @@
   "element": "physical",
   "maxHp": 980,
   "atk": 170,
-  "def": 50,
+  "physRes": 40,
+  "magRes": 40,
   "spd": 104,
   "toughness": 30,
-  "weaknesses": [
-    "ice",
-    "physical"
-  ],
   "xp": 120,
   "gold": 170,
   "skills": [
