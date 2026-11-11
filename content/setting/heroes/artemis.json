@@ -3,7 +3,7 @@
   "name": "Artemis",
   "role": "Huntress",
   "class": "Striker",
-  "theme": "Gods of Olympus",
+  "characterGroup": "Gods of Olympus",
   "sprite": "🏹",
   "reach": "ranged",
   "element": "ice",

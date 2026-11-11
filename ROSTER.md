@@ -15,7 +15,7 @@ Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shie
 | 💀 Hades | Caster | Underworld King: damage over time | Fire | 94 | 1150 | 145 | 75 | Grasp of the Dead: single + Burn + DEF Down | Realm of the Dead: all + 3-turn Burn |
 | 🔨 Hephaestus | Guardian | Smith: armor tank | Fire | 88 | 1550 | 130 | 110 | Forge Armor: heavy shield all | Molten Hammer: massive single + Burn |
 
-The ten share the theme **Gods of Olympus** (every hero has a `theme`, the title of its set). Each god has a class, a label for now (jrpg-battle decision 0054; what a class might do is jrpg-battle#363): Guardian, Striker, Caster or Support. The bot's pick spreads a team across classes.
+The ten share the character group **Gods of Olympus** (every hero has a `characterGroup`, the title of its set). Each god has a class, a label for now (jrpg-battle decision 0054; what a class might do is jrpg-battle#363): Guardian, Striker, Caster or Support. The bot's pick spreads a team across classes.
 
 Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for their teammates' skills.
 

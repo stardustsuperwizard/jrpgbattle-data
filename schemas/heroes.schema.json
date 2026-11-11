@@ -20,7 +20,7 @@
         "sprite",
         "reach",
         "class",
-        "theme",
+        "characterGroup",
         "element",
         "maxHp",
         "atk",
@@ -71,7 +71,7 @@
           "type": "string",
           "description": "Shown in the UI."
         },
-        "theme": {
+        "characterGroup": {
           "type": "string",
           "minLength": 1,
           "description": "The set of heroes it belongs to, such as Gods of Olympus (decision 0054). A title for a client; no rule reads it."

@@ -3,7 +3,7 @@
   "name": "Hephaestus",
   "role": "Smith",
   "class": "Guardian",
-  "theme": "Gods of Olympus",
+  "characterGroup": "Gods of Olympus",
   "sprite": "🔨",
   "reach": "melee",
   "element": "fire",
