@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "dungeon.schema.json",
-  "title": "setting/dungeon.json, content format 2026-11-12",
+  "title": "setting/dungeon.json, content format 2026-11-13",
   "description": "What is in the dungeon: monsters, bosses, themes, the shop and what drops. How a campaign works is core/campaign.json; the engine merges the two. null for a world with no dungeon. Every enemy and item named must be in the content, which the engine checks when it loads.",
   "anyOf": [
     {

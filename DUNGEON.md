@@ -42,7 +42,7 @@ The endless floors past 25 grow on their own, from a step above Tartarus.
 - **Slots:** each hero wears one weapon, one armour, one pair of boots and one charm (`slots`, `gearSlots` 4); every item names its `slot`.
 - **The shop's gear comes by stretch** (`shop.items` as stock entries, jrpg-battle decision 0043). Each stretch brings a new tier on sale before its first floor, and what came in stays. Each item upgrades the one below it of its slot: buying it over that one costs the difference.
 
-  | On sale from | Tier | Weapon (ATK) | Armour (PHYS / MAG RES) | Boots (SPD) | Charm (max HP) | Each |
+  | On sale from | Tier | Weapon (PHYS + MAG ATK) | Armour (PHYS / MAG RES) | Boots (SPD) | Charm (max HP) | Each |
   |---|---|---|---|---|---|---|
   | Floor 1 | Grove | 🗡️ Iron Dagger (+10) | 🦺 Leather Vest (+12) | 👟 Light Boots (+4) | 💗 Vigor Charm (+150) | 150 |
   | Floor 6 | Labyrinth | ⚔️ War Blade (+25) | 🛡️ Plate Mail (+30) | 🪽 Wind Boots (+10) | ❤️ Giant Belt (+400) | 400 |

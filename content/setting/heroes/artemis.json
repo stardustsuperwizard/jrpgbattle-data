@@ -8,7 +8,8 @@
   "reach": "ranged",
   "element": "physical",
   "maxHp": 1000,
-  "atk": 155,
+  "physAtk": 155,
+  "magAtk": 155,
   "physRes": 75,
   "magRes": 55,
   "spd": 116,
@@ -17,7 +18,8 @@
   "maxEnergy": 120,
   "growth": {
     "maxHp": 80,
-    "atk": 14,
+    "physAtk": 14,
+    "magAtk": 14,
     "physRes": 6,
     "magRes": 4,
     "spd": 1

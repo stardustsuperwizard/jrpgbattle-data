@@ -1,25 +1,25 @@
 # Roster: first wave, the Olympians
 
-Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; jrpg-battle's statuses burn, shock, bleed, freeze, ATK Up, RES Down and Taunt; and its two damage types, physical and magic. The statuses and elements are the engine's own core (jrpg-battle decisions 0050 and 0055), not this repository's. Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
+Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; jrpg-battle's statuses burn, shock, bleed, freeze, ATK Up, RES Down and Taunt; and its two damage types, physical and magic, each with its own attack and resistance (jrpg-battle decisions 0055 and 0056). The statuses and elements are the engine's own core (jrpg-battle decisions 0050 and 0055), not this repository's. Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
 
-| Champion | Class | Role | Element | Spd | HP | ATK | PHYS RES | MAG RES | Skill | Ultimate |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 🪽 Hermes | Support | Messenger: SP battery | Physical | 124 | 980 | 135 | 75 | 55 | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
-| 🏹 Artemis | Striker | Huntress: single target | Physical | 116 | 1000 | 155 | 75 | 55 | Silver Arrow: heavy single + Bleed | The Hunt: massive single |
-| ☀️ Apollo | Support | Sun Healer | Magic | 110 | 1100 | 110 | 68 | 92 | Healing Light: heal one + cleanse | Chariot of the Sun: all + Burn, heal all, ATK Up all |
-| 🗡️ Ares | Striker | War God: bruiser | Physical | 108 | 1400 | 140 | 109 | 81 | Bloodlust: single + Taunt | Rout: heavy blast + Bleed |
-| 🌹 Aphrodite | Support | Enchantress: SP battery, party heal | Magic | 106 | 1050 | 110 | 64 | 86 | Embrace: heal all 12% + ATK Up all | Born of the Foam: all, 40% Freeze, heal all |
-| ⚡ Zeus | Caster | Sky King: area damage | Magic | 104 | 1000 | 160 | 55 | 75 | Thunderbolt: blast, 60% Shock | King of Olympus: heavy all + Shock |
-| 🦉 Athena | Guardian | Strategist: tank | Physical | 98 | 1450 | 115 | 138 | 102 | Aegis: shield all + Taunt | Owl's Gambit: heavy single, ATK Up all |
-| 🔱 Poseidon | Caster | Sea King: area control | Magic | 97 | 1150 | 145 | 68 | 92 | Tidal Wave: all, 25% Freeze | Earthshaker: heavy all + RES Down |
-| 💀 Hades | Caster | Underworld King: damage over time | Magic | 94 | 1150 | 145 | 64 | 86 | Grasp of the Dead: single + Burn + RES Down | Realm of the Dead: all + 3-turn Burn |
-| 🔨 Hephaestus | Guardian | Smith: armor tank | Physical | 88 | 1550 | 130 | 126 | 94 | Forge Armor: heavy shield all | Molten Hammer: massive single + Burn |
+| Champion | Class | Role | Element | Spd | HP | PHYS ATK | MAG ATK | PHYS RES | MAG RES | Skill | Ultimate |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 🪽 Hermes | Support | Messenger: SP battery | Physical | 124 | 980 | 135 | 135 | 75 | 55 | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
+| 🏹 Artemis | Striker | Huntress: single target | Physical | 116 | 1000 | 155 | 155 | 75 | 55 | Silver Arrow: heavy single + Bleed | The Hunt: massive single |
+| ☀️ Apollo | Support | Sun Healer | Magic | 110 | 1100 | 110 | 110 | 68 | 92 | Healing Light: heal one + cleanse | Chariot of the Sun: all + Burn, heal all, ATK Up all |
+| 🗡️ Ares | Striker | War God: bruiser | Physical | 108 | 1400 | 140 | 140 | 109 | 81 | Bloodlust: single + Taunt | Rout: heavy blast + Bleed |
+| 🌹 Aphrodite | Support | Enchantress: SP battery, party heal | Magic | 106 | 1050 | 110 | 110 | 64 | 86 | Embrace: heal all 12% + ATK Up all | Born of the Foam: all, 40% Freeze, heal all |
+| ⚡ Zeus | Caster | Sky King: area damage | Magic | 104 | 1000 | 160 | 160 | 55 | 75 | Thunderbolt: blast, 60% Shock | King of Olympus: heavy all + Shock |
+| 🦉 Athena | Guardian | Strategist: tank | Physical | 98 | 1450 | 115 | 115 | 138 | 102 | Aegis: shield all + Taunt | Owl's Gambit: heavy single, ATK Up all |
+| 🔱 Poseidon | Caster | Sea King: area control | Magic | 97 | 1150 | 145 | 145 | 68 | 92 | Tidal Wave: all, 25% Freeze | Earthshaker: heavy all + RES Down |
+| 💀 Hades | Caster | Underworld King: damage over time | Magic | 94 | 1150 | 145 | 145 | 64 | 86 | Grasp of the Dead: single + Burn + RES Down | Realm of the Dead: all + 3-turn Burn |
+| 🔨 Hephaestus | Guardian | Smith: armor tank | Physical | 88 | 1550 | 130 | 130 | 126 | 94 | Forge Armor: heavy shield all | Molten Hammer: massive single + Burn |
 
 The ten share the character group **Gods of Olympus** (every hero has a `characterGroup`, the title of its set). Each god has a class, a label for now (jrpg-battle decision 0054; what a class might do is jrpg-battle#363): Guardian, Striker, Caster or Support. The bot's pick spreads a team across classes.
 
 Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for their teammates' skills.
 
-**Two damage types, two resistances** (jrpg-battle decision 0055). Every god and monster has a physical resistance (PHYS RES) and a magic resistance (MAG RES) instead of DEF, and a hit is lowered by the resistance that matches its element: `physical` by PHYS RES, `magic` by MAG RES. There are no weaknesses. A god fights with body and weapon (Physical: Hermes, Artemis, Ares, Athena, Hephaestus) or with divine power (Magic: Apollo, Aphrodite, Zeus, Poseidon, Hades); the water, dark, light and wind the myths ask for are no longer approximated with ice or fire. Each god's resistances are the old DEF, 15% higher against their own damage type and 15% lower against the other, so a physical bruiser is harder to hit physically than magically. A world may still add elements, each resisted by one of the two stats.
+**Two damage types, each with an attack and a resistance** (jrpg-battle decisions 0055 and 0056). Every god and monster has a PHYS ATK and a MAG ATK instead of ATK, and a PHYS RES and a MAG RES instead of DEF. A hit is driven by the attack of its element and lowered by the resistance of the same: `physical` is PHYS ATK against PHYS RES, `magic` is MAG ATK against MAG RES. Both attacks of every god and monster equal its old ATK for now, since no skill uses the other type yet. There are no weaknesses. A god fights with body and weapon (Physical: Hermes, Artemis, Ares, Athena, Hephaestus) or with divine power (Magic: Apollo, Aphrodite, Zeus, Poseidon, Hades); the water, dark, light and wind the myths ask for are no longer approximated with ice or fire. Each god's resistances are the old DEF, 15% higher against their own damage type and 15% lower against the other, so a physical bruiser is harder to hit physically than magically. A world may still add elements, each resisted by one of the two stats.
 
 
 ## Numbers (roster 0.15.0 on jrpg-battle 0.19.0, 300 seeded battles per line)

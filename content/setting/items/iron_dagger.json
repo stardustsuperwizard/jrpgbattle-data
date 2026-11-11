@@ -5,6 +5,7 @@
   "cost": 150,
   "slot": "weapon",
   "stats": {
-    "atk": 10
+    "physAtk": 10,
+    "magAtk": 10
   }
 }

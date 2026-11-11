@@ -8,14 +8,16 @@
   "reach": "melee",
   "element": "magic",
   "maxHp": 1150,
-  "atk": 145,
+  "physAtk": 145,
+  "magAtk": 145,
   "physRes": 68,
   "magRes": 92,
   "spd": 97,
   "maxEnergy": 120,
   "growth": {
     "maxHp": 92,
-    "atk": 13,
+    "physAtk": 13,
+    "magAtk": 13,
     "physRes": 5,
     "magRes": 7,
     "spd": 1

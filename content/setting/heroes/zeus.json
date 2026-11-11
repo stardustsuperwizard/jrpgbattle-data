@@ -8,7 +8,8 @@
   "reach": "ranged",
   "element": "magic",
   "maxHp": 1000,
-  "atk": 160,
+  "physAtk": 160,
+  "magAtk": 160,
   "physRes": 55,
   "magRes": 75,
   "spd": 104,
@@ -16,7 +17,8 @@
   "maxEnergy": 120,
   "growth": {
     "maxHp": 80,
-    "atk": 14,
+    "physAtk": 14,
+    "magAtk": 14,
     "physRes": 4,
     "magRes": 6,
     "spd": 1
