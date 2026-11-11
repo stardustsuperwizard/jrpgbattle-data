@@ -69,6 +69,11 @@
           "type": "string",
           "description": "Shown in the UI."
         },
+        "theme": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The set of heroes it belongs to, such as Gods of Olympus (decision 0054). A title for a client; no rule reads it."
+        },
         "class": {
           "type": "string",
           "minLength": 1,

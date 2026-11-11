@@ -3,6 +3,7 @@
   "name": "Apollo",
   "role": "Sun Healer",
   "class": "Support",
+  "theme": "Gods of Olympus",
   "sprite": "☀️",
   "reach": "melee",
   "element": "fire",

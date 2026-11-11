@@ -3,6 +3,7 @@
   "name": "Zeus",
   "role": "Sky King",
   "class": "Caster",
+  "theme": "Gods of Olympus",
   "sprite": "⚡",
   "reach": "ranged",
   "element": "lightning",

@@ -3,6 +3,7 @@
   "name": "Poseidon",
   "role": "Sea King",
   "class": "Caster",
+  "theme": "Gods of Olympus",
   "sprite": "🔱",
   "reach": "melee",
   "element": "ice",

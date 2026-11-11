@@ -3,6 +3,7 @@
   "name": "Athena",
   "role": "Strategist",
   "class": "Guardian",
+  "theme": "Gods of Olympus",
   "sprite": "🦉",
   "reach": "melee",
   "element": "physical",

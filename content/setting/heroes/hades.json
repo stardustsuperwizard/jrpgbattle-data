@@ -3,6 +3,7 @@
   "name": "Hades",
   "role": "Underworld King",
   "class": "Caster",
+  "theme": "Gods of Olympus",
   "sprite": "💀",
   "reach": "melee",
   "element": "fire",
