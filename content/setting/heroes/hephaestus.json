@@ -2,6 +2,8 @@
   "id": "hephaestus",
   "name": "Hephaestus",
   "role": "Smith",
+  "class": "Guardian",
+  "characterGroup": "Gods of Olympus",
   "sprite": "🔨",
   "reach": "melee",
   "element": "fire",

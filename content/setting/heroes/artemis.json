@@ -2,6 +2,8 @@
   "id": "artemis",
   "name": "Artemis",
   "role": "Huntress",
+  "class": "Striker",
+  "characterGroup": "Gods of Olympus",
   "sprite": "🏹",
   "reach": "ranged",
   "element": "ice",

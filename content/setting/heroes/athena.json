@@ -2,6 +2,8 @@
   "id": "athena",
   "name": "Athena",
   "role": "Strategist",
+  "class": "Guardian",
+  "characterGroup": "Gods of Olympus",
   "sprite": "🦉",
   "reach": "melee",
   "element": "physical",

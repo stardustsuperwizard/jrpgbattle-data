@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "common.schema.json",
-  "title": "Shared content shapes, content format 2026-11-10",
+  "title": "Shared content shapes, content format 2026-11-11",
   "description": "Shapes more than one content file uses: ids, stats, skills and their effects. The other schemas refer to these.",
   "$defs": {
     "id": {

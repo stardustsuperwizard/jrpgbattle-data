@@ -2,6 +2,8 @@
   "id": "zeus",
   "name": "Zeus",
   "role": "Sky King",
+  "class": "Caster",
+  "characterGroup": "Gods of Olympus",
   "sprite": "⚡",
   "reach": "ranged",
   "element": "lightning",

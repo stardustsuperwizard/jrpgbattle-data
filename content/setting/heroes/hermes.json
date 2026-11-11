@@ -2,6 +2,8 @@
   "id": "hermes",
   "name": "Hermes",
   "role": "Messenger",
+  "class": "Support",
+  "characterGroup": "Gods of Olympus",
   "sprite": "🪽",
   "reach": "melee",
   "element": "lightning",

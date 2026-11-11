@@ -2,6 +2,8 @@
   "id": "hades",
   "name": "Hades",
   "role": "Underworld King",
+  "class": "Caster",
+  "characterGroup": "Gods of Olympus",
   "sprite": "💀",
   "reach": "melee",
   "element": "fire",

@@ -2,6 +2,8 @@
   "id": "ares",
   "name": "Ares",
   "role": "War God",
+  "class": "Striker",
+  "characterGroup": "Gods of Olympus",
   "sprite": "🗡️",
   "reach": "melee",
   "element": "physical",

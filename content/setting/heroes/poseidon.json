@@ -2,6 +2,8 @@
   "id": "poseidon",
   "name": "Poseidon",
   "role": "Sea King",
+  "class": "Caster",
+  "characterGroup": "Gods of Olympus",
   "sprite": "🔱",
   "reach": "melee",
   "element": "ice",

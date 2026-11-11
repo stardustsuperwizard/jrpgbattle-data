@@ -2,6 +2,8 @@
   "id": "apollo",
   "name": "Apollo",
   "role": "Sun Healer",
+  "class": "Support",
+  "characterGroup": "Gods of Olympus",
   "sprite": "☀️",
   "reach": "melee",
   "element": "fire",

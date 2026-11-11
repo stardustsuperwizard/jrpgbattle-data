@@ -2,6 +2,8 @@
   "id": "aphrodite",
   "name": "Aphrodite",
   "role": "Enchantress",
+  "class": "Support",
+  "characterGroup": "Gods of Olympus",
   "sprite": "🌹",
   "reach": "melee",
   "element": "ice",
