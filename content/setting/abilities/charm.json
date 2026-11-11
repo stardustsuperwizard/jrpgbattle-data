@@ -4,7 +4,7 @@
   "type": "basic",
   "target": "enemy",
   "spGain": 2,
-  "description": "Deal Ice DMG to one enemy. Gain 2 SP instead of 1.",
+  "description": "Deal Magic DMG to one enemy. Gain 2 SP instead of 1.",
   "effects": [
     {
       "type": "damage",

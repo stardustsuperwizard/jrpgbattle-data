@@ -3,7 +3,8 @@
   "name": "Tidal Wave",
   "type": "skill",
   "target": "all_enemies",
-  "description": "Ice DMG to all enemies with a 25% chance to Freeze.",
+  "element": "water",
+  "description": "Magic DMG to all enemies with a 25% chance to Freeze.",
   "effects": [
     {
       "type": "damage",

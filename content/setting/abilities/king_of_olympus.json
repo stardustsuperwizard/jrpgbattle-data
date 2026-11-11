@@ -3,7 +3,8 @@
   "name": "King of Olympus",
   "type": "ultimate",
   "target": "all_enemies",
-  "description": "Heavy Lightning DMG to all enemies and Shock them.",
+  "element": "lightning",
+  "description": "Heavy Magic DMG to all enemies and Shock them.",
   "effects": [
     {
       "type": "damage",

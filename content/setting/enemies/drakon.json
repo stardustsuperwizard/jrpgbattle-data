@@ -3,16 +3,14 @@
   "name": "Drakon",
   "sprite": "🦎",
   "reach": "melee",
-  "element": "fire",
+  "damageType": "magic",
   "maxHp": 1050,
-  "atk": 170,
-  "def": 60,
+  "physAtk": 170,
+  "magAtk": 170,
+  "physRes": 48,
+  "magRes": 48,
   "spd": 110,
   "toughness": 40,
-  "weaknesses": [
-    "ice",
-    "physical"
-  ],
   "xp": 185,
   "gold": 260,
   "skills": [
@@ -21,6 +19,7 @@
       "name": "Searing Fang",
       "type": "basic",
       "target": "enemy",
+      "element": "fire",
       "weight": 3,
       "effects": [
         {
@@ -40,6 +39,7 @@
       "name": "Fire Breath",
       "type": "skill",
       "target": "blast",
+      "element": "fire",
       "weight": 1,
       "message": "{user} breathes a gout of flame!",
       "effects": [

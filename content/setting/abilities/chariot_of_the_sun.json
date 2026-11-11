@@ -3,7 +3,8 @@
   "name": "Chariot of the Sun",
   "type": "ultimate",
   "target": "all_enemies",
-  "description": "Fire DMG to all enemies and Burn them; heal all allies 20% Max HP and grant ATK Up for 2 turns.",
+  "element": "fire",
+  "description": "Magic DMG to all enemies and Burn them; heal all allies 20% Max HP and grant ATK Up for 2 turns.",
   "effects": [
     {
       "type": "damage",

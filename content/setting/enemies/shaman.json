@@ -3,17 +3,15 @@
   "name": "Goblin Shaman",
   "sprite": "🧌",
   "reach": "ranged",
-  "element": "lightning",
+  "damageType": "magic",
   "ai": "healer",
   "maxHp": 1080,
-  "atk": 150,
-  "def": 50,
+  "physAtk": 150,
+  "magAtk": 150,
+  "physRes": 40,
+  "magRes": 40,
   "spd": 92,
   "toughness": 40,
-  "weaknesses": [
-    "physical",
-    "lightning"
-  ],
   "xp": 160,
   "gold": 225,
   "skills": [
@@ -22,6 +20,7 @@
       "name": "Hex Bolt",
       "type": "basic",
       "target": "enemy",
+      "element": "lightning",
       "effects": [
         {
           "type": "damage",

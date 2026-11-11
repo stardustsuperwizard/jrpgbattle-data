@@ -5,10 +5,12 @@
   "cost": 1000,
   "slot": "armour",
   "stats": {
-    "def": 30
+    "physRes": 30,
+    "magRes": 15
   },
   "statsPct": {
-    "def": 0.04
+    "physRes": 0.04,
+    "magRes": 0.04
   },
   "components": [
     "plate_mail"

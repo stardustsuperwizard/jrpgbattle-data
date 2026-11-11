@@ -3,8 +3,9 @@
   "name": "Thunderbolt",
   "type": "skill",
   "target": "blast",
+  "element": "lightning",
   "splash": 0.5,
-  "description": "Lightning DMG to an enemy and half to adjacent enemies, with a 60% chance to Shock.",
+  "description": "Magic DMG to an enemy and half to adjacent enemies, with a 60% chance to Shock.",
   "effects": [
     {
       "type": "damage",

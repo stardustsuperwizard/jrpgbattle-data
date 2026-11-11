@@ -3,16 +3,14 @@
   "name": "Necromancer",
   "sprite": "🧙",
   "reach": "ranged",
-  "element": "ice",
+  "damageType": "magic",
   "maxHp": 950,
-  "atk": 175,
-  "def": 45,
+  "physAtk": 175,
+  "magAtk": 175,
+  "physRes": 36,
+  "magRes": 36,
   "spd": 104,
   "toughness": 40,
-  "weaknesses": [
-    "fire",
-    "physical"
-  ],
   "xp": 200,
   "gold": 280,
   "skills": [
@@ -21,6 +19,7 @@
       "name": "Grave Bolt",
       "type": "basic",
       "target": "enemy",
+      "element": "dark",
       "weight": 3,
       "effects": [
         {
@@ -40,6 +39,7 @@
       "name": "Withering Curse",
       "type": "skill",
       "target": "all_enemies",
+      "element": "dark",
       "weight": 1,
       "message": "{user} lays a withering curse!",
       "effects": [
@@ -49,7 +49,7 @@
         },
         {
           "type": "status",
-          "status": "def_down",
+          "status": "res_down",
           "chance": 0.5,
           "duration": 2
         }

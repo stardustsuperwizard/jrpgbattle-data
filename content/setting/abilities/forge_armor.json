@@ -3,13 +3,13 @@
   "name": "Forge Armor",
   "type": "skill",
   "target": "all_allies",
-  "description": "Shield all allies with heavy armor (scales with DEF) for 2 turns.",
+  "description": "Shield all allies with heavy armor (scales with PHYS and MAG RES) for 2 turns.",
   "effects": [
     {
       "type": "shield",
-      "defRatio": 1.2,
       "flat": 100,
-      "duration": 2
+      "duration": 2,
+      "resRatio": 1.2
     }
   ]
 }

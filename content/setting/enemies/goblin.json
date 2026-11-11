@@ -3,16 +3,14 @@
   "name": "Goblin",
   "sprite": "👺",
   "reach": "melee",
-  "element": "physical",
+  "damageType": "physical",
   "maxHp": 980,
-  "atk": 170,
-  "def": 50,
+  "physAtk": 170,
+  "magAtk": 170,
+  "physRes": 40,
+  "magRes": 40,
   "spd": 104,
   "toughness": 30,
-  "weaknesses": [
-    "ice",
-    "physical"
-  ],
   "xp": 120,
   "gold": 170,
   "skills": [

@@ -5,7 +5,8 @@
   "cost": 400,
   "slot": "weapon",
   "stats": {
-    "atk": 25
+    "physAtk": 25,
+    "magAtk": 25
   },
   "components": [
     "iron_dagger"

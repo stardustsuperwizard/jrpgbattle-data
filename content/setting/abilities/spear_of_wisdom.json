@@ -3,6 +3,7 @@
   "name": "Spear of Wisdom",
   "type": "basic",
   "target": "enemy",
+  "element": "metal",
   "description": "Deal Physical DMG to one enemy.",
   "effects": [
     {

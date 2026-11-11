@@ -5,10 +5,12 @@
   "cost": 3000,
   "slot": "armour",
   "stats": {
-    "def": 30
+    "physRes": 30,
+    "magRes": 15
   },
   "statsPct": {
-    "def": 0.1
+    "physRes": 0.1,
+    "magRes": 0.1
   },
   "components": [
     "hoplite_panoply"

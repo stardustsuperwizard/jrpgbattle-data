@@ -3,16 +3,14 @@
   "name": "Dracaena",
   "sprite": "🐍",
   "reach": "melee",
-  "element": "physical",
+  "damageType": "physical",
   "maxHp": 900,
-  "atk": 165,
-  "def": 50,
+  "physAtk": 165,
+  "magAtk": 165,
+  "physRes": 57,
+  "magRes": 40,
   "spd": 108,
   "toughness": 30,
-  "weaknesses": [
-    "fire",
-    "ice"
-  ],
   "xp": 150,
   "gold": 210,
   "skills": [
@@ -49,7 +47,7 @@
         },
         {
           "type": "status",
-          "status": "def_down",
+          "status": "res_down",
           "chance": 0.6,
           "duration": 2
         }

@@ -5,6 +5,7 @@
   "cost": 150,
   "slot": "armour",
   "stats": {
-    "def": 12
+    "physRes": 12,
+    "magRes": 6
   }
 }

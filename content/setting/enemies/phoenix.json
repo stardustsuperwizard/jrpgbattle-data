@@ -3,17 +3,15 @@
   "name": "Phoenix",
   "sprite": "🔥",
   "reach": "ranged",
-  "element": "fire",
+  "damageType": "magic",
   "ai": "healer",
   "maxHp": 960,
-  "atk": 160,
-  "def": 45,
+  "physAtk": 160,
+  "magAtk": 160,
+  "physRes": 36,
+  "magRes": 36,
   "spd": 118,
   "toughness": 30,
-  "weaknesses": [
-    "ice",
-    "physical"
-  ],
   "xp": 175,
   "gold": 245,
   "skills": [
@@ -22,6 +20,7 @@
       "name": "Ember Wing",
       "type": "basic",
       "target": "enemy",
+      "element": "fire",
       "effects": [
         {
           "type": "damage",

@@ -1,49 +1,50 @@
 # Roster: first wave, the Olympians
 
-Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; jrpg-battle's statuses burn, shock, bleed, freeze, ATK Up, DEF Down and Taunt; and its four elements. The statuses and elements are still the engine's own, copied into this repository's `content/` with the rest of its content, so new ones are a file each in `content/statuses/` or `content/elements/`. Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
+Ten Greek gods built only from jrpg-battle's building blocks: damage, heal, shield, status, cleanse and remove_status effects; jrpg-battle's statuses burn, shock, bleed, freeze, ATK Up, RES Down and Taunt; and its two damage types, physical and magic, each with its own attack and resistance (jrpg-battle decisions 0055 and 0056). The statuses and elements are the engine's own core (jrpg-battle decisions 0050 and 0055), not this repository's. Every champion has its own speed, different from each other and from the core heroes (Aria 96, Seren 99, Pyra 102, Vex 120), so mixed teams tie on speed far less than the mirror match does.
 
-| Champion | Class | Role | Element (for now) | Spd | HP | ATK | DEF | Skill | Ultimate |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 🪽 Hermes | Support | Messenger: SP battery | Lightning | 124 | 980 | 135 | 65 | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
-| 🏹 Artemis | Striker | Huntress: single target | Ice | 116 | 1000 | 155 | 65 | Silver Arrow: heavy single + Bleed | The Hunt: massive single |
-| ☀️ Apollo | Support | Sun Healer | Fire | 110 | 1100 | 110 | 80 | Healing Light: heal one + cleanse | Chariot of the Sun: all + Burn, heal all, ATK Up all |
-| 🗡️ Ares | Striker | War God: bruiser | Physical | 108 | 1400 | 140 | 95 | Bloodlust: single + Taunt | Rout: heavy blast + Bleed |
-| 🌹 Aphrodite | Support | Enchantress: SP battery, party heal | Ice | 106 | 1050 | 110 | 75 | Embrace: heal all 12% + ATK Up all | Born of the Foam: all, 40% Freeze, heal all |
-| ⚡ Zeus | Caster | Sky King: area damage | Lightning | 104 | 1000 | 160 | 65 | Thunderbolt: blast, 60% Shock | King of Olympus: heavy all + Shock |
-| 🦉 Athena | Guardian | Strategist: tank | Physical | 98 | 1450 | 115 | 120 | Aegis: shield all + Taunt | Owl's Gambit: heavy single, ATK Up all |
-| 🔱 Poseidon | Caster | Sea King: area control | Ice | 97 | 1150 | 145 | 80 | Tidal Wave: all, 25% Freeze | Earthshaker: heavy all + DEF Down |
-| 💀 Hades | Caster | Underworld King: damage over time | Fire | 94 | 1150 | 145 | 75 | Grasp of the Dead: single + Burn + DEF Down | Realm of the Dead: all + 3-turn Burn |
-| 🔨 Hephaestus | Guardian | Smith: armor tank | Fire | 88 | 1550 | 130 | 110 | Forge Armor: heavy shield all | Molten Hammer: massive single + Burn |
+| Champion | Class | Role | Damage type | Elements | Spd | HP | PHYS ATK | MAG ATK | PHYS RES | MAG RES | Skill | Ultimate |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 🪽 Hermes | Support | Messenger: SP battery | Physical | Wind, Dark | 124 | 980 | 135 | 135 | 75 | 55 | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
+| 🏹 Artemis | Striker | Huntress: single target | Physical | Metal | 116 | 1000 | 155 | 155 | 75 | 55 | Silver Arrow: heavy single + Bleed | The Hunt: massive single |
+| ☀️ Apollo | Support | Sun Healer | Magic | Fire | 110 | 1100 | 110 | 110 | 68 | 92 | Healing Light: heal one + cleanse | Chariot of the Sun: all + Burn, heal all, ATK Up all |
+| 🗡️ Ares | Striker | War God: bruiser | Physical | – | 108 | 1400 | 140 | 140 | 109 | 81 | Bloodlust: single + Taunt | Rout: heavy blast + Bleed |
+| 🌹 Aphrodite | Support | Enchantress: SP battery, party heal | Magic | Water | 106 | 1050 | 110 | 110 | 64 | 86 | Embrace: heal all 12% + ATK Up all | Born of the Foam: all, 40% Freeze, heal all |
+| ⚡ Zeus | Caster | Sky King: area damage | Magic | Lightning | 104 | 1000 | 160 | 160 | 55 | 75 | Thunderbolt: blast, 60% Shock | King of Olympus: heavy all + Shock |
+| 🦉 Athena | Guardian | Strategist: tank | Physical | Metal | 98 | 1450 | 115 | 115 | 138 | 102 | Aegis: shield all + Taunt | Owl's Gambit: heavy single, ATK Up all |
+| 🔱 Poseidon | Caster | Sea King: area control | Magic | Water, Earth | 97 | 1150 | 145 | 145 | 68 | 92 | Tidal Wave: all, 25% Freeze | Earthshaker: heavy all + RES Down |
+| 💀 Hades | Caster | Underworld King: damage over time | Magic | Dark | 94 | 1150 | 145 | 145 | 64 | 86 | Grasp of the Dead: single + Burn + RES Down | Realm of the Dead: all + 3-turn Burn |
+| 🔨 Hephaestus | Guardian | Smith: armor tank | Physical | Metal, Fire | 88 | 1550 | 130 | 130 | 126 | 94 | Forge Armor: heavy shield all | Molten Hammer: massive single + Burn |
 
 The ten share the character group **Gods of Olympus** (every hero has a `characterGroup`, the title of its set). Each god has a class, a label for now (jrpg-battle decision 0054; what a class might do is jrpg-battle#363): Guardian, Striker, Caster or Support. The bot's pick spreads a team across classes.
 
 Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for their teammates' skills.
 
-**Elements are provisional.** With only physical, fire, ice and lightning, several gods are approximations: Poseidon and Aphrodite are "ice" for water, Hades "fire" for the Phlegethon. Elements are content here now, one file each in `content/elements/`; the intended ones are: Poseidon and Aphrodite water, Hades dark, Apollo light, Hermes wind, Zeus lightning, Hephaestus fire.
+**Two layers on an attack** (jrpg-battle decisions 0055 to 0057). The **damage type**, physical or magic, is what an attack is: each type has its own attack stat and resistance (below). The **element**, set on a skill, is the kind of force it is: fire, water, earth, wind, lightning, ice, dark or metal. An element only chooses a client's animation and sound for now, so a skill with none plays its damage type's default; Zeus's lightning is a magic hit of lightning, Hephaestus's Molten Hammer a physical hit of fire. Later an element can become its own lever for builds. What follows is the damage types. Every god and monster has a PHYS ATK and a MAG ATK instead of ATK, and a PHYS RES and a MAG RES instead of DEF. A hit is driven by the attack of its element and lowered by the resistance of the same: `physical` is PHYS ATK against PHYS RES, `magic` is MAG ATK against MAG RES. Both attacks of every god and monster equal its old ATK for now, since no skill uses the other type yet. There are no weaknesses. A god fights with body and weapon (Physical: Hermes, Artemis, Ares, Athena, Hephaestus) or with divine power (Magic: Apollo, Aphrodite, Zeus, Poseidon, Hades); the water, dark, light and wind the myths ask for are no longer approximated with ice or fire. Each god's resistances are the old DEF, 15% higher against their own damage type and 15% lower against the other, so a physical bruiser is harder to hit physically than magically. A world may still add elements, each resisted by one of the two stats.
 
-## Numbers (roster 0.4.0 on jrpg-battle 0.6.0, 300 seeded battles per line)
 
-`npm run check` in this repository, against jrpg-battle 0.6.0; the core party wins PvE 83.3% and splits the PvP mirror 50.0%. The champions are unchanged since 0.3.0; the numbers moved with the engine. In 0.6.0 taunt pulls every attacker's single-target attacks, players' and the bot's as well as monsters' (jrpg-battle decision 0028); before, it only drew monsters, so in PvP Ares's and Athena's taunts did nothing. A frozen golem also keeps its wind-up now instead of losing it (decision 0027). Each champion stands in for the core hero with the closest job (`data/checks.json`).
+## Numbers (roster 0.15.0 on jrpg-battle 0.19.0, 300 seeded battles per line)
+
+`npm run check` in this repository, against jrpg-battle 0.19.0; the core party wins PvE 82.3% and splits the PvP mirror 48.3% (the engine's own simulator, which uses the engine's monsters, has 80.6% and 48.5%). The champions' resistances replaced their DEF in this release, and every hit now drains toughness, so the bosses' toughness went up to keep chargers from being broken on every hit. Each champion stands in for the core hero with the closest job (`data/checks.json`).
 
 | Champion | In for | PvE win | vs core | PvP win vs core team |
 |---|---|---|---|---|
-| Hermes | Vex | 71.0% | −12.3 | 34.3% |
-| Artemis | Vex | 98.7% | +15.3 | 10.7% |
-| Apollo | Seren | 51.3% | −32.0 | 63.7% |
-| Ares | Aria | 23.3% | −60.0 | 59.0% |
-| Aphrodite | Seren | 53.7% | −29.7 | **88.3%** |
-| Zeus | Pyra | 99.7% | +16.3 | 53.3% |
-| Athena | Aria | 89.3% | +6.0 | 47.3% |
-| Poseidon | Pyra | 99.3% | +16.0 | 68.3% |
-| Hades | Pyra | 70.7% | −12.7 | 40.3% |
-| Hephaestus | Aria | 73.0% | −10.3 | 41.3% |
+| Hermes | Vex | 77.0% | −5.3 | 39.7% |
+| Artemis | Vex | 80.3% | −2.0 | 15.7% |
+| Apollo | Seren | 86.3% | +4.0 | 68.3% |
+| Ares | Aria | 86.3% | +4.0 | 22.0% |
+| Aphrodite | Seren | 52.7% | −29.7 | **91.0%** |
+| Zeus | Pyra | 79.7% | −2.7 | 62.3% |
+| Athena | Aria | 87.0% | +4.7 | 54.3% |
+| Poseidon | Pyra | 88.0% | +5.7 | 72.0% |
+| Hades | Pyra | 90.7% | +8.3 | 20.0% |
+| Hephaestus | Aria | 75.7% | −6.7 | 43.7% |
 
-All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 94.0% and PvP 65.0% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 93.3% and 4.3%; Ares, Hades, Apollo, Zeus 0.0% and 51.3%.
+All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 86.0% and PvP 57.7% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 70.0% and 14.0%; Ares, Hades, Apollo, Zeus 45.3% and 55.7%.
 
 ### How to read them
 
-- **PvE mostly measures element match against one boss.** All the core party's losses come on wave 3, a single 11,400 HP golem weak only to lightning and ice, and monsters resist every element they aren't weak to. Ice and lightning gods (Zeus, Poseidon, Artemis) shred it; physical and fire gods are resisted. PvE numbers will mean more once there are more waves and bosses.
-- **PvP still depends on turn order, but no longer on the bot's SP greed.** Heroes have no weaknesses, so elements don't matter in PvP; turn order within a team does. Before jrpg-battle `v0.1.0`, Athena with Aria's exact stats won 53% at speed 98 but 11% at 100–101: acting just before Seren (99), the bot spent the team's last SP on Aegis and left Seren none for Mend. `v0.1.0`'s bot holds the last SP for a teammate's due heal (jrpg-battle#256), and the same sweep now runs 45% (94), 53% (97–98), 58–59% (100–101) and 69–70% (103–105). The remaining step sits at Pyra's speed (102): acting before her puts Aegis up ahead of the enemy's opening area attack. That's ordinary turn order, so a champion's PvP number still depends on where it lands among its teammates, and tuning one number against one team stays fragile.
+- **PvE no longer turns on one element.** All the core party's losses come on wave 3, a single golem; with no weaknesses, a champion's PvE number follows how much damage and healing it brings, not which element it was given. The team without a real healer (Ares, Hades, Apollo, Zeus) still loses more than half its PvE battles.
+- **PvP still depends on turn order, but no longer on the bot's SP greed.** Heroes' resistances are close to each other, so a champion's damage type matters a little in PvP; turn order within a team matters more. Before jrpg-battle `v0.1.0`, Athena with Aria's exact stats won 53% at speed 98 but 11% at 100–101: acting just before Seren (99), the bot spent the team's last SP on Aegis and left Seren none for Mend. `v0.1.0`'s bot holds the last SP for a teammate's due heal (jrpg-battle#256), and the same sweep now runs 45% (94), 53% (97–98), 58–59% (100–101) and 69–70% (103–105). The remaining step sits at Pyra's speed (102): acting before her puts Aegis up ahead of the enemy's opening area attack. That's ordinary turn order, so a champion's PvP number still depends on where it lands among its teammates, and tuning one number against one team stays fragile.
 - **The bot plays the champion, and its rules shape the numbers.** It casts an ally skill only when someone is under 55% HP, a party-wide skill only when nobody is shielded, and a blast skill only with two or more enemies standing. A champion whose skill the bot rarely casts tests weak.
 
 ### Known issues to fix next
@@ -57,27 +58,27 @@ All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 94.0% and PvP 65.0% ag
 
 The dungeon's monsters (`content/enemies/`), by the stretch of the Descent they first appear in; [DUNGEON.md](DUNGEON.md) has the whole map. The first five are jrpg-battle's own; roster 0.5.0 added ten from Greek myth, two of them stronger recolours of others (the Drakon of the Dracaena, the Myrmidon of the Hoplite), and the Minotaur; roster 0.6.0 adds a boss for each of the last three stretches.
 
-| Monster | From floor | Element | Weak to | Role |
-|---|---|---|---|---|
-| 🦠 Slime | 1 | Physical | Fire, lightning | Corrode: lowers a hero's DEF |
-| 👺 Goblin | 1 | Physical | Ice, physical | Hits hard, sometimes harder |
-| 🐺 Dire Wolf | 1 | Physical | Fire, ice | Fast; Howl raises its ATK |
-| 🧌 Goblin Shaman | 3 | Lightning | Physical, lightning | Healer; shocks |
-| 🐗 Erymanthian Boar | 3 | Physical | Fire, lightning | Stampede: a heavy gore that may bleed |
-| 🦅 Harpy | 6 | Lightning | Ice, physical | Fastest monster; Storm Shriek hits the whole party, may shock |
-| 💀 Spartoi | 6 | Physical | Physical, fire | The sown men: Phalanx shields itself and taunts |
-| 🐍 Dracaena | 6 | Physical | Fire, ice | Venom Fang may cause bleeding; Constrict lowers DEF |
-| 🔥 Phoenix | 11 | Fire | Ice, physical | Healer; burns |
-| 🦎 Drakon | 11 | Fire | Ice, physical | The Dracaena's fire kin: burning fangs, Fire Breath on three heroes |
-| 🛡️ Hoplite | 11 | Physical | Lightning, ice | Shield Wall shields every monster on its side |
-| 👻 Shade | 16 | Ice | Fire, lightning | Grave Chill may freeze; its Lament lowers the party's DEF |
-| 🧙 Necromancer | 16 | Ice | Fire, physical | Grave Bolt may freeze; Withering Curse hits the party and lowers DEF |
-| ⚔️ Myrmidon | 16 | Physical | Lightning, fire | The Hoplite's red-armoured elite: Battle Cry raises every monster's ATK for a turn |
-| 🗿 Ancient Golem | boss, 1–5 | Physical | Lightning, ice | Charger, every 3rd action: Cataclysm on the party |
-| 🐂 Minotaur | boss, 6–10 | Physical | Fire, lightning | Charger, every 4th action: Labyrinth Rampage on the party; Horn Gore bleeds |
-| 🐉 Lernaean Hydra | boss, 11–15 | Physical | Fire, ice | Charger, every 4th action: Venom Torrent on the party, may bleed; Venom Bite bleeds |
-| 🐕 Cerberus | boss, 16–20 | Fire | Ice, lightning | Charger, every 4th action: Triple Inferno on the party, may burn; Hellfire Bite burns |
-| 🌪️ Typhon | boss, 21–25 (the final boss) | Lightning | Ice, physical | Charger, every 3rd action: Wrath of the Titans on the party, may shock; Storm Fist shocks |
+| Monster | From floor | Damage type | Elements | PHYS / MAG RES | Role |
+|---|---|---|---|---|---|
+| 🦠 Slime | 1 | Physical | – | 34 / 24 | Corrode: lowers a hero's PHYS and MAG RES |
+| 👺 Goblin | 1 | Physical | – | 40 / 40 | Hits hard, sometimes harder |
+| 🐺 Dire Wolf | 1 | Physical | – | 46 / 32 | Fast; Howl raises its ATK |
+| 🧌 Goblin Shaman | 3 | Magic | Lightning | 40 / 40 | Healer; shocks |
+| 🐗 Erymanthian Boar | 3 | Physical | – | 57 / 40 | Stampede: a heavy gore that may bleed |
+| 🦅 Harpy | 6 | Magic | Wind | 28 / 28 | Fastest monster; Storm Shriek hits the whole party, may shock |
+| 💀 Spartoi | 6 | Physical | – | 72 / 72 | The sown men: Phalanx shields itself and taunts |
+| 🐍 Dracaena | 6 | Physical | – | 57 / 40 | Venom Fang may cause bleeding; Constrict lowers PHYS and MAG RES |
+| 🔥 Phoenix | 11 | Magic | Fire | 36 / 36 | Healer; burns |
+| 🦎 Drakon | 11 | Magic | Fire | 48 / 48 | The Dracaena's fire kin: burning fangs, Fire Breath on three heroes |
+| 🛡️ Hoplite | 11 | Physical | – | 109 / 76 | Shield Wall shields every monster on its side |
+| 👻 Shade | 16 | Magic | Dark | 34 / 24 | Grave Chill may freeze; its Lament lowers the party's PHYS and MAG RES |
+| 🧙 Necromancer | 16 | Magic | Dark | 36 / 36 | Grave Bolt may freeze; Withering Curse hits the party and lowers PHYS and MAG RES |
+| ⚔️ Myrmidon | 16 | Physical | – | 80 / 56 | The Hoplite's red-armoured elite: Battle Cry raises every monster's ATK for a turn |
+| 🗿 Ancient Golem | boss, 1–5 | Physical | Earth | 103 / 72 | Charger, every 3rd action: Cataclysm on the party |
+| 🐂 Minotaur | boss, 6–10 | Physical | – | 92 / 64 | Charger, every 4th action: Labyrinth Rampage on the party; Horn Gore bleeds |
+| 🐉 Lernaean Hydra | boss, 11–15 | Physical | Water | 98 / 68 | Charger, every 4th action: Venom Torrent on the party, may bleed; Venom Bite bleeds |
+| 🐕 Cerberus | boss, 16–20 | Magic | Fire | 103 / 72 | Charger, every 4th action: Triple Inferno on the party, may burn; Hellfire Bite burns |
+| 🌪️ Typhon | boss, 21–25 (the final boss) | Magic | Lightning, Wind | 80 / 80 | Charger, every 3rd action: Wrath of the Titans on the party, may shock; Storm Fist shocks |
 
 Every monster here has art on the site. A monster added later shows the site's default unit, chosen by its `reach`, until jrpgbattle-client-premium has its recipe.
 

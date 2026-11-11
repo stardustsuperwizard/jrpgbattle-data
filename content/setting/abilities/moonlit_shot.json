@@ -3,7 +3,7 @@
   "name": "Moonlit Shot",
   "type": "basic",
   "target": "enemy",
-  "description": "Deal Ice DMG to one enemy.",
+  "description": "Deal Physical DMG to one enemy.",
   "effects": [
     {
       "type": "damage",
