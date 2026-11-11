@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { API_VERSION, KINDS, build, buildContent, render } from '../scripts/build.mjs';
 
-const manifest = { formatVersion: '2026-11-10', name: 'Test', version: '1.0.0', licences: { data: 'UNLICENSED', lore: 'UNLICENSED' } };
+const manifest = { formatVersion: '2026-11-11', name: 'Test', version: '1.0.0', licences: { data: 'UNLICENSED', lore: 'UNLICENSED' } };
 const hero = (id, abilities) => ({ id, name: id, abilities });
 const ability = (id) => ({ id, name: id, type: 'basic', target: 'enemy', effects: [] });
 const enemy = (id) => ({ id, name: id, skills: [] });
@@ -106,7 +106,7 @@ test('the build writes every drop-in setting file and the static API', (t) => {
   assert.deepEqual(readdirSync(join(out, 'api')).sort(), ['.nojekyll', 'index.html', 'index.json', 'v1'], 'every other path is under its version');
   assert.match(readFileSync(join(out, 'api/index.html'), 'utf8'), /url: 'v1\/openapi\.json'/);
   assert.deepEqual(read('api/v1/index.json'), {
-    api: 'v1', name: 'Test', version: '1.0.0', formatVersion: '2026-11-10',
+    api: 'v1', name: 'Test', version: '1.0.0', formatVersion: '2026-11-11',
     heroes: ['zed', 'amy'], abilities: ['jab', 'kick', 'aim'], enemies: ['rat'], items: [],
     content: KINDS.map(({ name }) => `content/${name}.json`),
     openapi: 'openapi.json', schemas: 'schemas/',

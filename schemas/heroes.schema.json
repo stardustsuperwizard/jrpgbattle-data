@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "heroes.schema.json",
-  "title": "setting/heroes.json, content format 2026-11-10",
+  "title": "setting/heroes.json, content format 2026-11-11",
   "type": "object",
   "propertyNames": {
     "type": "string",
@@ -19,6 +19,7 @@
         "name",
         "sprite",
         "reach",
+        "class",
         "element",
         "maxHp",
         "atk",
