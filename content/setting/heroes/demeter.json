@@ -8,7 +8,7 @@
   "reach": "melee",
   "damageType": "magic",
   "maxHp": 1150,
-  "physAtk": 105,
+  "physAtk": 79,
   "magAtk": 105,
   "physRes": 68,
   "magRes": 92,
@@ -16,7 +16,7 @@
   "maxEnergy": 100,
   "growth": {
     "maxHp": 92,
-    "physAtk": 9,
+    "physAtk": 7,
     "magAtk": 9,
     "physRes": 5,
     "magRes": 7,

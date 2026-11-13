@@ -9,7 +9,7 @@
   "damageType": "physical",
   "maxHp": 1000,
   "physAtk": 155,
-  "magAtk": 155,
+  "magAtk": 116,
   "physRes": 75,
   "magRes": 55,
   "spd": 116,
@@ -19,7 +19,7 @@
   "growth": {
     "maxHp": 80,
     "physAtk": 14,
-    "magAtk": 14,
+    "magAtk": 11,
     "physRes": 6,
     "magRes": 4,
     "spd": 1

@@ -9,7 +9,7 @@
   "damageType": "physical",
   "maxHp": 1500,
   "physAtk": 120,
-  "magAtk": 120,
+  "magAtk": 90,
   "physRes": 129,
   "magRes": 95,
   "spd": 100,
@@ -17,7 +17,7 @@
   "growth": {
     "maxHp": 120,
     "physAtk": 10,
-    "magAtk": 10,
+    "magAtk": 8,
     "physRes": 11,
     "magRes": 8,
     "spd": 1
@@ -30,7 +30,7 @@
   "defaultLoadout": {
     "weapon": "war_axe",
     "armour": "brigandine",
-    "boots": "iron_greaves",
-    "charm": "giant_belt"
+    "boots": "wind_boots",
+    "charm": "ward_charm"
   }
 }

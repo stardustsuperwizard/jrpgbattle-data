@@ -14,7 +14,8 @@
     {
       "type": "status",
       "status": "shock",
-      "duration": 2
+      "duration": 2,
+      "dotRatio": 0.8
     }
   ]
 }
