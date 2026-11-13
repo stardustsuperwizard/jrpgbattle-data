@@ -1,0 +1,38 @@
+[
+  {
+    "id": "weapon",
+    "name": "Weapon",
+    "pool": {
+      "tiers": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "armour",
+    "name": "Armour",
+    "pool": {
+      "tiers": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "boots",
+    "name": "Boots",
+    "pool": {
+      "tiers": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "charm",
+    "name": "Charm",
+    "pool": {
+      "tiers": [
+        2
+      ]
+    }
+  }
+]

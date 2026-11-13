@@ -4,6 +4,7 @@
   "icon": "🥉",
   "cost": 1000,
   "slot": "armour",
+  "tier": 3,
   "stats": {
     "physRes": 30,
     "magRes": 15
@@ -13,6 +14,8 @@
     "magRes": 0.04
   },
   "components": [
-    "plate_mail"
+    "plate_mail",
+    "mystic_robe",
+    "brigandine"
   ]
 }

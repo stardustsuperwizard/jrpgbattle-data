@@ -1,0 +1,16 @@
+{
+  "id": "brigandine",
+  "name": "Brigandine",
+  "icon": "🥋",
+  "cost": 400,
+  "slot": "armour",
+  "tier": 2,
+  "stats": {},
+  "statsPct": {
+    "physRes": 0.26,
+    "magRes": 0.26
+  },
+  "components": [
+    "leather_vest"
+  ]
+}

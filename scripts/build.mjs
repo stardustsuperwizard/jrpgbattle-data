@@ -6,7 +6,7 @@
 // Sources, in content/setting/: jrpg-battle's setting files (its decision
 // 0050: the world, played by the engine's own core rules), the ones keyed by
 // id broken out one file per entry.
-//   manifest.json, waves.json, dungeon.json, house-rules.json
+//   manifest.json, slots.json, waves.json, dungeon.json, house-rules.json
 //                            single files, built as they are
 //   <kind>/index.json        the ids in order, for heroes (the order the pick
 //                            screen lists them), enemies and items
@@ -42,6 +42,7 @@ export const KINDS = [
   { name: 'abilities', order: 'use', id: true },
   { name: 'enemies', order: 'index', id: true },
   { name: 'items', order: 'index', id: true },
+  { name: 'slots', single: true },
   { name: 'waves', single: true },
   { name: 'dungeon', single: true },
   { name: 'house-rules', single: true },

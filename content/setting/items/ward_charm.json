@@ -1,0 +1,16 @@
+{
+  "id": "ward_charm",
+  "name": "Ward Charm",
+  "icon": "🔰",
+  "cost": 400,
+  "slot": "charm",
+  "tier": 2,
+  "stats": {},
+  "statsPct": {
+    "physRes": 0.3,
+    "magRes": 0.3
+  },
+  "components": [
+    "vigor_charm"
+  ]
+}

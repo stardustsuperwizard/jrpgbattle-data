@@ -4,6 +4,7 @@
   "icon": "🦺",
   "cost": 150,
   "slot": "armour",
+  "tier": 1,
   "stats": {
     "physRes": 12,
     "magRes": 6

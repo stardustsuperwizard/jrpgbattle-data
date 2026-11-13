@@ -236,9 +236,17 @@
         "from": 6,
         "items": [
           "giant_belt",
+          "war_charm",
+          "ward_charm",
           "war_blade",
+          "war_axe",
+          "mage_staff",
           "plate_mail",
-          "wind_boots"
+          "mystic_robe",
+          "brigandine",
+          "wind_boots",
+          "iron_greaves",
+          "war_boots"
         ]
       },
       {
@@ -304,18 +312,34 @@
             "leather_vest",
             "light_boots",
             "giant_belt",
+            "war_charm",
+            "ward_charm",
             "war_blade",
+            "war_axe",
+            "mage_staff",
             "plate_mail",
-            "wind_boots"
+            "mystic_robe",
+            "brigandine",
+            "wind_boots",
+            "iron_greaves",
+            "war_boots"
           ]
         },
         {
           "from": 11,
           "items": [
             "giant_belt",
+            "war_charm",
+            "ward_charm",
             "war_blade",
+            "war_axe",
+            "mage_staff",
             "plate_mail",
+            "mystic_robe",
+            "brigandine",
             "wind_boots",
+            "iron_greaves",
+            "war_boots",
             "asclepian_amulet",
             "bronze_spear",
             "bronze_cuirass",

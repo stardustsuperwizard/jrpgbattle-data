@@ -23,6 +23,7 @@ function sources(t, { order = ['zed', 'amy'], heroes = { zed: ['jab', 'kick'], a
     writeFileSync(join(root, path), typeof value === 'string' ? value : render(value));
   };
   put('content/setting/manifest.json', manifest);
+  put('content/setting/slots.json', [{ id: 'weapon', name: 'Weapon' }]);
   put('content/setting/waves.json', [['rat']]);
   put('content/setting/dungeon.json', null);
   put('content/setting/house-rules.json', { rules: { maxLevel: 25 } });

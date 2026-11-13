@@ -4,6 +4,7 @@
   "icon": "🟠",
   "cost": 1800,
   "slot": "charm",
+  "tier": 4,
   "stats": {
     "maxHp": 400
   },

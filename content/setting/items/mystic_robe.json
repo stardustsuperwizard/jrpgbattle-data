@@ -1,0 +1,15 @@
+{
+  "id": "mystic_robe",
+  "name": "Mystic Robe",
+  "icon": "👘",
+  "cost": 400,
+  "slot": "armour",
+  "tier": 2,
+  "stats": {
+    "physRes": 15,
+    "magRes": 30
+  },
+  "components": [
+    "leather_vest"
+  ]
+}

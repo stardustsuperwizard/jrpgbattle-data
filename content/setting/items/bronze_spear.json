@@ -4,6 +4,7 @@
   "icon": "🔱",
   "cost": 1000,
   "slot": "weapon",
+  "tier": 3,
   "stats": {
     "physAtk": 25,
     "magAtk": 25
@@ -13,6 +14,8 @@
     "magAtk": 0.04
   },
   "components": [
-    "war_blade"
+    "war_blade",
+    "war_axe",
+    "mage_staff"
   ]
 }

@@ -4,6 +4,7 @@
   "icon": "🐍",
   "cost": 1000,
   "slot": "charm",
+  "tier": 3,
   "stats": {
     "maxHp": 400
   },
@@ -11,6 +12,8 @@
     "maxHp": 0.04
   },
   "components": [
-    "giant_belt"
+    "giant_belt",
+    "war_charm",
+    "ward_charm"
   ]
 }

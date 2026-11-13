@@ -1,0 +1,15 @@
+{
+  "id": "war_axe",
+  "name": "Battle Axe",
+  "icon": "🪓",
+  "cost": 400,
+  "slot": "weapon",
+  "tier": 2,
+  "stats": {},
+  "statsPct": {
+    "physAtk": 0.22
+  },
+  "components": [
+    "iron_dagger"
+  ]
+}

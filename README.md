@@ -14,6 +14,7 @@ jrpgbattle's **setting** for the [jrpg-battle](https://github.com/stardustsuperw
 | `content/setting/heroes/<id>.json` | One champion, in the shape of an entry of jrpg-battle's `setting/heroes.json`; its `id` is its file name. |
 | `content/setting/abilities/<id>.json` | One ability, in the shape of an entry of `setting/abilities.json`. Each champion has exactly one basic, one skill and one ultimate. Abilities have no index: they come in the order the champions use them. |
 | `content/setting/enemies/`, `content/setting/items/` | One file per monster and item, in the shape of an entry of the engine's file of that name, each folder with an `index.json` listing its ids in order; each carries its file name as `id`. |
+| `content/setting/slots.json` | The slots a hero wears items in (weapon, armour, boots, charm), each with the `pool` a PvP pick chooses from by item tier (jrpg-battle decision 0058): tier 2, the Labyrinth's sidegrades. See [DUNGEON.md](DUNGEON.md). |
 | `content/setting/waves.json`, `content/setting/dungeon.json` | The practice waves, and what is in the dungeon (the pools, bosses, themes, the shop, the drops): see [DUNGEON.md](DUNGEON.md). How a campaign works is the engine's `core/campaign.json`. |
 | `content/setting/house-rules.json` | The core numbers this world changes, by the engine config's paths: the level cap and the loot sell share. The engine refuses anything its core lacks. |
 | `scripts/build.mjs` | `npm run build`: the sources into `dist/src/content/setting/` and `dist/api/`. Plain Node, no dependencies, no engine needed. |
@@ -49,7 +50,7 @@ npm run build          # into dist/
 
 | Output | What it is |
 |---|---|
-| `dist/src/content/setting/<name>.json` | jrpg-battle's setting files (its decision 0050): manifest, heroes, abilities, enemies, items, waves, dungeon and house-rules, each kind in its index order and abilities in the order the heroes use them. Dropped over a jrpg-battle checkout's `src/content/setting/`, they replace its default world. |
+| `dist/src/content/setting/<name>.json` | jrpg-battle's setting files (its decision 0050): manifest, heroes, abilities, enemies, items, slots, waves, dungeon and house-rules, each kind in its index order and abilities in the order the heroes use them. Dropped over a jrpg-battle checkout's `src/content/setting/`, they replace its default world. |
 | `dist/api/` | The static API, below. |
 
 The build refuses sources that don't fit together, naming every problem: a missing file or folder, a listed entry with no file, a file its index doesn't list, an `id` that isn't its file name, an ability a champion uses that has no file. An ability no champion uses is built after the rest and reported. Whether the content follows the game's rules is the engine's to say, in `npm run check`.
@@ -84,7 +85,7 @@ Pages serves one build, so when a `/v2/` comes the build writes both until `/v1/
 | `index.json` | `api` (`v1`), `name`, `version` and `formatVersion` from the manifest, each kind's ids in order, the paths of the combined files, and of `openapi.json` and `schemas/`. Start here. |
 | `openapi.json` | The OpenAPI 3.1 description of every path below, each response described by a schema in `schemas/`. |
 | `schemas/<name>.schema.json` | The content format's JSON Schemas, as the engine release in `engine.json` wrote them: one per setting file, an entry's shape a `$defs` of its file's (`heroes.schema.json#/$defs/hero`), and `common.schema.json`. A schema checks a file's shape; the engine checks the rest (an id naming something that exists) when it loads. |
-| `manifest.json`, `waves.json`, `dungeon.json`, `house-rules.json` | The single files. |
+| `manifest.json`, `slots.json`, `waves.json`, `dungeon.json`, `house-rules.json` | The single files. |
 | `<kind>/index.json` | Each kind's ids, in order: `heroes`, `abilities`, `enemies`, `items`. |
 | `<kind>/<id>.json` | One entry, as in the sources. |
 | `content/<name>.json` | Every combined content file, the same as a release's. |
