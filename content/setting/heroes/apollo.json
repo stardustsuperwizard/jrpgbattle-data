@@ -26,5 +26,11 @@
     "sunbeam",
     "healing_light",
     "chariot_of_the_sun"
-  ]
+  ],
+  "defaultLoadout": {
+    "weapon": "war_blade",
+    "armour": "mystic_robe",
+    "boots": "war_boots",
+    "charm": "war_charm"
+  }
 }

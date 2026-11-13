@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "slots.schema.json",
+  "title": "setting/slots.json, content format 2026-11-15",
+  "description": "The slots a hero wears items in (decisions 0036 and 0058), in the order a screen lists them: a hero wears one item in each. Each item names its slot by id. A slot's pool is what a pick may choose for it where a mode offers loadouts (PvP in the shipped modes): the items worn there at one of its tiers. A world with a dungeon needs at least one slot, as many as the campaign's gearSlots; [] is a world whose heroes wear nothing.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "name"
+    ],
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/slotId"
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "pool": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tiers"
+        ],
+        "properties": {
+          "tiers": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "minItems": 1,
+            "description": "The item tiers offered: every content item worn in this slot whose tier is one of these."
+          }
+        },
+        "description": "What a pick may choose for this slot where a mode offers loadouts (decision 0058); it must offer at least one item. A slot without one is never chosen."
+      }
+    }
+  }
+}

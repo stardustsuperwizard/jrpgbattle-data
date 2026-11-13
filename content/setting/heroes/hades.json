@@ -26,5 +26,11 @@
     "soul_lash",
     "grasp_of_the_dead",
     "realm_of_the_dead"
-  ]
+  ],
+  "defaultLoadout": {
+    "weapon": "mage_staff",
+    "armour": "mystic_robe",
+    "boots": "wind_boots",
+    "charm": "giant_belt"
+  }
 }

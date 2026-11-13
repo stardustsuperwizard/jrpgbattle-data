@@ -27,5 +27,11 @@
     "static_touch",
     "thunderbolt",
     "king_of_olympus"
-  ]
+  ],
+  "defaultLoadout": {
+    "weapon": "mage_staff",
+    "armour": "mystic_robe",
+    "boots": "war_boots",
+    "charm": "war_charm"
+  }
 }

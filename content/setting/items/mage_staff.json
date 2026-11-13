@@ -1,0 +1,15 @@
+{
+  "id": "mage_staff",
+  "name": "Mage Staff",
+  "icon": "🪄",
+  "cost": 400,
+  "slot": "weapon",
+  "tier": 2,
+  "stats": {},
+  "statsPct": {
+    "magAtk": 0.21
+  },
+  "components": [
+    "iron_dagger"
+  ]
+}

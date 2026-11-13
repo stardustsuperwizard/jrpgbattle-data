@@ -26,5 +26,11 @@
     "spear_of_wisdom",
     "aegis",
     "owls_gambit"
-  ]
+  ],
+  "defaultLoadout": {
+    "weapon": "war_axe",
+    "armour": "brigandine",
+    "boots": "iron_greaves",
+    "charm": "giant_belt"
+  }
 }

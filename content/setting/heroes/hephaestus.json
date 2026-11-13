@@ -26,5 +26,11 @@
     "hammer_blow",
     "forge_armor",
     "molten_hammer"
-  ]
+  ],
+  "defaultLoadout": {
+    "weapon": "war_axe",
+    "armour": "brigandine",
+    "boots": "iron_greaves",
+    "charm": "ward_charm"
+  }
 }

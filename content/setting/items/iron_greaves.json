@@ -1,0 +1,17 @@
+{
+  "id": "iron_greaves",
+  "name": "Iron Greaves",
+  "icon": "🥾",
+  "cost": 400,
+  "slot": "boots",
+  "tier": 2,
+  "stats": {},
+  "statsPct": {
+    "maxHp": 0.15,
+    "physRes": 0.12,
+    "magRes": 0.12
+  },
+  "components": [
+    "light_boots"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "war_boots",
+  "name": "War Boots",
+  "icon": "👢",
+  "cost": 400,
+  "slot": "boots",
+  "tier": 2,
+  "stats": {},
+  "statsPct": {
+    "physAtk": 0.1,
+    "magAtk": 0.1
+  },
+  "components": [
+    "light_boots"
+  ]
+}

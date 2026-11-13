@@ -4,10 +4,13 @@
   "icon": "🩴",
   "cost": 1000,
   "slot": "boots",
+  "tier": 3,
   "stats": {
     "spd": 11
   },
   "components": [
-    "wind_boots"
+    "wind_boots",
+    "iron_greaves",
+    "war_boots"
   ]
 }

@@ -4,6 +4,7 @@
   "icon": "🕊️",
   "cost": 1800,
   "slot": "boots",
+  "tier": 4,
   "stats": {
     "spd": 12
   },

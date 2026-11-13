@@ -26,5 +26,11 @@
     "charm",
     "embrace",
     "born_of_the_foam"
-  ]
+  ],
+  "defaultLoadout": {
+    "weapon": "war_blade",
+    "armour": "plate_mail",
+    "boots": "wind_boots",
+    "charm": "giant_belt"
+  }
 }

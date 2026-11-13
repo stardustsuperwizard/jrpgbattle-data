@@ -1,6 +1,6 @@
 {
   "name": "jrpgbattle-data",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "private": true,
   "type": "module",
   "description": "The jrpgbattle champion roster: content for the jrpg-battle engine, built from one file per entry.",
@@ -9,6 +9,7 @@
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.mjs",
     "check": "node scripts/check.mjs",
-    "schemas": "node scripts/schemas.mjs"
+    "schemas": "node scripts/schemas.mjs",
+    "sweep": "node scripts/sweep.mjs"
   }
 }

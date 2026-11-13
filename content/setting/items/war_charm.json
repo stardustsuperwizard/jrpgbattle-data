@@ -1,0 +1,16 @@
+{
+  "id": "war_charm",
+  "name": "War Charm",
+  "icon": "🔥",
+  "cost": 400,
+  "slot": "charm",
+  "tier": 2,
+  "stats": {},
+  "statsPct": {
+    "physAtk": 0.15,
+    "magAtk": 0.15
+  },
+  "components": [
+    "vigor_charm"
+  ]
+}

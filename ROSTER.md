@@ -22,6 +22,43 @@ Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for the
 **Two layers on an attack** (jrpg-battle decisions 0055 to 0057). The **damage type**, physical or magic, is what an attack is: each type has its own attack stat and resistance (below). The **element**, set on a skill, is the kind of force it is: fire, water, earth, wind, lightning, ice, dark or metal. An element only chooses a client's animation and sound for now, so a skill with none plays its damage type's default; Zeus's lightning is a magic hit of lightning, Hephaestus's Molten Hammer a physical hit of fire. Later an element can become its own lever for builds. What follows is the damage types. Every god and monster has a PHYS ATK and a MAG ATK instead of ATK, and a PHYS RES and a MAG RES instead of DEF. A hit is driven by the attack of its element and lowered by the resistance of the same: `physical` is PHYS ATK against PHYS RES, `magic` is MAG ATK against MAG RES. Both attacks of every god and monster equal its old ATK for now, since no skill uses the other type yet. There are no weaknesses. A god fights with body and weapon (Physical: Hermes, Artemis, Ares, Athena, Hephaestus) or with divine power (Magic: Apollo, Aphrodite, Zeus, Poseidon, Hades); the water, dark, light and wind the myths ask for are no longer approximated with ice or fire. Each god's resistances are the old DEF, 15% higher against their own damage type and 15% lower against the other, so a physical bruiser is harder to hit physically than magically. A world may still add elements, each resisted by one of the two stats.
 
 
+## PvP gear
+
+In PvP each god wears a **loadout**: one item in each slot, chosen from that slot's **pool** after the team pick, blind, with its own timer (jrpg-battle decisions 0058 and 0059; against the bot from jrpg-battle 0.23.0, online later). The pool is the Labyrinth's tier, three sidegrades a slot on one budget, which the campaign shop also sells from floor 6 (DUNGEON.md). The ladder above it (the Bronze Spear and up) is PvE-only, so the strongest campaign gear is never a free pick.
+
+| Slot | Flat, for low stats | Percentage, for high stats | The third way |
+|---|---|---|---|
+| Weapon | ⚔️ War Blade: +25 PHYS and MAG ATK | 🪓 Battle Axe: +26% PHYS ATK | 🪄 Mage Staff: +21% MAG ATK |
+| Armour | 🛡️ Plate Mail: +30 PHYS, +15 MAG RES | 🥋 Brigandine: +30% both RES | 👘 Mystic Robe: +15 PHYS, +30 MAG RES |
+| Boots | 🪽 Wind Boots: +10 SPD | 🥾 Iron Greaves: +15% HP, +12% both RES | 👢 War Boots: +10% both ATK |
+| Charm | ❤️ Giant Belt: +400 HP | 🔰 Ward Charm: +36% both RES | 🔥 War Charm: +15% both ATK |
+
+**Each god's default loadout** leans into its kit, so a god is ready to play without anyone opening the loadout screen (`defaultLoadout`; the bot wears it too):
+
+| God | Weapon | Armour | Boots | Charm | Why |
+|---|---|---|---|---|---|
+| ⚡ Zeus | Mage Staff | Mystic Robe | War Boots | War Charm | A caster: all-in on magic damage |
+| 🔱 Poseidon | Mage Staff | Mystic Robe | Wind Boots | War Charm | A caster who controls: magic, and speed to freeze first |
+| 💀 Hades | Mage Staff | Mystic Robe | Wind Boots | Giant Belt | A caster who lasts: his burns need him standing |
+| 🏹 Artemis | Battle Axe | Plate Mail | War Boots | Giant Belt | A striker: her high PHYS ATK scales with percentages |
+| 🗡️ Ares | Battle Axe | Brigandine | Iron Greaves | Giant Belt | A bruiser: damage on a body that takes the taunt |
+| 🦉 Athena | Battle Axe | Brigandine | Iron Greaves | Giant Belt | A tank: her high resistances scale with percentages |
+| 🔨 Hephaestus | Battle Axe | Brigandine | Iron Greaves | Ward Charm | The armour tank: resistance on resistance |
+| ☀️ Apollo | War Blade | Mystic Robe | War Boots | War Charm | A healer who hits: flat on his low attack, magic armour |
+| 🌹 Aphrodite | War Blade | Plate Mail | Wind Boots | Giant Belt | A battery: speed and staying power, to keep the SP flowing |
+| 🪽 Hermes | Battle Axe | Plate Mail | Wind Boots | War Charm | The fastest god, made faster, with damage to spend his SP on |
+
+**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 81 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.18.0 on jrpg-battle 0.23.0:
+
+| Slot | Best for |
+|---|---|
+| Weapon | Battle Axe: Hermes, Artemis, Ares, Athena, Hephaestus · Mage Staff: Zeus, Poseidon, Hades · War Blade: Apollo, Aphrodite |
+| Armour | Plate Mail: Hermes, Artemis, Aphrodite, Poseidon · Mystic Robe: Apollo, Ares, Zeus, Hades · Brigandine: Athena, Hephaestus |
+| Boots | Wind Boots: Hermes, Aphrodite, Poseidon, Hades, Hephaestus · War Boots: Artemis, Apollo, Zeus · Iron Greaves: Ares, Athena |
+| Charm | Giant Belt: Artemis, Ares, Aphrodite, Athena, Hades · War Charm: Hermes, Apollo, Zeus, Poseidon · Ward Charm: Hephaestus |
+
+Within a slot, the options a god doesn't take are mostly within 2 to 10 points of the one it does. The outliers are speed: Wind Boots are 20 points behind the other boots on Ares and Athena, whose kits don't care when they move, and the best boots on Hermes, Poseidon and Aphrodite, whose do. A default may give up a few points to lean into a kit (Hephaestus's Iron Greaves are 6 behind his Wind Boots); that is a choice a player can change.
+
 ## Numbers (roster 0.15.0 on jrpg-battle 0.19.0, 300 seeded battles per line)
 
 `npm run check` in this repository, against jrpg-battle 0.19.0; the core party wins PvE 82.3% and splits the PvP mirror 48.3% (the engine's own simulator, which uses the engine's monsters, has 80.6% and 48.5%). The champions' resistances replaced their DEF in this release, and every hit now drains toughness, so the bosses' toughness went up to keep chargers from being broken on every hit. Each champion stands in for the core hero with the closest job (`data/checks.json`).

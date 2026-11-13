@@ -2,7 +2,7 @@
 
 The gods of Olympus and their world, as a **setting** for the jrpg-battle engine (its decision 0050): the champions and their abilities, the monsters, the items, the practice waves, and what is in the dungeon. The rulebook is the engine's own `src/content/core/`; this folder replaces its `src/content/setting/` whole when a site builds.
 
-The layout mirrors the engine's setting folder, with the kinds keyed by id broken out one file per entry (see the repository README): `manifest.json`, `heroes/`, `abilities/`, `enemies/`, `items/`, `waves.json`, `dungeon.json` and `house-rules.json`.
+The layout mirrors the engine's setting folder, with the kinds keyed by id broken out one file per entry (see the repository README): `manifest.json`, `heroes/`, `abilities/`, `enemies/`, `items/`, `slots.json`, `waves.json`, `dungeon.json` and `house-rules.json`.
 
 **`dungeon.json` is what is *in* the dungeon**: the monster pools and bosses by floor, the stretches' themes, how many monsters a wave holds, how monsters grow by floor, the shop's stock and consumables, and which items drop. How a campaign *works* (floors, stretches, wipes, waypoints, gear slots, the town, the enchanter's odds, how loot rolls) is the engine's `core/campaign.json`; a key that belongs there is refused by name when the engine assembles the two.
 

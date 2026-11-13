@@ -1,13 +1,28 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "common.schema.json",
-  "title": "Shared content shapes, content format 2026-11-14",
+  "title": "Shared content shapes, content format 2026-11-15",
   "description": "Shapes more than one content file uses: ids, stats, skills and their effects. The other schemas refer to these.",
   "$defs": {
     "id": {
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9_]*$",
       "description": "An id: lowercase letters, digits and _, starting with a letter or digit."
+    },
+    "slotId": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+$",
+      "description": "A slot's id (decision 0058): lowercase letters, digits, - and _."
+    },
+    "loadout": {
+      "type": "object",
+      "description": "What a champion wears, by slot id (decision 0058): each key one of the world's slots (slots.json), each value the id of an item worn in that slot. A slot left out holds nothing.",
+      "propertyNames": {
+        "$ref": "#/$defs/slotId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/id"
+      }
     },
     "damageTypeId": {
       "type": "string",

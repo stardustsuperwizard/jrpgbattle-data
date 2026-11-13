@@ -4,6 +4,7 @@
   "icon": "🌙",
   "cost": 1800,
   "slot": "weapon",
+  "tier": 4,
   "stats": {
     "physAtk": 25,
     "magAtk": 25

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "items.schema.json",
-  "title": "setting/items.json, content format 2026-11-14",
+  "title": "setting/items.json, content format 2026-11-15",
   "type": "object",
   "propertyNames": {
     "type": "string",
@@ -77,9 +77,30 @@
           "description": "Item ids it is built from: buying it consumes those the hero wears (decision 0037)."
         },
         "slot": {
-          "type": "string",
-          "minLength": 1,
-          "description": "The slot type it is worn in, one of the dungeon's slots (decision 0036)."
+          "$ref": "common.schema.json#/$defs/slotId",
+          "description": "The slot it is worn in, one of the world's slots in slots.json (decisions 0036 and 0058). An item that is sold or dropped, or worn in a loadout, needs one."
+        },
+        "tier": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Its rank within its slot, from 1 (decision 0058). A slot's pool (slots.json) offers items by tier; an item without one is in no pool. Needs a slot."
+        },
+        "requires": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [],
+          "properties": {
+            "classes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "description": "The hero classes that may wear it."
+            }
+          },
+          "description": "Who may wear it (decision 0058). Reserved: the engine checks its shape and reads nothing in it yet."
         }
       }
     }

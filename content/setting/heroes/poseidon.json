@@ -26,5 +26,11 @@
     "trident_jab",
     "tidal_wave",
     "earthshaker"
-  ]
+  ],
+  "defaultLoadout": {
+    "weapon": "mage_staff",
+    "armour": "mystic_robe",
+    "boots": "wind_boots",
+    "charm": "war_charm"
+  }
 }
