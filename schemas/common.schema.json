@@ -69,9 +69,10 @@
       "enum": [
         "target",
         "self",
-        "all_allies"
+        "all_allies",
+        "fallen_allies"
       ],
-      "description": "Who an effect lands on: the skill's targets (the default), the user, or every living ally of the user."
+      "description": "Who an effect lands on: the skill's targets (the default), the user, every living ally of the user, or every fallen one (only a revive, decision 0061)."
     },
     "effect": {
       "description": "One building block of a skill, by `type`. A field the type doesn't have is refused.",
@@ -226,6 +227,54 @@
               "$ref": "#/$defs/effectOn"
             }
           }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "on"
+          ],
+          "properties": {
+            "type": {
+              "const": "revive"
+            },
+            "on": {
+              "const": "fallen_allies",
+              "description": "A revive lands only on the user's fallen allies."
+            },
+            "pctMaxHp": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Of the recipient's max HP."
+            },
+            "flat": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "description": "Stands every fallen ally of the user up, with this share of its max HP plus `flat`, at the back of the turn order (decision 0061). One of `pctMaxHp` and `flat` must be above zero."
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "form"
+            },
+            "form": {
+              "$ref": "#/$defs/id",
+              "description": "One of the hero's `forms` (heroes.json); left out, the hero's own abilities again."
+            },
+            "on": {
+              "$ref": "#/$defs/effectOn",
+              "description": "Only the user: `self`, or the target of a skill on `self`."
+            }
+          },
+          "description": "Changes the user's form (decision 0061): its abilities become the form's, or its own again. Only a hero has forms."
         }
       ]
     },

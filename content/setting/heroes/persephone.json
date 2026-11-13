@@ -27,6 +27,16 @@
     "winters_descent",
     "springs_return"
   ],
+  "forms": {
+    "spring": {
+      "name": "Maiden of Spring",
+      "abilities": [
+        "blossom",
+        "first_flowers",
+        "pomegranate_seed"
+      ]
+    }
+  },
   "defaultLoadout": {
     "weapon": "mage_staff",
     "armour": "mystic_robe",

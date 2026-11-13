@@ -1,0 +1,20 @@
+{
+  "id": "first_flowers",
+  "name": "First Flowers",
+  "type": "skill",
+  "target": "ally",
+  "element": "earth",
+  "description": "Heal one ally 20% Max HP + 60, and all allies 8% Max HP.",
+  "effects": [
+    {
+      "type": "heal",
+      "pctMaxHp": 0.2,
+      "flat": 60
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.08,
+      "on": "all_allies"
+    }
+  ]
+}

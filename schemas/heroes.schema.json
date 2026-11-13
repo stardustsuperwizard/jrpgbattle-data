@@ -169,6 +169,35 @@
           },
           "description": "Its default set, by ability id (abilities.json): exactly one basic, one skill and one ultimate."
         },
+        "forms": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "abilities"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Shown when the hero takes the form."
+              },
+              "abilities": {
+                "type": "array",
+                "items": {
+                  "$ref": "common.schema.json#/$defs/id"
+                },
+                "description": "The form's set, by ability id: exactly one basic, one skill and one ultimate."
+              }
+            }
+          },
+          "description": "Other forms the hero can take in battle (decision 0061), by id: a form effect in one of its abilities switches to one. Optional."
+        },
         "defaultLoadout": {
           "$ref": "common.schema.json#/$defs/loadout",
           "description": "What the champion wears where a mode offers loadouts and nobody chose (decision 0058): every item in its slot's pool (slots.json). Optional; without it, nothing."

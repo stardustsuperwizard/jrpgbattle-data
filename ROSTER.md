@@ -7,18 +7,18 @@ Sixteen Greek gods built only from jrpg-battle's building blocks: damage, heal, 
 | 🪽 Hermes | Support | Messenger: SP battery | Physical | Wind, Dark | 124 | 980 | 135 | 135 | 75 | 55 | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
 | 🏆 Nike | Striker | Winged Victory: fast breaker | Physical | Wind | 122 | 960 | 150 | 150 | 71 | 53 | Swift Victory: single, high Toughness damage, ATK Up self | Laurel of Victory: heavy blast, ATK Up all |
 | 🏹 Artemis | Striker | Huntress: single target | Physical | Metal | 116 | 1000 | 155 | 155 | 75 | 55 | Silver Arrow: heavy single + Bleed | The Hunt: massive single |
-| 🍇 Dionysus | Striker | Reveller: bleed and frenzy | Physical | – | 112 | 1150 | 150 | 150 | 81 | 60 | Maenad Frenzy: single + Bleed, ATK Up self | Bacchic Revel: all + Bleed, ATK Up all |
+| 🍇 Dionysus | Striker | Reveller: bleed and madness | Physical | – | 112 | 1150 | 150 | 150 | 81 | 60 | Maenad Frenzy: single + Bleed, ATK Up self | Bacchic Revel: all + Bleed, 50% Confuse, ATK Up all |
 | ☀️ Apollo | Support | Sun Healer | Magic | Fire | 110 | 1100 | 110 | 110 | 68 | 92 | Healing Light: heal one + cleanse | Chariot of the Sun: all + Burn, heal all, ATK Up all |
 | 🗡️ Ares | Striker | War God: bruiser | Physical | – | 108 | 1400 | 140 | 140 | 109 | 81 | Bloodlust: single + Taunt | Rout: heavy blast + Bleed |
 | 🌹 Aphrodite | Support | Enchantress: SP battery, party heal | Magic | Water | 106 | 1050 | 110 | 110 | 64 | 86 | Embrace: heal all 12% + ATK Up all | Born of the Foam: all, 40% Freeze, heal all |
 | ⚡ Zeus | Caster | Sky King: area damage | Magic | Lightning | 104 | 1000 | 160 | 160 | 55 | 75 | Thunderbolt: blast, 60% Shock | King of Olympus: heavy all + Shock |
 | 🌾 Demeter | Support | Harvest Mother: healer | Magic | Earth | 101 | 1150 | 105 | 105 | 68 | 92 | Bountiful Harvest: heal one 25% + 80, heal all 10% | Barren Earth: all + RES Down, heal all 22% |
-| 👑 Hera | Guardian | Queen of Heaven: tank who heals | Physical | Metal | 100 | 1500 | 120 | 120 | 129 | 95 | Queen’s Ward: shield all, heal all 5%, Taunt | Peacock’s Gaze: all + RES Down, heal all 10% |
+| 👑 Hera | Guardian | Queen of Heaven: tank who heals and raises | Physical | Metal | 100 | 1500 | 120 | 120 | 129 | 95 | Queen’s Ward: shield all, heal all 5%, Taunt | Peacock’s Gaze: all + RES Down, heal all 10%, revive the fallen at 30% |
 | 🦉 Athena | Guardian | Strategist: tank | Physical | Metal | 98 | 1450 | 115 | 115 | 138 | 102 | Aegis: shield all + Taunt | Owl's Gambit: heavy single, ATK Up all |
 | 🔱 Poseidon | Caster | Sea King: area control | Magic | Water, Earth | 97 | 1150 | 145 | 145 | 68 | 92 | Tidal Wave: all, 25% Freeze | Earthshaker: heavy all + RES Down |
 | 💀 Hades | Caster | Underworld King: damage over time | Magic | Dark | 94 | 1150 | 145 | 145 | 64 | 86 | Grasp of the Dead: single + Burn + RES Down | Realm of the Dead: all + 3-turn Burn |
-| 🌸 Persephone | Caster | Queen of Two Realms: freeze control | Magic | Ice, Earth | 92 | 1100 | 150 | 150 | 61 | 83 | Winter’s Descent: blast, 35% Freeze | Spring’s Return: all, 30% Freeze, heal all 15% |
-| 🔥 Hestia | Guardian | Hearth Keeper: magic tank, cleanse | Magic | Fire | 90 | 1500 | 120 | 120 | 98 | 132 | Sacred Flame: shield all, cleanse all, Taunt | Eternal Flame: all + Burn, heal self 25% |
+| 🌸 Persephone | Caster | Queen of Two Realms: freeze control, then healing | Magic | Ice, Earth, Dark | 92 | 1100 | 150 | 150 | 61 | 83 | Winter’s Descent: blast, 35% Freeze · in spring, First Flowers: heal one 20% + 60, all 8% | Spring’s Return: all, 30% Freeze, heal all 15%, to spring · in spring, Pomegranate Seed: all + RES Down, back below |
+| 🔥 Hestia | Guardian | Hearth Keeper: magic tank, cleanse, hits back | Magic | Fire | 90 | 1500 | 120 | 120 | 98 | 132 | Sacred Flame: shield all, cleanse all, Taunt, Retaliate | Eternal Flame: all + Burn, heal self 25% |
 | 🔨 Hephaestus | Guardian | Smith: armor tank | Physical | Metal, Fire | 88 | 1550 | 130 | 130 | 126 | 94 | Forge Armor: heavy shield all | Molten Hammer: massive single + Burn |
 
 The sixteen share the character group **Gods of Olympus** (every hero has a `characterGroup`, the title of its set). Each god has a class, a label for now (jrpg-battle decision 0054; what a class might do is jrpg-battle#363): Guardian, Striker, Caster or Support. The bot's pick spreads a team across classes.
@@ -26,6 +26,13 @@ The sixteen share the character group **Gods of Olympus** (every hero has a `cha
 Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for their teammates' skills.
 
 **Roster 0.19.0 adds six** (Hera, Hestia, Dionysus, Nike, Demeter, Persephone), bringing every class to four: Guardians Athena, Hephaestus, Hera, Hestia; Strikers Artemis, Ares, Dionysus, Nike; Casters Zeus, Poseidon, Hades, Persephone; Supports Hermes, Apollo, Aphrodite, Demeter. Demeter is the third healer. Her skill targets one ally, with a smaller heal for the rest, because the bot holds back a party-wide skill while anyone is shielded and saves SP only for single-target heals (jrpg-battle's `src/engine/autoplay.js`); a party-only heal tested at 46% PvE. Hestia is the first magic Guardian, Nike the third ranged god and Persephone the first to use ice.
+
+**Fuller kits (roster 0.20.0, jrpg-battle 0.26.0 and its decision 0061).** Four of the six use the engine's newest building blocks:
+
+- **Hera** raises the fallen: Peacock's Gaze revives every fallen ally with 30% of its max HP (a `revive` effect).
+- **Dionysus** drives his foes mad: Bacchic Revel has a 50% chance to Confuse each enemy for 2 turns, so its single-target skills may land on anyone else, its own side included (the core's `confuse`).
+- **Persephone** changes with the seasons. She starts as Queen of the Dead, her own form: frost, Freeze and control. Spring's Return brings her up as the **Maiden of Spring** (her `forms`), with Blossom, the healing First Flowers and Pomegranate Seed, which hits every enemy, lowers their RES and takes her back below.
+- **Hestia**'s hearth fire burns whoever strikes its keeper: Sacred Flame gives her Retaliate for 2 turns, hitting back at each blow for 40% of her MAG ATK (the core's `retaliate`).
 
 **Two layers on an attack** (jrpg-battle decisions 0055 to 0057). The **damage type**, physical or magic, is what an attack is: each type has its own attack stat and resistance (below). The **element**, set on a skill, is the kind of force it is: fire, water, earth, wind, lightning, ice, dark or metal. An element only chooses a client's animation and sound for now, so a skill with none plays its damage type's default; Zeus's lightning is a magic hit of lightning, Hephaestus's Molten Hammer a physical hit of fire. Later an element can become its own lever for builds. What follows is the damage types. Every god and monster has a PHYS ATK and a MAG ATK instead of ATK, and a PHYS RES and a MAG RES instead of DEF. A hit is driven by the attack of its element and lowered by the resistance of the same: `physical` is PHYS ATK against PHYS RES, `magic` is MAG ATK against MAG RES. Both attacks of every god and monster equal its old ATK for now, since no skill uses the other type yet. There are no weaknesses. A god fights with body and weapon (Physical: Hermes, Nike, Artemis, Dionysus, Ares, Hera, Athena, Hephaestus) or with divine power (Magic: Apollo, Aphrodite, Zeus, Demeter, Poseidon, Hades, Persephone, Hestia); the water, dark, light and wind the myths ask for are no longer approximated with ice or fire. Each god's resistances are the old DEF, 15% higher against their own damage type and 15% lower against the other, so a physical bruiser is harder to hit physically than magically. A world may still add elements, each resisted by one of the two stats.
 
@@ -62,13 +69,13 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 | 🌾 Demeter | War Blade | Mystic Robe | Wind Boots | War Charm | A healer who acts early and hits back: flat on her low attack |
 | 🌸 Persephone | Mage Staff | Mystic Robe | War Boots | War Charm | A caster: all-in on magic damage |
 
-**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 81 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.19.0 on jrpg-battle 0.24.0:
+**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 81 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.20.0 on jrpg-battle 0.26.0:
 
 | Slot | Best for |
 |---|---|
-| Weapon | Battle Axe: Hermes, Nike, Artemis, Dionysus, Ares, Hera, Athena, Hephaestus · Mage Staff: Zeus, Poseidon, Hades, Persephone · War Blade: Apollo, Aphrodite, Demeter, Hestia |
-| Armour | Plate Mail: Hermes, Artemis, Aphrodite, Demeter, Poseidon, Persephone · Mystic Robe: Apollo, Ares, Zeus, Hades · Brigandine: Nike, Dionysus, Hera, Athena, Hestia, Hephaestus |
-| Boots | Wind Boots: Hermes, Nike, Dionysus, Aphrodite, Demeter, Poseidon, Hades, Hestia, Hephaestus · War Boots: Artemis, Apollo, Zeus, Persephone · Iron Greaves: Ares, Hera, Athena |
+| Weapon | Battle Axe: Hermes, Nike, Artemis, Dionysus, Ares, Athena, Hephaestus · Mage Staff: Zeus, Poseidon, Hades, Persephone · War Blade: Apollo, Aphrodite, Demeter, Hera, Hestia |
+| Armour | Plate Mail: Hermes, Artemis, Aphrodite, Hera, Poseidon, Persephone · Mystic Robe: Dionysus, Apollo, Ares, Zeus, Demeter, Hades · Brigandine: Nike, Athena, Hestia, Hephaestus |
+| Boots | Wind Boots: Hermes, Nike, Aphrodite, Demeter, Hera, Poseidon, Hades, Hestia, Hephaestus · War Boots: Artemis, Dionysus, Apollo, Zeus, Persephone · Iron Greaves: Ares, Athena |
 | Charm | Giant Belt: Artemis, Ares, Aphrodite, Hera, Athena, Hades · War Charm: Hermes, Nike, Dionysus, Apollo, Zeus, Demeter, Poseidon, Persephone, Hestia · Ward Charm: Hephaestus |
 
 Within a slot, the options a god doesn't take are mostly within 2 to 10 points of the one it does. The outliers are speed: Wind Boots are 20 points behind the other boots on Ares and Athena, whose kits don't care when they move, and the best boots on Hermes, Poseidon and Aphrodite, whose do. Wind Boots are also 8 to 12 points ahead on Dionysus, Demeter and Hestia, so their defaults wear them. A default may give up a few points to lean into a kit (Hephaestus's Iron Greaves are 6 behind his Wind Boots, Hestia's Mage Staff 1 behind the War Blade); that is a choice a player can change.
@@ -82,23 +89,23 @@ Within a slot, the options a god doesn't take are mostly within 2 to 10 points o
 | Hermes | Vex | 77.0% | −5.3 | 39.7% |
 | Nike | Vex | 90.3% | +8.0 | 28.0% |
 | Artemis | Vex | 80.3% | −2.0 | 15.7% |
-| Dionysus | Vex | 71.7% | −10.7 | 71.0% |
+| Dionysus | Vex | 76.3% | −6.0 | 73.0% |
 | Apollo | Seren | 86.3% | +4.0 | 68.3% |
 | Ares | Aria | 86.3% | +4.0 | 22.0% |
 | Aphrodite | Seren | 52.7% | −29.7 | **91.0%** |
 | Zeus | Pyra | 79.7% | −2.7 | 62.3% |
 | Demeter | Seren | 96.3% | +14.0 | 44.3% |
-| Hera | Aria | 93.7% | +11.3 | 64.3% |
+| Hera | Aria | 98.3% | +16.0 | 76.0% |
 | Athena | Aria | 87.0% | +4.7 | 54.3% |
 | Poseidon | Pyra | 88.0% | +5.7 | 72.0% |
 | Hades | Pyra | 90.7% | +8.3 | 20.0% |
-| Persephone | Pyra | 96.3% | +14.0 | 38.3% |
-| Hestia | Aria | 74.3% | −8.0 | 64.7% |
+| Persephone | Pyra | 91.0% | +8.7 | 37.0% |
+| Hestia | Aria | 81.0% | −1.3 | 73.0% |
 | Hephaestus | Aria | 75.7% | −6.7 | 43.7% |
 
-All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 86.0% and PvP 57.7% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 70.0% and 14.0%; Ares, Hades, Apollo, Zeus 45.3% and 55.7%; Hera, Persephone, Demeter, Nike 100.0% and 34.0%; Hestia, Dionysus, Demeter, Persephone 96.7% and 81.0%.
+All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 86.0% and PvP 57.7% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 70.0% and 14.0%; Ares, Hades, Apollo, Zeus 45.3% and 55.7%; Hera, Persephone, Demeter, Nike 100.0% and 44.3%; Hestia, Dionysus, Demeter, Persephone 97.7% and 87.7%.
 
-The six added in roster 0.19.0 were measured on jrpg-battle 0.24.0, which plays battles as 0.23.0 does: the first ten's lines above are unchanged on it. Their kits are a first pass, tuned only to keep each within the range the first ten already span. Demeter and Persephone are strong in PvE, Nike weak in PvP for the same reason as Artemis and Hermes (she stands in for Vex), and the Hestia, Dionysus, Demeter, Persephone team the strongest all-champion team against the core team.
+The six added in roster 0.19.0 have their numbers from roster 0.20.0 on jrpg-battle 0.26.0, with Hera, Dionysus, Persephone and Hestia's fuller kits: the first ten's lines above are unchanged on it. Their kits are a first pass, not tuned; balance gets its own pass later.
 
 ### How to read them
 
@@ -149,15 +156,11 @@ Gods whose myth wants something the engine can't do yet. Each is a small jrpg-ba
 |---|---|---|
 | Hermes (fuller kit) | Speed up / turn advance (Haste, FFX) | The messenger acts again or hurries an ally |
 | Kronos | Delay an enemy's turn (Slow) | Lord of time. A Slow that lowers speed is now a content status (`"mods": { "spdPct": -0.3 }`, decision 0029); pushing a turn back is not yet |
-| Hera (fuller kit) | Revive a fallen ally | Queen of the gods, protector |
-| Dionysus (fuller kit) | Confuse / random target | Madness and revelry |
-| Persephone (fuller kit) | A form that changes over the battle | Spring and the underworld |
 | Medusa | Stone (a long freeze that ends on a hit) | Petrifying gaze |
 | Hydra / Heracles | Multi-hit, and a unit that grows heads when hit | The labors |
 | Eros | Charm: an enemy attacks its own side for a turn | The arrows |
 | Nyx | Stealth: can't be targeted for a turn | Night |
 | Hades (fuller kit) | Lifesteal | Taking souls |
-| Hestia (fuller kit) | Retaliation: a unit that hurts its attacker | The hearth's fire burns whoever strikes its keeper |
 
 ## Trying them in the game
 
