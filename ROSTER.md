@@ -56,22 +56,22 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 | 🌹 Aphrodite | War Blade | Plate Mail | Wind Boots | Giant Belt | A battery: speed and staying power, to keep the SP flowing |
 | 🪽 Hermes | Battle Axe | Plate Mail | Wind Boots | War Charm | The fastest god, made faster, with damage to spend his SP on |
 | 👑 Hera | Battle Axe | Brigandine | Iron Greaves | Giant Belt | A tank, like Athena |
-| 🔥 Hestia | Mage Staff | Brigandine | Iron Greaves | Ward Charm | The magic tank: resistance on resistance, a staff for her fire |
-| 🍇 Dionysus | Battle Axe | Plate Mail | War Boots | War Charm | A striker: all-in on physical damage |
+| 🔥 Hestia | Mage Staff | Brigandine | Wind Boots | Ward Charm | The magic tank: resistance, and speed to shield before the first blow |
+| 🍇 Dionysus | Battle Axe | Plate Mail | Wind Boots | War Charm | A striker who wants to bleed them first |
 | 🏆 Nike | Battle Axe | Plate Mail | Wind Boots | War Charm | Speed to act first, damage to break with |
-| 🌾 Demeter | War Blade | Mystic Robe | Wind Boots | Giant Belt | A healer who lasts and acts early |
+| 🌾 Demeter | War Blade | Mystic Robe | Wind Boots | War Charm | A healer who acts early and hits back: flat on her low attack |
 | 🌸 Persephone | Mage Staff | Mystic Robe | War Boots | War Charm | A caster: all-in on magic damage |
 
-**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 81 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.18.0 on jrpg-battle 0.23.0:
+**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 81 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.19.0 on jrpg-battle 0.24.0:
 
 | Slot | Best for |
 |---|---|
-| Weapon | Battle Axe: Hermes, Artemis, Ares, Athena, Hephaestus · Mage Staff: Zeus, Poseidon, Hades · War Blade: Apollo, Aphrodite |
-| Armour | Plate Mail: Hermes, Artemis, Aphrodite, Poseidon · Mystic Robe: Apollo, Ares, Zeus, Hades · Brigandine: Athena, Hephaestus |
-| Boots | Wind Boots: Hermes, Aphrodite, Poseidon, Hades, Hephaestus · War Boots: Artemis, Apollo, Zeus · Iron Greaves: Ares, Athena |
-| Charm | Giant Belt: Artemis, Ares, Aphrodite, Athena, Hades · War Charm: Hermes, Apollo, Zeus, Poseidon · Ward Charm: Hephaestus |
+| Weapon | Battle Axe: Hermes, Nike, Artemis, Dionysus, Ares, Hera, Athena, Hephaestus · Mage Staff: Zeus, Poseidon, Hades, Persephone · War Blade: Apollo, Aphrodite, Demeter, Hestia |
+| Armour | Plate Mail: Hermes, Artemis, Aphrodite, Demeter, Poseidon, Persephone · Mystic Robe: Apollo, Ares, Zeus, Hades · Brigandine: Nike, Dionysus, Hera, Athena, Hestia, Hephaestus |
+| Boots | Wind Boots: Hermes, Nike, Dionysus, Aphrodite, Demeter, Poseidon, Hades, Hestia, Hephaestus · War Boots: Artemis, Apollo, Zeus, Persephone · Iron Greaves: Ares, Hera, Athena |
+| Charm | Giant Belt: Artemis, Ares, Aphrodite, Hera, Athena, Hades · War Charm: Hermes, Nike, Dionysus, Apollo, Zeus, Demeter, Poseidon, Persephone, Hestia · Ward Charm: Hephaestus |
 
-Within a slot, the options a god doesn't take are mostly within 2 to 10 points of the one it does. The outliers are speed: Wind Boots are 20 points behind the other boots on Ares and Athena, whose kits don't care when they move, and the best boots on Hermes, Poseidon and Aphrodite, whose do. A default may give up a few points to lean into a kit (Hephaestus's Iron Greaves are 6 behind his Wind Boots); that is a choice a player can change.
+Within a slot, the options a god doesn't take are mostly within 2 to 10 points of the one it does. The outliers are speed: Wind Boots are 20 points behind the other boots on Ares and Athena, whose kits don't care when they move, and the best boots on Hermes, Poseidon and Aphrodite, whose do. Wind Boots are also 8 to 12 points ahead on Dionysus, Demeter and Hestia, so their defaults wear them. A default may give up a few points to lean into a kit (Hephaestus's Iron Greaves are 6 behind his Wind Boots, Hestia's Mage Staff 1 behind the War Blade); that is a choice a player can change.
 
 ## Numbers (roster 0.15.0 on jrpg-battle 0.19.0, 300 seeded battles per line)
 
