@@ -15,6 +15,7 @@
       "type": "status",
       "status": "shock",
       "duration": 2,
+      "dotRatio": 0.8,
       "chance": 0.6
     }
   ]
