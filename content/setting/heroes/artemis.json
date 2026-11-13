@@ -28,5 +28,11 @@
     "moonlit_shot",
     "silver_arrow",
     "the_hunt"
-  ]
+  ],
+  "defaultLoadout": {
+    "weapon": "war_axe",
+    "armour": "plate_mail",
+    "boots": "war_boots",
+    "charm": "giant_belt"
+  }
 }

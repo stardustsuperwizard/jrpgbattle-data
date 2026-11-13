@@ -7,8 +7,8 @@
   "tier": 2,
   "stats": {},
   "statsPct": {
-    "physRes": 0.26,
-    "magRes": 0.26
+    "physRes": 0.3,
+    "magRes": 0.3
   },
   "components": [
     "leather_vest"

@@ -19,6 +19,7 @@ jrpgbattle's **setting** for the [jrpg-battle](https://github.com/stardustsuperw
 | `content/setting/house-rules.json` | The core numbers this world changes, by the engine config's paths: the level cap and the loot sell share. The engine refuses anything its core lacks. |
 | `scripts/build.mjs` | `npm run build`: the sources into `dist/src/content/setting/` and `dist/api/`. Plain Node, no dependencies, no engine needed. |
 | `scripts/check.mjs` | `npm run check`: builds, validates the result with the engine and its schemas, checks `schemas/` is the engine's, and measures each champion. |
+| `scripts/sweep.mjs` | `npm run sweep`: the PvP pool's budget check. Runs jrpg-battle's loadout sweep on every god and fails if an option is the best for every god or for none (ROSTER.md, "PvP gear"). Slow: about three minutes at its default 60 matches a set. |
 | `scripts/openapi.mjs` | The API's OpenAPI description, which the build writes from the same content as the files. |
 | `schemas/` | The content format's JSON Schemas, copied from the jrpg-battle release in `engine.json` (its `docs/content-format/`, decision 0053) by `npm run schemas` (`scripts/schemas.mjs`). The API publishes them. Never edit them here: `npm run check` fails when they differ from the engine's. |
 | `tests/` | `npm test`: the build's own tests. |

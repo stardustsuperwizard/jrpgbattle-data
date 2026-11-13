@@ -39,13 +39,13 @@ The endless floors past 25 grow on their own, from a step above Tartarus.
 
 ## Loot, the town and the enchanter
 
-- **Slots:** each hero wears one weapon, one armour, one pair of boots and one charm (`slots`, `gearSlots` 4); every item names its `slot`.
-- **The shop's gear comes by stretch** (`shop.items` as stock entries, jrpg-battle decision 0043). Each stretch brings a new tier on sale before its first floor, and what came in stays. Each item upgrades the one below it of its slot: buying it over that one costs the difference.
+- **Slots:** each hero wears one weapon, one armour, one pair of boots and one charm (`content/setting/slots.json`, the engine's `gearSlots` 4); every item names its `slot` and its `tier` in it: 1 the Grove's, 2 the Labyrinth's, 3 to 5 the ladder above. Each slot's PvP pool is its tier 2 (jrpg-battle decision 0058; [ROSTER.md](ROSTER.md#pvp-gear)), so the ladder is PvE-only and the strongest campaign gear is never a free pick.
+- **The shop's gear comes by stretch** (`shop.items` as stock entries, jrpg-battle decision 0043). Each stretch brings a new tier on sale before its first floor, and what came in stays. Each item upgrades the one below it of its slot: buying it over that one costs the difference. The Labyrinth's tier is three sidegrades a slot, the PvP pool, each built from the Grove's item; the Marsh's rung is built from whichever of the three the hero wears.
 
   | On sale from | Tier | Weapon (PHYS + MAG ATK) | Armour (PHYS / MAG RES) | Boots (SPD) | Charm (max HP) | Each |
   |---|---|---|---|---|---|---|
   | Floor 1 | Grove | 🗡️ Iron Dagger (+10) | 🦺 Leather Vest (+12) | 👟 Light Boots (+4) | 💗 Vigor Charm (+150) | 150 |
-  | Floor 6 | Labyrinth | ⚔️ War Blade (+25) | 🛡️ Plate Mail (+30) | 🪽 Wind Boots (+10) | ❤️ Giant Belt (+400) | 400 |
+  | Floor 6 | Labyrinth | ⚔️ War Blade (+25), 🪓 Battle Axe (+26% PHYS ATK), 🪄 Mage Staff (+21% MAG ATK) | 🛡️ Plate Mail (+30), 👘 Mystic Robe (+15 PHYS / +30 MAG), 🥋 Brigandine (+30% both) | 🪽 Wind Boots (+10), 🥾 Iron Greaves (+15% HP, +12% both RES), 👢 War Boots (+10% both ATK) | ❤️ Giant Belt (+400), 🔥 War Charm (+15% both ATK), 🔰 Ward Charm (+36% both RES) | 400 |
   | Floor 11 | Marsh | 🔱 Bronze Spear (+25, +4%) | 🥉 Bronze Cuirass (+30, +4%) | 🩴 Courier's Sandals (+11) | 🐍 Asclepian Amulet (+400, +4%) | 1,000 |
   | Floor 16 | Underworld | 🌙 Adamant Harpe (+25, +7%) | 🏛️ Hoplite Panoply (+30, +7%) | 🕊️ Winged Sandals (+12) | 🟠 Amber of the Heliades (+400, +7%) | 1,800 |
   | Floor 21 | Tartarus | ⚡ Cyclopean Blade (+25, +10%) | 💎 Adamant Mail (+30, +10%) | 🌬️ Sandals of Zephyrus (+13) | 🍯 Phial of Ambrosia (+400, +10%) | 3,000 |
@@ -53,7 +53,7 @@ The endless floors past 25 grow on their own, from a step above Tartarus.
   Armour's number is its physical resistance; it gives half as much magic resistance (and its percentage to both).
 
   The upper tiers add little power for a lot of gold, on purpose: they are where a deep party's gold goes, and too much power there made the Descent trivial (below). Their weapons, armour and charms keep the Labyrinth tier's flat bonus and add a percentage of the hero's own stat (jrpg-battle decision 0045), so they keep pace as heroes level instead of fading; the boots stay flat, because a share of speed moves turn order more than any other stat.
-- **Loot:** cleared floors drop one item, and boss floors two more. The base item comes from the shop's tiers: the Grove tier from floor 1, then each stretch's tier and the one below it (the Grove and Labyrinth tiers from floor 6, the Labyrinth and Marsh tiers from floor 11, and so on to the Underworld and Tartarus tiers from floor 21). It drops as Common (no bonus), Magic (one) or Rare (two). The bonuses are ATK, DEF, max HP or SPD, and grow with depth. The stash holds 12 and sells at a quarter of an item's worth, so selling deep loot doesn't undo the gold sink.
+- **Loot:** cleared floors drop one item, and boss floors two more. The base item comes from the shop's tiers (the Labyrinth's sidegrades with it): the Grove tier from floor 1, then each stretch's tier and the one below it (the Grove and Labyrinth tiers from floor 6, the Labyrinth and Marsh tiers from floor 11, and so on to the Underworld and Tartarus tiers from floor 21). It drops as Common (no bonus), Magic (one) or Rare (two). The bonuses are ATK, DEF, max HP or SPD, and grow with depth. The stash holds 12 and sells at a quarter of an item's worth, so selling deep loot doesn't undo the gold sink.
 - **The town:** the Exit, the Stash and the Shop from the start; the Enchanter after floor 10; Retire after floor 25.
 - **The enchanter:** an item may have up to four bonuses.
   - Adding one costs 60 gold and 60 more per bonus, and works 90% → 45% of the time, wiping every bonus up to 20%.
@@ -76,6 +76,14 @@ The bot plays every turn and shops between floors, three waves a floor, at most 
 Measured on jrpg-battle 0.10.0. With roster 0.9.0's flat-only deep tiers, the same teams wiped 0.4, 1.8 and 8.1 times and the weakest team's runs cleared a median of 12 floors; the percentages help most where heroes are strongest by level and weakest by gear. Runs have no town to come back to, so a weak team's run still often ends at the Marsh's first floors. With strength by stretch (roster 0.9.0) the weakest team's runs fell from a median of 24 to 12. With roster 0.8.0's growth of 0.3 a floor, the same teams wiped 0.3, 1.1 and 8.5 times, almost all at Typhon. Roster 0.7.0, whose loot stopped at the Labyrinth tier and sold at half worth, ended with 3,510, 3,366 and 2,931 gold and wiped 0.2, 1.4 and 8.4 times; the bot sells its loot, so deeper loot at half worth brought the gold back up to 6,900–13,900 before the sell share fell to a quarter. Before the gear by stretch (roster 0.6.0, the shop's eight items on sale from floor 1), the same teams wiped 0.9, 3.5 and 16.8 times a campaign, their runs cleared a median of 26, 24 and 24 floors, and they ended with 37,212, 25,394 and 8,761 gold. Before that (statGrowth 0.5, level cap 10), Athena, Zeus, Apollo and Artemis cleared floor 11–12 at best in 60 tries, and runs ended around floor 9.
 
 **Where the gold goes.** A cleared campaign used to end with 9,000 to 37,000 gold, because the shop's eight items were bought out early. Now each stretch brings dearer gear, and the bot spends nearly everything: 3,700 to 5,400 gold is left at the end. It never enchants, so a player has the enchanter as well. The first try at the upper tiers gave them their price in power (up to +115 ATK); the Descent then had no wipes at all and runs went to floor 44, so the tiers were cut to small steps.
+
+**With the Labyrinth's sidegrades** (roster 0.18.0, #33), on jrpg-battle 0.23.0, 20 campaigns a team, three waves a floor, at most 80 floors started. The bot buys the dearest item each hero can wear, so it now buys sidegrades too; every team still clears the Descent every time:
+
+| Team | Wipes a campaign, before → after | Gold at the end, before → after |
+|---|---|---|
+| Athena, Zeus, Apollo, Artemis | 0.2 → 0.2 | 5,250 → 5,122 |
+| Hephaestus, Poseidon, Aphrodite, Hermes | 1.1 → 1.0 | 4,684 → 4,853 |
+| Ares, Hades, Apollo, Zeus | 0.4 → 0.4 | 5,158 → 5,004 |
 
 ### Measuring
 

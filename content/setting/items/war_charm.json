@@ -7,8 +7,8 @@
   "tier": 2,
   "stats": {},
   "statsPct": {
-    "physAtk": 0.12,
-    "magAtk": 0.12
+    "physAtk": 0.15,
+    "magAtk": 0.15
   },
   "components": [
     "vigor_charm"

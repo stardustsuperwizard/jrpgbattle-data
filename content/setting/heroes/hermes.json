@@ -27,5 +27,11 @@
     "caduceus_tap",
     "winged_sandals",
     "psychopomp"
-  ]
+  ],
+  "defaultLoadout": {
+    "weapon": "war_axe",
+    "armour": "plate_mail",
+    "boots": "wind_boots",
+    "charm": "war_charm"
+  }
 }
