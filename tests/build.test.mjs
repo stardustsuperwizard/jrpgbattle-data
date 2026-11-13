@@ -52,6 +52,16 @@ test('every kind comes in its index order, and abilities in the order the heroes
   assert.deepEqual(unused, []);
 });
 
+test("a hero's forms use their abilities too, after its own set", (t) => {
+  const root = sources(t, {
+    abilities: ['aim', 'jab', 'kick', 'zap', 'bonk'],
+    extra: (put) => put('content/setting/heroes/zed.json', { ...hero('zed', ['jab', 'kick']), forms: { other: { name: 'Other', abilities: ['zap', 'jab'] } } }),
+  });
+  const { content, unused } = buildContent(root);
+  assert.deepEqual(Object.keys(content.abilities), ['jab', 'kick', 'zap', 'aim', 'bonk']);
+  assert.deepEqual(unused, ['bonk']);
+});
+
 test('an ability no hero uses is built after the rest, by id, and reported', (t) => {
   const { content, unused } = buildContent(sources(t, { abilities: ['aim', 'jab', 'kick', 'zap', 'bonk'] }));
   assert.deepEqual(Object.keys(content.abilities), ['jab', 'kick', 'aim', 'bonk', 'zap']);

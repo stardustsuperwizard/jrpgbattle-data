@@ -3,7 +3,7 @@
   "name": "Peacock’s Gaze",
   "type": "ultimate",
   "target": "all_enemies",
-  "description": "Physical DMG to all enemies and RES Down for 2 turns; heal all allies 10% Max HP.",
+  "description": "Physical DMG to all enemies and RES Down for 2 turns; heal all allies 10% Max HP and revive every fallen ally with 30% Max HP.",
   "effects": [
     {
       "type": "damage",
@@ -19,6 +19,11 @@
       "type": "heal",
       "pctMaxHp": 0.1,
       "on": "all_allies"
+    },
+    {
+      "type": "revive",
+      "on": "fallen_allies",
+      "pctMaxHp": 0.3
     }
   ]
 }

@@ -1,0 +1,24 @@
+{
+  "id": "pomegranate_seed",
+  "name": "Pomegranate Seed",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "element": "dark",
+  "description": "Magic DMG to all enemies and RES Down for 2 turns. Persephone goes back below as Queen of the Dead.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 2,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "res_down",
+      "duration": 2
+    },
+    {
+      "type": "form",
+      "on": "self"
+    }
+  ]
+}

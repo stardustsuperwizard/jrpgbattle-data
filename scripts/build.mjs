@@ -114,7 +114,8 @@ function indexed(content, kind, files, problems) {
 
 /**
  * Every setting file, built from the sources: single files as they are,
- * indexed kinds in index order, abilities in the order the heroes use them
+ * indexed kinds in index order, abilities in the order the heroes use them,
+ * each hero's own set before its forms'
  * (then any no hero uses, by id). Throws, listing every problem, when the
  * sources don't fit together; the game rules themselves are jrpg-battle's to
  * check (npm run check).
@@ -148,7 +149,9 @@ export function buildContent(root = ROOT) {
       problems.push(`${SOURCE_DIR}/heroes/${id}.json needs "abilities", a list of ability ids.`);
       continue;
     }
-    for (const abilityId of hero.abilities) {
+    // Its own set, then each of its forms' (jrpg-battle decision 0060).
+    const forms = Object.values(hero.forms ?? {}).map((form) => (Array.isArray(form?.abilities) ? form.abilities : []));
+    for (const abilityId of [hero.abilities, ...forms].flat()) {
       if (!abilityFiles[abilityId]) problems.push(`${SOURCE_DIR}/heroes/${id}.json uses ability "${abilityId}", but ${SOURCE_DIR}/abilities/${abilityId}.json is missing.`);
       else if (!used.includes(abilityId)) used.push(abilityId);
     }
