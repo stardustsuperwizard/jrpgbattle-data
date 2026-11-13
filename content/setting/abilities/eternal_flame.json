@@ -1,0 +1,25 @@
+{
+  "id": "eternal_flame",
+  "name": "Eternal Flame",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "element": "fire",
+  "description": "Magic DMG to all enemies and Burn them for 2 turns; heal self 25% Max HP.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.8,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "burn",
+      "duration": 2
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.25,
+      "on": "self"
+    }
+  ]
+}

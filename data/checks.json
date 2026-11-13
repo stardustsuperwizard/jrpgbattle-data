@@ -1,6 +1,11 @@
 {
   "//": "Settings for scripts/check.mjs only; not part of the pack content.",
-  "coreParty": ["aria", "pyra", "seren", "vex"],
+  "coreParty": [
+    "aria",
+    "pyra",
+    "seren",
+    "vex"
+  ],
   "standsInFor": {
     "hermes": "vex",
     "artemis": "vex",
@@ -11,7 +16,13 @@
     "athena": "aria",
     "poseidon": "pyra",
     "hades": "pyra",
-    "hephaestus": "aria"
+    "hephaestus": "aria",
+    "nike": "vex",
+    "dionysus": "vex",
+    "demeter": "seren",
+    "hera": "aria",
+    "persephone": "pyra",
+    "hestia": "aria"
   },
   "teams": [
     [
@@ -31,6 +42,18 @@
       "hades",
       "apollo",
       "zeus"
+    ],
+    [
+      "hera",
+      "persephone",
+      "demeter",
+      "nike"
+    ],
+    [
+      "hestia",
+      "dionysus",
+      "demeter",
+      "persephone"
     ]
   ]
 }

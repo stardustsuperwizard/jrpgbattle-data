@@ -1,0 +1,36 @@
+{
+  "id": "hera",
+  "name": "Hera",
+  "role": "Queen of Heaven",
+  "class": "Guardian",
+  "characterGroup": "Gods of Olympus",
+  "sprite": "👑",
+  "reach": "melee",
+  "damageType": "physical",
+  "maxHp": 1500,
+  "physAtk": 120,
+  "magAtk": 120,
+  "physRes": 129,
+  "magRes": 95,
+  "spd": 100,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 120,
+    "physAtk": 10,
+    "magAtk": 10,
+    "physRes": 11,
+    "magRes": 8,
+    "spd": 1
+  },
+  "abilities": [
+    "royal_sceptre",
+    "queens_ward",
+    "peacocks_gaze"
+  ],
+  "defaultLoadout": {
+    "weapon": "war_axe",
+    "armour": "brigandine",
+    "boots": "iron_greaves",
+    "charm": "giant_belt"
+  }
+}

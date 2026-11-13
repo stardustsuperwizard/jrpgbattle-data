@@ -1,0 +1,21 @@
+{
+  "id": "swift_victory",
+  "name": "Swift Victory",
+  "type": "skill",
+  "target": "enemy",
+  "element": "wind",
+  "description": "Physical DMG to one enemy with high Toughness damage; gain ATK Up for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.9,
+      "toughness": 30
+    },
+    {
+      "type": "status",
+      "status": "atk_up",
+      "duration": 2,
+      "on": "self"
+    }
+  ]
+}

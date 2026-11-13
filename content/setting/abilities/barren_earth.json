@@ -1,0 +1,25 @@
+{
+  "id": "barren_earth",
+  "name": "Barren Earth",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "element": "earth",
+  "description": "Magic DMG to all enemies and RES Down for 2 turns; heal all allies 22% Max HP.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.6,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "res_down",
+      "duration": 2
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.22,
+      "on": "all_allies"
+    }
+  ]
+}

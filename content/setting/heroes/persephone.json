@@ -1,0 +1,36 @@
+{
+  "id": "persephone",
+  "name": "Persephone",
+  "role": "Queen of Two Realms",
+  "class": "Caster",
+  "characterGroup": "Gods of Olympus",
+  "sprite": "🌸",
+  "reach": "ranged",
+  "damageType": "magic",
+  "maxHp": 1100,
+  "physAtk": 150,
+  "magAtk": 150,
+  "physRes": 61,
+  "magRes": 83,
+  "spd": 92,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 88,
+    "physAtk": 13,
+    "magAtk": 13,
+    "physRes": 5,
+    "magRes": 7,
+    "spd": 1
+  },
+  "abilities": [
+    "frost_bloom",
+    "winters_descent",
+    "springs_return"
+  ],
+  "defaultLoadout": {
+    "weapon": "mage_staff",
+    "armour": "mystic_robe",
+    "boots": "war_boots",
+    "charm": "war_charm"
+  }
+}

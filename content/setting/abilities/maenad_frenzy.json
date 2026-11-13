@@ -1,0 +1,25 @@
+{
+  "id": "maenad_frenzy",
+  "name": "Maenad Frenzy",
+  "type": "skill",
+  "target": "enemy",
+  "description": "Physical DMG to one enemy and Bleed for 2 turns; gain ATK Up for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.8,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "bleed",
+      "duration": 2
+    },
+    {
+      "type": "status",
+      "status": "atk_up",
+      "duration": 2,
+      "on": "self"
+    }
+  ]
+}

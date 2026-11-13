@@ -1,0 +1,15 @@
+{
+  "id": "hearth_ember",
+  "name": "Hearth Ember",
+  "type": "basic",
+  "target": "enemy",
+  "element": "fire",
+  "description": "Deal Magic DMG to one enemy.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1,
+      "toughness": 10
+    }
+  ]
+}
