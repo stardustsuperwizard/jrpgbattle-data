@@ -1,0 +1,36 @@
+{
+  "id": "dionysus",
+  "name": "Dionysus",
+  "role": "Reveller",
+  "class": "Striker",
+  "characterGroup": "Gods of Olympus",
+  "sprite": "🍇",
+  "reach": "melee",
+  "damageType": "physical",
+  "maxHp": 1150,
+  "physAtk": 150,
+  "magAtk": 150,
+  "physRes": 81,
+  "magRes": 60,
+  "spd": 112,
+  "maxEnergy": 120,
+  "growth": {
+    "maxHp": 92,
+    "physAtk": 13,
+    "magAtk": 13,
+    "physRes": 7,
+    "magRes": 5,
+    "spd": 1
+  },
+  "abilities": [
+    "thyrsus_strike",
+    "maenad_frenzy",
+    "bacchic_revel"
+  ],
+  "defaultLoadout": {
+    "weapon": "war_axe",
+    "armour": "plate_mail",
+    "boots": "wind_boots",
+    "charm": "war_charm"
+  }
+}

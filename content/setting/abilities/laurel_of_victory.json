@@ -1,0 +1,22 @@
+{
+  "id": "laurel_of_victory",
+  "name": "Laurel of Victory",
+  "type": "ultimate",
+  "target": "blast",
+  "element": "wind",
+  "splash": 0.5,
+  "description": "Heavy Physical DMG to an enemy and half to adjacent enemies; all allies gain ATK Up for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 3.2,
+      "toughness": 30
+    },
+    {
+      "type": "status",
+      "status": "atk_up",
+      "duration": 2,
+      "on": "all_allies"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "bacchic_revel",
+  "name": "Bacchic Revel",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "description": "Physical DMG to all enemies and Bleed them for 2 turns; all allies gain ATK Up for 2 turns.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 2.2,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "bleed",
+      "duration": 2
+    },
+    {
+      "type": "status",
+      "status": "atk_up",
+      "duration": 2,
+      "on": "all_allies"
+    }
+  ]
+}

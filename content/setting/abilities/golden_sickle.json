@@ -1,0 +1,15 @@
+{
+  "id": "golden_sickle",
+  "name": "Golden Sickle",
+  "type": "basic",
+  "target": "enemy",
+  "element": "earth",
+  "description": "Deal Magic DMG to one enemy.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1,
+      "toughness": 10
+    }
+  ]
+}

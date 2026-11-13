@@ -1,0 +1,36 @@
+{
+  "id": "demeter",
+  "name": "Demeter",
+  "role": "Harvest Mother",
+  "class": "Support",
+  "characterGroup": "Gods of Olympus",
+  "sprite": "🌾",
+  "reach": "melee",
+  "damageType": "magic",
+  "maxHp": 1150,
+  "physAtk": 105,
+  "magAtk": 105,
+  "physRes": 68,
+  "magRes": 92,
+  "spd": 101,
+  "maxEnergy": 100,
+  "growth": {
+    "maxHp": 92,
+    "physAtk": 9,
+    "magAtk": 9,
+    "physRes": 5,
+    "magRes": 7,
+    "spd": 1
+  },
+  "abilities": [
+    "golden_sickle",
+    "bountiful_harvest",
+    "barren_earth"
+  ],
+  "defaultLoadout": {
+    "weapon": "war_blade",
+    "armour": "mystic_robe",
+    "boots": "wind_boots",
+    "charm": "war_charm"
+  }
+}

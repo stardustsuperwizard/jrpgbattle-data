@@ -1,0 +1,14 @@
+{
+  "id": "thyrsus_strike",
+  "name": "Thyrsus Strike",
+  "type": "basic",
+  "target": "enemy",
+  "description": "Deal Physical DMG to one enemy.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1,
+      "toughness": 10
+    }
+  ]
+}

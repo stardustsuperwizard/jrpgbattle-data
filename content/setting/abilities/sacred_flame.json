@@ -1,0 +1,25 @@
+{
+  "id": "sacred_flame",
+  "name": "Sacred Flame",
+  "type": "skill",
+  "target": "all_allies",
+  "element": "fire",
+  "description": "Shield all allies (scales with PHYS and MAG RES) for 2 turns, cleanse their debuffs, and Taunt.",
+  "effects": [
+    {
+      "type": "shield",
+      "flat": 60,
+      "duration": 2,
+      "resRatio": 0.8
+    },
+    {
+      "type": "cleanse"
+    },
+    {
+      "type": "status",
+      "status": "taunt",
+      "duration": 2,
+      "on": "self"
+    }
+  ]
+}

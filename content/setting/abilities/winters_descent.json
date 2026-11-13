@@ -1,0 +1,22 @@
+{
+  "id": "winters_descent",
+  "name": "Winter’s Descent",
+  "type": "skill",
+  "target": "blast",
+  "element": "ice",
+  "splash": 0.5,
+  "description": "Magic DMG to an enemy and half to adjacent enemies, with a 35% chance to Freeze.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1.8,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "freeze",
+      "duration": 1,
+      "chance": 0.35
+    }
+  ]
+}

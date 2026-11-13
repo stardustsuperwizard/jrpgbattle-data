@@ -1,0 +1,37 @@
+{
+  "id": "nike",
+  "name": "Nike",
+  "role": "Winged Victory",
+  "class": "Striker",
+  "characterGroup": "Gods of Olympus",
+  "sprite": "🏆",
+  "reach": "ranged",
+  "damageType": "physical",
+  "maxHp": 960,
+  "physAtk": 150,
+  "magAtk": 150,
+  "physRes": 71,
+  "magRes": 53,
+  "spd": 122,
+  "maxEnergy": 120,
+  "critRate": 0.2,
+  "growth": {
+    "maxHp": 77,
+    "physAtk": 13,
+    "magAtk": 13,
+    "physRes": 6,
+    "magRes": 4,
+    "spd": 1
+  },
+  "abilities": [
+    "winged_javelin",
+    "swift_victory",
+    "laurel_of_victory"
+  ],
+  "defaultLoadout": {
+    "weapon": "war_axe",
+    "armour": "plate_mail",
+    "boots": "wind_boots",
+    "charm": "war_charm"
+  }
+}

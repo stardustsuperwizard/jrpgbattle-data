@@ -1,0 +1,15 @@
+{
+  "id": "winged_javelin",
+  "name": "Winged Javelin",
+  "type": "basic",
+  "target": "enemy",
+  "element": "wind",
+  "description": "Deal Physical DMG to one enemy.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 1,
+      "toughness": 10
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "bountiful_harvest",
+  "name": "Bountiful Harvest",
+  "type": "skill",
+  "target": "ally",
+  "element": "earth",
+  "description": "Heal one ally 25% Max HP + 80, and all allies 10% Max HP.",
+  "effects": [
+    {
+      "type": "heal",
+      "pctMaxHp": 0.25,
+      "flat": 80
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.1,
+      "on": "all_allies"
+    }
+  ]
+}

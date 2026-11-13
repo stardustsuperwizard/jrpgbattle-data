@@ -1,0 +1,26 @@
+{
+  "id": "springs_return",
+  "name": "Spring’s Return",
+  "type": "ultimate",
+  "target": "all_enemies",
+  "element": "earth",
+  "description": "Magic DMG to all enemies with a 30% chance to Freeze; heal all allies 15% Max HP.",
+  "effects": [
+    {
+      "type": "damage",
+      "mult": 2,
+      "toughness": 20
+    },
+    {
+      "type": "status",
+      "status": "freeze",
+      "duration": 1,
+      "chance": 0.3
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.15,
+      "on": "all_allies"
+    }
+  ]
+}
