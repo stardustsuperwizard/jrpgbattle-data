@@ -27,7 +27,7 @@ Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for the
 
 **Roster 0.19.0 adds six** (Hera, Hestia, Dionysus, Nike, Demeter, Persephone), bringing every class to four: Guardians Athena, Hephaestus, Hera, Hestia; Strikers Artemis, Ares, Dionysus, Nike; Casters Zeus, Poseidon, Hades, Persephone; Supports Hermes, Apollo, Aphrodite, Demeter. Demeter is the third healer. Her skill targets one ally, with a smaller heal for the rest, because the bot holds back a party-wide skill while anyone is shielded and saves SP only for single-target heals (jrpg-battle's `src/engine/autoplay.js`); a party-only heal tested at 46% PvE. Hestia is the first magic Guardian, Nike the third ranged god and Persephone the first to use ice.
 
-**Fuller kits (roster 0.20.0, jrpg-battle 0.25.0 and its decision 0060).** Four of the six use the engine's newest building blocks:
+**Fuller kits (roster 0.20.0, jrpg-battle 0.26.0 and its decision 0061).** Four of the six use the engine's newest building blocks:
 
 - **Hera** raises the fallen: Peacock's Gaze revives every fallen ally with 30% of its max HP (a `revive` effect).
 - **Dionysus** drives his foes mad: Bacchic Revel has a 50% chance to Confuse each enemy for 2 turns, so its single-target skills may land on anyone else, its own side included (the core's `confuse`).
@@ -69,7 +69,7 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 | 🌾 Demeter | War Blade | Mystic Robe | Wind Boots | War Charm | A healer who acts early and hits back: flat on her low attack |
 | 🌸 Persephone | Mage Staff | Mystic Robe | War Boots | War Charm | A caster: all-in on magic damage |
 
-**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 81 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.20.0 on jrpg-battle 0.25.0:
+**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 81 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.20.0 on jrpg-battle 0.26.0:
 
 | Slot | Best for |
 |---|---|
@@ -100,12 +100,12 @@ Within a slot, the options a god doesn't take are mostly within 2 to 10 points o
 | Poseidon | Pyra | 88.0% | +5.7 | 72.0% |
 | Hades | Pyra | 90.7% | +8.3 | 20.0% |
 | Persephone | Pyra | 91.0% | +8.7 | 37.0% |
-| Hestia | Aria | 81.0% | −1.3 | 70.0% |
+| Hestia | Aria | 81.0% | −1.3 | 73.0% |
 | Hephaestus | Aria | 75.7% | −6.7 | 43.7% |
 
-All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 86.0% and PvP 57.7% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 70.0% and 14.0%; Ares, Hades, Apollo, Zeus 45.3% and 55.7%; Hera, Persephone, Demeter, Nike 100.0% and 44.3%; Hestia, Dionysus, Demeter, Persephone 97.7% and 86.0%.
+All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 86.0% and PvP 57.7% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 70.0% and 14.0%; Ares, Hades, Apollo, Zeus 45.3% and 55.7%; Hera, Persephone, Demeter, Nike 100.0% and 44.3%; Hestia, Dionysus, Demeter, Persephone 97.7% and 87.7%.
 
-The six added in roster 0.19.0 have their numbers from roster 0.20.0 on jrpg-battle 0.25.0, with Hera, Dionysus, Persephone and Hestia's fuller kits: the first ten's lines above are unchanged on it. Their kits are a first pass, not tuned; balance gets its own pass later.
+The six added in roster 0.19.0 have their numbers from roster 0.20.0 on jrpg-battle 0.26.0, with Hera, Dionysus, Persephone and Hestia's fuller kits: the first ten's lines above are unchanged on it. Their kits are a first pass, not tuned; balance gets its own pass later.
 
 ### How to read them
 

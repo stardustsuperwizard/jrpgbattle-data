@@ -149,7 +149,7 @@ export function buildContent(root = ROOT) {
       problems.push(`${SOURCE_DIR}/heroes/${id}.json needs "abilities", a list of ability ids.`);
       continue;
     }
-    // Its own set, then each of its forms' (jrpg-battle decision 0060).
+    // Its own set, then each of its forms' (jrpg-battle decision 0061).
     const forms = Object.values(hero.forms ?? {}).map((form) => (Array.isArray(form?.abilities) ? form.abilities : []));
     for (const abilityId of [hero.abilities, ...forms].flat()) {
       if (!abilityFiles[abilityId]) problems.push(`${SOURCE_DIR}/heroes/${id}.json uses ability "${abilityId}", but ${SOURCE_DIR}/abilities/${abilityId}.json is missing.`);

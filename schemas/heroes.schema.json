@@ -196,7 +196,7 @@
               }
             }
           },
-          "description": "Other forms the hero can take in battle (decision 0060), by id: a form effect in one of its abilities switches to one. Optional."
+          "description": "Other forms the hero can take in battle (decision 0061), by id: a form effect in one of its abilities switches to one. Optional."
         },
         "defaultLoadout": {
           "$ref": "common.schema.json#/$defs/loadout",
