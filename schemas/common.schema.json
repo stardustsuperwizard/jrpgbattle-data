@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "common.schema.json",
-  "title": "Shared content shapes, content format 2026-11-15",
+  "title": "Shared content shapes, jrpgbattle world format 2026-11-17",
   "description": "Shapes more than one content file uses: ids, stats, skills and their effects. The other schemas refer to these.",
   "$defs": {
     "id": {
@@ -27,17 +27,17 @@
     "damageTypeId": {
       "type": "string",
       "minLength": 1,
-      "description": "A damage type id, one of core/damageTypes.json's (physical or magic). The schema can't list them: the engine checks it when the content loads."
+      "description": "A damage type id, one of the ruleset's rules/damageTypes.json's (physical or magic). The schema can't list them: the engine checks it when the content loads."
     },
     "elementId": {
       "type": "string",
       "minLength": 1,
-      "description": "An element id, one of core/elements.json's (fire, lightning, metal and so on). The schema can't list them: the engine checks it when the content loads."
+      "description": "An element id, one of the world's elements.json's (fire, lightning, metal and so on). The schema can't list them: the engine checks it when the content loads."
     },
     "statusId": {
       "type": "string",
       "minLength": 1,
-      "description": "A status id, one of core/statuses.json's, checked when the content loads."
+      "description": "A status id, one of the ruleset's rules/statuses.json's, checked when the content loads."
     },
     "stats": {
       "type": "object",

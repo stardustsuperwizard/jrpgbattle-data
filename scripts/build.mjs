@@ -3,10 +3,12 @@
 // checkout, so the release workflow can run it on its own.
 //   node scripts/build.mjs [outDir]           (default dist/)
 //
-// Sources, in content/setting/: jrpg-battle's setting files (its decision
-// 0050: the world, played by the engine's own core rules), the ones keyed by
-// id broken out one file per entry.
-//   manifest.json, slots.json, waves.json, dungeon.json, house-rules.json
+// Sources, in content/world/: a world on jrpg-battle's jrpgbattle ruleset
+// (its decision 0086: world.json names the ruleset, its world format and the
+// features the world enables), the files keyed by id broken out one file per
+// entry.
+//   manifest.json, world.json, slots.json, waves.json, dungeon.json,
+//   campaign.json, modes.json, elements.json
 //                            single files, built as they are
 //   <kind>/index.json        the ids in order, for heroes (the order the pick
 //                            screen lists them), enemies and items
@@ -14,9 +16,9 @@
 //                            come in the order the heroes use them
 //
 // Output, in outDir:
-//   src/content/setting/<name>.json  jrpg-battle's setting files: dropped over
-//                            a jrpg-battle checkout's src/content/setting/,
-//                            they replace its default world whole
+//   src/world/<name>.json    a jrpg-battle world: dropped over a jrpg-battle
+//                            checkout's src/world/, they replace its example
+//                            world whole
 //   api/                     the static API: an index naming its versions
 //                            and a docs page, and under api/v1/ the sources
 //                            entry by entry, an index per kind, the combined
@@ -32,12 +34,13 @@ import { SCHEMA_DIR, keptSchemas } from './schemas.mjs';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ID_RE = /^[a-z0-9][a-z0-9_]*$/;
 
-// The setting files in the order jrpg-battle lists them (CONTENT_LAYOUT.setting),
+// The world files in the order the jrpgbattle ruleset lists them (its worldFiles),
 // and how each is kept here: `single` as one file; otherwise one file per
 // entry, `id` when an entry names its own id, `order` from the kind's
 // index.json or, for abilities, from the heroes that use them.
 export const KINDS = [
   { name: 'manifest', single: true },
+  { name: 'world', single: true },
   { name: 'heroes', order: 'index', id: true },
   { name: 'abilities', order: 'use', id: true },
   { name: 'enemies', order: 'index', id: true },
@@ -45,7 +48,9 @@ export const KINDS = [
   { name: 'slots', single: true },
   { name: 'waves', single: true },
   { name: 'dungeon', single: true },
-  { name: 'house-rules', single: true },
+  { name: 'campaign', single: true },
+  { name: 'modes', single: true },
+  { name: 'elements', single: true },
 ];
 
 /**
@@ -57,7 +62,7 @@ export const KINDS = [
 export const API_VERSION = 'v1';
 
 /** Where the sources live, under the repository root. */
-export const SOURCE_DIR = 'content/setting';
+export const SOURCE_DIR = 'content/world';
 
 // The repository's JSON layout: two-space indent and a final newline, so built files diff cleanly.
 export const render = (value) => `${JSON.stringify(value, null, 2)}\n`;
@@ -113,7 +118,7 @@ function indexed(content, kind, files, problems) {
 }
 
 /**
- * Every setting file, built from the sources: single files as they are,
+ * Every world file, built from the sources: single files as they are,
  * indexed kinds in index order, abilities in the order the heroes use them,
  * each hero's own set before its forms'
  * (then any no hero uses, by id). Throws, listing every problem, when the
@@ -159,26 +164,26 @@ export function buildContent(root = ROOT) {
   if (problems.length) throw new Error(problems.join('\n'));
   const unused = Object.keys(abilityFiles).filter((id) => !used.includes(id)).sort();
   content.abilities = Object.fromEntries([...used, ...unused].map((id) => [id, abilityFiles[id]]));
-  // In KINDS order, as the engine lists its setting files.
+  // In KINDS order, as the ruleset lists its world files.
   return { content: Object.fromEntries(KINDS.map(({ name }) => [name, content[name]])), unused };
 }
 
 /**
- * Writes the drop-in setting files and the static API under `out`, replacing
+ * Writes the drop-in world files and the static API under `out`, replacing
  * what a previous build left there.
  * @param {string} out
  * @param {string} [root]
  */
 export function build(out, root = ROOT) {
   const { content, unused } = buildContent(root);
-  const { manifest } = /** @type {any} */ (content);
+  const { manifest, world } = /** @type {any} */ (content);
   for (const dir of ['src', 'api']) rmSync(join(out, dir), { recursive: true, force: true });
   const write = (path, value) => {
     mkdirSync(dirname(join(out, path)), { recursive: true });
     writeFileSync(join(out, path), typeof value === 'string' ? value : render(value));
   };
 
-  for (const [name, value] of Object.entries(content)) write(`src/content/setting/${name}.json`, value);
+  for (const [name, value] of Object.entries(content)) write(`src/world/${name}.json`, value);
 
   // The API: a root index naming the versions, then the version's index to
   // discover the rest, and each kind entry by entry.
@@ -194,7 +199,8 @@ export function build(out, root = ROOT) {
     api: API_VERSION,
     name: manifest.name,
     version: manifest.version,
-    formatVersion: manifest.formatVersion,
+    ruleset: world.ruleset,
+    formatVersion: world.formatVersion,
     ...Object.fromEntries(entryKinds.map((name) => [name, Object.keys(content[name])])),
     content: Object.keys(content).map((name) => `content/${name}.json`),
     openapi: 'openapi.json',
@@ -210,7 +216,7 @@ export function build(out, root = ROOT) {
     for (const [id, entry] of Object.entries(entries)) write(`${v}/${kind.name}/${id}.json`, entry);
   }
   for (const [name, value] of Object.entries(content)) write(`${v}/content/${name}.json`, value);
-  // The content format's schemas, as the engine wrote them, and the description that refers to them.
+  // The world format's schemas, as the ruleset wrote them, and the description that refers to them.
   const schemas = keptSchemas(root);
   for (const kind of KINDS) if (!schemas[`${kind.name}.schema.json`]) throw new Error(`${SCHEMA_DIR}/ has no ${kind.name}.schema.json: run npm run schemas with the pinned jrpg-battle.`);
   for (const [name, text] of Object.entries(schemas)) write(`${v}/schemas/${name}`, text);
@@ -248,6 +254,6 @@ export function docsPage(name, spec) {
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const out = resolve(process.argv[2] ?? join(ROOT, 'dist'));
   const { counts, unused } = build(out);
-  console.log(`Built ${Object.entries(counts).map(([name, n]) => `${n} ${name}`).join(', ')} into ${out}/src/content/setting/ and ${out}/api/.`);
+  console.log(`Built ${Object.entries(counts).map(([name, n]) => `${n} ${name}`).join(', ')} into ${out}/src/world/ and ${out}/api/.`);
   if (unused.length) console.log(`No hero uses ${unused.join(', ')}; built after the rest.`);
 }

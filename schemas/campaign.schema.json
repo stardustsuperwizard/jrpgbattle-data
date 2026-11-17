@@ -1,0 +1,374 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "campaign.schema.json",
+  "title": "world/campaign.json, jrpgbattle world format 2026-11-17",
+  "description": "How a campaign works in this world (decisions 0031 to 0042, 0086): waves a floor and how they scale the monsters, starting gold, a floor's shares of XP and gold, how many items a hero carries, the town's services, the Descent, a wipe's cost, heirlooms, the enchanter and how loot rolls. The engine merges it with dungeon.json (what is in the dungeon) into the config's one dungeon; a path belongs to one file or the other.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "wavesPerFloor",
+    "startGold",
+    "xpShare",
+    "goldShare",
+    "bossShare",
+    "gearSlots"
+  ],
+  "properties": {
+    "wavesPerFloor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "min",
+        "max",
+        "default"
+      ],
+      "properties": {
+        "min": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "default": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "description": "The waves a player may choose for a floor."
+    },
+    "waveScaling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference",
+        "exponent"
+      ],
+      "properties": {
+        "reference": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "exponent": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "description": "How the waves chosen set each monster's strength and pay: (reference / waves) ^ exponent (#312)."
+    },
+    "startGold": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "xpShare": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The share of a monster's XP a floor pays, before growth."
+    },
+    "goldShare": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The share of its gold, likewise."
+    },
+    "bossShare": {
+      "type": "number",
+      "minimum": 0,
+      "description": "A boss's stats as a share of its content's, before growth."
+    },
+    "gearSlots": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Items a hero carries: as many as the world's slots."
+    },
+    "town": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "services"
+      ],
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "icon"
+            ],
+            "properties": {
+              "id": {
+                "enum": [
+                  "descent",
+                  "stash",
+                  "shop",
+                  "enchanter",
+                  "retire"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "icon": {
+                "type": "string"
+              },
+              "after": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Floors cleared before it opens."
+              }
+            }
+          }
+        }
+      },
+      "description": "A campaign's town: its services, in order (decision 0032)."
+    },
+    "campaign": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "floors": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The Descent's last floor."
+        },
+        "stretch": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Floors to a stretch."
+        },
+        "wipeGoldLoss": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "wipeReviveHp": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "endless": {
+          "type": "boolean",
+          "description": "Whether the campaign goes on past its last floor once cleared (decision 0039)."
+        },
+        "heirloomBoost": {
+          "type": "number",
+          "minimum": 0
+        },
+        "enchanter": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "maxAffixes",
+            "enchant",
+            "reroll"
+          ],
+          "properties": {
+            "maxAffixes": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "enchant": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "cost",
+                "costPerAffix",
+                "odds"
+              ],
+              "properties": {
+                "cost": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "costPerAffix": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "odds": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "success",
+                      "wipe"
+                    ],
+                    "properties": {
+                      "success": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "wipe": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    }
+                  },
+                  "description": "By how many bonuses the item has: the chance it works, and the chance it wipes every bonus."
+                }
+              }
+            },
+            "reroll": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "cost",
+                "costPerAffix",
+                "odds"
+              ],
+              "properties": {
+                "cost": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "costPerAffix": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "odds": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "success",
+                      "wipe"
+                    ],
+                    "properties": {
+                      "success": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "wipe": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    }
+                  },
+                  "description": "By how many bonuses the item has: the chance it works, and the chance it wipes every bonus."
+                }
+              }
+            }
+          },
+          "description": "The enchanter's prices and odds (decision 0042)."
+        },
+        "loot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [],
+          "properties": {
+            "drops": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "bossDrops": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "rarities": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "name",
+                  "weight",
+                  "affixes",
+                  "value"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9][a-z0-9_]*$"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "weight": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "affixes": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "value": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              }
+            },
+            "affixes": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "name",
+                  "stat",
+                  "min",
+                  "max",
+                  "perFloor"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "stat": {
+                    "enum": [
+                      "maxHp",
+                      "physAtk",
+                      "magAtk",
+                      "physRes",
+                      "magRes",
+                      "spd"
+                    ],
+                    "description": "The stat the bonus raises."
+                  },
+                  "min": {
+                    "type": "number"
+                  },
+                  "max": {
+                    "type": "number"
+                  },
+                  "perFloor": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              }
+            },
+            "sellShare": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "stashSize": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "description": "How loot rolls; what drops is dungeon.json's campaign.loot.items."
+        }
+      },
+      "description": "The Descent, its wipes, heirlooms, the enchanter and loot."
+    }
+  }
+}

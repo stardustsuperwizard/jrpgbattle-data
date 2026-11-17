@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "world.schema.json",
+  "title": "world/world.json, jrpgbattle world format 2026-11-17",
+  "description": "A world's own description (decision 0086): the ruleset it plays, the date of that ruleset's world format its files are written in, and the ruleset's optional features it enables, each with its values. A world naming another ruleset or format is refused by name, and a server doesn't start on it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ruleset", "formatVersion", "features"],
+  "properties": {
+    "ruleset": {
+      "const": "jrpgbattle",
+      "description": "The id of the ruleset the world plays: the server imports src/rulesets/<id>/index.js."
+    },
+    "formatVersion": {
+      "const": "2026-11-17",
+      "description": "The ruleset's world format (its ruleset.json formatVersion): every file of the world is in it."
+    },
+    "features": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["levels"],
+      "properties": {
+        "levels": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["maxLevel", "xpLevelBase", "xpLevelStep", "xpKillerShare"],
+          "description": "Levels and XP: the cap and the curve, laid into the config's rules (rules.maxLevel and the rest).",
+          "properties": {
+            "maxLevel": { "type": "integer", "minimum": 1, "description": "The highest level a hero reaches." },
+            "xpLevelBase": { "type": "number", "minimum": 0, "description": "The XP from level 1 to 2." },
+            "xpLevelStep": { "type": "number", "minimum": 0, "description": "How much more each level after costs." },
+            "xpKillerShare": { "type": "number", "minimum": 0, "maximum": 1, "description": "The share of a kill's XP the killer takes for a direct hit; the rest is shared." }
+          }
+        }
+      }
+    }
+  }
+}

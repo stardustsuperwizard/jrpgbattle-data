@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "modes.schema.json",
+  "title": "world/modes.json, jrpgbattle world format 2026-11-17",
+  "description": "The world's modes, by any id (decision 0083), each a setup naming the blocks it composes (pick, draft, loadouts, campaign), each of which jrpgbattle supports, where it runs, a plugin's wrapper and its teams. The world's own (decision 0086): its modes name its teams and levels.",
+  "type": "object",
+  "propertyNames": {
+    "pattern": "^[a-z][a-z0-9-]{0,31}$"
+  },
+  "additionalProperties": {
+    "$ref": "#/$defs/mode"
+  },
+  "$defs": {
+    "mode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "teams"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "pick": {
+          "enum": [
+            "blind",
+            "draft"
+          ],
+          "description": "How its teams choose champions: blind, or a draft on its draft order (the pick and draft blocks)."
+        },
+        "draft": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "order"
+          ],
+          "properties": {
+            "order": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "team",
+                  "act"
+                ],
+                "properties": {
+                  "team": {
+                    "enum": [
+                      1,
+                      2
+                    ]
+                  },
+                  "act": {
+                    "enum": [
+                      "ban",
+                      "pick"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "A drafted mode's bans and picks in turn, by the team drafting first (1) or second (2) (decision 0060)."
+        },
+        "timeLimit": {
+          "enum": [
+            "pvpTimeLimit",
+            "runTimeLimit"
+          ],
+          "description": "The jrpgbattle rule holding the match's time limit on the battle clock."
+        },
+        "levels": {
+          "type": "boolean",
+          "description": "Heroes gain XP and monsters pay gold."
+        },
+        "loadouts": {
+          "type": "boolean",
+          "description": "Its picks choose a loadout (the loadouts block)."
+        },
+        "campaign": {
+          "type": "boolean",
+          "description": "It is a campaign's floors (the campaign block); one mode at most."
+        },
+        "hosts": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "local",
+              "server"
+            ]
+          },
+          "description": "Where it runs: the page (local) and the server; the page only where left out."
+        },
+        "wrapper": {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "description": "A plugin's wrapper (decision 0083), ranking's queue today: the mode exists only where that service runs."
+        },
+        "teams": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "controllers"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]*$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "hero",
+                  "monster"
+                ],
+                "description": "hero unless given: a monster team fights on its monsters' AI, on bots only."
+              },
+              "champions": {
+                "type": "array",
+                "items": {
+                  "$ref": "common.schema.json#/$defs/id"
+                },
+                "description": "Hero ids in line-up order; a hero team without them picks (decision 0025)."
+              },
+              "controllers": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(local|bot|remote):.+$",
+                  "description": "local:<player>, bot:<profile> or remote:<player>."
+                }
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "loadout": {
+                "type": "array",
+                "items": {
+                  "$ref": "common.schema.json#/$defs/loadout"
+                },
+                "description": "Each champion's starting loadout, item ids by slot id (decision 0058)."
+              },
+              "waves": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind"
+                ],
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "fixed",
+                      "endless"
+                    ]
+                  }
+                },
+                "description": "A monster team's wave source."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

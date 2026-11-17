@@ -1,0 +1,12 @@
+{
+  "ruleset": "jrpgbattle",
+  "formatVersion": "2026-11-17",
+  "features": {
+    "levels": {
+      "maxLevel": 25,
+      "xpLevelBase": 40,
+      "xpLevelStep": 20,
+      "xpKillerShare": 0.5
+    }
+  }
+}

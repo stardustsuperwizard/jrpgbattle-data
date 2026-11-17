@@ -1,0 +1,42 @@
+{
+  "fire": {
+    "name": "Fire",
+    "icon": "🔥",
+    "color": "#ff7a45"
+  },
+  "water": {
+    "name": "Water",
+    "icon": "💧",
+    "color": "#4aa3ff"
+  },
+  "earth": {
+    "name": "Earth",
+    "icon": "🪨",
+    "color": "#b08a5a"
+  },
+  "wind": {
+    "name": "Wind",
+    "icon": "🌪️",
+    "color": "#9fe0c0"
+  },
+  "lightning": {
+    "name": "Lightning",
+    "icon": "⚡",
+    "color": "#ffd84a"
+  },
+  "ice": {
+    "name": "Ice",
+    "icon": "❄️",
+    "color": "#7fd8ff"
+  },
+  "dark": {
+    "name": "Dark",
+    "icon": "🌑",
+    "color": "#6b5b95"
+  },
+  "metal": {
+    "name": "Metal",
+    "icon": "⚙️",
+    "color": "#aab4c4"
+  }
+}
