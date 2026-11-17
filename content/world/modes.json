@@ -1,0 +1,364 @@
+{
+  "pve": {
+    "name": "PvE",
+    "description": "Your team against waves of monsters.",
+    "pick": "blind",
+    "hosts": [
+      "local"
+    ],
+    "teams": [
+      {
+        "id": "party",
+        "name": "Your team",
+        "controllers": [
+          "local:p1",
+          "local:p1",
+          "local:p1",
+          "local:p1"
+        ],
+        "level": 1,
+        "loadout": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "id": "enemy",
+        "name": "Monsters",
+        "kind": "monster",
+        "controllers": [
+          "bot:default"
+        ],
+        "waves": {
+          "kind": "fixed"
+        }
+      }
+    ]
+  },
+  "pvp": {
+    "name": "PvP",
+    "description": "Pick a team and fight another.",
+    "pick": "blind",
+    "timeLimit": "pvpTimeLimit",
+    "loadouts": true,
+    "hosts": [
+      "local",
+      "server"
+    ],
+    "teams": [
+      {
+        "id": "blue",
+        "name": "Blue",
+        "controllers": [
+          "local:p1",
+          "local:p1",
+          "local:p1",
+          "local:p1"
+        ],
+        "level": 1,
+        "loadout": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "id": "red",
+        "name": "Red",
+        "controllers": [
+          "bot:default",
+          "bot:default",
+          "bot:default",
+          "bot:default"
+        ],
+        "level": 1,
+        "loadout": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      }
+    ]
+  },
+  "draft": {
+    "name": "Draft",
+    "description": "Ban and pick in turn, then fight.",
+    "pick": "draft",
+    "draft": {
+      "order": [
+        {
+          "act": "ban",
+          "team": 1
+        },
+        {
+          "act": "ban",
+          "team": 2
+        },
+        {
+          "act": "pick",
+          "team": 1
+        },
+        {
+          "act": "pick",
+          "team": 2
+        },
+        {
+          "act": "pick",
+          "team": 2
+        },
+        {
+          "act": "pick",
+          "team": 1
+        },
+        {
+          "act": "pick",
+          "team": 1
+        },
+        {
+          "act": "pick",
+          "team": 2
+        },
+        {
+          "act": "pick",
+          "team": 2
+        },
+        {
+          "act": "pick",
+          "team": 1
+        }
+      ]
+    },
+    "timeLimit": "pvpTimeLimit",
+    "loadouts": true,
+    "hosts": [
+      "local",
+      "server"
+    ],
+    "teams": [
+      {
+        "id": "blue",
+        "name": "Blue",
+        "controllers": [
+          "local:p1",
+          "local:p1",
+          "local:p1",
+          "local:p1"
+        ],
+        "level": 1,
+        "loadout": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "id": "red",
+        "name": "Red",
+        "controllers": [
+          "bot:default",
+          "bot:default",
+          "bot:default",
+          "bot:default"
+        ],
+        "level": 1,
+        "loadout": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      }
+    ]
+  },
+  "ranked": {
+    "name": "Ranked PvP",
+    "description": "Rated matches against players near your rating.",
+    "pick": "blind",
+    "timeLimit": "pvpTimeLimit",
+    "loadouts": true,
+    "hosts": [
+      "server"
+    ],
+    "wrapper": {
+      "kind": "queue",
+      "queue": "blind"
+    },
+    "teams": [
+      {
+        "id": "blue",
+        "name": "Blue",
+        "controllers": [
+          "local:p1",
+          "local:p1",
+          "local:p1",
+          "local:p1"
+        ],
+        "level": 1,
+        "loadout": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "id": "red",
+        "name": "Red",
+        "controllers": [
+          "bot:default",
+          "bot:default",
+          "bot:default",
+          "bot:default"
+        ],
+        "level": 1,
+        "loadout": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      }
+    ]
+  },
+  "ranked-draft": {
+    "name": "Ranked Draft",
+    "description": "Rated drafted matches, on a ladder of their own.",
+    "pick": "draft",
+    "draft": {
+      "order": [
+        {
+          "act": "ban",
+          "team": 1
+        },
+        {
+          "act": "ban",
+          "team": 2
+        },
+        {
+          "act": "pick",
+          "team": 1
+        },
+        {
+          "act": "pick",
+          "team": 2
+        },
+        {
+          "act": "pick",
+          "team": 2
+        },
+        {
+          "act": "pick",
+          "team": 1
+        },
+        {
+          "act": "pick",
+          "team": 1
+        },
+        {
+          "act": "pick",
+          "team": 2
+        },
+        {
+          "act": "pick",
+          "team": 2
+        },
+        {
+          "act": "pick",
+          "team": 1
+        }
+      ]
+    },
+    "timeLimit": "pvpTimeLimit",
+    "loadouts": true,
+    "hosts": [
+      "server"
+    ],
+    "wrapper": {
+      "kind": "queue",
+      "queue": "draft"
+    },
+    "teams": [
+      {
+        "id": "blue",
+        "name": "Blue",
+        "controllers": [
+          "local:p1",
+          "local:p1",
+          "local:p1",
+          "local:p1"
+        ],
+        "level": 1,
+        "loadout": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "id": "red",
+        "name": "Red",
+        "controllers": [
+          "bot:default",
+          "bot:default",
+          "bot:default",
+          "bot:default"
+        ],
+        "level": 1,
+        "loadout": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      }
+    ]
+  },
+  "run": {
+    "name": "Dungeon",
+    "description": "A campaign's floors.",
+    "pick": "blind",
+    "campaign": true,
+    "levels": true,
+    "timeLimit": "runTimeLimit",
+    "hosts": [
+      "local",
+      "server"
+    ],
+    "teams": [
+      {
+        "id": "party",
+        "name": "Your team",
+        "controllers": [
+          "local:p1",
+          "local:p1",
+          "local:p1",
+          "local:p1"
+        ],
+        "level": 1,
+        "loadout": [
+          {},
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "id": "enemy",
+        "name": "Monsters",
+        "kind": "monster",
+        "controllers": [
+          "bot:default"
+        ],
+        "waves": {
+          "kind": "endless"
+        }
+      }
+    ]
+  }
+}

@@ -24,12 +24,12 @@ const runs = Number(process.argv[2] ?? 60);
 const read = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const load = (path) => import(pathToFileURL(join(ENGINE, path)).href);
 const { assembleContent, buildConfig, validateConfig } = await load('src/engine/content.js');
-const { readContent } = await load('scripts/content.js');
+const { readContent, ruleset } = await load('scripts/content.js');
 const { sweepLoadouts } = await load('scripts/sweep-loadouts.js');
 
-// As a deployment loads the setting: the engine's core rules, this world over them.
-const { content: setting } = buildContent(ROOT);
-const config = validateConfig(buildConfig(assembleContent({ core: readContent(join(ENGINE, 'src', 'content')).core, setting })));
+// As a deployment loads the world: on the ruleset it names, beside the engine's deployment files.
+const { content: world } = buildContent(ROOT);
+const config = validateConfig(buildConfig(assembleContent({ world, deployment: readContent().deployment }, ruleset), ruleset));
 const { teams } = read(join(ROOT, 'data', 'checks.json'));
 const name = (id) => config.items[id]?.name ?? id;
 const pct = (n) => `${Math.round(n * 100)}%`.padStart(4);
@@ -37,7 +37,7 @@ const pct = (n) => `${Math.round(n * 100)}%`.padStart(4);
 console.log(`The PvP pool on each god: ${runs} bot-vs-bot mirror matches a set, against the god's team (data/checks.json) wearing nothing\n`);
 /** By slot, by option: the gods it is best for. */
 const best = {};
-for (const god of Object.keys(setting.heroes)) {
+for (const god of Object.keys(world.heroes)) {
   const party = teams.find((team) => team.includes(god));
   if (!party) throw new Error(`data/checks.json has no team with ${god}: the sweep needs one.`);
   const r = sweepLoadouts(config, { heroId: god, party, runs });
@@ -55,7 +55,7 @@ const broken = [];
 for (const [slot, by] of Object.entries(best)) {
   console.log(`  ${slot}: ${Object.entries(by).map(([item, gods]) => `${name(item)} (${gods.length ? gods.map((g) => config.heroes[g].name).join(', ') : 'none'})`).join('; ')}`);
   const never = Object.entries(by).filter(([, gods]) => !gods.length).map(([item]) => name(item));
-  const always = Object.entries(by).filter(([, gods]) => gods.length === Object.keys(setting.heroes).length).map(([item]) => name(item));
+  const always = Object.entries(by).filter(([, gods]) => gods.length === Object.keys(world.heroes).length).map(([item]) => name(item));
   if (never.length) broken.push(`${slot}: ${never.join(', ')} is never the best`);
   if (always.length) broken.push(`${slot}: ${always.join(', ')} is the best for every god`);
 }

@@ -109,7 +109,7 @@ Roster 0.21.0 moved the sweep where it moved the gods: Hermes's Shocks now read 
 
 All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 86.0% and PvP 57.7% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 70.0% and 14.0%; Ares, Hades, Apollo, Zeus 45.3% and 55.7%; Hera, Persephone, Demeter, Nike 99.3% and 39.3%; Hestia, Dionysus, Demeter, Persephone 96.3% and 84.0%.
 
-The six added in roster 0.19.0 have their numbers from roster 0.21.0 on jrpg-battle 0.26.0, after the balance pass below: the first ten's lines above are unchanged on it.
+Roster 0.22.0 on jrpg-battle 0.49.0 (the world in its new shape, jrpg-battle decision 0086) gives every number above to the decimal. The six added in roster 0.19.0 have their numbers from roster 0.21.0 on jrpg-battle 0.26.0, after the balance pass below: the first ten's lines above are unchanged on it.
 
 ### The roster 0.21.0 balance pass
 

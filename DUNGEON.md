@@ -1,6 +1,6 @@
 # The Descent
 
-The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/setting/dungeon.json`: what is in it. How a campaign works (floors, stretches, wipes, the town, the enchanter, how loot rolls) is the engine's `core/campaign.json`, and the two core numbers this world changes are in `content/setting/house-rules.json` (jrpg-battle decision 0050). It needs jrpg-battle 0.10.0 or later (tag `v0.10.1`; percentage bonuses on gear; strength by stretch came in 0.9.0 and the shop's stock by floor in 0.8.0). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
+The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `content/world/dungeon.json`: what is in it. How a campaign works (floors, stretches, wipes, the town, the enchanter, how loot rolls) is `content/world/campaign.json`, the jrpgbattle example world's with loot selling for a quarter of its price, and the level cap is `content/world/world.json`'s levels feature (jrpg-battle decision 0086). It needs jrpg-battle 0.10.0 or later (tag `v0.10.1`; percentage bonuses on gear; strength by stretch came in 0.9.0 and the shop's stock by floor in 0.8.0). The content format is unchanged; the engine reads every block below as optional, and plays an older `dungeon.json` without them.
 
 ## The map
 
@@ -31,7 +31,7 @@ Each stretch keeps one healer among its monsters (the Shaman, then the Phoenix) 
   | 26 on | The Endless Abyss | 8.8, then 0.3 more a floor | 3.5, then 0.1 more a floor |
 
   Before (roster 0.8.0 and earlier) monsters grew 0.3 of their content a floor from floor 1, so floor 25 was 8.2 and every floor a little harder than the last; Tartarus keeps that 8.2 for its whole stretch.
-- **Level cap:** heroes now go up to level 25 (the house rule `rules.maxLevel` in `house-rules.json`; the engine's core says 10).
+- **Level cap:** heroes now go up to level 25 (`world.json`'s levels feature, `maxLevel`; the ruleset's example world says 10).
 - **Waves:** the waves the party chooses set each floor's strength and pay. Three is the content's own; one is harder and pays more, five easier and paying less (`waveScaling`, jrpg-battle decision 0033).
 - **Bosses:** a boss comes at 45% of its content stats (`bossShare`), times its stretch's strength.
 
@@ -39,7 +39,7 @@ The endless floors past 25 grow on their own, from a step above Tartarus.
 
 ## Loot, the town and the enchanter
 
-- **Slots:** each hero wears one weapon, one armour, one pair of boots and one charm (`content/setting/slots.json`, the engine's `gearSlots` 4); every item names its `slot` and its `tier` in it: 1 the Grove's, 2 the Labyrinth's, 3 to 5 the ladder above. Each slot's PvP pool is its tier 2 (jrpg-battle decision 0058; [ROSTER.md](ROSTER.md#pvp-gear)), so the ladder is PvE-only and the strongest campaign gear is never a free pick.
+- **Slots:** each hero wears one weapon, one armour, one pair of boots and one charm (`content/world/slots.json`, the engine's `gearSlots` 4); every item names its `slot` and its `tier` in it: 1 the Grove's, 2 the Labyrinth's, 3 to 5 the ladder above. Each slot's PvP pool is its tier 2 (jrpg-battle decision 0058; [ROSTER.md](ROSTER.md#pvp-gear)), so the ladder is PvE-only and the strongest campaign gear is never a free pick.
 - **The shop's gear comes by stretch** (`shop.items` as stock entries, jrpg-battle decision 0043). Each stretch brings a new tier on sale before its first floor, and what came in stays. Each item upgrades the one below it of its slot: buying it over that one costs the difference. The Labyrinth's tier is three sidegrades a slot, the PvP pool, each built from the Grove's item; the Marsh's rung is built from whichever of the three the hero wears.
 
   | On sale from | Tier | Weapon (PHYS + MAG ATK) | Armour (PHYS / MAG RES) | Boots (SPD) | Charm (max HP) | Each |

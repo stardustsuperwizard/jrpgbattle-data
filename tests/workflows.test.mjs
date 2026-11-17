@@ -1,6 +1,7 @@
 // The workflows read repository files by path; a file that moves (as the
-// manifest did into content/setting/ on 2026-11-09) breaks a release without
-// failing any pull request, since the release workflow only runs on a tag.
+// manifest did into content/setting/ on 2026-11-09, and into content/world/
+// on 2026-11-17) breaks a release without failing any pull request, since
+// the release workflow only runs on a tag.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
