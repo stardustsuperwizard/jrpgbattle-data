@@ -75,6 +75,28 @@
           "type": "number",
           "exclusiveMinimum": 0
         },
+        "physPen": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Flat penetration of its Physical hits: points of the target's PHYS RES they ignore (decision 0095). 0 when left out."
+        },
+        "magPen": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Flat penetration of its Magic hits: points of the target's MAG RES they ignore (decision 0095). 0 when left out."
+        },
+        "physPierce": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage penetration of its Physical hits: whole percentage points of the target's PHYS RES they ignore, before flat penetration (decision 0095). 0 when left out."
+        },
+        "magPierce": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage penetration of its Magic hits: whole percentage points of the target's MAG RES they ignore, before flat penetration (decision 0095). 0 when left out."
+        },
         "role": {
           "type": "string",
           "description": "Shown in the UI."
@@ -144,6 +166,22 @@
               "minimum": 0
             },
             "spd": {
+              "type": "number",
+              "minimum": 0
+            },
+            "physPen": {
+              "type": "number",
+              "minimum": 0
+            },
+            "magPen": {
+              "type": "number",
+              "minimum": 0
+            },
+            "physPierce": {
+              "type": "number",
+              "minimum": 0
+            },
+            "magPierce": {
               "type": "number",
               "minimum": 0
             }

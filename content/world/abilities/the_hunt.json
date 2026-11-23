@@ -3,12 +3,13 @@
   "name": "The Hunt",
   "type": "ultimate",
   "target": "enemy",
-  "description": "Massive Physical DMG to one enemy.",
+  "description": "Massive Physical DMG to one enemy, ignoring 40% of its PHYS RES.",
   "effects": [
     {
       "type": "damage",
       "mult": 4.4,
-      "toughness": 30
+      "toughness": 30,
+      "pierce": 40
     }
   ]
 }

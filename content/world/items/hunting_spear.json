@@ -1,0 +1,16 @@
+{
+  "id": "hunting_spear",
+  "name": "Hunting Spear",
+  "icon": "🎯",
+  "cost": 400,
+  "slot": "weapon",
+  "tier": 2,
+  "stats": {
+    "physPierce": 50,
+    "magPierce": 50
+  },
+  "statsPct": {},
+  "components": [
+    "iron_dagger"
+  ]
+}

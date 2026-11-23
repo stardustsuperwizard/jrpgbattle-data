@@ -61,6 +61,18 @@
         },
         "spd": {
           "type": "number"
+        },
+        "physPen": {
+          "type": "number"
+        },
+        "magPen": {
+          "type": "number"
+        },
+        "physPierce": {
+          "type": "number"
+        },
+        "magPierce": {
+          "type": "number"
         }
       },
       "description": "Flat stat changes, by stat."
@@ -97,6 +109,17 @@
               "type": "number",
               "minimum": 0,
               "description": "Toughness removed from the target by the hit."
+            },
+            "pen": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Flat penetration the hit adds to its user's (decision 0095)."
+            },
+            "pierce": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Percentage penetration, whole points, the hit adds to its user's (decision 0095); the total is held to 100."
             },
             "on": {
               "$ref": "#/$defs/effectOn"

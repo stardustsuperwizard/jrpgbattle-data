@@ -15,6 +15,8 @@ The jrpgbattle campaign's dungeon (jrpg-battle#305; this repository's #18), in `
 | 21–25 | Tartarus (`tartarus`) | Shade, Necromancer, Myrmidon, Drakon, Phoenix, Hoplite | 🌪️ Typhon, the final boss |
 | 26 on | The Endless Abyss (`abyss`) | Every monster from the Dire Wolf on | Any of the five |
 
+Monsters lean one way (roster 0.23.0, ROSTER.md's Monsters): physical damage bounces off the armoured and the bodiless (Boar, Spartoi, Hoplite, Myrmidon, Shade, and the Golem and Minotaur), magic washes off the Shaman, Phoenix, Drakon, Necromancer and Cerberus, and each stretch from the Labyrinth on mixes the two.
+
 Each stretch keeps one healer among its monsters (the Shaman, then the Phoenix) except the Underworld, where the Necromancer's curses take its place.
 
 ## How hard it gets
@@ -45,7 +47,7 @@ The endless floors past 25 grow on their own, from a step above Tartarus.
   | On sale from | Tier | Weapon (PHYS + MAG ATK) | Armour (PHYS / MAG RES) | Boots (SPD) | Charm (max HP) | Each |
   |---|---|---|---|---|---|---|
   | Floor 1 | Grove | 🗡️ Iron Dagger (+10) | 🦺 Leather Vest (+12) | 👟 Light Boots (+4) | 💗 Vigor Charm (+150) | 150 |
-  | Floor 6 | Labyrinth | ⚔️ War Blade (+25), 🪓 Battle Axe (+26% PHYS ATK), 🪄 Mage Staff (+21% MAG ATK) | 🛡️ Plate Mail (+30), 👘 Mystic Robe (+15 PHYS / +30 MAG), 🥋 Brigandine (+30% both) | 🪽 Wind Boots (+10), 🥾 Iron Greaves (+15% HP, +12% both RES), 👢 War Boots (+10% both ATK) | ❤️ Giant Belt (+400), 🔥 War Charm (+15% both ATK), 🔰 Ward Charm (+36% both RES) | 400 |
+  | Floor 6 | Labyrinth | ⚔️ War Blade (+25), 🪓 Battle Axe (+26% PHYS ATK), 🪄 Mage Staff (+21% MAG ATK), 🎯 Hunting Spear (ignores 50% of PHYS and MAG RES) | 🛡️ Plate Mail (+30), 👘 Mystic Robe (+15 PHYS / +30 MAG), 🥋 Brigandine (+30% both) | 🪽 Wind Boots (+10), 🥾 Iron Greaves (+15% HP, +12% both RES), 👢 War Boots (+10% both ATK) | ❤️ Giant Belt (+400), 🔥 War Charm (+15% both ATK), 🔰 Ward Charm (+36% both RES) | 400 |
   | Floor 11 | Marsh | 🔱 Bronze Spear (+25, +4%) | 🥉 Bronze Cuirass (+30, +4%) | 🩴 Courier's Sandals (+11) | 🐍 Asclepian Amulet (+400, +4%) | 1,000 |
   | Floor 16 | Underworld | 🌙 Adamant Harpe (+25, +7%) | 🏛️ Hoplite Panoply (+30, +7%) | 🕊️ Winged Sandals (+12) | 🟠 Amber of the Heliades (+400, +7%) | 1,800 |
   | Floor 21 | Tartarus | ⚡ Cyclopean Blade (+25, +10%) | 💎 Adamant Mail (+30, +10%) | 🌬️ Sandals of Zephyrus (+13) | 🍯 Phial of Ambrosia (+400, +10%) | 3,000 |

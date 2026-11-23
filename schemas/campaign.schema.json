@@ -338,7 +338,11 @@
                       "magAtk",
                       "physRes",
                       "magRes",
-                      "spd"
+                      "spd",
+                      "physPen",
+                      "magPen",
+                      "physPierce",
+                      "magPierce"
                     ],
                     "description": "The stat the bonus raises."
                   },
