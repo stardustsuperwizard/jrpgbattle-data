@@ -73,14 +73,14 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 | 🌾 Demeter | War Blade | Mystic Robe | Wind Boots | War Charm | A healer who acts early and hits back: flat on her low attack |
 | 🌸 Persephone | Mage Staff | Mystic Robe | War Boots | War Charm | A magic striker: all-in on magic damage |
 
-**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 108 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.23.0 on jrpg-battle 0.55.0:
+**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 108 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.23.0 on jrpg-battle 0.55.1:
 
 | Slot | Best for |
 |---|---|
-| Weapon | War Blade: Hermes, Apollo, Aphrodite, Demeter, Hera, Athena, Hestia · Battle Axe: Nike, Dionysus, Ares, Hephaestus · Mage Staff: Zeus, Poseidon, Hades, Persephone · Hunting Spear: Artemis |
-| Armour | Plate Mail: Hermes, Artemis, Apollo, Aphrodite, Poseidon · Mystic Robe: Ares, Zeus, Demeter, Hades · Brigandine: Nike, Dionysus, Hera, Athena, Persephone, Hestia, Hephaestus |
-| Boots | Wind Boots: Hermes, Nike, Artemis, Aphrodite, Demeter, Hera, Poseidon, Hephaestus · Iron Greaves: Ares, Athena, Hades · War Boots: Dionysus, Apollo, Zeus, Persephone, Hestia |
-| Charm | Giant Belt: Hermes, Artemis, Ares, Aphrodite, Athena, Hades · War Charm: Nike, Dionysus, Apollo, Zeus, Demeter, Poseidon, Persephone · Ward Charm: Hera, Hestia, Hephaestus |
+| Weapon | War Blade: Hermes, Apollo, Aphrodite, Demeter, Athena, Hestia · Battle Axe: Nike, Dionysus, Ares, Hera, Hephaestus · Mage Staff: Zeus, Poseidon, Hades, Persephone · Hunting Spear: Artemis |
+| Armour | Plate Mail: Hermes, Nike, Artemis, Apollo, Aphrodite, Poseidon · Mystic Robe: Ares, Zeus, Demeter, Hades, Persephone · Brigandine: Dionysus, Hera, Athena, Hestia, Hephaestus |
+| Boots | Wind Boots: Hermes, Nike, Artemis, Aphrodite, Demeter, Hera, Poseidon, Hephaestus · Iron Greaves: Ares, Athena · War Boots: Dionysus, Apollo, Zeus, Hades, Persephone, Hestia |
+| Charm | Giant Belt: Hermes, Artemis, Aphrodite, Athena, Hades · War Charm: Nike, Dionysus, Apollo, Zeus, Demeter, Poseidon, Persephone, Hestia · Ward Charm: Ares, Hera, Hephaestus |
 
 **The sweep undervalues the Hunting Spear.** Its opponents wear nothing, so there is less resistance to cut through than in a real match, where they wear their loadouts. At 35% the spear was the best for no god; 50% passes. Measuring against opponents in their default loadouts needs jrpg-battle's sweep to offer it.
 
@@ -88,36 +88,38 @@ Within a slot, the options a god doesn't take are mostly within 2 to 10 points o
 
 Roster 0.21.0 moved the sweep where it moved the gods: Hermes's Shocks now read his lower MAG ATK, so the War Blade's flat MAG ATK edges ahead of the Battle Axe for him (82 to 80), and without her party heal Hera does best wearing resistance and speed, so her default trades the Iron Greaves and Giant Belt, now 5 and 6 points behind, for Wind Boots and the Ward Charm. Every other default is within 2 points of its slot's best.
 
-## Numbers (roster 0.23.0 on jrpg-battle 0.55.0, 300 seeded battles per line)
+## Numbers (roster 0.23.0 on jrpg-battle 0.55.1, 300 seeded battles per line)
 
-`npm run check` in this repository, against jrpg-battle 0.55.0; the core party wins PvE 75.3% and splits the PvP mirror 48.3% (the engine's own simulator, which uses the engine's monsters, has 80.6% and 48.5%). Each champion stands in for the core hero with the closest job (`data/checks.json`).
+`npm run check` in this repository, against jrpg-battle 0.55.1; the core party wins PvE 75.3% and splits the PvP mirror 53.3% (the engine's own simulator, which uses the engine's monsters, has 83.8% and 49.4%). Each champion stands in for the core hero with the closest job (`data/checks.json`).
 
 | Champion | In for | PvE win | vs core | PvP win vs core team |
 |---|---|---|---|---|
-| Hermes | Vex | 73.7% | −1.7 | 39.7% |
-| Nike | Vex | 91.0% | +15.7 | 28.0% |
-| Artemis | Vex | 77.3% | +2.0 | 16.3% |
-| Dionysus | Vex | 69.0% | −6.3 | 62.0% |
-| Apollo | Seren | 80.7% | +5.3 | 68.3% |
-| Ares | Aria | 77.3% | +2.0 | 22.0% |
-| Aphrodite | Seren | 48.3% | −27.0 | **91.0%** |
-| Zeus | Pyra | 75.7% | +0.3 | 63.3% |
-| Demeter | Seren | 95.7% | +20.3 | 44.3% |
-| Hera | Aria | 86.7% | +11.3 | 66.3% |
-| Athena | Aria | 80.3% | +5.0 | 54.3% |
-| Poseidon | Pyra | 86.7% | +11.3 | 72.0% |
-| Hades | Pyra | 89.0% | +13.7 | 20.0% |
-| Persephone | Pyra | 85.0% | +9.7 | 57.0% |
-| Hestia | Aria | 75.3% | +0.0 | 67.3% |
-| Hephaestus | Aria | 66.3% | −9.0 | 43.7% |
+| Hermes | Vex | 73.7% | −1.7 | 85.3% |
+| Nike | Vex | 91.0% | +15.7 | 39.0% |
+| Artemis | Vex | 77.3% | +2.0 | 36.0% |
+| Dionysus | Vex | 69.0% | −6.3 | 77.0% |
+| Apollo | Seren | 80.7% | +5.3 | 61.3% |
+| Ares | Aria | 77.3% | +2.0 | 50.7% |
+| Aphrodite | Seren | 48.3% | −27.0 | 49.0% |
+| Zeus | Pyra | 75.7% | +0.3 | 60.7% |
+| Demeter | Seren | 95.7% | +20.3 | 14.3% |
+| Hera | Aria | 86.7% | +11.3 | 87.3% |
+| Athena | Aria | 80.3% | +5.0 | 52.0% |
+| Poseidon | Pyra | 86.7% | +11.3 | 76.0% |
+| Hades | Pyra | 89.0% | +13.7 | 31.3% |
+| Persephone | Pyra | 85.0% | +9.7 | 84.0% |
+| Hestia | Aria | 75.3% | +0.0 | 80.7% |
+| Hephaestus | Aria | 66.3% | −9.0 | 47.0% |
 
-All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 85.3% and PvP 65.7% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 67.7% and 14.0%; Ares, Hades, Apollo, Zeus 52.3% and 59.0%; Hera, Persephone, Demeter, Nike 99.3% and 39.3%; Hestia, Dionysus, Demeter, Persephone 96.3% and 84.0%.
+All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 85.3% and PvP 64.7% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 67.7% and 14.0%; Ares, Hades, Apollo, Zeus 52.3% and 58.0%; Hera, Persephone, Demeter, Nike 99.3% and 44.0%; Hestia, Dionysus, Demeter, Persephone 96.3% and 81.7%.
 
 ### The roster 0.23.0 pass: monsters lean one way
 
 Until now the two damage types hardly mattered against monsters: the widest gap between a monster's PHYS and MAG RES was worth about 11% of damage, and none resisted magic more than physical. Roster 0.23.0 makes twelve monsters lean hard one way (see Monsters below), so hitting each with the right damage type does about 1.6 times the damage of the wrong one, a little less for the frailest. Each keeps its old average: against a party dealing half physical and half magic damage, it takes what it took before. Zeus's King of Olympus and Artemis's The Hunt pierce resistance (30% and 40%, jrpg-battle 0.55.0's penetration), and the PvP weapon pool gains the Hunting Spear.
 
-**What moved.** The practice waves now end on a golem that resists physical damage (173 / 33) after a shaman that resists magic (0 / 100). The golem fights alone, so there is no softer target to choose, and the core party deals more physical damage than magic: the core party's PvE win fell from 82.3% to 75.3%, and every champion's PvE number moved with it (Hephaestus −9.4, Ares −9.0, Athena −6.7, Apollo −5.6, and Nike +0.7, the only one up). The `vs core` column is against the new 75.3%. Against the mixed waves, the bot already sends each god at the monster its damage type suits. PvP moved only where the two ultimates pierce: Zeus 62.3% → 63.3%, Artemis 15.7% → 16.3%, and the Athena, Zeus, Apollo, Artemis team 57.7% → 65.7%.
+**What moved.** The practice waves now end on a golem that resists physical damage (173 / 33) after a shaman that resists magic (0 / 100). The golem fights alone, so there is no softer target to choose, and the core party deals more physical damage than magic: the core party's PvE win fell from 82.3% to 75.3%, and every champion's PvE number moved with it (Hephaestus −9.4, Ares −9.0, Athena −6.7, Apollo −5.6, and Nike +0.7, the only one up). The `vs core` column is against the new 75.3%. Against the mixed waves, the bot already sends each god at the monster its damage type suits. On jrpg-battle 0.55.0, PvP moved only where the two ultimates pierce (Zeus 62.3% → 63.3%, Artemis 15.7% → 16.3%).
+
+**The bot's aim (jrpg-battle 0.55.1, its decision 0096).** The hero bot now aims by how much of a hit gets through, counting RES Down and penetration, so a team follows its debuffer onto the weakened foe. PvE is unchanged to the decimal: the practice waves leave it no different choice. PvP moved a lot, every number in the table above being on 0.55.1: Hermes 39.7% → 85.3%, Hera 66.3% → 87.3%, Persephone 57.0% → 84.0%, Artemis 16.3% → 36.0%, Ares 22.0% → 50.7%, and down, Aphrodite 91.0% → 49.0%, Demeter 44.3% → 14.3%, Apollo 68.3% → 61.3%. The core party's mirror moved from 48.3% to 53.3%.
 
 Roster 0.22.0's numbers, on jrpg-battle 0.49.0 and 0.55.0 alike, were roster 0.21.0's below: core party PvE 82.3%.
 
@@ -149,16 +151,17 @@ The Hestia, Dionysus, Demeter and Persephone team still beats the core team 84.0
 
 ### How to read them
 
-- **The bot aims by resistance, roughly.** It sends each god's damage at the foe with the lowest raw resistance to the god's damage type. On jrpg-battle 0.55.0 it doesn't yet count RES Down, penetration or a skill's own damage type; jrpg-battle 0.55.1 (its decision 0096) does.
+- **The bot aims by resistance.** It sends each hit at the foe it hurts most, counting the foe's RES Down, its own penetration and the skill's damage type (jrpg-battle 0.55.1, its decision 0096), so a team focuses on whoever its debuffer weakened.
 - **PvE no longer turns on one element.** All the core party's losses come on wave 3, a single golem; with no weaknesses, a champion's PvE number follows how much damage and healing it brings, not which element it was given. The team without a real healer (Ares, Hades, Apollo, Zeus) still loses more than half its PvE battles.
 - **PvP still depends on turn order, but no longer on the bot's SP greed.** Heroes' resistances are close to each other, so a champion's damage type matters a little in PvP; turn order within a team matters more. Before jrpg-battle `v0.1.0`, Athena with Aria's exact stats won 53% at speed 98 but 11% at 100–101: acting just before Seren (99), the bot spent the team's last SP on Aegis and left Seren none for Mend. `v0.1.0`'s bot holds the last SP for a teammate's due heal (jrpg-battle#256), and the same sweep now runs 45% (94), 53% (97–98), 58–59% (100–101) and 69–70% (103–105). The remaining step sits at Pyra's speed (102): acting before her puts Aegis up ahead of the enemy's opening area attack. That's ordinary turn order, so a champion's PvP number still depends on where it lands among its teammates, and tuning one number against one team stays fragile.
 - **The bot plays the champion, and its rules shape the numbers.** It casts an ally skill only when someone is under 55% HP, a party-wide skill only when nobody is shielded, and a blast skill only with two or more enemies standing. A champion whose skill the bot rarely casts tests weak.
 
 ### Known issues to fix next
 
-- **Aphrodite** (91.0% PvP, 48.3% PvE): the strongest PvP champion against the core team, and the weakest in PvE. A party heal and ATK Up for everyone each turn, behind a taunting Aria who draws the core team's single-target hits, outlasts it.
-- **Artemis** (16.3% PvP), **Hades** (20.0%), **Ares** (22.0%) and **Nike** (28.0%) are the weakest in PvP against the core team. Artemis and Nike replace Vex, the fastest core hero, and lose his place at the top of the order.
-- **Hephaestus** wins 31% of the bot's matches on the gods alone (25% drafted), the lowest of the sixteen.
+- **Demeter** (14.3% PvP) is now the weakest in PvP against the core team, from 44.3%: once the bot focuses its damage, her spread healing (25% + 80 on one, 10% on the rest) no longer keeps up. **Hades** (31.3%) and **Artemis** (36.0%) follow.
+- **Hera** (87.3%), **Hermes** (85.3%) and **Persephone** (84.0%) are the strongest in PvP against the core team.
+- **Aphrodite** (48.3% PvE) is still the weakest in PvE; her PvP (49.0%, from 91.0%) is no longer an outlier.
+- **Hephaestus** wins 31% of the bot's matches on the gods alone (25% drafted), the lowest of the sixteen (measured on roster 0.21.0).
 - **A team without a real healer struggles in PvE** (Ares, Hades, Apollo, Zeus: 52.3%, since Apollo heals only one ally per skill).
 
 ## Monsters
