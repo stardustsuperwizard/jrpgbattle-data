@@ -6,12 +6,12 @@ Sixteen Greek gods built only from jrpg-battle's building blocks: damage, heal, 
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 🪽 Hermes | Support | Messenger: SP battery | Physical | Wind, Dark | 124 | 980 | 135 | 101 | 75 | 55 | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
 | 🏆 Nike | Striker | Winged Victory: fast breaker | Physical | Wind | 122 | 960 | 150 | 113 | 71 | 53 | Swift Victory: single, high Toughness damage, ATK Up self | Laurel of Victory: heavy blast, ATK Up all |
-| 🏹 Artemis | Striker | Huntress: single target | Physical | Metal | 116 | 1000 | 155 | 116 | 75 | 55 | Silver Arrow: heavy single + Bleed | The Hunt: massive single |
+| 🏹 Artemis | Striker | Huntress: single target | Physical | Metal | 116 | 1000 | 155 | 116 | 75 | 55 | Silver Arrow: heavy single + Bleed | The Hunt: massive single, ignores 40% PHYS RES |
 | 🍇 Dionysus | Striker | Reveller: bleed and madness | Physical | – | 112 | 1150 | 150 | 113 | 81 | 60 | Maenad Frenzy: single + Bleed, ATK Up self | Bacchic Revel: all + Bleed, 30% Confuse |
 | ☀️ Apollo | Support | Sun Healer | Magic | Fire | 110 | 1100 | 83 | 110 | 68 | 92 | Healing Light: heal one + cleanse | Chariot of the Sun: all + Burn, heal all, ATK Up all |
 | 🗡️ Ares | Striker | War God: bruiser | Physical | – | 108 | 1400 | 140 | 105 | 109 | 81 | Bloodlust: single + Taunt | Rout: heavy blast + Bleed |
 | 🌹 Aphrodite | Support | Enchantress: SP battery, party heal | Magic | Water | 106 | 1050 | 83 | 110 | 64 | 86 | Embrace: heal all 12% + ATK Up all | Born of the Foam: all, 40% Freeze, heal all |
-| ⚡ Zeus | Striker | Sky King: area damage | Magic | Lightning | 104 | 1000 | 120 | 160 | 55 | 75 | Thunderbolt: blast, 60% Shock | King of Olympus: heavy all + Shock |
+| ⚡ Zeus | Striker | Sky King: area damage | Magic | Lightning | 104 | 1000 | 120 | 160 | 55 | 75 | Thunderbolt: blast, 60% Shock | King of Olympus: heavy all + Shock, ignores 30% MAG RES |
 | 🌾 Demeter | Support | Harvest Mother: healer | Magic | Earth | 101 | 1150 | 79 | 105 | 68 | 92 | Bountiful Harvest: heal one 25% + 80, heal all 10% | Barren Earth: all + RES Down, heal all 22% |
 | 👑 Hera | Guardian | Queen of Heaven: tank who heals and raises | Physical | Metal | 100 | 1500 | 120 | 90 | 129 | 95 | Queen’s Ward: shield all, heal all 5%, Taunt | Peacock’s Gaze: all + RES Down, revive the fallen at 20% |
 | 🦉 Athena | Guardian | Strategist: tank | Physical | Metal | 98 | 1450 | 115 | 86 | 138 | 102 | Aegis: shield all + Taunt | Owl's Gambit: heavy single, ATK Up all |
@@ -41,7 +41,7 @@ Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for the
 
 ## PvP gear
 
-In PvP each god wears a **loadout**: one item in each slot, chosen from that slot's **pool** after the team pick, blind, with its own timer (jrpg-battle decisions 0058 and 0059; against the bot from jrpg-battle 0.23.0, online later). The pool is the Labyrinth's tier, three sidegrades a slot on one budget, which the campaign shop also sells from floor 6 (DUNGEON.md). The ladder above it (the Bronze Spear and up) is PvE-only, so the strongest campaign gear is never a free pick.
+In PvP each god wears a **loadout**: one item in each slot, chosen from that slot's **pool** after the team pick, blind, with its own timer (jrpg-battle decisions 0058 and 0059; against the bot from jrpg-battle 0.23.0, online later). The pool is the Labyrinth's tier, three sidegrades a slot on one budget (four for the weapon), which the campaign shop also sells from floor 6 (DUNGEON.md). The ladder above it (the Bronze Spear and up) is PvE-only, so the strongest campaign gear is never a free pick.
 
 | Slot | Flat, for low stats | Percentage, for high stats | The third way |
 |---|---|---|---|
@@ -49,6 +49,8 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 | Armour | 🛡️ Plate Mail: +30 PHYS, +15 MAG RES | 🥋 Brigandine: +30% both RES | 👘 Mystic Robe: +15 PHYS, +30 MAG RES |
 | Boots | 🪽 Wind Boots: +10 SPD | 🥾 Iron Greaves: +15% HP, +12% both RES | 👢 War Boots: +10% both ATK |
 | Charm | ❤️ Giant Belt: +400 HP | 🔰 Ward Charm: +36% both RES | 🔥 War Charm: +15% both ATK |
+
+**The weapon's fourth way: 🎯 Hunting Spear** (roster 0.23.0): its wearer's hits ignore 50% of the target's PHYS or MAG RES (`physPierce` and `magPierce` 50: penetration, jrpg-battle 0.55.0, its decision 0095). It is the counter-pick: against a Guardian in Brigandine it does about what the Battle Axe's +26% does, and against a lightly armoured team much less. It stacks with a skill's own penetration, so Artemis's The Hunt (40%) goes through 90% of a target's PHYS RES with it, which makes it her best weapon.
 
 **Each god's default loadout** leans into its kit, so a god is ready to play without anyone opening the loadout screen (`defaultLoadout`; the bot wears it too):
 
@@ -71,45 +73,55 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 | 🌾 Demeter | War Blade | Mystic Robe | Wind Boots | War Charm | A healer who acts early and hits back: flat on her low attack |
 | 🌸 Persephone | Mage Staff | Mystic Robe | War Boots | War Charm | A magic striker: all-in on magic damage |
 
-**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 81 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.21.0 on jrpg-battle 0.26.0:
+**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 108 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.23.0 on jrpg-battle 0.55.1:
 
 | Slot | Best for |
 |---|---|
-| Weapon | Battle Axe: Nike, Artemis, Dionysus, Ares, Athena, Hephaestus · Mage Staff: Zeus, Poseidon, Hades, Persephone · War Blade: Hermes, Apollo, Aphrodite, Demeter, Hera, Hestia |
-| Armour | Plate Mail: Hermes, Artemis, Aphrodite, Poseidon · Mystic Robe: Apollo, Ares, Zeus, Demeter, Hades · Brigandine: Nike, Dionysus, Hera, Athena, Persephone, Hestia, Hephaestus |
-| Boots | Wind Boots: Hermes, Nike, Aphrodite, Demeter, Hera, Poseidon, Hades, Hephaestus · War Boots: Artemis, Dionysus, Apollo, Zeus, Persephone, Hestia · Iron Greaves: Ares, Athena |
-| Charm | Giant Belt: Hermes, Artemis, Ares, Aphrodite, Athena, Hades · War Charm: Nike, Dionysus, Apollo, Zeus, Demeter, Poseidon, Persephone, Hestia · Ward Charm: Hera, Hephaestus |
+| Weapon | War Blade: Hermes, Apollo, Aphrodite, Demeter, Athena, Hestia · Battle Axe: Nike, Dionysus, Ares, Hera, Hephaestus · Mage Staff: Zeus, Poseidon, Hades, Persephone · Hunting Spear: Artemis |
+| Armour | Plate Mail: Hermes, Nike, Artemis, Apollo, Aphrodite, Poseidon · Mystic Robe: Ares, Zeus, Demeter, Hades, Persephone · Brigandine: Dionysus, Hera, Athena, Hestia, Hephaestus |
+| Boots | Wind Boots: Hermes, Nike, Artemis, Aphrodite, Demeter, Hera, Poseidon, Hephaestus · Iron Greaves: Ares, Athena · War Boots: Dionysus, Apollo, Zeus, Hades, Persephone, Hestia |
+| Charm | Giant Belt: Hermes, Artemis, Aphrodite, Athena, Hades · War Charm: Nike, Dionysus, Apollo, Zeus, Demeter, Poseidon, Persephone, Hestia · Ward Charm: Ares, Hera, Hephaestus |
+
+**The sweep undervalues the Hunting Spear.** Its opponents wear nothing, so there is less resistance to cut through than in a real match, where they wear their loadouts. At 35% the spear was the best for no god; 50% passes. Measuring against opponents in their default loadouts needs jrpg-battle's sweep to offer it.
 
 Within a slot, the options a god doesn't take are mostly within 2 to 10 points of the one it does. The outliers are speed: Wind Boots are 12 to 24 points behind the other boots on Ares and Athena, whose kits don't care when they move, and 5 to 19 points ahead on Hermes, Poseidon, Aphrodite and Demeter, whose do. A default may give up a few points to lean into a kit (Hephaestus's Iron Greaves are 6 behind his Wind Boots, Hermes's Battle Axe 2 behind the War Blade); that is a choice a player can change.
 
 Roster 0.21.0 moved the sweep where it moved the gods: Hermes's Shocks now read his lower MAG ATK, so the War Blade's flat MAG ATK edges ahead of the Battle Axe for him (82 to 80), and without her party heal Hera does best wearing resistance and speed, so her default trades the Iron Greaves and Giant Belt, now 5 and 6 points behind, for Wind Boots and the Ward Charm. Every other default is within 2 points of its slot's best.
 
-## Numbers (roster 0.21.0 on jrpg-battle 0.26.0, 300 seeded battles per line)
+## Numbers (roster 0.23.0 on jrpg-battle 0.55.1, 300 seeded battles per line)
 
-`npm run check` in this repository, against jrpg-battle 0.26.0; the core party wins PvE 82.3% and splits the PvP mirror 48.3% (the engine's own simulator, which uses the engine's monsters, has 80.6% and 48.5%). The champions' resistances replaced their DEF in this release, and every hit now drains toughness, so the bosses' toughness went up to keep chargers from being broken on every hit. Each champion stands in for the core hero with the closest job (`data/checks.json`).
+`npm run check` in this repository, against jrpg-battle 0.55.1; the core party wins PvE 75.3% and splits the PvP mirror 53.3% (the engine's own simulator, which uses the engine's monsters, has 83.8% and 49.4%). Each champion stands in for the core hero with the closest job (`data/checks.json`).
 
 | Champion | In for | PvE win | vs core | PvP win vs core team |
 |---|---|---|---|---|
-| Hermes | Vex | 77.0% | −5.3 | 39.7% |
-| Nike | Vex | 90.3% | +8.0 | 28.0% |
-| Artemis | Vex | 80.3% | −2.0 | 15.7% |
-| Dionysus | Vex | 74.3% | −8.0 | 62.0% |
-| Apollo | Seren | 86.3% | +4.0 | 68.3% |
-| Ares | Aria | 86.3% | +4.0 | 22.0% |
-| Aphrodite | Seren | 52.7% | −29.7 | **91.0%** |
-| Zeus | Pyra | 79.7% | −2.7 | 62.3% |
-| Demeter | Seren | 96.3% | +14.0 | 44.3% |
-| Hera | Aria | 88.7% | +6.3 | 66.3% |
-| Athena | Aria | 87.0% | +4.7 | 54.3% |
-| Poseidon | Pyra | 88.0% | +5.7 | 72.0% |
-| Hades | Pyra | 90.7% | +8.3 | 20.0% |
-| Persephone | Pyra | 90.3% | +8.0 | 57.0% |
-| Hestia | Aria | 78.7% | −3.7 | 67.3% |
-| Hephaestus | Aria | 75.7% | −6.7 | 43.7% |
+| Hermes | Vex | 73.7% | −1.7 | 85.3% |
+| Nike | Vex | 91.0% | +15.7 | 39.0% |
+| Artemis | Vex | 77.3% | +2.0 | 36.0% |
+| Dionysus | Vex | 69.0% | −6.3 | 77.0% |
+| Apollo | Seren | 80.7% | +5.3 | 61.3% |
+| Ares | Aria | 77.3% | +2.0 | 50.7% |
+| Aphrodite | Seren | 48.3% | −27.0 | 49.0% |
+| Zeus | Pyra | 75.7% | +0.3 | 60.7% |
+| Demeter | Seren | 95.7% | +20.3 | 14.3% |
+| Hera | Aria | 86.7% | +11.3 | 87.3% |
+| Athena | Aria | 80.3% | +5.0 | 52.0% |
+| Poseidon | Pyra | 86.7% | +11.3 | 76.0% |
+| Hades | Pyra | 89.0% | +13.7 | 31.3% |
+| Persephone | Pyra | 85.0% | +9.7 | 84.0% |
+| Hestia | Aria | 75.3% | +0.0 | 80.7% |
+| Hephaestus | Aria | 66.3% | −9.0 | 47.0% |
 
-All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 86.0% and PvP 57.7% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 70.0% and 14.0%; Ares, Hades, Apollo, Zeus 45.3% and 55.7%; Hera, Persephone, Demeter, Nike 99.3% and 39.3%; Hestia, Dionysus, Demeter, Persephone 96.3% and 84.0%.
+All-champion teams: Athena, Zeus, Apollo, Artemis win PvE 85.3% and PvP 64.7% against the core team; Hephaestus, Poseidon, Aphrodite, Hermes 67.7% and 14.0%; Ares, Hades, Apollo, Zeus 52.3% and 58.0%; Hera, Persephone, Demeter, Nike 99.3% and 44.0%; Hestia, Dionysus, Demeter, Persephone 96.3% and 81.7%.
 
-Roster 0.22.0 on jrpg-battle 0.49.0 (the world in its new shape, jrpg-battle decision 0086) gives every number above to the decimal. The six added in roster 0.19.0 have their numbers from roster 0.21.0 on jrpg-battle 0.26.0, after the balance pass below: the first ten's lines above are unchanged on it.
+### The roster 0.23.0 pass: monsters lean one way
+
+Until now the two damage types hardly mattered against monsters: the widest gap between a monster's PHYS and MAG RES was worth about 11% of damage, and none resisted magic more than physical. Roster 0.23.0 makes twelve monsters lean hard one way (see Monsters below), so hitting each with the right damage type does about 1.6 times the damage of the wrong one, a little less for the frailest. Each keeps its old average: against a party dealing half physical and half magic damage, it takes what it took before. Zeus's King of Olympus and Artemis's The Hunt pierce resistance (30% and 40%, jrpg-battle 0.55.0's penetration), and the PvP weapon pool gains the Hunting Spear.
+
+**What moved.** The practice waves now end on a golem that resists physical damage (173 / 33) after a shaman that resists magic (0 / 100). The golem fights alone, so there is no softer target to choose, and the core party deals more physical damage than magic: the core party's PvE win fell from 82.3% to 75.3%, and every champion's PvE number moved with it (Hephaestus −9.4, Ares −9.0, Athena −6.7, Apollo −5.6, and Nike +0.7, the only one up). The `vs core` column is against the new 75.3%. Against the mixed waves, the bot already sends each god at the monster its damage type suits. On jrpg-battle 0.55.0, PvP moved only where the two ultimates pierce (Zeus 62.3% → 63.3%, Artemis 15.7% → 16.3%).
+
+**The bot's aim (jrpg-battle 0.55.1, its decision 0096).** The hero bot now aims by how much of a hit gets through, counting RES Down and penetration, so a team follows its debuffer onto the weakened foe. PvE is unchanged to the decimal: the practice waves leave it no different choice. PvP moved a lot, every number in the table above being on 0.55.1: Hermes 39.7% → 85.3%, Hera 66.3% → 87.3%, Persephone 57.0% → 84.0%, Artemis 16.3% → 36.0%, Ares 22.0% → 50.7%, and down, Aphrodite 91.0% → 49.0%, Demeter 44.3% → 14.3%, Apollo 68.3% → 61.3%. The core party's mirror moved from 48.3% to 53.3%.
+
+Roster 0.22.0's numbers, on jrpg-battle 0.49.0 and 0.55.0 alike, were roster 0.21.0's below: core party PvE 82.3%.
 
 ### The roster 0.21.0 balance pass
 
@@ -139,41 +151,45 @@ The Hestia, Dionysus, Demeter and Persephone team still beats the core team 84.0
 
 ### How to read them
 
+- **The bot aims by resistance.** It sends each hit at the foe it hurts most, counting the foe's RES Down, its own penetration and the skill's damage type (jrpg-battle 0.55.1, its decision 0096), so a team focuses on whoever its debuffer weakened.
 - **PvE no longer turns on one element.** All the core party's losses come on wave 3, a single golem; with no weaknesses, a champion's PvE number follows how much damage and healing it brings, not which element it was given. The team without a real healer (Ares, Hades, Apollo, Zeus) still loses more than half its PvE battles.
 - **PvP still depends on turn order, but no longer on the bot's SP greed.** Heroes' resistances are close to each other, so a champion's damage type matters a little in PvP; turn order within a team matters more. Before jrpg-battle `v0.1.0`, Athena with Aria's exact stats won 53% at speed 98 but 11% at 100–101: acting just before Seren (99), the bot spent the team's last SP on Aegis and left Seren none for Mend. `v0.1.0`'s bot holds the last SP for a teammate's due heal (jrpg-battle#256), and the same sweep now runs 45% (94), 53% (97–98), 58–59% (100–101) and 69–70% (103–105). The remaining step sits at Pyra's speed (102): acting before her puts Aegis up ahead of the enemy's opening area attack. That's ordinary turn order, so a champion's PvP number still depends on where it lands among its teammates, and tuning one number against one team stays fragile.
 - **The bot plays the champion, and its rules shape the numbers.** It casts an ally skill only when someone is under 55% HP, a party-wide skill only when nobody is shielded, and a blast skill only with two or more enemies standing. A champion whose skill the bot rarely casts tests weak.
 
 ### Known issues to fix next
 
-- **Aphrodite** (91.0% PvP, 52.7% PvE): the strongest PvP champion against the core team, and the weakest in PvE. A party heal and ATK Up for everyone each turn, behind a taunting Aria who draws the core team's single-target hits, outlasts it.
-- **Artemis** (15.7% PvP), **Hades** (20.0%), **Ares** (22.0%) and **Nike** (28.0%) are the weakest in PvP against the core team. Artemis and Nike replace Vex, the fastest core hero, and lose his place at the top of the order.
-- **Hephaestus** wins 31% of the bot's matches on the gods alone (25% drafted), the lowest of the sixteen.
-- **A team without a real healer struggles in PvE** (Ares, Hades, Apollo, Zeus: 45.3%, since Apollo heals only one ally per skill).
+- **Demeter** (14.3% PvP) is now the weakest in PvP against the core team, from 44.3%: once the bot focuses its damage, her spread healing (25% + 80 on one, 10% on the rest) no longer keeps up. **Hades** (31.3%) and **Artemis** (36.0%) follow.
+- **Hera** (87.3%), **Hermes** (85.3%) and **Persephone** (84.0%) are the strongest in PvP against the core team.
+- **Aphrodite** (48.3% PvE) is still the weakest in PvE; her PvP (49.0%, from 91.0%) is no longer an outlier.
+- **Hephaestus** wins 31% of the bot's matches on the gods alone (25% drafted), the lowest of the sixteen (measured on roster 0.21.0).
+- **A team without a real healer struggles in PvE** (Ares, Hades, Apollo, Zeus: 52.3%, since Apollo heals only one ally per skill).
 
 ## Monsters
 
 The dungeon's monsters (`content/enemies/`), by the stretch of the Descent they first appear in; [DUNGEON.md](DUNGEON.md) has the whole map. The first five are jrpg-battle's own; roster 0.5.0 added ten from Greek myth, two of them stronger recolours of others (the Drakon of the Dracaena, the Myrmidon of the Hoplite), and the Minotaur; roster 0.6.0 adds a boss for each of the last three stretches.
+
+Roster 0.23.0 sorts them by what they resist. **Physical damage bounces off** the armoured and the bodiless: the Boar, Spartoi, Hoplite, Myrmidon, Shade, Golem and Minotaur. **Magic washes off** the Shaman, Phoenix, Drakon, Necromancer and Cerberus. The Slime, Goblin, Dire Wolf, Harpy, Dracaena, Hydra and Typhon resist both alike. Each stretch from the Labyrinth on mixes the two, so a party needs both damage types and does best aiming each god at the right monster.
 
 | Monster | From floor | Damage type | Elements | PHYS / MAG RES | Role |
 |---|---|---|---|---|---|
 | 🦠 Slime | 1 | Physical | – | 34 / 24 | Corrode: lowers a hero's PHYS and MAG RES |
 | 👺 Goblin | 1 | Physical | – | 40 / 40 | Hits hard, sometimes harder |
 | 🐺 Dire Wolf | 1 | Physical | – | 46 / 32 | Fast; Howl raises its ATK |
-| 🧌 Goblin Shaman | 3 | Magic | Lightning | 40 / 40 | Healer; shocks |
-| 🐗 Erymanthian Boar | 3 | Physical | – | 57 / 40 | Stampede: a heavy gore that may bleed |
+| 🧌 Goblin Shaman | 3 | Magic | Lightning | 0 / 100 | Healer; shocks |
+| 🐗 Erymanthian Boar | 3 | Physical | – | 123 / 2 | Stampede: a heavy gore that may bleed |
 | 🦅 Harpy | 6 | Magic | Wind | 28 / 28 | Fastest monster; Storm Shriek hits the whole party, may shock |
-| 💀 Spartoi | 6 | Physical | – | 72 / 72 | The sown men: Phalanx shields itself and taunts |
+| 💀 Spartoi | 6 | Physical | – | 154 / 21 | The sown men: Phalanx shields itself and taunts |
 | 🐍 Dracaena | 6 | Physical | – | 57 / 40 | Venom Fang may cause bleeding; Constrict lowers PHYS and MAG RES |
-| 🔥 Phoenix | 11 | Magic | Fire | 36 / 36 | Healer; burns |
-| 🦎 Drakon | 11 | Magic | Fire | 48 / 48 | The Dracaena's fire kin: burning fangs, Fire Breath on three heroes |
-| 🛡️ Hoplite | 11 | Physical | – | 109 / 76 | Shield Wall shields every monster on its side |
-| 👻 Shade | 16 | Magic | Dark | 34 / 24 | Grave Chill may freeze; its Lament lowers the party's PHYS and MAG RES |
-| 🧙 Necromancer | 16 | Magic | Dark | 36 / 36 | Grave Bolt may freeze; Withering Curse hits the party and lowers PHYS and MAG RES |
-| ⚔️ Myrmidon | 16 | Physical | – | 80 / 56 | The Hoplite's red-armoured elite: Battle Cry raises every monster's ATK for a turn |
-| 🗿 Ancient Golem | boss, 1–5 | Physical | Earth | 103 / 72 | Charger, every 3rd action: Cataclysm on the party |
-| 🐂 Minotaur | boss, 6–10 | Physical | – | 92 / 64 | Charger, every 4th action: Labyrinth Rampage on the party; Horn Gore bleeds |
+| 🔥 Phoenix | 11 | Magic | Fire | 0 / 88 | Healer; burns |
+| 🦎 Drakon | 11 | Magic | Fire | 2 / 122 | The Dracaena's fire kin: burning fangs, Fire Breath on three heroes |
+| 🛡️ Hoplite | 11 | Physical | – | 179 / 37 | Shield Wall shields every monster on its side |
+| 👻 Shade | 16 | Magic | Dark | 68 / 0 | Grave Chill may freeze; its Lament lowers the party's PHYS and MAG RES |
+| 🧙 Necromancer | 16 | Magic | Dark | 0 / 88 | Grave Bolt may freeze; Withering Curse hits the party and lowers PHYS and MAG RES |
+| ⚔️ Myrmidon | 16 | Physical | – | 148 / 17 | The Hoplite's red-armoured elite: Battle Cry raises every monster's ATK for a turn |
+| 🗿 Ancient Golem | boss, 1–5 | Physical | Earth | 173 / 33 | Charger, every 3rd action: Cataclysm on the party |
+| 🐂 Minotaur | boss, 6–10 | Physical | – | 160 / 25 | Charger, every 4th action: Labyrinth Rampage on the party; Horn Gore bleeds |
 | 🐉 Lernaean Hydra | boss, 11–15 | Physical | Water | 98 / 68 | Charger, every 4th action: Venom Torrent on the party, may bleed; Venom Bite bleeds |
-| 🐕 Cerberus | boss, 16–20 | Magic | Fire | 103 / 72 | Charger, every 4th action: Triple Inferno on the party, may burn; Hellfire Bite burns |
+| 🐕 Cerberus | boss, 16–20 | Magic | Fire | 33 / 173 | Charger, every 4th action: Triple Inferno on the party, may burn; Hellfire Bite burns |
 | 🌪️ Typhon | boss, 21–25 (the final boss) | Magic | Lightning, Wind | 80 / 80 | Charger, every 3rd action: Wrath of the Titans on the party, may shock; Storm Fist shocks |
 
 Every monster here has art on the site. A monster added later shows the site's default unit, chosen by its `reach`, until jrpgbattle-client-premium has its recipe.

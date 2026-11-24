@@ -65,6 +65,22 @@
             "spd": {
               "type": "number",
               "exclusiveMinimum": -1
+            },
+            "physPen": {
+              "type": "number",
+              "exclusiveMinimum": -1
+            },
+            "magPen": {
+              "type": "number",
+              "exclusiveMinimum": -1
+            },
+            "physPierce": {
+              "type": "number",
+              "exclusiveMinimum": -1
+            },
+            "magPierce": {
+              "type": "number",
+              "exclusiveMinimum": -1
             }
           },
           "description": "Percentage bonuses as shares (0.1 is +10%), applied after the flat ones (decision 0045)."
