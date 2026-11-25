@@ -298,6 +298,43 @@
             }
           },
           "description": "Changes the user's form (decision 0061): its abilities become the form's, or its own again. Only a hero has forms."
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "unit",
+            "count",
+            "max",
+            "statsShare"
+          ],
+          "properties": {
+            "type": {
+              "const": "summon"
+            },
+            "unit": {
+              "$ref": "#/$defs/id",
+              "description": "The enemy it calls, by id (enemies.json)."
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "How many one use calls, at most; no more than `max`."
+            },
+            "max": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "How many of this summoner's may stand at once. A summon at the cap brings those standing back to full HP instead."
+            },
+            "statsShare": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1,
+              "description": "Of the summoner's max HP, attacks and resistances, each summon's own. Its speed and everything else are its template's."
+            }
+          },
+          "description": "Calls units of one of the world's enemies to the user's side (decision 0101), at the back of its line and of the turn order, played by their own AI. Always the user's, once a use, so it takes no `on`. A summon falls with its summoner, never keeps its side in the fight, gives no XP or gold, and leaves at the next wave."
         }
       ]
     },

@@ -22,7 +22,7 @@ Every champion has its own speed, different from each other and from the core he
 | 👑 Hera | Guardian | Queen of Heaven | Physical | 100 | 1500 | 120 | 90 | 129 | 95 |
 | 🦉 Athena | Guardian | Strategist | Physical | 98 | 1450 | 115 | 86 | 138 | 102 |
 | 🔱 Poseidon | Controller | Sea King | Magic | 97 | 1150 | 109 | 145 | 68 | 92 |
-| 💀 Hades | Striker | Underworld King | Magic | 94 | 1150 | 109 | 145 | 64 | 86 |
+| 💀 Hades | Controller | Underworld King | Magic | 94 | 1150 | 109 | 145 | 64 | 86 |
 | 🌸 Persephone | Controller | Queen of Two Realms | Magic | 92 | 1100 | 113 | 150 | 61 | 83 |
 | 🔥 Hestia | Guardian | Hearth Keeper | Magic | 90 | 1500 | 90 | 120 | 98 | 132 |
 | 🔨 Hephaestus | Guardian | Smith | Physical | 88 | 1550 | 130 | 98 | 126 | 94 |
@@ -36,9 +36,9 @@ Roster 0.24.0 settles the roles on four classes, after the four roles of 4th-edi
 | Class | D&D's role | Its job | Gods |
 |---|---|---|---|
 | Guardian | Defender | Takes the hits: Taunt, shields, Guard | Hera, Athena (bruiser), Hestia, Hephaestus |
-| Striker | Striker | Damage, most of it on one target | Nike, Artemis, Ares (bruiser), Zeus, Hades |
+| Striker | Striker | Damage, most of it on one target | Nike, Artemis, Ares (bruiser), Zeus |
 | Support | Leader | Heals, buffs and SP | Hermes, Apollo, Aphrodite, Demeter |
-| Controller | Controller | Shapes the fight: Freeze, Slow, Confuse, Sunder | Dionysus, Poseidon, Persephone, and Hades with his summons |
+| Controller | Controller | Shapes the fight: Freeze, Slow, Confuse, Sunder, summons | Dionysus, Poseidon, Persephone, Hades |
 
 **Picks:** the bot's pick takes one god of each class before a second of any (jrpg-battle's `botPick`). With four classes and teams of four, every bot team is one god from each.
 
@@ -46,7 +46,7 @@ Roster 0.24.0 settles the roles on four classes, after the four roles of 4th-edi
 
 ## The kits (roster 0.24.0)
 
-Roster 0.24.0 reworks 15 gods' three abilities so that each does a job of its own, with the new statuses and penetration, instead of the same few statuses at bigger sizes. Hades keeps his old kit until the engine can summon. Hermes stays a Support, with a support kit of his own: tempo for his team. Hades then gains a summon of minions and moves from Striker to Controller: his minions shape the fight rather than deal its damage. With him, the sixteen divide four to a class.
+Roster 0.24.0 reworks 15 gods' three abilities so that each does a job of its own, with the new statuses and penetration, instead of the same few statuses at bigger sizes. Hermes stays a Support, with a support kit of his own: tempo for his team. Roster 0.26.0 reworks the sixteenth, Hades: he summons Shades (jrpg-battle 0.60.0, its decision 0101) and moves from Striker to Controller, since his minions shape the fight rather than deal its damage. The sixteen divide four to a class.
 
 | God | Its job | Basic | Skill | Ultimate |
 |---|---|---|---|---|
@@ -61,11 +61,11 @@ Roster 0.24.0 reworks 15 gods' three abilities so that each does a job of its ow
 | 🌾 Demeter | Sustain | Golden Sickle: single, heal all 3% | Bountiful Harvest: heal one 30% + 100, Guard it 2 turns | Barren Earth: all, Weaken 2 turns, heal all 20% |
 | 👑 Hera | Raise and ward | Royal Sceptre: single, Taunt 1 turn | Queen’s Ward: shield all, heal all 5% | Peacock’s Gaze: all + RES Down, revive the fallen at 20% |
 | 🦉 Athena | Damage reduction, and a strategist's strike | Spear of Wisdom: single, ignores 30% PHYS RES | Aegis: Guard all 2 turns, a light shield, Taunt | Owl’s Gambit: heavy single, high Toughness damage, RES Down 2 turns |
+| 💀 Hades | The dead at his call | Soul Lash: single, 30% Curse 2 turns | Grasp of the Dead: single + Burn, call a Shade (up to 2) | Realm of the Dead: all + 3-turn Burn, call Shades up to 2 and heal those standing |
 | 🔱 Poseidon | The tides | Trident Jab: single, ignores 15% MAG RES | Tidal Wave: all, 40% Slow 2 turns | Earthshaker: heavy all, 50% Sunder 2 turns |
 | 🌸 Persephone | The seasons | Frost Bloom: single · in spring, Blossom | Winter’s Descent: blast, 35% Freeze · in spring, First Flowers: heal one 20% + 60, all 8% | Spring’s Return: all, 30% Freeze, heal all 15%, to spring · in spring, Pomegranate Seed: all + RES Down, back below |
 | 🔥 Hestia | The hearth | Hearth Ember: single, heal self 3% | Sacred Flame: shield all, cleanse all, Taunt 1 turn, Retaliate 1 turn | Eternal Flame: all + Burn, heal all 10% |
 | 🔨 Hephaestus | The armour breaker | Hammer Blow: single, 30% Sunder | Forge Armor: heavy shield all | Molten Hammer: massive single, ignores 40 PHYS RES, Sunder, Burn |
-| 💀 Hades | *Old kit, until summoning; then a Controller* | Soul Lash: single | Grasp of the Dead: single + Burn + RES Down | Realm of the Dead: all + 3-turn Burn |
 
 **Owners:** each status has one or two, so it says whose kit it is.
 - ATK Up: Nike's team and Aphrodite's.
@@ -76,6 +76,11 @@ Roster 0.24.0 reworks 15 gods' three abilities so that each does a job of its ow
 - Slow: Poseidon's tide.
 - Sunder: Poseidon's earthquake and Hephaestus's hammer.
 - Confuse: Dionysus and Aphrodite.
+- Curse: Hades's lash.
+- Summons: Hades's Shades, the hooded ghosts of the dungeon.
+  - **Stats:** 35% of his max HP, attacks and resistances, with the Shade's own speed and skills: Grave Chill may Freeze, and its Lament lowers the foes' RES.
+  - **The cap:** at most two stand; a summon at two heals them instead.
+  - **Limits:** they fall with him, never keep his side in the fight, and leave when a wave starts.
 - Taunt: the Guardians, and Ares; Hermes's Psychopomp strips it, and every Shield.
 
 Persephone's kit is unchanged: her forms already give her a job of her own.
@@ -105,7 +110,7 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 |---|---|---|---|---|---|
 | ⚡ Zeus | Mage Staff | Mystic Robe | War Boots | War Charm | A magic striker: all-in on magic damage |
 | 🔱 Poseidon | Mage Staff | Mystic Robe | War Boots | War Charm | A controller: magic, and attack for the tide (Wind Boots put him at a worse place in the turn order) |
-| 💀 Hades | Mage Staff | Mystic Robe | Wind Boots | Giant Belt | A magic striker who lasts: his burns need him standing |
+| 💀 Hades | Mage Staff | Mystic Robe | Wind Boots | Giant Belt | A controller who lasts: his burns and his Shades need him standing, and his Shades take a share of his HP |
 | 🏹 Artemis | Hunting Spear | Plate Mail | Wind Boots | Giant Belt | A hunter: the spear's pierce stacks with her own, and speed to strike first |
 | 🗡️ Ares | Battle Axe | Brigandine | Iron Greaves | Giant Belt | A bruiser: damage on a body that takes the taunt |
 | 🦉 Athena | Battle Axe | Brigandine | Iron Greaves | Giant Belt | A tank: her high resistances scale with percentages |
@@ -120,22 +125,22 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 | 🌾 Demeter | War Blade | Mystic Robe | Wind Boots | War Charm | A healer who acts early and hits back: flat on her low attack |
 | 🌸 Persephone | Mage Staff | Mystic Robe | War Boots | War Charm | A controller: all-in on magic damage |
 
-**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 108 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.24.0 on jrpg-battle 0.58.0:
+**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 108 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.26.0 on jrpg-battle 0.60.1:
 
 | Slot | Best for |
 |---|---|
 | Weapon | War Blade: Apollo, Aphrodite, Demeter, Persephone, Hestia · Battle Axe: Hermes, Nike, Dionysus, Ares, Hera, Athena · Mage Staff: Zeus, Poseidon, Hades · Hunting Spear: Artemis, Hephaestus |
-| Armour | Plate Mail: Hermes, Artemis, Dionysus, Aphrodite · Mystic Robe: Apollo, Ares, Zeus, Demeter, Hera, Hades, Persephone · Brigandine: Nike, Athena, Poseidon, Hestia, Hephaestus |
-| Boots | Wind Boots: Nike, Artemis, Apollo, Aphrodite, Demeter, Hera, Hades, Hestia · Iron Greaves: Hermes, Ares, Athena, Poseidon, Hephaestus · War Boots: Dionysus, Zeus, Persephone |
+| Armour | Plate Mail: Hermes, Artemis, Dionysus, Aphrodite · Mystic Robe: Apollo, Zeus, Demeter, Hera, Hades, Persephone · Brigandine: Nike, Ares, Athena, Poseidon, Hestia, Hephaestus |
+| Boots | Wind Boots: Nike, Artemis, Apollo, Aphrodite, Demeter, Hera, Hestia · Iron Greaves: Hermes, Ares, Athena, Poseidon, Hades, Hephaestus · War Boots: Dionysus, Zeus, Persephone |
 | Charm | Giant Belt: Hermes, Artemis, Ares, Aphrodite, Poseidon, Hades · War Charm: Nike, Dionysus, Apollo, Zeus, Demeter, Persephone, Hestia · Ward Charm: Hera, Athena, Hephaestus |
 
 **The sweep and the defaults disagree on boots.** The sweep's opponents wear nothing, so there is less resistance to cut through and nothing to race on speed. It rated Wind Boots best for Hera and Poseidon before Hermes's change, and still does for Hera, but against a team in its loadouts (`npm run check`'s last column) Hera wins 93% in them and 57% in Iron Greaves, and Poseidon 23% in them and 72% in War Boots. The defaults follow the check, where the other team wears gear.
 
 **Speed is the biggest lever in a loadout.** In the loadout column a god's boots move it far more than any number in its kit, by where the extra speed puts it among its teammates' turns: Demeter in Wind Boots acts before Pyra (102) instead of just after her, which takes her from 22% to 51% on boots alone (below).
 
-## Numbers (roster 0.24.0 on jrpg-battle 0.58.0, 1,000 seeded battles per line)
+## Numbers (roster 0.26.0 on jrpg-battle 0.60.1, 1,000 seeded battles per line)
 
-`npm run check -- 1000` in this repository, against jrpg-battle 0.58.0: the core party wins PvE 75.5% and splits the PvP mirror 49.4%, and 50.0% in loadouts. Each champion stands in for the core hero with the closest job (`data/checks.json`). Roster 0.25.0 on jrpg-battle 0.59.1 gives the same numbers: its tags are labels, which no battle reads.
+`npm run check -- 1000` in this repository, against jrpg-battle 0.60.1: the core party wins PvE 75.5% and splits the PvP mirror 49.4%, and 50.0% in loadouts. Each champion stands in for the core hero with the closest job (`data/checks.json`). Roster 0.25.0 on jrpg-battle 0.59.1 gives the same numbers: its tags are labels, which no battle reads. Roster 0.26.0 on jrpg-battle 0.60.1 changes only Hades's lines and his team's.
 
 | Champion | Class | In for | PvE win | vs core | PvP bare | PvP in loadouts |
 |---|---|---|---|---|---|---|
@@ -151,7 +156,7 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 | Hera | Guardian | Aria | 85.3% | +9.8 | 61.3% | 57.1% |
 | Athena | Guardian | Aria | 85.5% | +10.0 | 49.0% | 47.3% |
 | Poseidon | Controller | Pyra | 90.9% | +15.4 | 58.9% | 71.7% |
-| Hades | Striker | Pyra | 86.8% | +11.3 | 31.2% | 35.6% |
+| Hades | Controller | Pyra | 97.9% | +22.4 | 33.7% | 60.6% |
 | Persephone | Controller | Pyra | 86.0% | +10.5 | 83.5% | 56.0% |
 | Hestia | Guardian | Aria | 68.5% | −7.0 | 73.2% | 73.3% |
 | Hephaestus | Guardian | Aria | 71.5% | −4.0 | 48.9% | 47.5% |
@@ -162,7 +167,7 @@ All-champion teams, PvE, then PvP against the core team bare and in loadouts:
 |---|---|---|---|
 | Athena, Zeus, Apollo, Artemis | 94.6% | 75.3% | 71.0% |
 | Hephaestus, Poseidon, Aphrodite, Hermes | 98.6% | 51.0% | 45.4% |
-| Ares, Hades, Apollo, Zeus | 48.7% | 29.9% | 37.9% |
+| Ares, Hades, Apollo, Zeus | 94.1% | 42.7% | 45.4% |
 | Hera, Persephone, Demeter, Nike | 100.0% | 73.2% | 61.6% |
 | Hestia, Dionysus, Demeter, Persephone | 98.8% | 59.6% | 73.6% |
 
@@ -184,7 +189,7 @@ All-champion teams, PvE, then PvP against the core team bare and in loadouts:
 - **Demeter's weakness was her place in the turn order,** not her kit. At speed 101 she acts just after Pyra (102); in her own Wind Boots she acts well before. Every heal cut from her kit took her PvP down about as much as her PvE.
 - **Persephone keeps her own numbers.** Against the bare column she seemed too strong (84%); in loadouts she is 56%.
 
-All-champion teams with Hades in them are still weak; he is balanced with his new kit. Hermes's support kit took the team he plays in from 15.5% to 45.4% in loadouts.
+Hermes's support kit took the team he plays in from 15.5% to 45.4% in loadouts, and Hades's summons (roster 0.26.0) took his from 37.9% to 45.4%.
 
 **Before roster 0.24.0:** roster 0.23.0 gives exactly the same numbers on jrpg-battle 0.58.0 as on 0.55.1. Those were 300 battles a line, the bare column only, with core PvE at 75.3%. PvP against the core team was:
 - Hermes 85.3%
@@ -193,7 +198,7 @@ All-champion teams with Hades in them are still weak; he is balanced with his ne
 - Apollo 61.3%, Aphrodite 49.0%, Demeter 14.3%
 - Hera 87.3%, Athena 52.0%, Hestia 80.7%, Hephaestus 47.0%
 
-Six were outside 45–75% then; none of the 15 is now, in loadouts.
+Six were outside 45–75% then; none of the sixteen is now, in loadouts. Hades, the last to be reworked, went from 35.6% to 60.6% (roster 0.26.0).
 
 ### How to read them
 
@@ -205,7 +210,6 @@ Six were outside 45–75% then; none of the 15 is now, in loadouts.
 
 ### Known issues to fix next
 
-- **Hades** keeps his old kit, and his numbers are its (35.6% in loadouts). His rework needs summoning from the engine.
 - **The sweep and the check disagree on speed boots** (above): the sweep's opponents wear nothing. A sweep against opponents in their loadouts needs jrpg-battle's sweep to offer it.
 - **The practice waves reward Sunder and magic damage,** through their one golem. Nike, Artemis, Poseidon and Demeter are over 90% PvE. That is for the monsters' pass, after the roster.
 - **Turn order and speed** deserve a pass of their own: a god's boots can move it by 35 points.
@@ -300,7 +304,6 @@ Gods whose myth wants something the engine can't do yet. Each is a small jrpg-ba
 
 | Champion idea | Mechanic | Why |
 |---|---|---|
-| Hades (his rework) | Summon minions: a `summon` effect that adds AI-controlled units to his side, their stats a share of his, falling with him | The lord of the dead's shades; designed with the owner, next after the tags |
 | Hermes or Nike | Turn advance: an ally acts sooner now | The messenger hurries an ally. Haste speeds the turns after; pushing a turn forward is not yet possible |
 | Kronos | Delay an enemy's turn | Lord of time. Slow lengthens the turns after; pushing a turn back is not yet possible |
 | Medusa | Stone (a long freeze that ends on a hit) | Petrifying gaze |

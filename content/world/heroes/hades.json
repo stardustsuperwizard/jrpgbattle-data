@@ -2,7 +2,7 @@
   "id": "hades",
   "name": "Hades",
   "role": "Underworld King",
-  "class": "Striker",
+  "class": "Controller",
   "characterGroup": "Gods of Olympus",
   "sprite": "💀",
   "reach": "melee",

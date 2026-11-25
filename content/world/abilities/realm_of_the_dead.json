@@ -4,17 +4,24 @@
   "type": "ultimate",
   "target": "all_enemies",
   "element": "dark",
-  "description": "Magic DMG to all enemies and Burn them for 3 turns.",
+  "description": "Magic DMG to all enemies and Burn them for 3 turns; call Shades to his side up to 2, and bring those standing back to full HP.",
   "effects": [
     {
       "type": "damage",
-      "mult": 2,
+      "mult": 1.6,
       "toughness": 20
     },
     {
       "type": "status",
       "status": "burn",
       "duration": 3
+    },
+    {
+      "type": "summon",
+      "unit": "shade",
+      "count": 2,
+      "max": 2,
+      "statsShare": 0.35
     }
   ]
 }
