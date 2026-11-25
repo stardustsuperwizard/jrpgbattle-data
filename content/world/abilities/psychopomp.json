@@ -4,19 +4,20 @@
   "type": "ultimate",
   "target": "all_enemies",
   "element": "dark",
-  "description": "Physical DMG to all enemies with a 60% chance to Shock.",
+  "description": "Physical DMG to all enemies, and strip their Shield and Taunt.",
   "effects": [
     {
       "type": "damage",
-      "mult": 2,
+      "mult": 2.4,
       "toughness": 20
     },
     {
-      "type": "status",
-      "status": "shock",
-      "duration": 2,
-      "dotRatio": 0.8,
-      "chance": 0.6
+      "type": "remove_status",
+      "status": "shield"
+    },
+    {
+      "type": "remove_status",
+      "status": "taunt"
     }
   ]
 }

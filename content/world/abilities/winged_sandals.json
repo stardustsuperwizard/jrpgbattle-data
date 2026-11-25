@@ -4,7 +4,7 @@
   "type": "skill",
   "target": "enemy",
   "element": "wind",
-  "description": "Physical DMG to one enemy and Shock it for 2 turns.",
+  "description": "Physical DMG to one enemy; grant all allies Haste for 2 turns.",
   "effects": [
     {
       "type": "damage",
@@ -13,9 +13,9 @@
     },
     {
       "type": "status",
-      "status": "shock",
+      "status": "haste",
       "duration": 2,
-      "dotRatio": 0.8
+      "on": "all_allies"
     }
   ]
 }

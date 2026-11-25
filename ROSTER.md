@@ -48,10 +48,11 @@ The tags arrive with the engine release that carries them.
 
 ## The kits (roster 0.24.0)
 
-Roster 0.24.0 reworks 14 gods' three abilities so that each does a job of its own, with the new statuses and penetration, instead of the same few statuses at bigger sizes. Hermes and Hades keep their old kits for now: Hades until the engine can summon, Hermes until his support kit is tuned. Hermes stays a Support, with a support kit of his own: tempo for his team. Hades gains a summon of minions and moves from Striker to Controller: his minions shape the fight rather than deal its damage. With him, the sixteen divide four to a class.
+Roster 0.24.0 reworks 15 gods' three abilities so that each does a job of its own, with the new statuses and penetration, instead of the same few statuses at bigger sizes. Hades keeps his old kit until the engine can summon. Hermes stays a Support, with a support kit of his own: tempo for his team. Hades then gains a summon of minions and moves from Striker to Controller: his minions shape the fight rather than deal its damage. With him, the sixteen divide four to a class.
 
 | God | Its job | Basic | Skill | Ultimate |
 |---|---|---|---|---|
+| 🪽 Hermes | Tempo: SP, speed, and a way past the Guardians | Caduceus Tap: single, 2 SP | Winged Sandals: heavy single, Haste all 2 turns | Psychopomp: all, strip Shield and Taunt |
 | 🏆 Nike | Tempo and the team's attack | Winged Javelin: single | Swift Victory: heavy single, high Toughness damage, Haste self 2 turns | Laurel of Victory: heavy blast, ATK Up all |
 | 🏹 Artemis | The hunter | Moonlit Shot: single, ignores 30% PHYS RES | Silver Arrow: heavy single, Exposed 2 turns | The Hunt: massive single, ignores 50% PHYS RES |
 | 🍇 Dionysus | Madness | Thyrsus Strike: single, 35% Bleed | Maenad Frenzy: single, 60% Confuse 2 turns | Bacchic Revel: all + Bleed, Weaken 2 turns |
@@ -66,25 +67,24 @@ Roster 0.24.0 reworks 14 gods' three abilities so that each does a job of its ow
 | 🌸 Persephone | The seasons | Frost Bloom: single · in spring, Blossom | Winter’s Descent: blast, 35% Freeze · in spring, First Flowers: heal one 20% + 60, all 8% | Spring’s Return: all, 30% Freeze, heal all 15%, to spring · in spring, Pomegranate Seed: all + RES Down, back below |
 | 🔥 Hestia | The hearth | Hearth Ember: single, heal self 3% | Sacred Flame: shield all, cleanse all, Taunt 1 turn, Retaliate 1 turn | Eternal Flame: all + Burn, heal all 10% |
 | 🔨 Hephaestus | The armour breaker | Hammer Blow: single, 30% Sunder | Forge Armor: heavy shield all | Molten Hammer: massive single, ignores 40 PHYS RES, Sunder, Burn |
-| 🪽 Hermes | *Old kit, until his support kit* | Caduceus Tap: single, 2 SP | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
 | 💀 Hades | *Old kit, until summoning; then a Controller* | Soul Lash: single | Grasp of the Dead: single + Burn + RES Down | Realm of the Dead: all + 3-turn Burn |
 
 **Owners:** each status has one or two, so it says whose kit it is.
 - ATK Up: Nike's team and Aphrodite's.
-- Haste: Nike's.
+- Haste: Hermes's team and Nike herself.
 - Exposed: Artemis's prey and Ares's rout.
 - Weaken: Dionysus's revel and Demeter's famine.
 - Guard: Athena's whole team and Demeter's one ally.
 - Slow: Poseidon's tide.
 - Sunder: Poseidon's earthquake and Hephaestus's hammer.
 - Confuse: Dionysus and Aphrodite.
-- Taunt: the Guardians, and Ares.
+- Taunt: the Guardians, and Ares; Hermes's Psychopomp strips it, and every Shield.
 
 Persephone's kit is unchanged: her forms already give her a job of her own.
 
 **SP batteries:** Hermes and Aphrodite's basic attacks gain 2 SP instead of 1, so they pay for their teammates' skills.
 
-**Two layers on an attack** (jrpg-battle decisions 0055 to 0057). The **damage type**, physical or magic, is what an attack is: each type has its own attack stat and resistance (below). The **element**, set on a skill, is the kind of force it is: fire, water, earth, wind, lightning, ice, dark or metal. An element only chooses a client's animation and sound for now, so a skill with none plays its damage type's default; Zeus's lightning is a magic hit of lightning, Hephaestus's Molten Hammer a physical hit of fire. Later an element can become its own lever for builds. What follows is the damage types. Every god and monster has a PHYS ATK and a MAG ATK instead of ATK, and a PHYS RES and a MAG RES instead of DEF. A hit is driven by the attack of its element and lowered by the resistance of the same: `physical` is PHYS ATK against PHYS RES, `magic` is MAG ATK against MAG RES. Each god has a **main attack**, of its own damage type, and an **off attack**, of the other (roster 0.21.0): the main attack is its old ATK, and the off attack three quarters of it, rounded, in its base stats and its growth alike, so Zeus has 160 MAG ATK and 120 PHYS ATK. No god has a skill of the other damage type, so the off attack drives only what reads it: a damage-over-time status of the other type (Burn and Shock are magic, Bleed physical), and later a hybrid skill or one that scales from both attacks (jrpg-battle#365). Two gods apply one: Hermes's Shocks and Hephaestus's Burn. Their skills carry their own `dotRatio` (0.8 for Hermes's Shocks over the core's 0.6, 0.66 for Molten Hammer's Burn over 0.5), which keeps their ticks where they were at the lower attack, so the split moves no battle. A monster's two attacks still equal its old ATK. There are no weaknesses. A god fights with body and weapon (Physical: Hermes, Nike, Artemis, Dionysus, Ares, Hera, Athena, Hephaestus) or with divine power (Magic: Apollo, Aphrodite, Zeus, Demeter, Poseidon, Hades, Persephone, Hestia); the water, dark, light and wind the myths ask for are no longer approximated with ice or fire. Each god's resistances are the old DEF, 15% higher against their own damage type and 15% lower against the other, so a physical bruiser is harder to hit physically than magically. A world may still add elements, each resisted by one of the two stats.
+**Two layers on an attack** (jrpg-battle decisions 0055 to 0057). The **damage type**, physical or magic, is what an attack is: each type has its own attack stat and resistance (below). The **element**, set on a skill, is the kind of force it is: fire, water, earth, wind, lightning, ice, dark or metal. An element only chooses a client's animation and sound for now, so a skill with none plays its damage type's default; Zeus's lightning is a magic hit of lightning, Hephaestus's Molten Hammer a physical hit of fire. Later an element can become its own lever for builds. What follows is the damage types. Every god and monster has a PHYS ATK and a MAG ATK instead of ATK, and a PHYS RES and a MAG RES instead of DEF. A hit is driven by the attack of its element and lowered by the resistance of the same: `physical` is PHYS ATK against PHYS RES, `magic` is MAG ATK against MAG RES. Each god has a **main attack**, of its own damage type, and an **off attack**, of the other (roster 0.21.0): the main attack is its old ATK, and the off attack three quarters of it, rounded, in its base stats and its growth alike, so Zeus has 160 MAG ATK and 120 PHYS ATK. No god has a skill of the other damage type, so the off attack drives only what reads it: a damage-over-time status of the other type (Burn and Shock are magic, Bleed physical), and later a hybrid skill or one that scales from both attacks (jrpg-battle#365). One god applies one: Hephaestus, whose Molten Hammer Burns. It carries its own `dotRatio`, 0.66 over the core's 0.5, which keeps its ticks where they were at the lower attack. (Until roster 0.24.0, Hermes's Shocks did the same, at 0.8.) A monster's two attacks still equal its old ATK. There are no weaknesses. A god fights with body and weapon (Physical: Hermes, Nike, Artemis, Dionysus, Ares, Hera, Athena, Hephaestus) or with divine power (Magic: Apollo, Aphrodite, Zeus, Demeter, Poseidon, Hades, Persephone, Hestia); the water, dark, light and wind the myths ask for are no longer approximated with ice or fire. Each god's resistances are the old DEF, 15% higher against their own damage type and 15% lower against the other, so a physical bruiser is harder to hit physically than magically. A world may still add elements, each resisted by one of the two stats.
 
 
 
@@ -126,12 +126,12 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 
 | Slot | Best for |
 |---|---|
-| Weapon | War Blade: Hermes, Apollo, Aphrodite, Demeter, Persephone, Hestia · Battle Axe: Nike, Dionysus, Ares, Hera, Athena · Mage Staff: Zeus, Poseidon, Hades · Hunting Spear: Artemis, Hephaestus |
-| Armour | Plate Mail: Hermes, Artemis, Dionysus, Aphrodite · Mystic Robe: Apollo, Ares, Zeus, Demeter, Hera, Poseidon, Hades, Persephone · Brigandine: Nike, Athena, Hestia, Hephaestus |
-| Boots | Wind Boots: Nike, Artemis, Apollo, Demeter, Hera, Poseidon, Hades, Hestia, Hephaestus · Iron Greaves: Ares, Aphrodite, Athena · War Boots: Hermes, Dionysus, Zeus, Persephone |
-| Charm | Giant Belt: Artemis, Ares, Aphrodite, Poseidon, Hades · War Charm: Hermes, Nike, Dionysus, Apollo, Zeus, Demeter, Persephone, Hestia · Ward Charm: Hera, Athena, Hephaestus |
+| Weapon | War Blade: Apollo, Aphrodite, Demeter, Persephone, Hestia · Battle Axe: Hermes, Nike, Dionysus, Ares, Hera, Athena · Mage Staff: Zeus, Poseidon, Hades · Hunting Spear: Artemis, Hephaestus |
+| Armour | Plate Mail: Hermes, Artemis, Dionysus, Aphrodite · Mystic Robe: Apollo, Ares, Zeus, Demeter, Hera, Hades, Persephone · Brigandine: Nike, Athena, Poseidon, Hestia, Hephaestus |
+| Boots | Wind Boots: Nike, Artemis, Apollo, Aphrodite, Demeter, Hera, Hades, Hestia · Iron Greaves: Hermes, Ares, Athena, Poseidon, Hephaestus · War Boots: Dionysus, Zeus, Persephone |
+| Charm | Giant Belt: Hermes, Artemis, Ares, Aphrodite, Poseidon, Hades · War Charm: Nike, Dionysus, Apollo, Zeus, Demeter, Persephone, Hestia · Ward Charm: Hera, Athena, Hephaestus |
 
-**The sweep and the defaults disagree on boots.** The sweep's opponents wear nothing, so there is less resistance to cut through and nothing to race on speed. It rates Wind Boots best for Hera and Poseidon, but against a team in its loadouts (`npm run check`'s last column) Hera wins 93% in them and 57% in Iron Greaves, and Poseidon 23% in them and 72% in War Boots. The defaults follow the check, where the other team wears gear.
+**The sweep and the defaults disagree on boots.** The sweep's opponents wear nothing, so there is less resistance to cut through and nothing to race on speed. It rated Wind Boots best for Hera and Poseidon before Hermes's change, and still does for Hera, but against a team in its loadouts (`npm run check`'s last column) Hera wins 93% in them and 57% in Iron Greaves, and Poseidon 23% in them and 72% in War Boots. The defaults follow the check, where the other team wears gear.
 
 **Speed is the biggest lever in a loadout.** In the loadout column a god's boots move it far more than any number in its kit, by where the extra speed puts it among its teammates' turns: Demeter in Wind Boots acts before Pyra (102) instead of just after her, which takes her from 22% to 51% on boots alone (below).
 
@@ -141,7 +141,7 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 
 | Champion | Class | In for | PvE win | vs core | PvP bare | PvP in loadouts |
 |---|---|---|---|---|---|---|
-| Hermes | Support | Vex | 72.2% | −3.3 | 85.9% | 68.9% |
+| Hermes | Support | Vex | 99.5% | +24.0 | 90.5% | 51.1% |
 | Nike | Striker | Vex | 94.1% | +18.6 | 60.2% | 46.2% |
 | Artemis | Striker | Vex | 91.2% | +15.7 | 49.9% | 45.6% |
 | Dionysus | Controller | Vex | 77.5% | +2.0 | 54.7% | 59.9% |
@@ -163,7 +163,7 @@ All-champion teams, PvE, then PvP against the core team bare and in loadouts:
 | Team | PvE | PvP bare | PvP in loadouts |
 |---|---|---|---|
 | Athena, Zeus, Apollo, Artemis | 94.6% | 75.3% | 71.0% |
-| Hephaestus, Poseidon, Aphrodite, Hermes | 85.4% | 4.3% | 15.5% |
+| Hephaestus, Poseidon, Aphrodite, Hermes | 98.6% | 51.0% | 45.4% |
 | Ares, Hades, Apollo, Zeus | 48.7% | 29.9% | 37.9% |
 | Hera, Persephone, Demeter, Nike | 100.0% | 73.2% | 61.6% |
 | Hestia, Dionysus, Demeter, Persephone | 98.8% | 59.6% | 73.6% |
@@ -186,15 +186,16 @@ All-champion teams, PvE, then PvP against the core team bare and in loadouts:
 - **Demeter's weakness was her place in the turn order,** not her kit. At speed 101 she acts just after Pyra (102); in her own Wind Boots she acts well before. Every heal cut from her kit took her PvP down about as much as her PvE.
 - **Persephone keeps her own numbers.** Against the bare column she seemed too strong (84%); in loadouts she is 56%.
 
-All-champion teams with Hermes or Hades in them are still weak: those two are balanced with their new kits.
+All-champion teams with Hades in them are still weak; he is balanced with his new kit. Hermes's support kit took the team he plays in from 15.5% to 45.4% in loadouts.
 
 **Before roster 0.24.0:** roster 0.23.0 gives exactly the same numbers on jrpg-battle 0.58.0 as on 0.55.1. Those were 300 battles a line, the bare column only, with core PvE at 75.3%. PvP against the core team was:
+- Hermes 85.3%
 - Nike 39.0%, Artemis 36.0%, Ares 50.7%, Zeus 60.7%
 - Dionysus 77.0%, Poseidon 76.0%, Persephone 84.0%
 - Apollo 61.3%, Aphrodite 49.0%, Demeter 14.3%
 - Hera 87.3%, Athena 52.0%, Hestia 80.7%, Hephaestus 47.0%
 
-Five were outside 45–75% then; none of the 14 is now, in loadouts.
+Six were outside 45–75% then; none of the 15 is now, in loadouts.
 
 ### How to read them
 
@@ -206,7 +207,7 @@ Five were outside 45–75% then; none of the 14 is now, in loadouts.
 
 ### Known issues to fix next
 
-- **Hermes and Hades** keep their old kits, and their numbers are their old kits': Hermes strong (68.9% in loadouts), Hades weak (35.6%). Hermes's support kit needs nothing new from the engine; Hades's needs summoning.
+- **Hades** keeps his old kit, and his numbers are its (35.6% in loadouts). His rework needs summoning from the engine.
 - **The sweep and the check disagree on speed boots** (above): the sweep's opponents wear nothing. A sweep against opponents in their loadouts needs jrpg-battle's sweep to offer it.
 - **The practice waves reward Sunder and magic damage,** through their one golem. Nike, Artemis, Poseidon and Demeter are over 90% PvE. That is for the monsters' pass, after the roster.
 - **Turn order and speed** deserve a pass of their own: a god's boots can move it by 35 points.
