@@ -7,7 +7,7 @@
   "effects": [
     {
       "type": "damage",
-      "mult": 1.8,
+      "mult": 2.2,
       "toughness": 30,
       "pen": 20
     },

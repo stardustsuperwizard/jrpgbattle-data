@@ -30,9 +30,9 @@
     "the_hunt"
   ],
   "defaultLoadout": {
-    "weapon": "war_axe",
+    "weapon": "hunting_spear",
     "armour": "plate_mail",
-    "boots": "war_boots",
+    "boots": "wind_boots",
     "charm": "giant_belt"
   }
 }

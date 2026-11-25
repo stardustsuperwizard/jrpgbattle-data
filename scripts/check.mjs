@@ -103,7 +103,7 @@ const pad = (text, width) => String(text).padEnd(width);
 // Content has no party (decision 0025), so each line-up is passed in: PvE's as the party, PvP's as both teams' picks.
 const pve = (party) => simulate((seed) => createMatch(config, { mode: 'pve', seed, party, controllers: { party: 'bot:default' } }), runs);
 const controllers = { blue: 'bot:default', red: 'bot:default' };
-const pvp = (blue, red) => simulatePvp((seed) => createMatch(config, { mode: 'pvp', seed, controllers, picks: completePicks(config, { seed, mode: 'pvp', picks: { blue, red } }) }), runs);
+const pvp = (blue, red, loadouts) => simulatePvp((seed) => createMatch(config, { mode: 'pvp', seed, controllers, ...(loadouts ? { loadouts } : {}), picks: completePicks(config, { seed, mode: 'pvp', picks: { blue, red } }) }), runs);
 
 // Each champion stands in for the core hero whose job is closest, so the
 // numbers compare like with like: Aria the tank, Pyra area damage, Seren
@@ -111,7 +111,14 @@ const pvp = (blue, red) => simulatePvp((seed) => createMatch(config, { mode: 'pv
 // PvE also rewards matching the waves' weaknesses (the wave-3 golem is weak
 // only to lightning and ice), so PvP, where heroes have no weaknesses, is the
 // fairer read of raw strength.
-const { coreParty: CORE_PARTY, standsInFor: STANDS_IN_FOR, teams: ROSTER_TEAMS } = read(join(ROOT, 'data', 'checks.json'));
+const { coreParty: CORE_PARTY, standsInFor: STANDS_IN_FOR, coreLoadouts: CORE_LOADOUTS, teams: ROSTER_TEAMS } = read(join(ROOT, 'data', 'checks.json'));
+
+// PvP is balanced first (ROSTER.md, "How to read them"), and a real match is
+// played in loadouts, so the last column puts every hero in one: each god its
+// own default, each core hero the one data/checks.json gives it. Speed boots
+// decide some kits' turn order, which the bare column can't show.
+const wearing = (id) => ({ ...(heroes[id]?.defaultLoadout ?? CORE_LOADOUTS[id] ?? {}) });
+const geared = (blue, red) => pvp(blue, red, { blue: blue.map(wearing), red: red.map(wearing) });
 
 console.log(`${manifest.name} ${manifest.version}: ${Object.keys(heroes).length} champions, ${Object.keys(abilities).length} abilities; loads as ${config.contentVersion}`);
 console.log(`Engine: ${ENGINE} (${ENGINE_VERSION}; CI checks against ${ENGINE_TAG})`);
@@ -121,20 +128,23 @@ console.log(`Wrote dist/tuning-import.json\n`);
 
 const baseline = pve(CORE_PARTY);
 const mirror = pvp(CORE_PARTY, CORE_PARTY);
-console.log(`${runs} battles per line. Core party: PvE win ${pct(baseline.winRate)}; PvP mirror blue ${pct(mirror.wins.blue / mirror.runs)}\n`);
-console.log(`${pad('Champion', 18)}${pad('spd', 5)}${pad('in for', 8)}${pad('PvE win', 9)}${pad('vs core', 9)}PvP win vs core team`);
+const mirrorGeared = geared(CORE_PARTY, CORE_PARTY);
+console.log(`${runs} battles per line. Core party: PvE win ${pct(baseline.winRate)}; PvP mirror blue ${pct(mirror.wins.blue / mirror.runs)}, in loadouts ${pct(mirrorGeared.wins.blue / mirrorGeared.runs)}\n`);
+console.log(`${pad('Champion', 18)}${pad('spd', 5)}${pad('in for', 8)}${pad('PvE win', 9)}${pad('vs core', 9)}${pad('PvP bare', 10)}PvP in loadouts`);
 for (const [id, hero] of Object.entries(heroes)) {
   const slot = STANDS_IN_FOR[id];
   const party = CORE_PARTY.map((h) => (h === slot ? id : h));
   const p = pve(party);
   const v = pvp(party, CORE_PARTY);
+  const g = geared(party, CORE_PARTY);
   const delta = ((p.winRate - baseline.winRate) * 100).toFixed(1);
-  console.log(`${pad(hero.name, 18)}${pad(hero.spd, 5)}${pad(slot ?? '?', 8)}${pad(pct(p.winRate), 9)}${pad(`${delta >= 0 ? '+' : ''}${delta}`, 9)}${pct(v.wins.blue / v.runs)}`);
+  console.log(`${pad(hero.name, 18)}${pad(hero.spd, 5)}${pad(slot ?? '?', 8)}${pad(pct(p.winRate), 9)}${pad(`${delta >= 0 ? '+' : ''}${delta}`, 9)}${pad(pct(v.wins.blue / v.runs), 10)}${pct(g.wins.blue / g.runs)}`);
 }
 
 console.log('\nAll-champion teams');
 for (const team of ROSTER_TEAMS) {
   const p = pve(team);
   const v = pvp(team, CORE_PARTY);
-  console.log(`  ${team.map((id) => heroes[id].name).join(', ')}: PvE win ${pct(p.winRate)}, PvP win vs core team ${pct(v.wins.blue / v.runs)}`);
+  const g = geared(team, CORE_PARTY);
+  console.log(`  ${team.map((id) => heroes[id].name).join(', ')}: PvE win ${pct(p.winRate)}, PvP win vs core team ${pct(v.wins.blue / v.runs)}, in loadouts ${pct(g.wins.blue / g.runs)}`);
 }

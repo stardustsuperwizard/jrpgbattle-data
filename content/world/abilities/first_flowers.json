@@ -4,16 +4,16 @@
   "type": "skill",
   "target": "ally",
   "element": "earth",
-  "description": "Heal one ally 15% Max HP + 40, and all allies 3% Max HP.",
+  "description": "Heal one ally 20% Max HP + 60, and all allies 8% Max HP.",
   "effects": [
     {
       "type": "heal",
-      "pctMaxHp": 0.15,
-      "flat": 40
+      "pctMaxHp": 0.2,
+      "flat": 60
     },
     {
       "type": "heal",
-      "pctMaxHp": 0.03,
+      "pctMaxHp": 0.08,
       "on": "all_allies"
     }
   ]
