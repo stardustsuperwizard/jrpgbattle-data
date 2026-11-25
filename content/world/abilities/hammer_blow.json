@@ -4,12 +4,18 @@
   "type": "basic",
   "target": "enemy",
   "element": "metal",
-  "description": "Deal Physical DMG to one enemy.",
+  "description": "Deal Physical DMG to one enemy with a 30% chance to Sunder it for 2 turns.",
   "effects": [
     {
       "type": "damage",
       "mult": 1,
       "toughness": 10
+    },
+    {
+      "type": "status",
+      "status": "sunder",
+      "duration": 2,
+      "chance": 0.3
     }
   ]
 }

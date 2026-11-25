@@ -4,12 +4,18 @@
   "type": "ultimate",
   "target": "enemy",
   "element": "fire",
-  "description": "Massive Physical DMG to one enemy with high Toughness damage, and Burn it.",
+  "description": "Massive Physical DMG to one enemy, ignoring 40 of its PHYS RES; Sunder it and Burn it for 2 turns.",
   "effects": [
     {
       "type": "damage",
-      "mult": 4,
-      "toughness": 40
+      "mult": 3.6,
+      "toughness": 40,
+      "pen": 40
+    },
+    {
+      "type": "status",
+      "status": "sunder",
+      "duration": 2
     },
     {
       "type": "status",

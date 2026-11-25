@@ -3,11 +3,11 @@
   "name": "Embrace",
   "type": "skill",
   "target": "all_allies",
-  "description": "Heal all allies 12% Max HP and grant ATK Up for 2 turns.",
+  "description": "Heal all allies 18% Max HP and grant ATK Up for 2 turns.",
   "effects": [
     {
       "type": "heal",
-      "pctMaxHp": 0.12
+      "pctMaxHp": 0.18
     },
     {
       "type": "status",

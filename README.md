@@ -24,7 +24,7 @@ jrpgbattle's **world** for the [jrpg-battle](https://github.com/stardustsuperwiz
 | `scripts/openapi.mjs` | The API's OpenAPI description, which the build writes from the same content as the files. |
 | `schemas/` | The jrpgbattle world format's JSON Schemas, copied from the jrpg-battle release in `engine.json` (its `src/rulesets/jrpgbattle/schemas/`, decisions 0053, 0086) by `npm run schemas` (`scripts/schemas.mjs`). The API publishes them. Never edit them here: `npm run check` fails when they differ from the engine's. |
 | `tests/` | `npm test`: the build's own tests. |
-| `data/checks.json` | Settings for the check only: the core party it measures against, which core hero each champion stands in for, and sample teams. Not content. |
+| `data/checks.json` | Settings for the check only: the core party it measures against, which core hero each champion stands in for, what each core hero wears in the loadout column, and sample teams. Not content. |
 
 Ids are lowercase letters, digits and `_`. Champion and ability ids must not reuse jrpg-battle's (`aria`, `slash`, …): a deployment wouldn't mind, but the check measures each champion beside the engine's heroes and refuses a clash.
 
@@ -112,7 +112,7 @@ npm run check              # 300 battles per line
 npm run check -- 1000      # more battles, steadier numbers
 ```
 
-It builds the sources, reads the engine's example world and deployment files with jrpg-battle's own reader, puts the built files where a deployment would and runs its boundary check and validation, both as a deployment loads them and with the engine's heroes kept beside the champions so each can be measured against the hero it stands in for. It reports any speed shared with another hero, writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions), and prints each champion's PvE and PvP win rates against the core party. ROSTER.md explains how to read them.
+It builds the sources, reads the engine's example world and deployment files with jrpg-battle's own reader, puts the built files where a deployment would and runs its boundary check and validation, both as a deployment loads them and with the engine's heroes kept beside the champions so each can be measured against the hero it stands in for. It reports any speed shared with another hero, writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions), and prints each champion's PvE win rate and its PvP win rate against the core team, both with nobody wearing gear and with every hero in a loadout (each god its default, each core hero the one `data/checks.json` gives it). The gods are balanced PvP-first, on the loadout column; ROSTER.md explains how to read them.
 
 **Compatibility is the ruleset and its world format, not a release number** (jrpg-battle decisions 0023, 0086). `world.json` names the ruleset the files play and its world format, and they work with every jrpg-battle release whose ruleset reads that format. The engine refuses another ruleset or format by name. An engine release that keeps the format needs nothing here: no roster release, and the site moves its engine pin alone. When the ruleset moves its world format, the files move with it in one PR and the roster releases. `engine.json` names the release CI checks against and the schemas come from; bump it to measure on a newer engine, run `npm run schemas` with that release checked out, and update ROSTER.md if the numbers move.
 

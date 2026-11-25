@@ -3,23 +3,18 @@
   "name": "Maenad Frenzy",
   "type": "skill",
   "target": "enemy",
-  "description": "Physical DMG to one enemy and Bleed for 2 turns; gain ATK Up for 2 turns.",
+  "description": "Physical DMG to one enemy with a 60% chance to Confuse it for 2 turns.",
   "effects": [
     {
       "type": "damage",
-      "mult": 1.8,
+      "mult": 1.4,
       "toughness": 20
     },
     {
       "type": "status",
-      "status": "bleed",
-      "duration": 2
-    },
-    {
-      "type": "status",
-      "status": "atk_up",
+      "status": "confuse",
       "duration": 2,
-      "on": "self"
+      "chance": 0.6
     }
   ]
 }

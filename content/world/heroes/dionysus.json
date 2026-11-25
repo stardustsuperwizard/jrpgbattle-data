@@ -2,7 +2,7 @@
   "id": "dionysus",
   "name": "Dionysus",
   "role": "Reveller",
-  "class": "Striker",
+  "class": "Controller",
   "characterGroup": "Gods of Olympus",
   "sprite": "🍇",
   "reach": "melee",

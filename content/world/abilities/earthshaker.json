@@ -4,17 +4,18 @@
   "type": "ultimate",
   "target": "all_enemies",
   "element": "earth",
-  "description": "Heavy Magic DMG to all enemies and RES Down for 2 turns.",
+  "description": "Heavy Magic DMG to all enemies with a 50% chance to Sunder them for 2 turns: half their PHYS RES.",
   "effects": [
     {
       "type": "damage",
-      "mult": 2.4,
+      "mult": 1.5,
       "toughness": 30
     },
     {
       "type": "status",
-      "status": "res_down",
-      "duration": 2
+      "status": "sunder",
+      "duration": 2,
+      "chance": 0.5
     }
   ]
 }

@@ -3,12 +3,13 @@
   "name": "Bloodlust",
   "type": "skill",
   "target": "enemy",
-  "description": "Physical DMG to one enemy with high Toughness damage, then Taunt for 2 turns.",
+  "description": "Heavy Physical DMG to one enemy with high Toughness damage, ignoring 20 of its PHYS RES; Taunt for 2 turns.",
   "effects": [
     {
       "type": "damage",
-      "mult": 1.8,
-      "toughness": 30
+      "mult": 2.2,
+      "toughness": 30,
+      "pen": 20
     },
     {
       "type": "status",

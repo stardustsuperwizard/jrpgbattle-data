@@ -4,22 +4,22 @@
   "type": "ultimate",
   "target": "all_enemies",
   "element": "water",
-  "description": "Magic DMG to all enemies with a 40% chance to Freeze; heal all allies 20% Max HP.",
+  "description": "Magic DMG to all enemies with a 50% chance to Confuse them for 2 turns; heal all allies 35% Max HP.",
   "effects": [
     {
       "type": "damage",
-      "mult": 1.2,
+      "mult": 1.4,
       "toughness": 20
     },
     {
       "type": "status",
-      "status": "freeze",
-      "duration": 1,
-      "chance": 0.4
+      "status": "confuse",
+      "duration": 2,
+      "chance": 0.5
     },
     {
       "type": "heal",
-      "pctMaxHp": 0.2,
+      "pctMaxHp": 0.35,
       "on": "all_allies"
     }
   ]

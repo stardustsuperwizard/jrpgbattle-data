@@ -4,12 +4,17 @@
   "type": "basic",
   "target": "enemy",
   "element": "earth",
-  "description": "Deal Magic DMG to one enemy.",
+  "description": "Deal Magic DMG to one enemy; heal all allies 3% Max HP.",
   "effects": [
     {
       "type": "damage",
       "mult": 1,
       "toughness": 10
+    },
+    {
+      "type": "heal",
+      "pctMaxHp": 0.03,
+      "on": "all_allies"
     }
   ]
 }

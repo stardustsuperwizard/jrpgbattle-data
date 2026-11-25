@@ -4,16 +4,16 @@
   "type": "skill",
   "target": "enemy",
   "element": "wind",
-  "description": "Physical DMG to one enemy with high Toughness damage; gain ATK Up for 2 turns.",
+  "description": "Physical DMG to one enemy with high Toughness damage; gain Haste for 2 turns.",
   "effects": [
     {
       "type": "damage",
-      "mult": 1.9,
-      "toughness": 30
+      "mult": 2.6,
+      "toughness": 25
     },
     {
       "type": "status",
-      "status": "atk_up",
+      "status": "haste",
       "duration": 2,
       "on": "self"
     }

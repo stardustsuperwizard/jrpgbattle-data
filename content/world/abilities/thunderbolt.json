@@ -5,12 +5,13 @@
   "target": "blast",
   "element": "lightning",
   "splash": 0.5,
-  "description": "Magic DMG to an enemy and half to adjacent enemies, with a 60% chance to Shock.",
+  "description": "Magic DMG to an enemy and half to adjacent enemies, ignoring 15% of their MAG RES, with a 60% chance to Shock.",
   "effects": [
     {
       "type": "damage",
       "mult": 2,
-      "toughness": 20
+      "toughness": 20,
+      "pierce": 15
     },
     {
       "type": "status",

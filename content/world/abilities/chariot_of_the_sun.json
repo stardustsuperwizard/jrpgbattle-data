@@ -4,11 +4,11 @@
   "type": "ultimate",
   "target": "all_enemies",
   "element": "fire",
-  "description": "Magic DMG to all enemies and Burn them; heal all allies 20% Max HP and grant ATK Up for 2 turns.",
+  "description": "Magic DMG to all enemies and Burn them for 2 turns; heal all allies 20% Max HP and cleanse their debuffs.",
   "effects": [
     {
       "type": "damage",
-      "mult": 1.8,
+      "mult": 1.4,
       "toughness": 20
     },
     {
@@ -22,9 +22,7 @@
       "on": "all_allies"
     },
     {
-      "type": "status",
-      "status": "atk_up",
-      "duration": 2,
+      "type": "cleanse",
       "on": "all_allies"
     }
   ]
