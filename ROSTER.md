@@ -38,19 +38,17 @@ Roster 0.24.0 settles the roles on four classes, after the four roles of 4th-edi
 | Guardian | Defender | Takes the hits: Taunt, shields, Guard | Hera, Athena, Hestia, Hephaestus |
 | Striker | Striker | Damage, most of it on one target | Nike, Artemis, Ares, Zeus, Hades |
 | Support | Leader | Heals, buffs and SP | Hermes, Apollo, Aphrodite, Demeter |
-| Controller | Controller | Shapes the fight: Freeze, Slow, Confuse, Sunder | Dionysus, Poseidon, Persephone |
+| Controller | Controller | Shapes the fight: Freeze, Slow, Confuse, Sunder | Dionysus, Poseidon, Persephone, and Hades with his summons |
 
 **Picks:** the bot's pick takes one god of each class before a second of any (jrpg-battle's `botPick`). With four classes and teams of four, every bot team is one god from each.
 
-**Tags:** a god that sits between classes will also have a tag beside its class, through `tags` (jrpg-battle 0.59.0, its decision 0100).
-- **Bruiser,** partly tank and partly damage: Ares (Striker) and Athena (Guardian).
-- **Assassin:** Hermes, once he has an assassin's tools (below, "Needs a mechanic").
+**Tags:** a god that sits between classes will also have a tag beside its class, through `tags` (jrpg-battle 0.59.0, its decision 0100). The one tag so far is **bruiser,** partly tank and partly damage: Ares (Striker) and Athena (Guardian).
 
 The tags arrive with the engine release that carries them.
 
 ## The kits (roster 0.24.0)
 
-Roster 0.24.0 reworks 14 gods' three abilities so that each does a job of its own, with the new statuses and penetration, instead of the same few statuses at bigger sizes. Hermes and Hades keep their old kits until the engine work their new ones need lands. Hermes becomes an assassin, moving from Support to Striker with the `assassin` tag, and Hades gains a summon of minions, moving from Striker to Controller: his minions shape the fight rather than deal its damage. With both, the classes are Guardian 4, Striker 5, Support 3 and Controller 4.
+Roster 0.24.0 reworks 14 gods' three abilities so that each does a job of its own, with the new statuses and penetration, instead of the same few statuses at bigger sizes. Hermes and Hades keep their old kits for now: Hades until the engine can summon, Hermes until his support kit is tuned. Hermes stays a Support, with a support kit of his own: tempo for his team. Hades gains a summon of minions and moves from Striker to Controller: his minions shape the fight rather than deal its damage. With him, the sixteen divide four to a class.
 
 | God | Its job | Basic | Skill | Ultimate |
 |---|---|---|---|---|
@@ -68,7 +66,7 @@ Roster 0.24.0 reworks 14 gods' three abilities so that each does a job of its ow
 | 🌸 Persephone | The seasons | Frost Bloom: single · in spring, Blossom | Winter’s Descent: blast, 35% Freeze · in spring, First Flowers: heal one 20% + 60, all 8% | Spring’s Return: all, 30% Freeze, heal all 15%, to spring · in spring, Pomegranate Seed: all + RES Down, back below |
 | 🔥 Hestia | The hearth | Hearth Ember: single, heal self 3% | Sacred Flame: shield all, cleanse all, Taunt 1 turn, Retaliate 1 turn | Eternal Flame: all + Burn, heal all 10% |
 | 🔨 Hephaestus | The armour breaker | Hammer Blow: single, 30% Sunder | Forge Armor: heavy shield all | Molten Hammer: massive single, ignores 40 PHYS RES, Sunder, Burn |
-| 🪽 Hermes | *Old kit, until his assassin's tools; then a Striker* | Caduceus Tap: single, 2 SP | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
+| 🪽 Hermes | *Old kit, until his support kit* | Caduceus Tap: single, 2 SP | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
 | 💀 Hades | *Old kit, until summoning; then a Controller* | Soul Lash: single | Grasp of the Dead: single + Burn + RES Down | Realm of the Dead: all + 3-turn Burn |
 
 **Owners:** each status has one or two, so it says whose kit it is.
@@ -208,7 +206,7 @@ Five were outside 45–75% then; none of the 14 is now, in loadouts.
 
 ### Known issues to fix next
 
-- **Hermes and Hades** keep their old kits, and their numbers are their old kits': Hermes strong (68.9% in loadouts), Hades weak (35.6%). They are reworked once the engine has an assassin's tools and summoning.
+- **Hermes and Hades** keep their old kits, and their numbers are their old kits': Hermes strong (68.9% in loadouts), Hades weak (35.6%). Hermes's support kit needs nothing new from the engine; Hades's needs summoning.
 - **The sweep and the check disagree on speed boots** (above): the sweep's opponents wear nothing. A sweep against opponents in their loadouts needs jrpg-battle's sweep to offer it.
 - **The practice waves reward Sunder and magic damage,** through their one golem. Nike, Artemis, Poseidon and Demeter are over 90% PvE. That is for the monsters' pass, after the roster.
 - **Turn order and speed** deserve a pass of their own: a god's boots can move it by 35 points.
@@ -304,13 +302,12 @@ Gods whose myth wants something the engine can't do yet. Each is a small jrpg-ba
 | Champion idea | Mechanic | Why |
 |---|---|---|
 | Hades (his rework) | Summon minions: a `summon` effect that adds AI-controlled units to his side, their stats a share of his, falling with him | The lord of the dead's shades; designed with the owner, next after the tags |
-| Hermes (his rework) | Stealth: a status that keeps its holder from being picked by single-target attacks, ended when it strikes | The assassin: the Cap of Invisibility, which he wore |
 | Hermes or Nike | Turn advance: an ally acts sooner now | The messenger hurries an ally. Haste speeds the turns after; pushing a turn forward is not yet possible |
 | Kronos | Delay an enemy's turn | Lord of time. Slow lengthens the turns after; pushing a turn back is not yet possible |
 | Medusa | Stone (a long freeze that ends on a hit) | Petrifying gaze |
 | Hydra / Heracles | Multi-hit, and a unit that grows heads when hit | The labors |
 | Eros | Charm: an enemy attacks its own side for a turn | The arrows |
-| Nyx | Stealth, as Hermes's | Night |
+| Nyx | Stealth: a status that keeps its holder from being picked by single-target attacks, ended when it strikes | Night; an assassin, if the roster wants one |
 | Hades (fuller kit) | Lifesteal | Taking souls |
 | An assassin's finisher | An execute: more damage the lower the target's HP | The classic assassin's burst |
 
