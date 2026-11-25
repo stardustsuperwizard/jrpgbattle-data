@@ -4,16 +4,16 @@
   "type": "skill",
   "target": "enemy",
   "element": "metal",
-  "description": "Heavy Physical DMG to one enemy and Bleed for 2 turns.",
+  "description": "Heavy Physical DMG to one enemy, and mark it Exposed for 2 turns: it takes 25% more damage.",
   "effects": [
     {
       "type": "damage",
-      "mult": 2.2,
+      "mult": 3.0,
       "toughness": 20
     },
     {
       "type": "status",
-      "status": "bleed",
+      "status": "exposed",
       "duration": 2
     }
   ]

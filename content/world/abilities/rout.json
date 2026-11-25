@@ -4,16 +4,16 @@
   "type": "ultimate",
   "target": "blast",
   "splash": 0.5,
-  "description": "Heavy Physical DMG to an enemy and half to adjacent enemies, and Bleed them.",
+  "description": "Heavy Physical DMG to an enemy and half to adjacent enemies, and mark them Exposed for 2 turns: they take 25% more damage.",
   "effects": [
     {
       "type": "damage",
-      "mult": 3,
+      "mult": 2.6,
       "toughness": 30
     },
     {
       "type": "status",
-      "status": "bleed",
+      "status": "exposed",
       "duration": 2
     }
   ]

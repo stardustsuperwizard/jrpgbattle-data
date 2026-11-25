@@ -4,12 +4,18 @@
   "type": "basic",
   "target": "enemy",
   "element": "lightning",
-  "description": "Deal Magic DMG to one enemy.",
+  "description": "Deal Magic DMG to one enemy with a 30% chance to Shock it for 2 turns.",
   "effects": [
     {
       "type": "damage",
       "mult": 1,
       "toughness": 10
+    },
+    {
+      "type": "status",
+      "status": "shock",
+      "duration": 2,
+      "chance": 0.3
     }
   ]
 }

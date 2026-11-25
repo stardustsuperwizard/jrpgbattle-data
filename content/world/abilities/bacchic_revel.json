@@ -3,11 +3,11 @@
   "name": "Bacchic Revel",
   "type": "ultimate",
   "target": "all_enemies",
-  "description": "Physical DMG to all enemies and Bleed them for 2 turns, with a 30% chance to Confuse them for 2 turns.",
+  "description": "Physical DMG to all enemies, Bleed them and Weaken them for 2 turns.",
   "effects": [
     {
       "type": "damage",
-      "mult": 1.8,
+      "mult": 1.6,
       "toughness": 20
     },
     {
@@ -17,9 +17,8 @@
     },
     {
       "type": "status",
-      "status": "confuse",
-      "duration": 2,
-      "chance": 0.3
+      "status": "weaken",
+      "duration": 2
     }
   ]
 }

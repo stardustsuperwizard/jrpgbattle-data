@@ -4,11 +4,11 @@
   "type": "ultimate",
   "target": "all_enemies",
   "element": "earth",
-  "description": "Magic DMG to all enemies with a 30% chance to Freeze; heal all allies 15% Max HP. Persephone returns to the world above as the Maiden of Spring.",
+  "description": "Magic DMG to all enemies with a 30% chance to Freeze; heal all allies 10% Max HP. Persephone returns to the world above as the Maiden of Spring.",
   "effects": [
     {
       "type": "damage",
-      "mult": 2,
+      "mult": 1.2,
       "toughness": 20
     },
     {
@@ -19,7 +19,7 @@
     },
     {
       "type": "heal",
-      "pctMaxHp": 0.15,
+      "pctMaxHp": 0.1,
       "on": "all_allies"
     },
     {

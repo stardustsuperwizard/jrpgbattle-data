@@ -4,17 +4,17 @@
   "type": "skill",
   "target": "ally",
   "element": "earth",
-  "description": "Heal one ally 25% Max HP + 80, and all allies 10% Max HP.",
+  "description": "Heal one ally 30% Max HP + 100 and Guard it for 2 turns: it takes 30% less damage.",
   "effects": [
     {
       "type": "heal",
-      "pctMaxHp": 0.25,
-      "flat": 80
+      "pctMaxHp": 0.3,
+      "flat": 100
     },
     {
-      "type": "heal",
-      "pctMaxHp": 0.1,
-      "on": "all_allies"
+      "type": "status",
+      "status": "guard",
+      "duration": 2
     }
   ]
 }

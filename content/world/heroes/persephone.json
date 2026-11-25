@@ -2,7 +2,7 @@
   "id": "persephone",
   "name": "Persephone",
   "role": "Queen of Two Realms",
-  "class": "Striker",
+  "class": "Controller",
   "characterGroup": "Gods of Olympus",
   "sprite": "🌸",
   "reach": "ranged",

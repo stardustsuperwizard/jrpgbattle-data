@@ -4,12 +4,18 @@
   "type": "basic",
   "target": "enemy",
   "element": "fire",
-  "description": "Deal Magic DMG to one enemy.",
+  "description": "Deal Magic DMG to one enemy with a 30% chance to Burn it for 2 turns.",
   "effects": [
     {
       "type": "damage",
       "mult": 1,
       "toughness": 10
+    },
+    {
+      "type": "status",
+      "status": "burn",
+      "duration": 2,
+      "chance": 0.3
     }
   ]
 }

@@ -4,13 +4,13 @@
   "type": "skill",
   "target": "all_allies",
   "element": "fire",
-  "description": "Shield all allies (scales with PHYS and MAG RES) for 2 turns and cleanse their debuffs; Taunt for 2 turns; hit back at whoever strikes her for 1 turn.",
+  "description": "Shield all allies (scales with PHYS and MAG RES) for 2 turns and cleanse their debuffs; Taunt for 1 turn; hit back at whoever strikes her for 1 turn.",
   "effects": [
     {
       "type": "shield",
       "flat": 60,
       "duration": 2,
-      "resRatio": 0.8
+      "resRatio": 0.6
     },
     {
       "type": "cleanse"
@@ -18,7 +18,7 @@
     {
       "type": "status",
       "status": "taunt",
-      "duration": 2,
+      "duration": 1,
       "on": "self"
     },
     {

@@ -2,7 +2,7 @@
   "id": "poseidon",
   "name": "Poseidon",
   "role": "Sea King",
-  "class": "Striker",
+  "class": "Controller",
   "characterGroup": "Gods of Olympus",
   "sprite": "🔱",
   "reach": "melee",

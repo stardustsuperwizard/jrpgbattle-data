@@ -3,13 +3,18 @@
   "name": "Aegis",
   "type": "skill",
   "target": "all_allies",
-  "description": "Shield all allies (scales with PHYS and MAG RES) for 2 turns and Taunt.",
+  "description": "Guard all allies for 2 turns (they take 30% less damage) and give them a light shield (scales with PHYS and MAG RES); Taunt for 2 turns.",
   "effects": [
     {
+      "type": "status",
+      "status": "guard",
+      "duration": 2
+    },
+    {
       "type": "shield",
-      "flat": 80,
+      "flat": 20,
       "duration": 2,
-      "resRatio": 1
+      "resRatio": 0.2
     },
     {
       "type": "status",

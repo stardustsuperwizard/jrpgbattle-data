@@ -4,18 +4,18 @@
   "type": "skill",
   "target": "all_enemies",
   "element": "water",
-  "description": "Magic DMG to all enemies with a 25% chance to Freeze.",
+  "description": "Magic DMG to all enemies with a 40% chance to Slow them for 2 turns.",
   "effects": [
     {
       "type": "damage",
-      "mult": 1,
+      "mult": 0.7,
       "toughness": 15
     },
     {
       "type": "status",
-      "status": "freeze",
-      "duration": 1,
-      "chance": 0.25
+      "status": "slow",
+      "duration": 2,
+      "chance": 0.4
     }
   ]
 }

@@ -4,12 +4,13 @@
   "type": "basic",
   "target": "enemy",
   "element": "water",
-  "description": "Deal Magic DMG to one enemy.",
+  "description": "Deal Magic DMG to one enemy, ignoring 15% of its MAG RES.",
   "effects": [
     {
       "type": "damage",
       "mult": 1,
-      "toughness": 10
+      "toughness": 10,
+      "pierce": 15
     }
   ]
 }
