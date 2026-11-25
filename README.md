@@ -32,7 +32,7 @@ Ids are lowercase letters, digits and `_`. Champion and ability ids must not reu
 
 ### Adding a champion
 
-1. Write `content/world/heroes/<id>.json` and its three `content/world/abilities/<id>.json` files. Every champion says its `reach`, `"melee"` or `"ranged"` (jrpg-battle decision 0052): how it fights, which a site uses to draw it before its art exists. No rule reads it.
+1. Write `content/world/heroes/<id>.json` and its three `content/world/abilities/<id>.json` files. Every champion says its `reach`, `"melee"` or `"ranged"` (jrpg-battle decision 0052): how it fights, which a site uses to draw it before its art exists. No rule reads it. A champion that sits between two classes may also say `tags`, labels beside its class such as `["bruiser"]` (jrpg-battle decision 0100); no rule reads those either.
 2. Add the id to `content/world/heroes/index.json` where it belongs in the roster.
 3. Bump `version` in `content/world/manifest.json`, and `package.json`'s with it.
 4. `npm test && npm run check`, and update ROSTER.md with its numbers.

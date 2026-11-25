@@ -3,6 +3,9 @@
   "name": "Ares",
   "role": "War God",
   "class": "Striker",
+  "tags": [
+    "bruiser"
+  ],
   "characterGroup": "Gods of Olympus",
   "sprite": "🗡️",
   "reach": "melee",
