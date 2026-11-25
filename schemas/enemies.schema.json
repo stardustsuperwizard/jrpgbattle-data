@@ -101,6 +101,12 @@
           "type": "string",
           "description": "Shown in the UI."
         },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "What else it is, beside its class, such as bruiser (decision 0100). Labels for a client; no rule reads them. None when left out."
+        },
         "characterGroup": {
           "type": "string",
           "minLength": 1,

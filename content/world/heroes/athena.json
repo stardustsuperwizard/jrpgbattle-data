@@ -3,6 +3,9 @@
   "name": "Athena",
   "role": "Strategist",
   "class": "Guardian",
+  "tags": [
+    "bruiser"
+  ],
   "characterGroup": "Gods of Olympus",
   "sprite": "🦉",
   "reach": "melee",

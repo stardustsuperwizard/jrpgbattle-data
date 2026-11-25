@@ -35,16 +35,14 @@ Roster 0.24.0 settles the roles on four classes, after the four roles of 4th-edi
 
 | Class | D&D's role | Its job | Gods |
 |---|---|---|---|
-| Guardian | Defender | Takes the hits: Taunt, shields, Guard | Hera, Athena, Hestia, Hephaestus |
-| Striker | Striker | Damage, most of it on one target | Nike, Artemis, Ares, Zeus, Hades |
+| Guardian | Defender | Takes the hits: Taunt, shields, Guard | Hera, Athena (bruiser), Hestia, Hephaestus |
+| Striker | Striker | Damage, most of it on one target | Nike, Artemis, Ares (bruiser), Zeus, Hades |
 | Support | Leader | Heals, buffs and SP | Hermes, Apollo, Aphrodite, Demeter |
 | Controller | Controller | Shapes the fight: Freeze, Slow, Confuse, Sunder | Dionysus, Poseidon, Persephone, and Hades with his summons |
 
 **Picks:** the bot's pick takes one god of each class before a second of any (jrpg-battle's `botPick`). With four classes and teams of four, every bot team is one god from each.
 
-**Tags:** a god that sits between classes will also have a tag beside its class, through `tags` (jrpg-battle 0.59.0, its decision 0100). The one tag so far is **bruiser,** partly tank and partly damage: Ares (Striker) and Athena (Guardian).
-
-The tags arrive with the engine release that carries them.
+**Tags:** a god that sits between classes has a tag beside its class, its `tags` (roster 0.25.0, on jrpg-battle 0.59.0 and its decision 0100). Like a class, a tag is a label: no rule reads it, and the bot's pick spreads on class alone. The one tag so far is **bruiser,** partly tank and partly damage: Ares (Striker) and Athena (Guardian).
 
 ## The kits (roster 0.24.0)
 
@@ -137,7 +135,7 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 
 ## Numbers (roster 0.24.0 on jrpg-battle 0.58.0, 1,000 seeded battles per line)
 
-`npm run check -- 1000` in this repository, against jrpg-battle 0.58.0: the core party wins PvE 75.5% and splits the PvP mirror 49.4%, and 50.0% in loadouts. Each champion stands in for the core hero with the closest job (`data/checks.json`).
+`npm run check -- 1000` in this repository, against jrpg-battle 0.58.0: the core party wins PvE 75.5% and splits the PvP mirror 49.4%, and 50.0% in loadouts. Each champion stands in for the core hero with the closest job (`data/checks.json`). Roster 0.25.0 on jrpg-battle 0.59.1 gives the same numbers: its tags are labels, which no battle reads.
 
 | Champion | Class | In for | PvE win | vs core | PvP bare | PvP in loadouts |
 |---|---|---|---|---|---|---|
