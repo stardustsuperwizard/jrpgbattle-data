@@ -4,11 +4,11 @@
   "type": "skill",
   "target": "enemy",
   "element": "dark",
-  "description": "Magic DMG to one enemy, Burn it, and RES Down for 2 turns.",
+  "description": "Magic DMG to one enemy and Burn it for 2 turns; call a Shade to his side (at most 2).",
   "effects": [
     {
       "type": "damage",
-      "mult": 1.6,
+      "mult": 1.4,
       "toughness": 20
     },
     {
@@ -17,9 +17,11 @@
       "duration": 2
     },
     {
-      "type": "status",
-      "status": "res_down",
-      "duration": 2
+      "type": "summon",
+      "unit": "shade",
+      "count": 1,
+      "max": 2,
+      "statsShare": 0.35
     }
   ]
 }

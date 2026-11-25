@@ -4,12 +4,18 @@
   "type": "basic",
   "target": "enemy",
   "element": "dark",
-  "description": "Deal Magic DMG to one enemy.",
+  "description": "Deal Magic DMG to one enemy with a 30% chance to Curse it for 2 turns: half its MAG RES.",
   "effects": [
     {
       "type": "damage",
       "mult": 1,
       "toughness": 10
+    },
+    {
+      "type": "status",
+      "status": "curse",
+      "duration": 2,
+      "chance": 0.3
     }
   ]
 }
