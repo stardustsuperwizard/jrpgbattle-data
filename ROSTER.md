@@ -50,7 +50,7 @@ The tags arrive with the engine release that carries them.
 
 ## The kits (roster 0.24.0)
 
-Roster 0.24.0 reworks 14 gods' three abilities so that each does a job of its own, with the new statuses and penetration, instead of the same few statuses at bigger sizes. Hermes and Hades keep their old kits until the engine work their new ones need lands. Hermes becomes an assassin, and Hades gains a summon of minions.
+Roster 0.24.0 reworks 14 gods' three abilities so that each does a job of its own, with the new statuses and penetration, instead of the same few statuses at bigger sizes. Hermes and Hades keep their old kits until the engine work their new ones need lands. Hermes becomes an assassin, moving from Support to Striker with the `assassin` tag, and Hades gains a summon of minions, moving from Striker to Controller: his minions shape the fight rather than deal its damage. With both, the classes are Guardian 4, Striker 5, Support 3 and Controller 4.
 
 | God | Its job | Basic | Skill | Ultimate |
 |---|---|---|---|---|
@@ -68,8 +68,8 @@ Roster 0.24.0 reworks 14 gods' three abilities so that each does a job of its ow
 | 🌸 Persephone | The seasons | Frost Bloom: single · in spring, Blossom | Winter’s Descent: blast, 35% Freeze · in spring, First Flowers: heal one 20% + 60, all 8% | Spring’s Return: all, 30% Freeze, heal all 15%, to spring · in spring, Pomegranate Seed: all + RES Down, back below |
 | 🔥 Hestia | The hearth | Hearth Ember: single, heal self 3% | Sacred Flame: shield all, cleanse all, Taunt 1 turn, Retaliate 1 turn | Eternal Flame: all + Burn, heal all 10% |
 | 🔨 Hephaestus | The armour breaker | Hammer Blow: single, 30% Sunder | Forge Armor: heavy shield all | Molten Hammer: massive single, ignores 40 PHYS RES, Sunder, Burn |
-| 🪽 Hermes | *Old kit, until his assassin's tools* | Caduceus Tap: single, 2 SP | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
-| 💀 Hades | *Old kit, until summoning* | Soul Lash: single | Grasp of the Dead: single + Burn + RES Down | Realm of the Dead: all + 3-turn Burn |
+| 🪽 Hermes | *Old kit, until his assassin's tools; then a Striker* | Caduceus Tap: single, 2 SP | Winged Sandals: single + Shock | Psychopomp: all, 60% Shock |
+| 💀 Hades | *Old kit, until summoning; then a Controller* | Soul Lash: single | Grasp of the Dead: single + Burn + RES Down | Realm of the Dead: all + 3-turn Burn |
 
 **Owners:** each status has one or two, so it says whose kit it is.
 - ATK Up: Nike's team and Aphrodite's.
