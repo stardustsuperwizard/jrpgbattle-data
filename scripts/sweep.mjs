@@ -1,63 +1,68 @@
 // The PvP pool's budget check (#33): jrpg-battle's loadout sweep (its #373)
 // over every god. For each, every set the pools allow (one item from each
-// slot's pool, 81 sets) is worn by that god in a bot-vs-bot mirror match
-// against the same line-up wearing nothing, the line-up being the god's
-// team in data/checks.json. It prints each option's win rate for each god,
-// averaged over the sets that hold it, and which option is best for whom.
+// slot's pool, 108 sets) is worn by that god in the core party, in place of
+// the core hero it stands in for, against the core team, every other hero on
+// both teams in its own loadout, as `npm run check`'s loadout column plays
+// (jrpg-battle 0.61.0's --against and --wearing). It prints each option's
+// win rate for each god, averaged over the sets that hold it, with its
+// margin, and which option is best for whom: an option within the leader's
+// margin ties for best, and a leader with no option within its margin is the
+// clear best.
 //   node scripts/sweep.mjs [matches per set]       (default 60)
 //   JRPG_BATTLE=/path/to/jrpg-battle node scripts/sweep.mjs
 //
 // The pool's rule (the owner, on #33): no option is the best for every god,
 // and every option is the best for at least one; so the best choice in each
-// slot depends on the god. It exits 1 when a slot breaks that rule. Seeds
+// slot depends on the god. Against a team in its loadouts the options often
+// land within their margins of each other, so a tie counts as the best for
+// "at least one", and only a clear best counts for "every god": options
+// that tie for everyone are a slot in balance, not one that dominates. It
+// exits 1 when a slot breaks that rule. Seeds
 // are fixed, so the numbers are exact; ROSTER.md has the last run's.
-import { readFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { allLoadouts, checks, load, measuringContent } from './measure.mjs';
 
-import { buildContent } from './build.mjs';
-
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const ENGINE = resolve(process.env.JRPG_BATTLE ?? join(ROOT, '..', 'jrpg-battle'));
 const runs = Number(process.argv[2] ?? 60);
-
-const read = (path) => JSON.parse(readFileSync(path, 'utf8'));
-const load = (path) => import(pathToFileURL(join(ENGINE, path)).href);
-const { assembleContent, buildConfig, validateConfig } = await load('src/engine/content.js');
-const { readContent, ruleset } = await load('scripts/content.js');
 const { sweepLoadouts } = await load('scripts/sweep-loadouts.js');
 
-// As a deployment loads the world: on the ruleset it names, beside the engine's deployment files.
-const { content: world } = buildContent(ROOT);
-const config = validateConfig(buildConfig(assembleContent({ world, deployment: readContent().deployment }, ruleset), ruleset));
-const { teams } = read(join(ROOT, 'data', 'checks.json'));
+const { world, config } = measuringContent();
+const { coreParty, standsInFor } = checks;
+const wearing = allLoadouts(config);
 const name = (id) => config.items[id]?.name ?? id;
 const pct = (n) => `${Math.round(n * 100)}%`.padStart(4);
+const gods = Object.keys(world.heroes);
 
-console.log(`The PvP pool on each god: ${runs} bot-vs-bot mirror matches a set, against the god's team (data/checks.json) wearing nothing\n`);
-/** By slot, by option: the gods it is best for. */
+console.log(`The PvP pool on each god: ${runs} bot-vs-bot matches a set, the god in the core party against the core team, everyone else in its loadout\n`);
+/** By slot, by option: the gods it is best for, or ties for; and those it is clearly best for. */
 const best = {};
-for (const god of Object.keys(world.heroes)) {
-  const party = teams.find((team) => team.includes(god));
-  if (!party) throw new Error(`data/checks.json has no team with ${god}: the sweep needs one.`);
-  const r = sweepLoadouts(config, { heroId: god, party, runs });
-  const cells = r.options.map(({ slot, items }) => {
+const clear = {};
+for (const god of gods) {
+  const slot = standsInFor[god];
+  if (!coreParty.includes(slot)) throw new Error(`data/checks.json has ${god} stand in for "${slot}", who isn't in the core party.`);
+  const party = coreParty.map((id) => (id === slot ? god : id));
+  const r = sweepLoadouts(config, { heroId: god, party, runs, against: coreParty, wearing });
+  const cells = r.options.map(({ slot: slotId, items }) => {
     const top = items.reduce((a, b) => (b.rate > a.rate ? b : a));
-    ((best[slot] ??= Object.fromEntries(items.map((i) => [i.item, []])))[top.item]).push(god);
-    return items.map((i) => `${name(i.item)} ${pct(i.rate)}`).join(', ');
+    const tied = items.filter((i) => top.rate - i.rate <= top.margin);
+    const by = (best[slotId] ??= Object.fromEntries(items.map((i) => [i.item, []])));
+    for (const i of tied) by[i.item].push(god);
+    const clearly = (clear[slotId] ??= Object.fromEntries(items.map((i) => [i.item, []])));
+    if (tied.length === 1) clearly[top.item].push(god);
+    return items.map((i) => `${name(i.item)} ${pct(i.rate)}${tied.includes(i) ? '*' : ''}`).join(', ');
   });
-  console.log(`${config.heroes[god].name} (bare ${pct(r.baseline).trim()})`);
-  r.options.forEach(({ slot }, i) => console.log(`  ${slot.padEnd(7)} ${cells[i]}`));
+  console.log(`${config.heroes[god].name} (in its own loadout ${pct(r.baseline).trim()})`);
+  r.options.forEach(({ slot: slotId }, i) => console.log(`  ${slotId.padEnd(7)} ${cells[i]}`));
 }
+console.log('\n* the best, or within its margin of it (about 95% of its matches).');
 
-console.log('\nBest option in each slot, by god:');
+console.log('\nBest option in each slot, by god (ties count for each; ! marks a clear best):');
 const broken = [];
 for (const [slot, by] of Object.entries(best)) {
-  console.log(`  ${slot}: ${Object.entries(by).map(([item, gods]) => `${name(item)} (${gods.length ? gods.map((g) => config.heroes[g].name).join(', ') : 'none'})`).join('; ')}`);
-  const never = Object.entries(by).filter(([, gods]) => !gods.length).map(([item]) => name(item));
-  const always = Object.entries(by).filter(([, gods]) => gods.length === Object.keys(world.heroes).length).map(([item]) => name(item));
+  const mark = (item, g) => `${config.heroes[g].name}${clear[slot][item].includes(g) ? '!' : ''}`;
+  console.log(`  ${slot}: ${Object.entries(by).map(([item, list]) => `${name(item)} (${list.length ? list.map((g) => mark(item, g)).join(', ') : 'none'})`).join('; ')}`);
+  const never = Object.entries(by).filter(([, list]) => !list.length).map(([item]) => name(item));
+  const always = Object.entries(clear[slot]).filter(([, list]) => list.length === gods.length).map(([item]) => name(item));
   if (never.length) broken.push(`${slot}: ${never.join(', ')} is never the best`);
-  if (always.length) broken.push(`${slot}: ${always.join(', ')} is the best for every god`);
+  if (always.length) broken.push(`${slot}: ${always.join(', ')} is clearly the best for every god`);
 }
 if (broken.length) {
   console.log(`\nThe pool breaks its rule: ${broken.join('; ')}.`);

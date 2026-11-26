@@ -20,6 +20,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { buildContent, render } from './build.mjs';
 import { ENGINE_SCHEMA_DIR, SCHEMA_DIR, engineSchemas, keptSchemas } from './schemas.mjs';
+import { vsRoster } from './measure.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ENGINE = resolve(process.env.JRPG_BATTLE ?? join(ROOT, '..', 'jrpg-battle'));
@@ -130,7 +131,9 @@ const baseline = pve(CORE_PARTY);
 const mirror = pvp(CORE_PARTY, CORE_PARTY);
 const mirrorGeared = geared(CORE_PARTY, CORE_PARTY);
 console.log(`${runs} battles per line. Core party: PvE win ${pct(baseline.winRate)}; PvP mirror blue ${pct(mirror.wins.blue / mirror.runs)}, in loadouts ${pct(mirrorGeared.wins.blue / mirrorGeared.runs)}\n`);
-console.log(`${pad('Champion', 18)}${pad('spd', 5)}${pad('in for', 8)}${pad('PvE win', 9)}${pad('vs core', 9)}${pad('PvP bare', 10)}PvP in loadouts`);
+console.log(`${pad('Champion', 18)}${pad('spd', 5)}${pad('in for', 8)}${pad('PvE win', 9)}${pad('vs core', 9)}${pad('PvP bare', 10)}${pad('PvP in loadouts', 17)}PvP vs roster`);
+// The last column plays each god in the bot's teams from the champions against the same, so no one team's speeds decide it.
+const gods = Object.keys(heroes);
 for (const [id, hero] of Object.entries(heroes)) {
   const slot = STANDS_IN_FOR[id];
   const party = CORE_PARTY.map((h) => (h === slot ? id : h));
@@ -138,7 +141,8 @@ for (const [id, hero] of Object.entries(heroes)) {
   const v = pvp(party, CORE_PARTY);
   const g = geared(party, CORE_PARTY);
   const delta = ((p.winRate - baseline.winRate) * 100).toFixed(1);
-  console.log(`${pad(hero.name, 18)}${pad(hero.spd, 5)}${pad(slot ?? '?', 8)}${pad(pct(p.winRate), 9)}${pad(`${delta >= 0 ? '+' : ''}${delta}`, 9)}${pad(pct(v.wins.blue / v.runs), 10)}${pct(g.wins.blue / g.runs)}`);
+  const r = vsRoster(config, gods, id, runs);
+  console.log(`${pad(hero.name, 18)}${pad(hero.spd, 5)}${pad(slot ?? '?', 8)}${pad(pct(p.winRate), 9)}${pad(`${delta >= 0 ? '+' : ''}${delta}`, 9)}${pad(pct(v.wins.blue / v.runs), 10)}${pad(pct(g.wins.blue / g.runs), 17)}${pct(r.wins.blue / r.runs)}`);
 }
 
 console.log('\nAll-champion teams');

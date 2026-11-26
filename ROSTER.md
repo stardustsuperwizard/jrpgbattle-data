@@ -125,41 +125,48 @@ In PvP each god wears a **loadout**: one item in each slot, chosen from that slo
 | 🌾 Demeter | War Blade | Mystic Robe | Wind Boots | War Charm | A healer who acts early and hits back: flat on her low attack |
 | 🌸 Persephone | Mage Staff | Mystic Robe | War Boots | War Charm | A controller: all-in on magic damage |
 
-**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods): each god wears every one of the 108 sets in turn, 60 bot-vs-bot mirror matches a set against its team (`data/checks.json`) wearing nothing. No option is the best for every god, and every option is the best for at least one; the sweep fails otherwise. The best option in each slot, roster 0.26.0 on jrpg-battle 0.60.1:
+**The budget check** (`npm run sweep`, jrpg-battle's loadout sweep over the gods, in loadouts from jrpg-battle 0.61.0):
+- **How it plays:** each god wears every one of the 108 sets in turn, in the core party against the core team, everyone else in their own loadouts, 60 matches a set.
+- **Ties and clear bests:** an option within the leader's margin (about 95% of its matches) ties for best; a leader with none within its margin is the clear best (`!` below).
+- **The rule:** every option is the best or ties for it for some god, and none is clearly the best for every god; the sweep fails otherwise.
 
-| Slot | Best for |
+Roster 0.26.0 on jrpg-battle 0.61.0:
+
+| Slot | Best, or tied for it (`!` clear) |
 |---|---|
-| Weapon | War Blade: Apollo, Aphrodite, Demeter, Persephone, Hestia · Battle Axe: Hermes, Nike, Dionysus, Ares, Hera, Athena · Mage Staff: Zeus, Poseidon, Hades · Hunting Spear: Artemis, Hephaestus |
-| Armour | Plate Mail: Hermes, Artemis, Dionysus, Aphrodite · Mystic Robe: Apollo, Zeus, Demeter, Hera, Hades, Persephone · Brigandine: Nike, Ares, Athena, Poseidon, Hestia, Hephaestus |
-| Boots | Wind Boots: Nike, Artemis, Apollo, Aphrodite, Demeter, Hera, Hestia · Iron Greaves: Hermes, Ares, Athena, Poseidon, Hades, Hephaestus · War Boots: Dionysus, Zeus, Persephone |
-| Charm | Giant Belt: Hermes, Artemis, Ares, Aphrodite, Poseidon, Hades · War Charm: Nike, Dionysus, Apollo, Zeus, Demeter, Persephone, Hestia · Ward Charm: Hera, Athena, Hephaestus |
+| Weapon | War Blade: every god but Nike and Ares · Battle Axe: Nike!, Ares!, Hermes, Dionysus, Demeter, Hera, Athena, Hephaestus · Mage Staff: Apollo, Aphrodite, Zeus, Demeter, Hera, Athena, Poseidon, Hades, Persephone, Hestia · Hunting Spear: Artemis, Apollo, Aphrodite, Zeus, Demeter, Hera, Athena, Poseidon, Persephone, Hestia, Hephaestus |
+| Armour | All three tie for nearly every god; Brigandine is clearly best for Zeus! alone |
+| Boots | Wind Boots: Artemis!, Dionysus!, Demeter!, Hera!, Athena!, Hestia!, Nike, Apollo · Iron Greaves: Aphrodite!, Hades!, Persephone!, Nike, Apollo, Ares, Hephaestus · War Boots: Hermes!, Zeus!, Poseidon!, Nike, Ares, Hephaestus |
+| Charm | Giant Belt: Hermes!, Artemis!, Apollo!, Aphrodite!, Demeter!, Hera!, Persephone!, Nike, Dionysus, Ares, Zeus, Athena, Poseidon, Hestia · War Charm: Nike, Dionysus, Ares, Zeus, Athena, Poseidon · Ward Charm: Hades!, Hephaestus!, Athena, Hestia |
 
-**The sweep and the defaults disagree on boots.** The sweep's opponents wear nothing, so there is less resistance to cut through and nothing to race on speed. It rated Wind Boots best for Hera and Poseidon before Hermes's change, and still does for Hera, but against a team in its loadouts (`npm run check`'s last column) Hera wins 93% in them and 57% in Iron Greaves, and Poseidon 23% in them and 72% in War Boots. The defaults follow the check, where the other team wears gear.
+**Boots and charms decide; weapons and armour mostly don't.** Against a geared team, the weapon and armour options sit within each other's margins for most gods; the clear choices are speed (boots) and staying power (charms).
+
+**The sweep in loadouts agrees with the check** where the bare sweep didn't: War Boots are clearly Poseidon's best, and Wind Boots Hera's. Hera's default is Iron Greaves all the same, on purpose: in Wind Boots she won 93% against the core team, outside the band.
 
 **Speed is the biggest lever in a loadout.** In the loadout column a god's boots move it far more than any number in its kit, by where the extra speed puts it among its teammates' turns: Demeter in Wind Boots acts before Pyra (102) instead of just after her, which takes her from 22% to 51% on boots alone (below).
 
 ## Numbers (roster 0.26.0 on jrpg-battle 0.60.1, 1,000 seeded battles per line)
 
-`npm run check -- 1000` in this repository, against jrpg-battle 0.60.1: the core party wins PvE 75.5% and splits the PvP mirror 49.4%, and 50.0% in loadouts. Each champion stands in for the core hero with the closest job (`data/checks.json`). Roster 0.25.0 on jrpg-battle 0.59.1 gives the same numbers: its tags are labels, which no battle reads. Roster 0.26.0 on jrpg-battle 0.60.1 changes only Hades's lines and his team's.
+`npm run check -- 1000` in this repository, against jrpg-battle 0.60.1: the core party wins PvE 75.5% and splits the PvP mirror 49.4%, and 50.0% in loadouts. Each champion stands in for the core hero with the closest job (`data/checks.json`). Roster 0.25.0 on jrpg-battle 0.59.1 gives the same numbers: its tags are labels, which no battle reads. Roster 0.26.0 on jrpg-battle 0.60.1 changes only Hades's lines and his team's. The last column is new with jrpg-battle 0.61.0: below, "Speed and the roster".
 
-| Champion | Class | In for | PvE win | vs core | PvP bare | PvP in loadouts |
-|---|---|---|---|---|---|---|
-| Hermes | Support | Vex | 99.5% | +24.0 | 90.5% | 51.1% |
-| Nike | Striker | Vex | 94.1% | +18.6 | 60.2% | 46.2% |
-| Artemis | Striker | Vex | 91.2% | +15.7 | 49.9% | 45.6% |
-| Dionysus | Controller | Vex | 77.5% | +2.0 | 54.7% | 59.9% |
-| Apollo | Support | Seren | 68.6% | −6.9 | 55.2% | 50.2% |
-| Ares | Striker | Aria | 82.8% | +7.3 | 46.4% | 63.1% |
-| Aphrodite | Support | Seren | 67.8% | −7.7 | 60.2% | 56.2% |
-| Zeus | Striker | Pyra | 78.1% | +2.6 | 60.6% | 52.2% |
-| Demeter | Support | Seren | 97.6% | +22.1 | 22.1% | 64.4% |
-| Hera | Guardian | Aria | 85.3% | +9.8 | 61.3% | 57.1% |
-| Athena | Guardian | Aria | 85.5% | +10.0 | 49.0% | 47.3% |
-| Poseidon | Controller | Pyra | 90.9% | +15.4 | 58.9% | 71.7% |
-| Hades | Controller | Pyra | 97.9% | +22.4 | 33.7% | 60.6% |
-| Persephone | Controller | Pyra | 86.0% | +10.5 | 83.5% | 56.0% |
-| Hestia | Guardian | Aria | 68.5% | −7.0 | 73.2% | 73.3% |
-| Hephaestus | Guardian | Aria | 71.5% | −4.0 | 48.9% | 47.5% |
+| Champion | Class | In for | PvE win | vs core | PvP bare | PvP in loadouts | PvP vs roster |
+|---|---|---|---|---|---|---|---|
+| Hermes | Support | Vex | 99.5% | +24.0 | 90.5% | 51.1% | 45.5% |
+| Nike | Striker | Vex | 94.1% | +18.6 | 60.2% | 46.2% | 46.7% |
+| Artemis | Striker | Vex | 91.2% | +15.7 | 49.9% | 45.6% | 61.3% |
+| Dionysus | Controller | Vex | 77.5% | +2.0 | 54.7% | 59.9% | 47.6% |
+| Apollo | Support | Seren | 68.6% | −6.9 | 55.2% | 50.2% | 43.9% |
+| Ares | Striker | Aria | 82.8% | +7.3 | 46.4% | 63.1% | 39.8% |
+| Aphrodite | Support | Seren | 67.8% | −7.7 | 60.2% | 56.2% | 65.7% |
+| Zeus | Striker | Pyra | 78.1% | +2.6 | 60.6% | 52.2% | 53.7% |
+| Demeter | Support | Seren | 97.6% | +22.1 | 22.1% | 64.4% | 45.7% |
+| Hera | Guardian | Aria | 85.3% | +9.8 | 61.3% | 57.1% | 59.2% |
+| Athena | Guardian | Aria | 85.5% | +10.0 | 49.0% | 47.3% | 51.1% |
+| Poseidon | Controller | Pyra | 90.9% | +15.4 | 58.9% | 71.7% | 32.3% |
+| Hades | Controller | Pyra | 97.9% | +22.4 | 33.7% | 60.6% | 63.1% |
+| Persephone | Controller | Pyra | 86.0% | +10.5 | 83.5% | 56.0% | 56.5% |
+| Hestia | Guardian | Aria | 68.5% | −7.0 | 73.2% | 73.3% | 48.9% |
+| Hephaestus | Guardian | Aria | 71.5% | −4.0 | 48.9% | 47.5% | 37.0% |
 
 All-champion teams, PvE, then PvP against the core team bare and in loadouts:
 
@@ -170,6 +177,27 @@ All-champion teams, PvE, then PvP against the core team bare and in loadouts:
 | Ares, Hades, Apollo, Zeus | 94.1% | 42.7% | 45.4% |
 | Hera, Persephone, Demeter, Nike | 100.0% | 73.2% | 61.6% |
 | Hestia, Dionysus, Demeter, Persephone | 98.8% | 59.6% | 73.6% |
+
+### Speed and the roster (measured, roster 0.26.0 on jrpg-battle 0.61.0)
+
+The 0.24.0 pass found that a god's boots moved it far more than any number in its kit. Three measurements now show how much of that is the game and how much is the one team the gods were tuned against. They change no number.
+
+- **PvP vs roster** (`npm run check`'s last column).
+  - **How it plays:** each god plays in a team the bot's blind pick builds around it from the champions alone, one god of each class with it in its class's place, against a team the bot builds from every champion, everyone in loadouts, a new pair of teams each seeded match.
+  - **What it measures:** no one team's speeds decide it, and it is the roster against itself, as players meet it.
+  - **Where it differs:** several gods tuned against the core team land somewhere else: Poseidon 71.7% → 32.3%, Ares 63.1% → 39.8%, Hestia 73.3% → 48.9%, Hephaestus 47.5% → 37.0%, and up, Artemis 45.6% → 61.3%, Aphrodite 56.2% → 65.7%.
+  - **Why:** Poseidon's War Boots, chosen because they took him from 23% to 72% against the core team, suit that team's speeds, not the roster's.
+- **The speed report** (`npm run speed`, `scripts/speed.mjs`).
+  - **How it plays:** each god at its base speed and at steps of 2 up to 10 either side (its boots add their own), in the core party against the core team in loadouts, 300 matches a step. Noise is about ±6 points.
+  - **What it found:** most gods have a cliff, a jump of 25 to 40 points between two speeds 2 apart: Hades −39 (from 88 to 90), Hera +37 (100 to 102), Demeter +34 (91 to 93), Hestia −31 (90 to 92), Poseidon −29 (99 to 101), Apollo +27 (102 to 104), Ares +25 (102 to 104).
+  - **Ties:** some sit on a core hero's speed. Hera at 102 ties Pyra, and a tie resolves the friendly actions first (jrpg-battle decision 0011), so her ward lands before Pyra's opening blast every time, and she wins 94% instead of 56%.
+  - **Not monotonic:** Hades's line rises and falls, 25%, 22%, 61%, 22%, 29% and 62% at six neighbouring speeds. A god's PvP number against one fixed team says as much about where its speed lands as about its kit.
+- **The sweep in loadouts** (`npm run sweep`, jrpg-battle 0.61.0's `--against` and `--wearing`). It now plays each god in the core party against the core team with everyone else in their loadouts, as the check does, and gives each option its margin. Against a geared team the options in a slot are mostly within each other's margins, so a tie counts as the best (`*`), and only a clear best (`!`) can break the rule's "none best for every god". The armours tie for nearly every god: the choice of armour barely matters there.
+
+**What this means for the 0.24.0 targets.** The loadout column was tuned against one team whose four speeds the gods sit between, so some of its numbers are turn-order luck. The roster column is the steadier measure. A balance pass on it, and a decision on speed, come next:
+- **Wind Boots:** a smaller or percentage speed bonus.
+- **The first turn:** a seeded random offset to each unit's wait, so one speed point doesn't decide who acts first every match.
+- **Ties:** whether a tie should always favour the friendly action.
 
 ### How the roster 0.24.0 pass was balanced: PvP first
 
@@ -210,7 +238,6 @@ Six were outside 45–75% then; none of the sixteen is now, in loadouts. Hades, 
 
 ### Known issues to fix next
 
-- **The sweep and the check disagree on speed boots** (above): the sweep's opponents wear nothing. A sweep against opponents in their loadouts needs jrpg-battle's sweep to offer it.
 - **The practice waves reward Sunder and magic damage,** through their one golem. Nike, Artemis, Poseidon and Demeter are over 90% PvE. That is for the monsters' pass, after the roster.
 - **Turn order and speed** deserve a pass of their own: a god's boots can move it by 35 points.
 
