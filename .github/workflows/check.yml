@@ -55,7 +55,7 @@ jobs:
       - name: Build the content files and the API
         run: npm run build
 
-      - name: Check the roster
-        run: npm run check -- 300
+      - name: Check the roster builds, loads and fits the world format
+        run: npm run check
         env:
           JRPG_BATTLE: ${{ github.workspace }}/jrpg-battle
