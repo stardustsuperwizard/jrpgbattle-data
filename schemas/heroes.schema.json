@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "heroes.schema.json",
-  "title": "world/heroes.json, jrpgbattle world format 2026-11-17",
+  "title": "world/heroes.json, jrpgbattle world format 2026-11-26",
   "type": "object",
   "propertyNames": {
     "type": "string",

@@ -31,6 +31,7 @@ function sources(t, { order = ['zed', 'amy'], heroes = { zed: ['jab', 'kick'], a
   put('content/world/campaign.json', { startGold: 0 });
   put('content/world/modes.json', { pve: { teams: [] } });
   put('content/world/elements.json', {});
+  put('content/world/formations.json', {});
   put('content/world/enemies/index.json', ['rat']);
   put('content/world/enemies/rat.json', enemy('rat'));
   put('content/world/items/index.json', []);

@@ -18,17 +18,16 @@ jrpgbattle's **world** for the [jrpg-battle](https://github.com/stardustsuperwiz
 | `content/world/slots.json` | The slots a hero wears items in (weapon, armour, boots, charm), each with the `pool` a PvP pick chooses from by item tier (jrpg-battle decision 0058): tier 2, the Labyrinth's sidegrades. See [DUNGEON.md](DUNGEON.md). |
 | `content/world/waves.json`, `content/world/dungeon.json`, `content/world/campaign.json` | The practice waves, what is in the dungeon (the pools, bosses, themes, the shop, the drops): see [DUNGEON.md](DUNGEON.md), and how a campaign works in this world: the engine's example's, with loot selling for a quarter of its price (`campaign.loot.sellShare` 0.25). |
 | `content/world/modes.json`, `content/world/elements.json` | The world's modes and elements, as the engine's example world has them. |
+| `content/world/formations.json` | The formations a team may stand in (jrpg-battle decision 0103): each its lines of line-up slots, front to back, and the cover each line gives the units behind it. None yet (`{}`): the gods stand in line-up order, with no cover, until the formations are designed and measured in jrpgbattle-balance. |
 | `scripts/build.mjs` | `npm run build`: the sources into `dist/src/world/` and `dist/api/`. Plain Node, no dependencies, no engine needed. |
-| `scripts/check.mjs` | `npm run check`: builds, validates the result with the engine and its schemas, checks `schemas/` is the engine's, and measures each champion. |
-| `scripts/sweep.mjs` | `npm run sweep`: the PvP pool's budget check. Runs jrpg-battle's loadout sweep on every god, in the core party against the core team with everyone else in their loadouts, and fails if an option is clearly the best for every god or ties for the best for none (ROSTER.md, "PvP gear"). Slow: about ten minutes at its default 60 matches a set. |
-| `scripts/speed.mjs` | `npm run speed`: how much each god's PvP rests on its exact speed, at steps either side of it (ROSTER.md, "Speed and the roster"). |
-| `scripts/measure.mjs` | What the check, the sweep and the speed report measure with: the world beside the engine's heroes, each hero's loadout, and the matches they play. |
+| `scripts/check.mjs` | `npm run check`: builds, validates the result with the engine and its schemas, checks `schemas/` is the engine's, and writes `dist/tuning-import.json`. It checks the roster works, not that it is balanced: win rates are [jrpgbattle-balance](https://github.com/stardustsuperwizard/jrpgbattle-balance)'s. |
 | `scripts/openapi.mjs` | The API's OpenAPI description, which the build writes from the same content as the files. |
 | `schemas/` | The jrpgbattle world format's JSON Schemas, copied from the jrpg-battle release in `engine.json` (its `src/rulesets/jrpgbattle/schemas/`, decisions 0053, 0086) by `npm run schemas` (`scripts/schemas.mjs`). The API publishes them. Never edit them here: `npm run check` fails when they differ from the engine's. |
 | `tests/` | `npm test`: the build's own tests. |
-| `data/checks.json` | Settings for the check only: the core party it measures against, which core hero each champion stands in for, what each core hero wears in the loadout column, and sample teams. Not content. |
 
-Ids are lowercase letters, digits and `_`. Champion and ability ids must not reuse jrpg-battle's (`aria`, `slash`, …): a deployment wouldn't mind, but the check measures each champion beside the engine's heroes and refuses a clash.
+Ids are lowercase letters, digits and `_`. Champion and ability ids must not reuse jrpg-battle's (`aria`, `slash`, …): a deployment wouldn't mind, but jrpgbattle-balance measures each champion beside the engine's heroes, so the check refuses a clash.
+
+**Balance lives in [jrpgbattle-balance](https://github.com/stardustsuperwizard/jrpgbattle-balance)** (from 2026-11-26): each god's win rates, the PvP gear pool's rule, speed and turn order, and the history of each balance pass. It measures this repository's releases and opens an issue here when a number should change; the change itself is made here, as a content release.
 
 **This repository owns the world, not the rules.** The rules (combat, the battle clock, statuses, damage types) are the jrpgbattle ruleset's (the engine's `src/rulesets/jrpgbattle/rules/`), the same for every world on it, and a change there reaches this site with the next engine release. What a world decides is in its own files: the features it enables in `world.json` (here a level cap of 25, where the ruleset's example world has 10), and how its campaign works in `campaign.json` (here loot sells for 0.25 of its price, where the example's sells for 0.5); `npm run check` prints each beside the example world's value. (Until 2026-11-17 these two numbers were house rules over the engine's core.)
 
@@ -37,12 +36,12 @@ Ids are lowercase letters, digits and `_`. Champion and ability ids must not reu
 1. Write `content/world/heroes/<id>.json` and its three `content/world/abilities/<id>.json` files. Every champion says its `reach`, `"melee"` or `"ranged"` (jrpg-battle decision 0052): how it fights, which a site uses to draw it before its art exists. No rule reads it. A champion that sits between two classes may also say `tags`, labels beside its class such as `["bruiser"]` (jrpg-battle decision 0100); no rule reads those either.
 2. Add the id to `content/world/heroes/index.json` where it belongs in the roster.
 3. Bump `version` in `content/world/manifest.json`, and `package.json`'s with it.
-4. `npm test && npm run check`, and update ROSTER.md with its numbers.
+4. `npm test && npm run check`, and add the champion to ROSTER.md. Its numbers are measured in jrpgbattle-balance once the release is out.
 
 ### Adding a monster
 
 1. Write `content/world/enemies/<id>.json` (its `reach` as a champion's, its `skills` inline, with `weight`s for the default AI, or `"ai": "healer"` or `"charger"` with the tagged skills those need) and add the id to `content/world/enemies/index.json`.
-2. Put it in the dungeon: a pool in `content/world/dungeon.json` (`from` a floor), or a stretch's `bosses` (entries `{ from, bosses }` by floor), and its row in DUNGEON.md's map. Practice's fixed `waves.json` is what `npm run check` measures the champions on, so changing it moves every number in ROSTER.md.
+2. Put it in the dungeon: a pool in `content/world/dungeon.json` (`from` a floor), or a stretch's `bosses` (entries `{ from, bosses }` by floor), and its row in DUNGEON.md's map. Practice's fixed `waves.json` is what jrpgbattle-balance measures the champions on, so changing it moves every PvE number there.
 3. Bump the version as for a champion, `npm test && npm run check`, and add it to ROSTER.md's monsters.
 4. The site draws it with an enemy recipe of its own (jrpgbattle-client-premium's `art/enemies/`); until then it shows the site's default unit, chosen by its `reach`.
 
@@ -54,7 +53,7 @@ npm run build          # into dist/
 
 | Output | What it is |
 |---|---|
-| `dist/src/world/<name>.json` | A jrpg-battle world (its decision 0086): manifest, world, heroes, abilities, enemies, items, slots, waves, dungeon, campaign, modes and elements, each kind in its index order and abilities in the order the heroes use them. Dropped over a jrpg-battle checkout's `src/world/`, they replace its example world. |
+| `dist/src/world/<name>.json` | A jrpg-battle world (its decision 0086): manifest, world, heroes, abilities, enemies, items, slots, waves, dungeon, campaign, modes, elements and formations, each kind in its index order and abilities in the order the heroes use them. Dropped over a jrpg-battle checkout's `src/world/`, they replace its example world. |
 | `dist/api/` | The static API, below. |
 
 The build refuses sources that don't fit together, naming every problem: a missing file or folder, a listed entry with no file, a file its index doesn't list, an `id` that isn't its file name, an ability a champion uses that has no file. An ability no champion uses is built after the rest and reported. Whether the content follows the game's rules is the engine's to say, in `npm run check`.
@@ -89,7 +88,7 @@ Pages serves one build, so when a `/v2/` comes the build writes both until `/v1/
 | `index.json` | `api` (`v1`), `name` and `version` from the manifest, `ruleset` and `formatVersion` from `world.json`, each kind's ids in order, the paths of the combined files, and of `openapi.json` and `schemas/`. Start here. |
 | `openapi.json` | The OpenAPI 3.1 description of every path below, each response described by a schema in `schemas/`. |
 | `schemas/<name>.schema.json` | The world format's JSON Schemas, as the ruleset in the engine release in `engine.json` wrote them: one per world file, an entry's shape a `$defs` of its file's (`heroes.schema.json#/$defs/hero`), and `common.schema.json`. A schema checks a file's shape; the engine checks the rest (an id naming something that exists) when it loads. |
-| `manifest.json`, `world.json`, `slots.json`, `waves.json`, `dungeon.json`, `campaign.json`, `modes.json`, `elements.json` | The single files. |
+| `manifest.json`, `world.json`, `slots.json`, `waves.json`, `dungeon.json`, `campaign.json`, `modes.json`, `elements.json`, `formations.json` | The single files. |
 | `<kind>/index.json` | Each kind's ids, in order: `heroes`, `abilities`, `enemies`, `items`. |
 | `<kind>/<id>.json` | One entry, as in the sources. |
 | `content/<name>.json` | Every combined content file, the same as a release's. |
@@ -110,13 +109,12 @@ Needs Node 22 or later and a jrpg-battle checkout beside this one (or `JRPG_BATT
 
 ```sh
 git -C ../jrpg-battle checkout "$(node -p "require('./engine.json').tag")"  # the tag CI checks against
-npm run check              # 300 battles per line
-npm run check -- 1000      # more battles, steadier numbers
+npm run check
 ```
 
-It builds the sources, reads the engine's example world and deployment files with jrpg-battle's own reader, puts the built files where a deployment would and runs its boundary check and validation, both as a deployment loads them and with the engine's heroes kept beside the champions so each can be measured against the hero it stands in for. It reports any speed shared with another hero, writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions), and prints each champion's PvE win rate and its PvP win rate against the core team, both with nobody wearing gear and with every hero in a loadout (each god its default, each core hero the one `data/checks.json` gives it), and its PvP win rate against the roster itself: in teams the bot's pick builds from the champions, against the same, everyone in loadouts. The gods are balanced PvP-first; ROSTER.md explains how to read the columns.
+It builds the sources, reads the engine's example world and deployment files with jrpg-battle's own reader, puts the built files where a deployment would and runs its boundary check and validation as a deployment loads them, checks the world against the format's schemas, refuses a champion or ability id the engine's own heroes use, and writes `dist/tuning-import.json` (paste it into the game's tuning panel to play the champions). It plays no battles: the champions' win rates, against the core team and the roster, bare and in loadouts, are jrpgbattle-balance's `npm run roster`.
 
-**Compatibility is the ruleset and its world format, not a release number** (jrpg-battle decisions 0023, 0086). `world.json` names the ruleset the files play and its world format, and they work with every jrpg-battle release whose ruleset reads that format. The engine refuses another ruleset or format by name. An engine release that keeps the format needs nothing here: no roster release, and the site moves its engine pin alone. When the ruleset moves its world format, the files move with it in one PR and the roster releases. `engine.json` names the release CI checks against and the schemas come from; bump it to measure on a newer engine, run `npm run schemas` with that release checked out, and update ROSTER.md if the numbers move.
+**Compatibility is the ruleset and its world format, not a release number** (jrpg-battle decisions 0023, 0086). `world.json` names the ruleset the files play and its world format, and they work with every jrpg-battle release whose ruleset reads that format. The engine refuses another ruleset or format by name. An engine release that keeps the format needs nothing here: no roster release, and the site moves its engine pin alone. When the ruleset moves its world format, the files move with it in one PR and the roster releases. `engine.json` names the release CI checks against and the schemas come from; bump it to check against a newer engine and run `npm run schemas` with that release checked out; jrpgbattle-balance moves its own pins to measure it.
 
 ## CI
 

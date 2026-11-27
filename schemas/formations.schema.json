@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "formations.schema.json",
+  "title": "world/formations.json, jrpgbattle world format 2026-11-26",
+  "description": "The formations, by id (decision 0103): a team's line-up slots arranged in lines from front to back, and the cover each line gives. A formation is for the team size its slots cover. No grid and no coordinates: a client draws each line as a column or a row. A unit behind a line has a chance, its cover, that a single-target attack aimed at it lands on a front-liner instead; its cover shrinks as the allies in front of it fall. The ruleset's maxCover (its rules) caps every line's cover.",
+  "type": "object",
+  "propertyNames": { "pattern": "^[a-z0-9][a-z0-9_]*$" },
+  "additionalProperties": { "$ref": "#/$defs/formation" },
+  "$defs": {
+    "formation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "lines"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "lines": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Front to back. Every slot from 0 to one less than the team size is in exactly one line, and the front line's cover is 0.",
+          "items": { "$ref": "#/$defs/line" }
+        },
+        "default": {
+          "type": "boolean",
+          "description": "The formation a team of its size stands in when it chooses none. At most one per size; with none, such a team stands in line-up order with no cover."
+        }
+      }
+    },
+    "line": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slots", "cover"],
+      "properties": {
+        "slots": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 0 },
+          "description": "The line-up slots standing in this line, top to bottom: what \"directly in front\" means for a redirect, and \"beside\" for a blast's splash."
+        },
+        "cover": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "The line's full cover, a share (0.25 is 25%), at most the ruleset's maxCover. It shrinks in proportion to the allies in every line ahead who have fallen."
+        }
+      }
+    }
+  }
+}
