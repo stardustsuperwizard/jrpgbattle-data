@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "campaign.schema.json",
-  "title": "world/campaign.json, jrpgbattle world format 2026-11-17",
+  "title": "world/campaign.json, jrpgbattle world format 2026-11-26",
   "description": "How a campaign works in this world (decisions 0031 to 0042, 0086): waves a floor and how they scale the monsters, starting gold, a floor's shares of XP and gold, how many items a hero carries, the town's services, the Descent, a wipe's cost, heirlooms, the enchanter and how loot rolls. The engine merges it with dungeon.json (what is in the dungeon) into the config's one dungeon; a path belongs to one file or the other.",
   "type": "object",
   "additionalProperties": false,

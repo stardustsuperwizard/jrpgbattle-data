@@ -8,7 +8,7 @@
 // features the world enables), the files keyed by id broken out one file per
 // entry.
 //   manifest.json, world.json, slots.json, waves.json, dungeon.json,
-//   campaign.json, modes.json, elements.json
+//   campaign.json, modes.json, elements.json, formations.json
 //                            single files, built as they are
 //   <kind>/index.json        the ids in order, for heroes (the order the pick
 //                            screen lists them), enemies and items
@@ -51,6 +51,7 @@ export const KINDS = [
   { name: 'campaign', single: true },
   { name: 'modes', single: true },
   { name: 'elements', single: true },
+  { name: 'formations', single: true },
 ];
 
 /**

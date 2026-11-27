@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "world.schema.json",
-  "title": "world/world.json, jrpgbattle world format 2026-11-17",
+  "title": "world/world.json, jrpgbattle world format 2026-11-26",
   "description": "A world's own description (decision 0086): the ruleset it plays, the date of that ruleset's world format its files are written in, and the ruleset's optional features it enables, each with its values. A world naming another ruleset or format is refused by name, and a server doesn't start on it.",
   "type": "object",
   "additionalProperties": false,
@@ -12,7 +12,7 @@
       "description": "The id of the ruleset the world plays: the server imports src/rulesets/<id>/index.js."
     },
     "formatVersion": {
-      "const": "2026-11-17",
+      "const": "2026-11-26",
       "description": "The ruleset's world format (its ruleset.json formatVersion): every file of the world is in it."
     },
     "features": {

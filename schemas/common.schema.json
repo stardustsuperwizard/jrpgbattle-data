@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "common.schema.json",
-  "title": "Shared content shapes, jrpgbattle world format 2026-11-17",
+  "title": "Shared content shapes, jrpgbattle world format 2026-11-26",
   "description": "Shapes more than one content file uses: ids, stats, skills and their effects. The other schemas refer to these.",
   "$defs": {
     "id": {
@@ -332,6 +332,23 @@
               "exclusiveMinimum": 0,
               "maximum": 1,
               "description": "Of the summoner's max HP, attacks and resistances, each summon's own. Its speed and everything else are its template's."
+            },
+            "turns": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Its lifetime, in its own turns, counted as a status's duration is (decision 0102). After its last turn it leaves the field without falling: no knockout, no XP or gold. Called again at the cap, those standing start a fresh lifetime. Left out, it stays until it falls."
+            },
+            "stands": {
+              "enum": ["front", "back", "beside"],
+              "description": "On a side in a formation (decision 0103), the line it joins: the first, the last, or its summoner's own, right after its summoner. The back when unset. A side with no formation takes it at the back of its line-up, as always."
+            },
+            "shields": {
+              "type": "boolean",
+              "description": "Counts as a front-liner for the cover of those behind it while it stands (decision 0103), and may take a redirected hit when the unit directly in front of the target is down. Unset is false."
+            },
+            "covered": {
+              "type": "boolean",
+              "description": "Takes its line's cover where it stands behind a line (decision 0103). Unset is false."
             }
           },
           "description": "Calls units of one of the world's enemies to the user's side (decision 0101), at the back of its line and of the turn order, played by their own AI. Always the user's, once a use, so it takes no `on`. A summon falls with its summoner, never keeps its side in the fight, gives no XP or gold, and leaves at the next wave."

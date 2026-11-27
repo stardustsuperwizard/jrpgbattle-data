@@ -18,6 +18,7 @@ jrpgbattle's **world** for the [jrpg-battle](https://github.com/stardustsuperwiz
 | `content/world/slots.json` | The slots a hero wears items in (weapon, armour, boots, charm), each with the `pool` a PvP pick chooses from by item tier (jrpg-battle decision 0058): tier 2, the Labyrinth's sidegrades. See [DUNGEON.md](DUNGEON.md). |
 | `content/world/waves.json`, `content/world/dungeon.json`, `content/world/campaign.json` | The practice waves, what is in the dungeon (the pools, bosses, themes, the shop, the drops): see [DUNGEON.md](DUNGEON.md), and how a campaign works in this world: the engine's example's, with loot selling for a quarter of its price (`campaign.loot.sellShare` 0.25). |
 | `content/world/modes.json`, `content/world/elements.json` | The world's modes and elements, as the engine's example world has them. |
+| `content/world/formations.json` | The formations a team may stand in (jrpg-battle decision 0103): each its lines of line-up slots, front to back, and the cover each line gives the units behind it. None yet (`{}`): the gods stand in line-up order, with no cover, until the formations are designed and measured in jrpgbattle-balance. |
 | `scripts/build.mjs` | `npm run build`: the sources into `dist/src/world/` and `dist/api/`. Plain Node, no dependencies, no engine needed. |
 | `scripts/check.mjs` | `npm run check`: builds, validates the result with the engine and its schemas, checks `schemas/` is the engine's, and writes `dist/tuning-import.json`. It checks the roster works, not that it is balanced: win rates are [jrpgbattle-balance](https://github.com/stardustsuperwizard/jrpgbattle-balance)'s. |
 | `scripts/openapi.mjs` | The API's OpenAPI description, which the build writes from the same content as the files. |
@@ -52,7 +53,7 @@ npm run build          # into dist/
 
 | Output | What it is |
 |---|---|
-| `dist/src/world/<name>.json` | A jrpg-battle world (its decision 0086): manifest, world, heroes, abilities, enemies, items, slots, waves, dungeon, campaign, modes and elements, each kind in its index order and abilities in the order the heroes use them. Dropped over a jrpg-battle checkout's `src/world/`, they replace its example world. |
+| `dist/src/world/<name>.json` | A jrpg-battle world (its decision 0086): manifest, world, heroes, abilities, enemies, items, slots, waves, dungeon, campaign, modes, elements and formations, each kind in its index order and abilities in the order the heroes use them. Dropped over a jrpg-battle checkout's `src/world/`, they replace its example world. |
 | `dist/api/` | The static API, below. |
 
 The build refuses sources that don't fit together, naming every problem: a missing file or folder, a listed entry with no file, a file its index doesn't list, an `id` that isn't its file name, an ability a champion uses that has no file. An ability no champion uses is built after the rest and reported. Whether the content follows the game's rules is the engine's to say, in `npm run check`.
@@ -87,7 +88,7 @@ Pages serves one build, so when a `/v2/` comes the build writes both until `/v1/
 | `index.json` | `api` (`v1`), `name` and `version` from the manifest, `ruleset` and `formatVersion` from `world.json`, each kind's ids in order, the paths of the combined files, and of `openapi.json` and `schemas/`. Start here. |
 | `openapi.json` | The OpenAPI 3.1 description of every path below, each response described by a schema in `schemas/`. |
 | `schemas/<name>.schema.json` | The world format's JSON Schemas, as the ruleset in the engine release in `engine.json` wrote them: one per world file, an entry's shape a `$defs` of its file's (`heroes.schema.json#/$defs/hero`), and `common.schema.json`. A schema checks a file's shape; the engine checks the rest (an id naming something that exists) when it loads. |
-| `manifest.json`, `world.json`, `slots.json`, `waves.json`, `dungeon.json`, `campaign.json`, `modes.json`, `elements.json` | The single files. |
+| `manifest.json`, `world.json`, `slots.json`, `waves.json`, `dungeon.json`, `campaign.json`, `modes.json`, `elements.json`, `formations.json` | The single files. |
 | `<kind>/index.json` | Each kind's ids, in order: `heroes`, `abilities`, `enemies`, `items`. |
 | `<kind>/<id>.json` | One entry, as in the sources. |
 | `content/<name>.json` | Every combined content file, the same as a release's. |

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "waves.schema.json",
-  "title": "world/waves.json, jrpgbattle world format 2026-11-17",
+  "title": "world/waves.json, jrpgbattle world format 2026-11-26",
   "description": "The practice waves (PvE), in order: each a list of enemy ids.",
   "type": "array",
   "items": {

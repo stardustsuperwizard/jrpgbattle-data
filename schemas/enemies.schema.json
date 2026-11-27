@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "enemies.schema.json",
-  "title": "world/enemies.json, jrpgbattle world format 2026-11-17",
+  "title": "world/enemies.json, jrpgbattle world format 2026-11-26",
   "type": "object",
   "propertyNames": {
     "type": "string",
@@ -124,6 +124,27 @@
             "charger"
           ],
           "description": "The enemy AI; default when unset. A healer needs a skill with special heal, a charger chargeEvery and one charge and one release skill."
+        },
+        "aim": {
+          "enum": [
+            "random",
+            "front",
+            "back",
+            "weakest"
+          ],
+          "description": "Whom its attacks aim at (decision 0103); random when unset. front: the foremost line of the side it attacks; back: its rearmost line; weakest: the lowest HP. A side with no formation is one line, so front and back are anyone there. Cover still applies to the hit afterwards."
+        },
+        "stands": {
+          "enum": ["front", "back", "beside"],
+          "description": "Where it stands when summoned onto a side in a formation (decision 0103), unless the summon effect says: the first line, the last, or its summoner's own. The back when neither says."
+        },
+        "shields": {
+          "type": "boolean",
+          "description": "When summoned, it shields those behind it (decision 0103), unless the summon effect says. False when neither says."
+        },
+        "covered": {
+          "type": "boolean",
+          "description": "When summoned, it takes its line's cover (decision 0103), unless the summon effect says. False when neither says."
         },
         "chargeEvery": {
           "type": "integer",

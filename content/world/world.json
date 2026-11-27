@@ -1,6 +1,6 @@
 {
   "ruleset": "jrpgbattle",
-  "formatVersion": "2026-11-17",
+  "formatVersion": "2026-11-26",
   "features": {
     "levels": {
       "maxLevel": 25,
