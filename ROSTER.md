@@ -31,15 +31,22 @@ The sixteen share the character group **Gods of Olympus** (every hero has a `cha
 
 ## Formations
 
-Roster 0.28.0 gives a team of four three formations (jrpg-battle decision 0103), chosen in the loadout stage of a match that has one. A team that chooses none, as in PvE, a campaign's floors and any match with no loadout stage, stands in the **Square**, the default. Each line is line-up slots, front to back; a unit behind a line has the line's cover, the chance a single-target attack aimed at it lands on whoever stands in front, while the allies ahead of it stand.
+Roster 0.29.0 gives a team of four two Squares (jrpg-battle decision 0103), chosen in the loadout stage of a match that has one. A team that chooses none, as in PvE, a campaign's floors and any match with no loadout stage, stands in the **Square**, the default. Each line is line-up slots, front to back, each line's slots top to bottom; a unit behind a line has the line's cover, the chance a single-target attack aimed at it lands on whoever stands directly in front of it, while the allies ahead of it stand. The slots are the pick's recommended roles: 0 Guardian, 1 Striker, 2 Controller, 3 Support.
 
-| Formation | Lines, front to back (slots, cover) |
-|---|---|
-| Square (default) | 0 1 · 2 3 at 25% |
-| Wing | 0 · 1 2 at 25% · 3 at 50% |
-| Power-I | 0 · 1 at 25% · 2 at 25% · 3 at 25% |
+As your side stands in the arena, the front on the right:
 
-These are the engine example world's sketch, measured in jrpgbattle-balance's `reports/2026-11-27-aim-band.md` on jrpg-battle 0.66.1: on the core team the three are within about 3 points of each other. The sketch's fourth, Strong front (three in front, one behind at 50%), is left out: it lost to all three by 9 to 13 points at every cover tried, so it needs a new shape or job, not a new number. The cover values are the sketch's, to be tuned on real matches.
+```
+Square (default)          Guarded Square
+Controller | Striker      Striker | Controller
+Support    | Guardian     Support | Guardian
+```
+
+| Formation | Front line (slots) | Back line, 25% cover (slots) | Who covers whom |
+|---|---|---|---|
+| Square (default) | Striker, Guardian (1 0) | Controller, Support (2 3) | the Striker the Controller, the Guardian the Support |
+| Guarded Square | Controller, Guardian (2 0) | Striker, Support (1 3) | the Controller the Striker, the Guardian the Support |
+
+The Guarded Square is for a glass-cannon Striker (Artemis): it stands behind, and a bruiser Controller takes its hits in front. The roster has no bruiser Controller yet. The Wing and the Power-I (roster 0.28.0) are gone. The cover values are the engine sketch's, to be tuned on real matches in jrpgbattle-balance.
 
 ## Four classes
 
