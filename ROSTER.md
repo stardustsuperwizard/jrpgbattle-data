@@ -29,6 +29,18 @@ Every champion has its own speed, different from each other and from the core he
 
 The sixteen share the character group **Gods of Olympus** (every hero has a `characterGroup`, the title of its set).
 
+## Formations
+
+Roster 0.28.0 gives a team of four three formations (jrpg-battle decision 0103), chosen in the loadout stage of a match that has one. A team that chooses none, as in PvE, a campaign's floors and any match with no loadout stage, stands in the **Square**, the default. Each line is line-up slots, front to back; a unit behind a line has the line's cover, the chance a single-target attack aimed at it lands on whoever stands in front, while the allies ahead of it stand.
+
+| Formation | Lines, front to back (slots, cover) |
+|---|---|
+| Square (default) | 0 1 · 2 3 at 25% |
+| Wing | 0 · 1 2 at 25% · 3 at 50% |
+| Power-I | 0 · 1 at 25% · 2 at 25% · 3 at 25% |
+
+These are the engine example world's sketch, measured in jrpgbattle-balance's `reports/2026-11-27-aim-band.md` on jrpg-battle 0.66.1: on the core team the three are within about 3 points of each other. The sketch's fourth, Strong front (three in front, one behind at 50%), is left out: it lost to all three by 9 to 13 points at every cover tried, so it needs a new shape or job, not a new number. The cover values are the sketch's, to be tuned on real matches.
+
 ## Four classes
 
 Roster 0.24.0 settles the roles on four classes, after the four roles of 4th-edition D&D: one of each makes a team of four. Each god has one, a label for now (jrpg-battle decision 0054; whether a class should carry rules is jrpg-battle#363).
