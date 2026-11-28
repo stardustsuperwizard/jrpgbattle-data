@@ -1,1 +1,27 @@
-{}
+{
+  "square": {
+    "name": "Square",
+    "default": true,
+    "lines": [
+      { "slots": [0, 1], "cover": 0 },
+      { "slots": [2, 3], "cover": 0.25 }
+    ]
+  },
+  "wing": {
+    "name": "Wing",
+    "lines": [
+      { "slots": [0], "cover": 0 },
+      { "slots": [1, 2], "cover": 0.25 },
+      { "slots": [3], "cover": 0.5 }
+    ]
+  },
+  "power_i": {
+    "name": "Power-I",
+    "lines": [
+      { "slots": [0], "cover": 0 },
+      { "slots": [1], "cover": 0.25 },
+      { "slots": [2], "cover": 0.25 },
+      { "slots": [3], "cover": 0.25 }
+    ]
+  }
+}
